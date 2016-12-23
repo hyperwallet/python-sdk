@@ -1,0 +1,4 @@
+[run]
+source = hyperwallet
+omit = venv/*
+omit = hyperwallet/tests/*

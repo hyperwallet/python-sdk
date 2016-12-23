@@ -1,29 +1,42 @@
-# Makefile for Sphinx documentation
-#
-
-# You can set these variables from the command line.
-SPHINXOPTS    =
-SPHINXBUILD   = sphinx-build
-PAPER         =
-BUILDDIR      = build
-
-# Internal variables.
-PAPEROPT_a4     = -D latex_paper_size=a4
-PAPEROPT_letter = -D latex_paper_size=letter
-ALLSPHINXOPTS   = -d $(BUILDDIR)/doctrees $(PAPEROPT_$(PAPER)) $(SPHINXOPTS) source
-# the i18n builder cannot share the environment and doctrees with the others
-I18NSPHINXOPTS  = $(PAPEROPT_$(PAPER)) $(SPHINXOPTS) source
-
-.PHONY: help clean html
-
 help:
-	@echo "Please use \`make <target>' where <target> is one of"
-	@echo "  html       to make standalone HTML files"
+	@echo "  env         install all production dependencies"
+	@echo "  dev         install all production and development dependencies"
+	@echo "  docs        build documentation"
+	@echo "  clean       clean working directory"
+	@echo "  lint        check style with pycodestyle"
+	@echo "  test        run tests"
+	@echo "  build       build the distribution"
+	@echo "  coverage    run tests with code coverage"
+
+env:
+	pip install -r requirements.txt
+
+dev: env
+	pip install -r requirements.dev.txt
+	pip install -r requirements.docs.txt
+
+docs:
+	$(MAKE) -C doc html
 
 clean:
-	rm -rf $(BUILDDIR)/*
+	rm -fr htmlcov
+	rm -fr dist
+	rm -fr .eggs
+	rm -fr *.egg-info
+	find . -name '*.pyc' -exec rm -f {} \;
+	find . -name '*.pyo' -exec rm -f {} \;
 
-html:
-	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(BUILDDIR)/html
-	@echo
-	@echo "Build finished. The HTML pages are in $(BUILDDIR)/html."
+lint:
+	pycodestyle --config=setup.cfg hyperwallet
+
+test: dev lint
+	python setup.py test
+
+build: clean
+	python setup.py check
+	python setup.py sdist
+
+coverage: clean
+	coverage run setup.py test
+	coverage html
+	coverage report

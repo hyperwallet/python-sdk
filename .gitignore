@@ -1,3 +1,19 @@
-*.pyc
-build/
+# Compiled python modules
+*.py[co]
+
+# Setuptools distribution folder
+dist
+
+# Python egg metadata
+*.egg
+*.egg-info
+
+# Directories
 venv
+doc/_build/**
+htmlcov
+.eggs
+
+# Other
+.DS_Store
+.coverage
