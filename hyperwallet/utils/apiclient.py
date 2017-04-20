@@ -98,17 +98,20 @@ class ApiClient(object):
         except:
             return body
 
-        if response.ok:
-            body = response.json()
-        else:
-            if (not response.ok and
-                    response.content and
-                    response.json().get('errors')):
+        content = response.content.decode('utf-8')
 
-                # Overwrite the general error response if errors were returned
-                body['errors'] = response.json().get('errors')
+        if response.status_code is 204:
+            return {}
 
-        return body
+        try:
+            json_body = json.loads(content)
+        except ValueError as e:
+            raise HyperwalletException(e.message)
+
+        if 'errors' in json_body:
+            raise HyperwalletException(json_body)
+
+        return json_body
 
     def doGet(self, partialUrl, params={}):
         '''

@@ -10,6 +10,7 @@ from hyperwallet import (
     Webhook
 )
 
+
 class Api(object):
     '''
     A Python interface for the Hyperwallet API.
