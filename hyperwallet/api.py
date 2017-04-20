@@ -7,6 +7,7 @@ from exceptions import HyperwalletException
 from utils import ApiClient
 
 from hyperwallet import (
+    User,
     Webhook
 )
 
@@ -78,10 +79,12 @@ class Api(object):
         List Users.
 
         :param params: A dictionary containing query parameters.
-        :returns: The List Users API response.
+        :returns: An array of Users.
         '''
 
-        return self.apiClient.doGet('users', params)
+        response = self.apiClient.doGet('users', params)
+
+        return [User(x) for x in response.get('data', [])]
 
     def createUser(self,
                    data=None):
@@ -89,7 +92,7 @@ class Api(object):
         Create a User.
 
         :param data: A dictionary containing User information. **REQUIRED**
-        :returns: The Create a User API response.
+        :returns: A User.
         '''
 
         if not data:
@@ -97,7 +100,9 @@ class Api(object):
 
         self._addProgramToken(data)
 
-        return self.apiClient.doPost('users', data)
+        response = self.apiClient.doPost('users', data)
+
+        return User(response)
 
     def retrieveUser(self,
                      userToken=None):
@@ -105,15 +110,17 @@ class Api(object):
         Retrieve a User.
 
         :param userToken: A token identifying the User. **REQUIRED**
-        :returns: The Retrieve a User API response.
+        :returns: A User.
         '''
 
         if not userToken:
             raise HyperwalletException('userToken is required')
 
-        return self.apiClient.doGet(
+        response = self.apiClient.doGet(
             os.path.join('users', userToken)
         )
+
+        return User(response)
 
     def updateUser(self,
                    userToken=None,
@@ -123,7 +130,7 @@ class Api(object):
 
         :param userToken: A token identifying the User. **REQUIRED**
         :param data: A dictionary containing User information. **REQUIRED**
-        :returns: The Update a User API response.
+        :returns: A User.
         '''
 
         if not userToken:
@@ -132,10 +139,12 @@ class Api(object):
         if not data:
             raise HyperwalletException('data is required')
 
-        return self.apiClient.doPut(
+        response = self.apiClient.doPut(
             os.path.join('users', userToken),
             data
         )
+
+        return User(response)
 
     def listUserBalances(self,
                          userToken=None,
@@ -960,10 +969,10 @@ class Api(object):
     def listWebhooks(self,
                      params=None):
         '''
-        List Webhook notifications.
+        List Webhook Notifications.
 
         :param params: A dictionary containing query parameters.
-        :returns: An array of Webhook objects.
+        :returns: An array of Webhooks.
         '''
 
         response = self.apiClient.doGet('webhook-notifications', params)
@@ -973,10 +982,10 @@ class Api(object):
     def retrieveWebhook(self,
                         webhookToken=None):
         '''
-        Retrieve a Webhook notification.
+        Retrieve a Webhook Notification.
 
         :param webhookToken: A token identifying the Webhook. **REQUIRED**
-        :returns: A Webhook object.
+        :returns: A Webhook.
         '''
 
         if not webhookToken:
