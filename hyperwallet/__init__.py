@@ -12,4 +12,8 @@ __download_url__    = 'https://pypi.python.org/pypi/hyperwallet-sdk'
 __description__     = 'A Python wrapper around the Hyperwallet API'
 
 
+from .models import (                                                    # noqa
+    Webhook                                                              # noqa
+)
+
 from .api import Api                                                     # noqa

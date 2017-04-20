@@ -6,6 +6,9 @@ from config import SERVER
 from exceptions import HyperwalletException
 from utils import ApiClient
 
+from hyperwallet import (
+    Webhook
+)
 
 class Api(object):
     '''
@@ -952,3 +955,34 @@ class Api(object):
             data,
             headers
         )
+
+    def listWebhooks(self,
+                     params=None):
+        '''
+        List Webhook notifications.
+
+        :param params: A dictionary containing query parameters.
+        :returns: An array of Webhook objects.
+        '''
+
+        response = self.apiClient.doGet('webhook-notifications', params)
+
+        return [Webhook(x) for x in response.get('data', [])]
+
+    def retrieveWebhook(self,
+                        webhookToken=None):
+        '''
+        Retrieve a Webhook notification.
+
+        :param webhookToken: A token identifying the Webhook. **REQUIRED**
+        :returns: A Webhook object.
+        '''
+
+        if not webhookToken:
+            raise HyperwalletException('webhookToken is required')
+
+        response = self.apiClient.doGet(
+            os.path.join('webhook-notifications', webhookToken)
+        )
+
+        return Webhook(response)
