@@ -1,3 +1,9 @@
+# Thanks to Twitter Python SDK
+# https://github.com/bear/python-twitter/blob/master/twitter/models.py
+
+import json
+
+
 class HyperwalletModel(object):
     '''
     The base Hyperwallet Model from which all other models will inherit.
@@ -73,6 +79,79 @@ class User(HyperwalletModel):
         )
 
 
+class BankAccount(HyperwalletModel):
+    '''
+    The BankAccount Model.
+
+    :param data: A dictionary containing the attributes for the BankAccount.
+    '''
+
+    def __init__(self, data):
+        '''
+        Create a new BankAccount with the provided attributes.
+        '''
+
+        self.defaults = {
+            'token': None,
+            'status': None,
+            'createdOn': None,
+            'userToken': None,
+            'profileType': None,
+            'firstName': None,
+            'middleName': None,
+            'lastName': None,
+            'dateOfBirth': None,
+            'phoneNumber': None,
+            'mobileNumber': None,
+            'governmentId': None,
+            'addressLine1': None,
+            'addressLine2': None,
+            'city': None,
+            'stateProvince': None,
+            'postalCode': None,
+            'country': None,
+            'countryOfBirth': None,
+            'countryOfNationality': None,
+            'businessName': None,
+            'businessRegistrationId': None,
+            'businessRegistrationCountry': None,
+            'type': None,
+            'bankId': None,
+            'bankName': None,
+            'bankAccountId': None,
+            'bankAccountPurpose': None,
+            'bankAccountRelationship': None,
+            'branchAddressLine1': None,
+            'branchCity': None,
+            'branchCountry': None,
+            'branchId': None,
+            'branchName': None,
+            'branchPostalCode': None,
+            'branchStateProvince': None,
+            'intermediaryBankAccountId': None,
+            'intermediaryBankAddressLine1': None,
+            'intermediaryBankCity': None,
+            'intermediaryBankCountry': None,
+            'intermediaryBankId': None,
+            'intermediaryBankName': None,
+            'intermediaryBankPostalCode': None,
+            'intermediaryBankStateProvince': None,
+            'transferMethodCountry': None,
+            'transferMethodCurrency': None,
+            'wireInstructions': None
+        }
+
+        for (param, default) in self.defaults.items():
+            setattr(self, param, data.get(param, default))
+
+    def __repr__(self):
+        return "BankAccount({token}, {date}, {id})".format(
+            token=self.token,
+            date=self.createdOn,
+            id=self.bankAccountId
+        )
+
+
 class Webhook(HyperwalletModel):
     '''
     The Webhook Model.
@@ -118,7 +197,7 @@ class Webhook(HyperwalletModel):
 
         types = {
             # 'PAYMENTS': 'payment',
-            # 'BANK_ACCOUNTS': 'bankAccount',
+            'BANK_ACCOUNTS': BankAccount,
             # 'PREPAID_CARDS': 'prepaidCard',
             'USERS': User
         }
