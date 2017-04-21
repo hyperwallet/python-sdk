@@ -183,6 +183,44 @@ class BankAccount(HyperwalletModel):
         )
 
 
+class Payment(HyperwalletModel):
+    '''
+    The Payment Model.
+
+    :param data: A dictionary containing the attributes for the Payment.
+    '''
+
+    def __init__(self, data):
+        '''
+        Create a new Payment with the provided attributes.
+        '''
+
+        self.defaults = {
+            'token': None,
+            'createdOn': None,
+            'clientPaymentId': None,
+            'amount': None,
+            'currency': None,
+            'notes': None,
+            'memo': None,
+            'purpose': None,
+            'releaseOn': None,
+            'expiresOn': None,
+            'destinationToken': None,
+            'programToken': None
+        }
+
+        for (param, default) in self.defaults.items():
+            setattr(self, param, data.get(param, default))
+
+    def __repr__(self):
+        return "Payment({token}, {date}, {id})".format(
+            token=self.token,
+            date=self.createdOn,
+            id=self.clientPaymentId
+        )
+
+
 class Webhook(HyperwalletModel):
     '''
     The Webhook Model.
@@ -227,7 +265,7 @@ class Webhook(HyperwalletModel):
             return None
 
         types = {
-            # 'PAYMENTS': 'payment',
+            'PAYMENTS': Payment,
             'BANK_ACCOUNTS': BankAccount,
             # 'PREPAID_CARDS': 'prepaidCard',
             'USERS': User
