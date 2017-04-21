@@ -95,9 +95,39 @@ class Webhook(HyperwalletModel):
         for (param, default) in self.defaults.items():
             setattr(self, param, data.get(param, default))
 
+        wh_object = Webhook.make_object(self.type, self.object)
+
+        if wh_object is not None:
+            self.object = wh_object
+
     def __repr__(self):
         return "Webhook({token}, {date}, {type})".format(
             token=self.token,
             date=self.createdOn,
             type=self.type
         )
+
+    @staticmethod
+    def make_object(wh_type, wh_object):
+
+        if wh_type is None:
+            return None
+
+        if type(wh_object) is not dict:
+            return None
+
+        types = {
+            # 'PAYMENTS': 'payment',
+            # 'BANK_ACCOUNTS': 'bankAccount',
+            # 'PREPAID_CARDS': 'prepaidCard',
+            'USERS': User
+        }
+
+        base, sub = wh_type.split('.')[:2]
+
+        if sub in types:
+            return types[sub](wh_object)
+        elif base in types:
+            return types[base](wh_object)
+
+        return None
