@@ -103,10 +103,9 @@ class User(HyperwalletModel):
             setattr(self, param, data.get(param, default))
 
     def __repr__(self):
-        return "User({token}, {date}, {id})".format(
-            token=self.token,
+        return "User({date}, {token})".format(
             date=self.createdOn,
-            id=self.clientUserId
+            token=self.token
         )
 
 
@@ -176,10 +175,9 @@ class BankAccount(HyperwalletModel):
             setattr(self, param, data.get(param, default))
 
     def __repr__(self):
-        return "BankAccount({token}, {date}, {id})".format(
-            token=self.token,
+        return "BankAccount({date}, {token})".format(
             date=self.createdOn,
-            id=self.bankAccountId
+            token=self.token
         )
 
 
@@ -214,10 +212,9 @@ class Payment(HyperwalletModel):
             setattr(self, param, data.get(param, default))
 
     def __repr__(self):
-        return "Payment({token}, {date}, {id})".format(
-            token=self.token,
+        return "Payment({date}, {token})".format(
             date=self.createdOn,
-            id=self.clientPaymentId
+            token=self.token
         )
 
 
@@ -249,10 +246,9 @@ class Webhook(HyperwalletModel):
             self.object = wh_object
 
     def __repr__(self):
-        return "Webhook({token}, {date}, {type})".format(
-            token=self.token,
+        return "Webhook({date}, {token})".format(
             date=self.createdOn,
-            type=self.type
+            token=self.token
         )
 
     @staticmethod
