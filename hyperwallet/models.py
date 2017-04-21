@@ -18,6 +18,37 @@ class HyperwalletModel(object):
 
         self.defaults = {}
 
+    def __str__(self):
+        '''
+        Return a string representation of the HyperwalletModel.
+        '''
+
+        return json.dumps(self._to_dict(), sort_keys=True)
+
+    def _to_dict(self):
+        '''
+        Create a dictionary representation of the Model.
+        '''
+
+        data = {}
+
+        for (key, value) in self.defaults.items():
+            if isinstance(getattr(self, key, None), (list, tuple, set)):
+                data[key] = list()
+                for subobj in getattr(self, key, None):
+                    if getattr(subobj, '_to_dict', None):
+                        data[key].append(subobj._to_dict())
+                    else:
+                        data[key].append(subobj)
+
+            elif getattr(getattr(self, key, None), '_to_dict', None):
+                data[key] = getattr(self, key)._to_dict()
+
+            elif getattr(self, key, None):
+                data[key] = getattr(self, key, None)
+
+        return data
+
 
 class User(HyperwalletModel):
     '''
