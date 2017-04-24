@@ -193,7 +193,7 @@ class Api(object):
 
         :param userToken: A token identifying the User. **REQUIRED**
         :param params: A dictionary containing query parameters.
-        :returns: The List Bank Accounts API response.
+        :returns: An array of Bank Accounts.
         '''
 
         if not userToken:
@@ -215,7 +215,7 @@ class Api(object):
         :param userToken: A token identifying the User. **REQUIRED**
         :param data:
             A dictionary containing Bank Account information. **REQUIRED**
-        :returns: The Create a Bank Account API response.
+        :returns: A Bank Account.
         '''
 
         if not userToken:
@@ -240,7 +240,7 @@ class Api(object):
         :param userToken: A token identifying the User. **REQUIRED**
         :param bankAccountToken:
             A token identifying the Bank Account. **REQUIRED**
-        :returns: The Retrieve a Bank Account API response.
+        :returns: A Bank Account.
         '''
 
         if not userToken:
@@ -267,7 +267,7 @@ class Api(object):
             A token identifying the Bank Account. **REQUIRED**
         :param data:
             A dictionary containing Bank Account information. **REQUIRED**
-        :returns: The Update a Bank Account API response.
+        :returns: A Bank Account.
         '''
 
         if not userToken:
@@ -759,10 +759,12 @@ class Api(object):
         List Payments.
 
         :param params: A dictionary containing query parameters.
-        :returns: The List Payments API response.
+        :returns: An array of Payments.
         '''
 
-        return self.apiClient.doGet('payments', params)
+        response = self.apiClient.doGet('payments', params)
+
+        return [Payment(x) for x in response.get('data', [])]
 
     def createPayment(self,
                       data=None):
@@ -770,7 +772,7 @@ class Api(object):
         Create a Payment.
 
         :param data: A dictionary containing Payment information. **REQUIRED**
-        :returns: The Create a Payment API response.
+        :returns: A Payment.
         '''
 
         if not data:
@@ -778,7 +780,9 @@ class Api(object):
 
         self._addProgramToken(data)
 
-        return self.apiClient.doPost('payments', data)
+        response = self.apiClient.doPost('payments', data)
+
+        return Payment(response)
 
     def retrievePayment(self,
                         paymentToken=None):
@@ -786,13 +790,15 @@ class Api(object):
         Retrieve a Payment.
 
         :param paymentToken: A token identifying the Payment. **REQUIRED**
-        :returns: The Retrieve a Payment API response.
+        :returns: A Payment.
         '''
 
         if not paymentToken:
             raise HyperwalletException('paymentToken is required')
 
-        return self.apiClient.doGet(os.path.join('payments', paymentToken))
+        response = self.apiClient.doGet(os.path.join('payments', paymentToken))
+
+        return Payment(response)
 
     def retrieveAccount(self,
                         programToken=None,
