@@ -8,6 +8,7 @@ from utils import ApiClient
 
 from hyperwallet import (
     User,
+    BankAccount,
     Webhook
 )
 
@@ -198,10 +199,12 @@ class Api(object):
         if not userToken:
             raise HyperwalletException('userToken is required')
 
-        return self.apiClient.doGet(
+        response = self.apiClient.doGet(
             os.path.join('users', userToken, 'bank-accounts'),
             params
         )
+
+        return [BankAccount(x) for x in response.get('data', [])]
 
     def createBankAccount(self,
                           userToken=None,
@@ -221,10 +224,12 @@ class Api(object):
         if not data:
             raise HyperwalletException('data is required')
 
-        return self.apiClient.doPost(
+        response = self.apiClient.doPost(
             os.path.join('users', userToken, 'bank-accounts'),
             data
         )
+
+        return BankAccount(response)
 
     def retrieveBankAccount(self,
                             userToken=None,
@@ -244,9 +249,11 @@ class Api(object):
         if not bankAccountToken:
             raise HyperwalletException('bankAccountToken is required')
 
-        return self.apiClient.doGet(
+        response = self.apiClient.doGet(
             os.path.join('users', userToken, 'bank-accounts', bankAccountToken)
         )
+
+        return BankAccount(response)
 
     def updateBankAccount(self,
                           userToken=None,
@@ -272,7 +279,7 @@ class Api(object):
         if not data:
             raise HyperwalletException('data is required')
 
-        return self.apiClient.doPut(
+        response = self.apiClient.doPut(
             os.path.join(
                 'users',
                 userToken,
@@ -281,6 +288,8 @@ class Api(object):
             ),
             data
         )
+
+        return BankAccount(response)
 
     def createBankAccountStatusTransition(self,
                                           userToken=None,

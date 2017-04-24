@@ -14,6 +14,7 @@ __description__     = 'A Python wrapper around the Hyperwallet API'
 
 from .models import (
     User,                                                                # noqa
+    BankAccount,                                                         # noqa
     Webhook                                                              # noqa
 )
 
