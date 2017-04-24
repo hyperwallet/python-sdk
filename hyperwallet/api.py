@@ -10,6 +10,7 @@ from hyperwallet import (
     User,
     BankAccount,
     PrepaidCard,
+    PaperCheck,
     Webhook
 )
 
@@ -604,16 +605,18 @@ class Api(object):
 
         :param userToken: A token identifying the User. **REQUIRED**
         :param params: A dictionary containing query parameters.
-        :returns: The List Paper Checks API response.
+        :returns: An array of Paper Checks.
         '''
 
         if not userToken:
             raise HyperwalletException('userToken is required')
 
-        return self.apiClient.doGet(
+        response = self.apiClient.doGet(
             os.path.join('users', userToken, 'paper-checks'),
             params
         )
+
+        return [PaperCheck(x) for x in response.get('data', [])]
 
     def createPaperCheck(self,
                          userToken=None,
@@ -624,7 +627,7 @@ class Api(object):
         :param userToken: A token identifying the User. **REQUIRED**
         :param data:
             A dictionary containing Paper Check information. **REQUIRED**
-        :returns: The Create a Paper Check API response.
+        :returns: A Paper Check.
         '''
 
         if not userToken:
@@ -633,10 +636,12 @@ class Api(object):
         if not data:
             raise HyperwalletException('data is required')
 
-        return self.apiClient.doPost(
+        response = self.apiClient.doPost(
             os.path.join('users', userToken, 'paper-checks'),
             data
         )
+
+        return PaperCheck(response)
 
     def retrievePaperCheck(self,
                            userToken=None,
@@ -647,7 +652,7 @@ class Api(object):
         :param userToken: A token identifying the User. **REQUIRED**
         :param paperCheckToken:
             A token identifying the Paper Check. **REQUIRED**
-        :returns: The Retrieve a Paper Check API response.
+        :returns: A Paper Check.
         '''
 
         if not userToken:
@@ -656,9 +661,11 @@ class Api(object):
         if not paperCheckToken:
             raise HyperwalletException('paperCheckToken is required')
 
-        return self.apiClient.doGet(
+        response = self.apiClient.doGet(
             os.path.join('users', userToken, 'paper-checks', paperCheckToken)
         )
+
+        return PaperCheck(response)
 
     def updatePaperCheck(self,
                          userToken=None,
@@ -672,7 +679,7 @@ class Api(object):
             A token identifying the Paper Check. **REQUIRED**
         :param data:
             A dictionary containing Paper Check information. **REQUIRED**
-        :returns: The Update a Paper Check API response.
+        :returns: A Paper Check.
         '''
 
         if not userToken:
@@ -684,10 +691,12 @@ class Api(object):
         if not data:
             raise HyperwalletException('data is required')
 
-        return self.apiClient.doPut(
+        response = self.apiClient.doPut(
             os.path.join('users', userToken, 'paper-checks', paperCheckToken),
             data
         )
+
+        return PaperCheck(response)
 
     def createPaperCheckStatusTransition(self,
                                          userToken=None,

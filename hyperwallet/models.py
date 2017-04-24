@@ -113,12 +113,12 @@ class BankAccount(HyperwalletModel):
     '''
     The BankAccount Model.
 
-    :param data: A dictionary containing the attributes for the BankAccount.
+    :param data: A dictionary containing the attributes for the Bank Account.
     '''
 
     def __init__(self, data):
         '''
-        Create a new BankAccount with the provided attributes.
+        Create a new Bank Account with the provided attributes.
         '''
 
         self.defaults = {
@@ -193,12 +193,12 @@ class PrepaidCard(HyperwalletModel):
     '''
     The PrepaidCard Model.
 
-    :param data: A dictionary containing the attributes for the PrepaidCard.
+    :param data: A dictionary containing the attributes for the Prepaid Card.
     '''
 
     def __init__(self, data):
         '''
-        Create a new PrepaidCard with the provided attributes.
+        Create a new Prepaid Card with the provided attributes.
         '''
 
         self.defaults = {
@@ -220,6 +220,80 @@ class PrepaidCard(HyperwalletModel):
 
     def __repr__(self):
         return "PrepaidCard({date}, {token})".format(
+            date=self.createdOn,
+            token=self.token
+        )
+
+
+class PaperCheck(HyperwalletModel):
+    '''
+    The PaperCheck Model.
+
+    :param data: A dictionary containing the attributes for the Paper Check.
+    '''
+
+    def __init__(self, data):
+        '''
+        Create a new Paper Check with the provided attributes.
+        '''
+
+        self.defaults = {
+            'token': None,
+            'createdOn': None,
+            'status': None,
+            'type': None,
+            'profileType': None,
+            'firstName': None,
+            'middleName': None,
+            'lastName': None,
+            'dateOfBirth': None,
+            'countryOfBirth': None,
+            'countryOfNationality': None,
+            'phoneNumber': None,
+            'mobileNumber': None,
+            'governmentId': None,
+            'businessName': None,
+            'businessRegistrationId': None,
+            'businessRegistrationCountry': None,
+            'addressLine1': None,
+            'city': None,
+            'stateProvince': None,
+            'country': None,
+            'postalCode': None,
+            'transferMethodCountry': None,
+            'transferMethodCurrency': None,
+            'bankName': None,
+            'bankId': None,
+            'bankAccountRelationship': None,
+            'branchName': None,
+            'branchId': None,
+            'bankAccountId': None,
+            'bankAccountPurpose': None,
+            'branchAddressLine1': None,
+            'branchAddressLine2': None,
+            'branchCity': None,
+            'branchStateProvince': None,
+            'branchCountry': None,
+            'branchPostalCode': None,
+            'wireInstructions': None,
+            'intermediaryBankId': None,
+            'intermediaryBankName': None,
+            'intermediaryBankAccountId': None,
+            'intermediaryBankAddressLine1': None,
+            'intermediaryBankAddressLine2': None,
+            'intermediaryBankCity': None,
+            'intermediaryBankStateProvince': None,
+            'intermediaryBankCountry': None,
+            'intermediaryBankPostalCode': None,
+            'shippingMethod': None,
+            'isDefaultTransferMethod': None
+        }
+
+        for (param, default) in self.defaults.items():
+            setattr(self, param, data.get(param, default))
+
+    def __repr__(self):
+        return "PaperCheck({date}, {token})".format(
             date=self.createdOn,
             token=self.token
         )

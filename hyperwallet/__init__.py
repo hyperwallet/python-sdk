@@ -16,6 +16,7 @@ from .models import (
     User,                                                                # noqa
     BankAccount,                                                         # noqa
     PrepaidCard,                                                         # noqa
+    PaperCheck,                                                          # noqa
     Webhook                                                              # noqa
 )
 
