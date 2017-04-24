@@ -189,6 +189,42 @@ class BankAccount(HyperwalletModel):
         )
 
 
+class PrepaidCard(HyperwalletModel):
+    '''
+    The PrepaidCard Model.
+
+    :param data: A dictionary containing the attributes for the PrepaidCard.
+    '''
+
+    def __init__(self, data):
+        '''
+        Create a new PrepaidCard with the provided attributes.
+        '''
+
+        self.defaults = {
+            'token': None,
+            'createdOn': None,
+            'status': None,
+            'type': None,
+            'transferMethodCountry': None,
+            'transferMethodCurrency': None,
+            'cardType': None,
+            'cardPackage': None,
+            'cardNumber': None,
+            'cardBrand': None,
+            'dateOfExpiry': None
+        }
+
+        for (param, default) in self.defaults.items():
+            setattr(self, param, data.get(param, default))
+
+    def __repr__(self):
+        return "PrepaidCard({date}, {token})".format(
+            date=self.createdOn,
+            token=self.token
+        )
+
+
 class Payment(HyperwalletModel):
     '''
     The Payment Model.
@@ -271,7 +307,7 @@ class Webhook(HyperwalletModel):
         types = {
             'PAYMENTS': Payment,
             'BANK_ACCOUNTS': BankAccount,
-            # 'PREPAID_CARDS': 'prepaidCard',
+            'PREPAID_CARDS': PrepaidCard,
             'USERS': User
         }
 

@@ -9,6 +9,7 @@ from utils import ApiClient
 from hyperwallet import (
     User,
     BankAccount,
+    PrepaidCard,
     Webhook
 )
 
@@ -371,16 +372,18 @@ class Api(object):
 
         :param userToken: A token identifying the User. **REQUIRED**
         :param params: A dictionary containing query parameters.
-        :returns: The List Prepaid Cards for User API response.
+        :returns: An array of Prepaid Cards.
         '''
 
         if not userToken:
             raise HyperwalletException('userToken is required')
 
-        return self.apiClient.doGet(
+        response = self.apiClient.doGet(
             os.path.join('users', userToken, 'prepaid-cards'),
             params
         )
+
+        return [PrepaidCard(x) for x in response.get('data', [])]
 
     def createPrepaidCard(self,
                           userToken=None,
@@ -391,7 +394,7 @@ class Api(object):
         :param userToken: A token identifying the User. **REQUIRED**
         :param data:
             A dictionary containing Prepaid Card information. **REQUIRED**
-        :returns: The Create a Prepaid Card API response.
+        :returns: A Prepaid Card.
         '''
 
         if not userToken:
@@ -400,10 +403,12 @@ class Api(object):
         if not data:
             raise HyperwalletException('data is required')
 
-        return self.apiClient.doPost(
+        response = self.apiClient.doPost(
             os.path.join('users', userToken, 'prepaid-cards'),
             data
         )
+
+        return PrepaidCard(response)
 
     def retrievePrepaidCard(self,
                             userToken=None,
@@ -414,7 +419,7 @@ class Api(object):
         :param userToken: A token identifying the User. **REQUIRED**
         :param prepaidCardToken:
             A token identifying the Prepaid Card. **REQUIRED**
-        :returns: The Retrieve a Prepaid Card API response.
+        :returns: A Prepaid Card.
         '''
 
         if not userToken:
@@ -423,9 +428,11 @@ class Api(object):
         if not prepaidCardToken:
             raise HyperwalletException('prepaidCardToken is required')
 
-        return self.apiClient.doGet(
+        response = self.apiClient.doGet(
             os.path.join('users', userToken, 'prepaid-cards', prepaidCardToken)
         )
+
+        return PrepaidCard(response)
 
     def listPrepaidCardStatusTransitions(self,
                                          userToken=None,
