@@ -915,13 +915,32 @@ class Api(object):
             )
         )
 
+    def getPayments(self,
+                    params=None):
+        '''
+        Get Payments.
+
+        A wrapper for the listPayments function. Provides an easy mechanism
+        to return a slice of all Payments between a given **offset** and
+        **maximum**.
+
+        :param params:
+            A dictionary containing parameters to slice with.
+        :returns:
+            An array of Payments.
+        '''
+
+        return self._getCollection(self.listPayments, params)
+
     def listPayments(self,
                      params=None):
         '''
         List Payments.
 
-        :param params: A dictionary containing query parameters.
-        :returns: An array of Payments.
+        :param params:
+            A dictionary containing query parameters.
+        :returns:
+            An array of Payments.
         '''
 
         response = self.apiClient.doGet('payments', params)
@@ -933,8 +952,10 @@ class Api(object):
         '''
         Create a Payment.
 
-        :param data: A dictionary containing Payment information. **REQUIRED**
-        :returns: A Payment.
+        :param data:
+            A dictionary containing Payment information. **REQUIRED**
+        :returns:
+            A Payment.
         '''
 
         if not data:
@@ -951,8 +972,10 @@ class Api(object):
         '''
         Retrieve a Payment.
 
-        :param paymentToken: A token identifying the Payment. **REQUIRED**
-        :returns: A Payment.
+        :param paymentToken:
+            A token identifying the Payment. **REQUIRED**
+        :returns:
+            A Payment.
         '''
 
         if not paymentToken:
