@@ -461,15 +461,35 @@ class Api(object):
             )
         )
 
+    def getPrepaidCards(self,
+                        params=None):
+        '''
+        Get Prepaid Cards.
+
+        A wrapper for the listPrepaidCards function. Provides an easy mechanism
+        to return a slice of all Prepaid Cards between a given **offset** and
+        **maximum**.
+
+        :param params:
+            A dictionary containing parameters to slice with.
+        :returns:
+            An array of Prepaid Cards.
+        '''
+
+        return self._getCollection(self.listPrepaidCards, params)
+
     def listPrepaidCards(self,
                          userToken=None,
                          params=None):
         '''
-        List Prepaid Cards for User.
+        List Prepaid Cards.
 
-        :param userToken: A token identifying the User. **REQUIRED**
-        :param params: A dictionary containing query parameters.
-        :returns: An array of Prepaid Cards.
+        :param userToken:
+            A token identifying the User. **REQUIRED**
+        :param params:
+            A dictionary containing query parameters.
+        :returns:
+            An array of Prepaid Cards.
         '''
 
         if not userToken:
@@ -488,10 +508,12 @@ class Api(object):
         '''
         Create a Prepaid Card.
 
-        :param userToken: A token identifying the User. **REQUIRED**
+        :param userToken:
+            A token identifying the User. **REQUIRED**
         :param data:
             A dictionary containing Prepaid Card information. **REQUIRED**
-        :returns: A Prepaid Card.
+        :returns:
+            A Prepaid Card.
         '''
 
         if not userToken:
@@ -513,10 +535,12 @@ class Api(object):
         '''
         Retrieve a Prepaid Card.
 
-        :param userToken: A token identifying the User. **REQUIRED**
+        :param userToken:
+            A token identifying the User. **REQUIRED**
         :param prepaidCardToken:
             A token identifying the Prepaid Card. **REQUIRED**
-        :returns: A Prepaid Card.
+        :returns:
+            A Prepaid Card.
         '''
 
         if not userToken:
