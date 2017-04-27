@@ -717,15 +717,35 @@ class Api(object):
             params
         )
 
+    def getPaperChecks(self,
+                       params=None):
+        '''
+        Get Paper Checks.
+
+        A wrapper for the listPaperChecks function. Provides an easy mechanism
+        to return a slice of all Paper Checks between a given **offset** and
+        **maximum**.
+
+        :param params:
+            A dictionary containing parameters to slice with.
+        :returns:
+            An array of Paper Checks.
+        '''
+
+        return self._getCollection(self.listPaperChecks, params)
+
     def listPaperChecks(self,
                         userToken=None,
                         params=None):
         '''
         List Paper Checks.
 
-        :param userToken: A token identifying the User. **REQUIRED**
-        :param params: A dictionary containing query parameters.
-        :returns: An array of Paper Checks.
+        :param userToken:
+            A token identifying the User. **REQUIRED**
+        :param params:
+            A dictionary containing query parameters.
+        :returns:
+            An array of Paper Checks.
         '''
 
         if not userToken:
@@ -744,10 +764,12 @@ class Api(object):
         '''
         Create a Paper Check.
 
-        :param userToken: A token identifying the User. **REQUIRED**
+        :param userToken:
+            A token identifying the User. **REQUIRED**
         :param data:
             A dictionary containing Paper Check information. **REQUIRED**
-        :returns: A Paper Check.
+        :returns:
+            A Paper Check.
         '''
 
         if not userToken:
@@ -769,10 +791,12 @@ class Api(object):
         '''
         Retrieve a Paper Check.
 
-        :param userToken: A token identifying the User. **REQUIRED**
+        :param userToken:
+            A token identifying the User. **REQUIRED**
         :param paperCheckToken:
             A token identifying the Paper Check. **REQUIRED**
-        :returns: A Paper Check.
+        :returns:
+            A Paper Check.
         '''
 
         if not userToken:
@@ -794,12 +818,14 @@ class Api(object):
         '''
         Update a Paper Check.
 
-        :param userToken: A token identifying the User. **REQUIRED**
+        :param userToken:
+            A token identifying the User. **REQUIRED**
         :param paperCheckToken:
             A token identifying the Paper Check. **REQUIRED**
         :param data:
             A dictionary containing Paper Check information. **REQUIRED**
-        :returns: A Paper Check.
+        :returns:
+            A Paper Check.
         '''
 
         if not userToken:
