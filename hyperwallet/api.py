@@ -1166,13 +1166,32 @@ class Api(object):
             headers
         )
 
+    def getWebhooks(self,
+                    params=None):
+        '''
+        Get Webhooks.
+
+        A wrapper for the listWebhooks function. Provides an easy mechanism
+        to return a slice of all Webhooks between a given **offset** and
+        **maximum**.
+
+        :param params:
+            A dictionary containing parameters to slice with.
+        :returns:
+            An array of Webhooks.
+        '''
+
+        return self._getCollection(self.listWebhooks, params)
+
     def listWebhooks(self,
                      params=None):
         '''
         List Webhook Notifications.
 
-        :param params: A dictionary containing query parameters.
-        :returns: An array of Webhooks.
+        :param params:
+            A dictionary containing query parameters.
+        :returns:
+            An array of Webhooks.
         '''
 
         response = self.apiClient.doGet('webhook-notifications', params)
@@ -1184,8 +1203,10 @@ class Api(object):
         '''
         Retrieve a Webhook Notification.
 
-        :param webhookToken: A token identifying the Webhook. **REQUIRED**
-        :returns: A Webhook.
+        :param webhookToken:
+            A token identifying the Webhook. **REQUIRED**
+        :returns:
+            A Webhook.
         '''
 
         if not webhookToken:
