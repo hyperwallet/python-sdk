@@ -19,11 +19,14 @@ class Api(object):
     '''
     A Python interface for the Hyperwallet API.
 
-    :param username: The username of this API user. **REQUIRED**
-    :param password: The password of this API user. **REQUIRED**
+    :param username:
+        The username of this API user. **REQUIRED**
+    :param password:
+        The password of this API user. **REQUIRED**
     :param programToken:
         The token for the program this user is accessing. **REQUIRED**
-    :param server: Your UAT or Production API URL if applicable.
+    :param server:
+        Your UAT or Production API URL if applicable.
 
     .. note::
         **server** defaults to the Hyperwallet Sandbox URL if not provided.
@@ -76,16 +79,20 @@ class Api(object):
 
         return data
 
-    def getUsers(self,
-                 params=None):
+    def _getCollection(self,
+                       func=None,
+                       params=None):
         '''
-        Get Users.
+        Get A Collection of a Resource Type.
 
-        A wrapper for the listUsers function. Provides an easy mechanism to
-        return a slice of all Users between a given **offset** and **maximum**.
+        A wrapper for any List function.
 
-        :param params: A dictionary containing parameters to slice with.
-        :returns: An array of Users.
+        :param func:
+            The List function to wrap.
+        :param params:
+            A dictionary containing parameters to slice with.
+        :returns:
+            An array of Resources.
         '''
 
         offset = params.get('offset') or 0
@@ -99,7 +106,7 @@ class Api(object):
         chunksize = 100
 
         while True:
-            response = self.listUsers({'offset': offset, 'limit': chunksize})
+            response = func({'offset': offset, 'limit': chunksize})
             results += response
             offset += chunksize
 
@@ -114,13 +121,31 @@ class Api(object):
 
         return results[0:maximum]
 
+    def getUsers(self,
+                 params=None):
+        '''
+        Get Users.
+
+        A wrapper for the listUsers function. Provides an easy mechanism to
+        return a slice of all Users between a given **offset** and **maximum**.
+
+        :param params:
+            A dictionary containing parameters to slice with.
+        :returns:
+            An array of Users.
+        '''
+
+        return self._getCollection(self.listUsers, params)
+
     def listUsers(self,
                   params=None):
         '''
         List Users.
 
-        :param params: A dictionary containing query parameters.
-        :returns: An array of Users.
+        :param params:
+            A dictionary containing query parameters.
+        :returns:
+            An array of Users.
         '''
 
         response = self.apiClient.doGet('users', params)
@@ -132,8 +157,10 @@ class Api(object):
         '''
         Create a User.
 
-        :param data: A dictionary containing User information. **REQUIRED**
-        :returns: A User.
+        :param data:
+            A dictionary containing User information. **REQUIRED**
+        :returns:
+            A User.
         '''
 
         if not data:
@@ -150,8 +177,10 @@ class Api(object):
         '''
         Retrieve a User.
 
-        :param userToken: A token identifying the User. **REQUIRED**
-        :returns: A User.
+        :param userToken:
+            A token identifying the User. **REQUIRED**
+        :returns:
+            A User.
         '''
 
         if not userToken:
@@ -169,9 +198,12 @@ class Api(object):
         '''
         Update a User.
 
-        :param userToken: A token identifying the User. **REQUIRED**
-        :param data: A dictionary containing User information. **REQUIRED**
-        :returns: A User.
+        :param userToken:
+            A token identifying the User. **REQUIRED**
+        :param data:
+            A dictionary containing User information. **REQUIRED**
+        :returns:
+            A User.
         '''
 
         if not userToken:
