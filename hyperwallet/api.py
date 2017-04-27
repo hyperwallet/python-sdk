@@ -76,6 +76,44 @@ class Api(object):
 
         return data
 
+    def getUsers(self,
+                 params=None):
+        '''
+        Get Users.
+
+        A wrapper for the listUsers function. Provides an easy mechanism to
+        return a slice of all Users between a given **offset** and **maximum**.
+
+        :param params: A dictionary containing parameters to slice with.
+        :returns: An array of Users.
+        '''
+
+        offset = params.get('offset') or 0
+        maximum = None or params.get('maximum')
+
+        # Return an empty array if the maximum is a negative number.
+        if maximum is not None and maximum < 1:
+            return []
+
+        results = []
+        chunksize = 100
+
+        while True:
+            response = self.listUsers({'offset': offset, 'limit': chunksize})
+            results += response
+            offset += chunksize
+
+            # If the response is smaller than the chunk we could have expected,
+            # we know this is the last of the data available
+            if len(response) < chunksize:
+                break
+
+            # Break if the total results exceed the maximum we wanted to return
+            if maximum and len(results) >= maximum:
+                break
+
+        return results[0:maximum]
+
     def listUsers(self,
                   params=None):
         '''
