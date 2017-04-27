@@ -257,15 +257,35 @@ class Api(object):
             params
         )
 
+    def getBankAccounts(self,
+                        params=None):
+        '''
+        Get Bank Accounts.
+
+        A wrapper for the listBankAccounts function. Provides an easy mechanism
+        to return a slice of all Bank Accounts between a given **offset** and
+        **maximum**.
+
+        :param params:
+            A dictionary containing parameters to slice with.
+        :returns:
+            An array of Bank Accounts.
+        '''
+
+        return self._getCollection(self.listBankAccounts, params)
+
     def listBankAccounts(self,
                          userToken=None,
                          params=None):
         '''
         List Bank Accounts.
 
-        :param userToken: A token identifying the User. **REQUIRED**
-        :param params: A dictionary containing query parameters.
-        :returns: An array of Bank Accounts.
+        :param userToken:
+            A token identifying the User. **REQUIRED**
+        :param params:
+            A dictionary containing query parameters.
+        :returns:
+            An array of Bank Accounts.
         '''
 
         if not userToken:
@@ -284,10 +304,12 @@ class Api(object):
         '''
         Create a Bank Account.
 
-        :param userToken: A token identifying the User. **REQUIRED**
+        :param userToken:
+            A token identifying the User. **REQUIRED**
         :param data:
             A dictionary containing Bank Account information. **REQUIRED**
-        :returns: A Bank Account.
+        :returns:
+            A Bank Account.
         '''
 
         if not userToken:
@@ -309,10 +331,12 @@ class Api(object):
         '''
         Retrieve a Bank Account.
 
-        :param userToken: A token identifying the User. **REQUIRED**
+        :param userToken:
+            A token identifying the User. **REQUIRED**
         :param bankAccountToken:
             A token identifying the Bank Account. **REQUIRED**
-        :returns: A Bank Account.
+        :returns:
+            A Bank Account.
         '''
 
         if not userToken:
@@ -334,12 +358,14 @@ class Api(object):
         '''
         Update a Bank Account.
 
-        :param userToken: A token identifying the User. **REQUIRED**
+        :param userToken:
+            A token identifying the User. **REQUIRED**
         :param bankAccountToken:
             A token identifying the Bank Account. **REQUIRED**
         :param data:
             A dictionary containing Bank Account information. **REQUIRED**
-        :returns: A Bank Account.
+        :returns:
+            A Bank Account.
         '''
 
         if not userToken:
