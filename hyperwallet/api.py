@@ -9,6 +9,7 @@ from utils import ApiClient
 from hyperwallet import (
     User,
     BankAccount,
+    BankCard,
     PrepaidCard,
     PaperCheck,
     Webhook
