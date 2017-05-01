@@ -444,6 +444,121 @@ class Api(object):
             )
         )
 
+    def listBankCards(self,
+                      userToken=None,
+                      params=None):
+        '''
+        List Bank Cards.
+
+        :param userToken:
+            A token identifying the User. **REQUIRED**
+        :param params:
+            A dictionary containing query parameters.
+        :returns:
+            An array of Bank Cards.
+        '''
+
+        if not userToken:
+            raise HyperwalletException('userToken is required')
+
+        response = self.apiClient.doGet(
+            os.path.join('users', userToken, 'bank-cards'),
+            params
+        )
+
+        return [BankCard(x) for x in response.get('data', [])]
+
+    def createBankCard(self,
+                       userToken=None,
+                       data=None):
+        '''
+        Create a Bank Card.
+
+        :param userToken:
+            A token identifying the User. **REQUIRED**
+        :param data:
+            A dictionary containing Bank Card information. **REQUIRED**
+        :returns:
+            A Bank Card.
+        '''
+
+        if not userToken:
+            raise HyperwalletException('userToken is required')
+
+        if not data:
+            raise HyperwalletException('data is required')
+
+        response = self.apiClient.doPost(
+            os.path.join('users', userToken, 'bank-cards'),
+            data
+        )
+
+        return BankCard(response)
+
+    def retrieveBankCard(self,
+                         userToken=None,
+                         bankCardToken=None):
+        '''
+        Retrieve a Bank Card.
+
+        :param userToken:
+            A token identifying the User. **REQUIRED**
+        :param bankCardToken:
+            A token identifying the Bank Card. **REQUIRED**
+        :returns:
+            A Bank Card.
+        '''
+
+        if not userToken:
+            raise HyperwalletException('userToken is required')
+
+        if not bankCardToken:
+            raise HyperwalletException('bankCardToken is required')
+
+        response = self.apiClient.doGet(
+            os.path.join('users', userToken, 'bank-cards', bankCardToken)
+        )
+
+        return BankCard(response)
+
+    def updateBankCard(self,
+                       userToken=None,
+                       bankCardToken=None,
+                       data=None):
+        '''
+        Update a Bank Card.
+
+        :param userToken:
+            A token identifying the User. **REQUIRED**
+        :param bankCardToken:
+            A token identifying the Bank Card. **REQUIRED**
+        :param data:
+            A dictionary containing Bank Card information. **REQUIRED**
+        :returns:
+            A Bank Card.
+        '''
+
+        if not userToken:
+            raise HyperwalletException('userToken is required')
+
+        if not bankCardToken:
+            raise HyperwalletException('bankCardToken is required')
+
+        if not data:
+            raise HyperwalletException('data is required')
+
+        response = self.apiClient.doPut(
+            os.path.join(
+                'users',
+                userToken,
+                'bank-cards',
+                bankCardToken
+            ),
+            data
+        )
+
+        return BankCard(response)
+
     def listPrepaidCards(self,
                          userToken=None,
                          params=None):

@@ -189,6 +189,49 @@ class BankAccount(HyperwalletModel):
         )
 
 
+class BankCard(HyperwalletModel):
+    '''
+    The BankCard Model.
+
+    :param data: A dictionary containing the attributes for the Bank Card.
+    '''
+
+    def __init__(self, data):
+        '''
+        Create a new Bank Card with the provided attributes.
+        '''
+
+        self.defaults = {
+            'token': None,
+            'createdOn': None,
+            'status': None,
+            'type': None,
+            'profileType': None,
+            'businessName': None,
+            'addressLine1': None,
+            'city': None,
+            'stateProvince': None,
+            'country': None,
+            'postalCode': None,
+            'transferMethodCountry': None,
+            'transferMethodCurrency': None,
+            'cardNumber': None,
+            'cardType': None,
+            'cardBrand': None,
+            'dateOfExpiry': None,
+            'isDefaultTransferMethod': None
+        }
+
+        for (param, default) in self.defaults.items():
+            setattr(self, param, data.get(param, default))
+
+    def __repr__(self):
+        return "BankCard({date}, {token})".format(
+            date=self.createdOn,
+            token=self.token
+        )
+
+
 class PrepaidCard(HyperwalletModel):
     '''
     The PrepaidCard Model.
