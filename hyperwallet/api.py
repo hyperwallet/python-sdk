@@ -85,7 +85,7 @@ class Api(object):
         '''
         Get A Collection of a Resource Type.
 
-        A wrapper for any List function.
+        A wrapper for any program-level List function.
 
         :param func:
             The List function to wrap.
@@ -256,23 +256,6 @@ class Api(object):
             os.path.join('users', userToken, 'receipts'),
             params
         )
-
-    def getBankAccounts(self,
-                        params=None):
-        '''
-        Get Bank Accounts.
-
-        A wrapper for the listBankAccounts function. Provides an easy mechanism
-        to return a slice of all Bank Accounts between a given **offset** and
-        **maximum**.
-
-        :param params:
-            A dictionary containing parameters to slice with.
-        :returns:
-            An array of Bank Accounts.
-        '''
-
-        return self._getCollection(self.listBankAccounts, params)
 
     def listBankAccounts(self,
                          userToken=None,
@@ -460,23 +443,6 @@ class Api(object):
                 statusTransitionToken
             )
         )
-
-    def getPrepaidCards(self,
-                        params=None):
-        '''
-        Get Prepaid Cards.
-
-        A wrapper for the listPrepaidCards function. Provides an easy mechanism
-        to return a slice of all Prepaid Cards between a given **offset** and
-        **maximum**.
-
-        :param params:
-            A dictionary containing parameters to slice with.
-        :returns:
-            An array of Prepaid Cards.
-        '''
-
-        return self._getCollection(self.listPrepaidCards, params)
 
     def listPrepaidCards(self,
                          userToken=None,
@@ -716,23 +682,6 @@ class Api(object):
             ),
             params
         )
-
-    def getPaperChecks(self,
-                       params=None):
-        '''
-        Get Paper Checks.
-
-        A wrapper for the listPaperChecks function. Provides an easy mechanism
-        to return a slice of all Paper Checks between a given **offset** and
-        **maximum**.
-
-        :param params:
-            A dictionary containing parameters to slice with.
-        :returns:
-            An array of Paper Checks.
-        '''
-
-        return self._getCollection(self.listPaperChecks, params)
 
     def listPaperChecks(self,
                         userToken=None,
