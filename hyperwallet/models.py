@@ -416,6 +416,36 @@ class Program(HyperwalletModel):
         )
 
 
+class Account(HyperwalletModel):
+    '''
+    The Account Model.
+
+    :param data:
+        A dictionary containing the attributes for the Account.
+    '''
+
+    def __init__(self, data):
+        '''
+        Create a new Account with the provided attributes.
+        '''
+
+        self.defaults = {
+            'token': None,
+            'createdOn': None,
+            'type': None,
+            'email': None
+        }
+
+        for (param, default) in self.defaults.items():
+            setattr(self, param, data.get(param, default))
+
+    def __repr__(self):
+        return "Account({date}, {token})".format(
+            date=self.createdOn,
+            token=self.token
+        )
+
+
 class Webhook(HyperwalletModel):
     '''
     The Webhook Model.

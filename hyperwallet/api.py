@@ -14,6 +14,7 @@ from hyperwallet import (
     PaperCheck,
     Payment,
     Program,
+    Account,
     Webhook
 )
 
@@ -1100,9 +1101,12 @@ class Api(object):
         '''
         Retrieve an Account.
 
-        :param programToken: A token identifying the Program. **REQUIRED**
-        :param accountToken: A token identifying the Account. **REQUIRED**
-        :returns: The Retrieve an Account API response.
+        :param programToken:
+            A token identifying the Program. **REQUIRED**
+        :param accountToken:
+            A token identifying the Account. **REQUIRED**
+        :returns:
+            An Account.
         '''
 
         if not programToken:
@@ -1111,9 +1115,17 @@ class Api(object):
         if not accountToken:
             raise HyperwalletException('accountToken is required')
 
-        return self.apiClient.doGet(
-            os.path.join('programs', programToken, 'accounts', accountToken)
+        response = self.apiClient.doGet(
+            os.path.join(
+                'programs',
+                programToken,
+                'accounts',
+                accountToken
+            )
         )
+
+        return Account(response)
+
 
     def listAccountBalances(self,
                             programToken=None,
