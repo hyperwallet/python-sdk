@@ -21,6 +21,7 @@ from .models import (
     Payment,                                                             # noqa
     Program,                                                             # noqa
     Account,                                                             # noqa
+    Balance,                                                             # noqa
     Webhook                                                              # noqa
 )
 

@@ -15,6 +15,7 @@ from hyperwallet import (
     Payment,
     Program,
     Account,
+    Balance,
     Webhook
 )
 

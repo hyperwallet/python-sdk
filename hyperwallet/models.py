@@ -446,6 +446,34 @@ class Account(HyperwalletModel):
         )
 
 
+class Balance(HyperwalletModel):
+    '''
+    The Balance Model.
+
+    :param data:
+        A dictionary containing the attributes for the Balance.
+    '''
+
+    def __init__(self, data):
+        '''
+        Create a new Balance with the provided attributes.
+        '''
+
+        self.defaults = {
+            'currency': None,
+            'amount': None
+        }
+
+        for (param, default) in self.defaults.items():
+            setattr(self, param, data.get(param, default))
+
+    def __repr__(self):
+        return "Balance({currency}, {amount})".format(
+            currency=self.currency,
+            amount=self.amount
+        )
+
+
 class Webhook(HyperwalletModel):
     '''
     The Webhook Model.
