@@ -12,6 +12,7 @@ from hyperwallet import (
     BankCard,
     PrepaidCard,
     PaperCheck,
+    Payment,
     Webhook
 )
 
@@ -330,7 +331,12 @@ class Api(object):
             raise HyperwalletException('bankAccountToken is required')
 
         response = self.apiClient.doGet(
-            os.path.join('users', userToken, 'bank-accounts', bankAccountToken)
+            os.path.join(
+                'users',
+                userToken,
+                'bank-accounts',
+                bankAccountToken
+            )
         )
 
         return BankAccount(response)
@@ -632,7 +638,12 @@ class Api(object):
             raise HyperwalletException('prepaidCardToken is required')
 
         response = self.apiClient.doGet(
-            os.path.join('users', userToken, 'prepaid-cards', prepaidCardToken)
+            os.path.join(
+                'users',
+                userToken,
+                'prepaid-cards',
+                prepaidCardToken
+            )
         )
 
         return PrepaidCard(response)
@@ -871,7 +882,12 @@ class Api(object):
             raise HyperwalletException('paperCheckToken is required')
 
         response = self.apiClient.doGet(
-            os.path.join('users', userToken, 'paper-checks', paperCheckToken)
+            os.path.join(
+                'users',
+                userToken,
+                'paper-checks',
+                paperCheckToken
+            )
         )
 
         return PaperCheck(response)
@@ -903,7 +919,12 @@ class Api(object):
             raise HyperwalletException('data is required')
 
         response = self.apiClient.doPut(
-            os.path.join('users', userToken, 'paper-checks', paperCheckToken),
+            os.path.join(
+                'users',
+                userToken,
+                'paper-checks',
+                paperCheckToken
+            ),
             data
         )
 
@@ -1046,7 +1067,9 @@ class Api(object):
         if not paymentToken:
             raise HyperwalletException('paymentToken is required')
 
-        response = self.apiClient.doGet(os.path.join('payments', paymentToken))
+        response = self.apiClient.doGet(
+            os.path.join('payments', paymentToken)
+        )
 
         return Payment(response)
 

@@ -18,6 +18,7 @@ from .models import (
     BankCard,                                                            # noqa
     PrepaidCard,                                                         # noqa
     PaperCheck,                                                          # noqa
+    Payment,                                                             # noqa
     Webhook                                                              # noqa
 )
 
