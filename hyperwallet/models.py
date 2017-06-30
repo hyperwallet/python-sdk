@@ -8,7 +8,8 @@ class HyperwalletModel(object):
     '''
     The base Hyperwallet Model from which all other models will inherit.
 
-    :param data: A dictionary containing the attributes for the Model.
+    :param data:
+        A dictionary containing the attributes for the Model.
     '''
 
     def __init__(self, data):
@@ -54,7 +55,8 @@ class User(HyperwalletModel):
     '''
     The User Model.
 
-    :param data: A dictionary containing the attributes for the User.
+    :param data:
+        A dictionary containing the attributes for the User.
     '''
 
     def __init__(self, data):
@@ -113,7 +115,8 @@ class BankAccount(HyperwalletModel):
     '''
     The BankAccount Model.
 
-    :param data: A dictionary containing the attributes for the Bank Account.
+    :param data:
+        A dictionary containing the attributes for the Bank Account.
     '''
 
     def __init__(self, data):
@@ -193,7 +196,8 @@ class BankCard(HyperwalletModel):
     '''
     The BankCard Model.
 
-    :param data: A dictionary containing the attributes for the Bank Card.
+    :param data:
+        A dictionary containing the attributes for the Bank Card.
     '''
 
     def __init__(self, data):
@@ -236,7 +240,8 @@ class PrepaidCard(HyperwalletModel):
     '''
     The PrepaidCard Model.
 
-    :param data: A dictionary containing the attributes for the Prepaid Card.
+    :param data:
+        A dictionary containing the attributes for the Prepaid Card.
     '''
 
     def __init__(self, data):
@@ -272,7 +277,8 @@ class PaperCheck(HyperwalletModel):
     '''
     The PaperCheck Model.
 
-    :param data: A dictionary containing the attributes for the Paper Check.
+    :param data:
+        A dictionary containing the attributes for the Paper Check.
     '''
 
     def __init__(self, data):
@@ -346,7 +352,8 @@ class Payment(HyperwalletModel):
     '''
     The Payment Model.
 
-    :param data: A dictionary containing the attributes for the Payment.
+    :param data:
+        A dictionary containing the attributes for the Payment.
     '''
 
     def __init__(self, data):
@@ -374,6 +381,36 @@ class Payment(HyperwalletModel):
 
     def __repr__(self):
         return "Payment({date}, {token})".format(
+            date=self.createdOn,
+            token=self.token
+        )
+
+
+class Program(HyperwalletModel):
+    '''
+    The Program Model.
+
+    :param data:
+        A dictionary containing the attributes for the Program.
+    '''
+
+    def __init__(self, data):
+        '''
+        Create a new Program with the provided attributes.
+        '''
+
+        self.defaults = {
+            'token': None,
+            'createdOn': None,
+            'name': None,
+            'parentToken': None
+        }
+
+        for (param, default) in self.defaults.items():
+            setattr(self, param, data.get(param, default))
+
+    def __repr__(self):
+        return "Program({date}, {token})".format(
             date=self.createdOn,
             token=self.token
         )

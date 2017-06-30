@@ -19,6 +19,7 @@ from .models import (
     PrepaidCard,                                                         # noqa
     PaperCheck,                                                          # noqa
     Payment,                                                             # noqa
+    Program,                                                             # noqa
     Webhook                                                              # noqa
 )
 

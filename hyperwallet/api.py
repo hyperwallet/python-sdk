@@ -13,6 +13,7 @@ from hyperwallet import (
     PrepaidCard,
     PaperCheck,
     Payment,
+    Program,
     Webhook
 )
 
@@ -1073,6 +1074,26 @@ class Api(object):
 
         return Payment(response)
 
+    def retrieveProgram(self,
+                        programToken=None):
+        '''
+        Retrieve a Program.
+
+        :param programToken:
+            A token identifying the Program. **REQUIRED**
+        :returns:
+            A Program.
+        '''
+
+        if not programToken:
+            raise HyperwalletException('programToken is required')
+
+        response = self.apiClient.doGet(
+            os.path.join('programs', programToken)
+        )
+
+        return Program(response)
+
     def retrieveAccount(self,
                         programToken=None,
                         accountToken=None):
@@ -1153,20 +1174,6 @@ class Api(object):
             ),
             params
         )
-
-    def retrieveProgram(self,
-                        programToken=None):
-        '''
-        Retrieve a Program.
-
-        :param programToken: A token identifying the Program. **REQUIRED**
-        :returns: The Retrieve a Program API response.
-        '''
-
-        if not programToken:
-            raise HyperwalletException('programToken is required')
-
-        return self.apiClient.doGet(os.path.join('programs', programToken))
 
     def listTransferMethodConfigurations(self,
                                          params={}):
