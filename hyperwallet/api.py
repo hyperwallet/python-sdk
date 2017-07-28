@@ -16,7 +16,8 @@ from hyperwallet import (
     Program,
     Account,
     Balance,
-    Webhook
+    Webhook,
+    StatusTransition
 )
 
 

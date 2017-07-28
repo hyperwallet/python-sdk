@@ -531,3 +531,36 @@ class Webhook(HyperwalletModel):
             return types[base](wh_object)
 
         return None
+
+
+class StatusTransition(HyperwalletModel):
+    '''
+    The StatusTransition Model.
+
+    :param data:
+        A dictionary containing the attributes for the Status Transition.
+    '''
+
+    def __init__(self, data):
+        '''
+        Create a new Status Transition with the provided attributes.
+        '''
+
+        self.defaults = {
+            'token': None,
+            'createdOn': None,
+            'transition': None,
+            'fromStatus': None,
+            'toStatus': None,
+            'notes': None,
+            'statusCode': None
+        }
+
+        for (param, default) in self.defaults.items():
+            setattr(self, param, data.get(param, default))
+
+    def __repr__(self):
+        return "StatusTransition({date}, {token})".format(
+            date=self.createdOn,
+            token=self.token
+        )

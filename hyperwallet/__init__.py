@@ -22,7 +22,8 @@ from .models import (
     Program,                                                             # noqa
     Account,                                                             # noqa
     Balance,                                                             # noqa
-    Webhook                                                              # noqa
+    Webhook,                                                             # noqa
+    StatusTransition                                                     # noqa
 )
 
 from .api import Api                                                     # noqa
