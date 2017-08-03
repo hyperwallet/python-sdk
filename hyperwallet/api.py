@@ -85,64 +85,6 @@ class Api(object):
 
         return data
 
-    def _getCollection(self,
-                       func=None,
-                       params=None):
-        '''
-        Get A Collection of a Resource Type.
-
-        A wrapper for any program-level List function.
-
-        :param func:
-            The List function to wrap.
-        :param params:
-            A dictionary containing parameters to slice with.
-        :returns:
-            An array of Resources.
-        '''
-
-        offset = params.get('offset') or 0
-        maximum = None or params.get('maximum')
-
-        # Return an empty array if the maximum is a negative number.
-        if maximum is not None and maximum < 1:
-            return []
-
-        results = []
-        chunksize = 100
-
-        while True:
-            response = func({'offset': offset, 'limit': chunksize})
-            results += response
-            offset += chunksize
-
-            # If the response is smaller than the chunk we could have expected,
-            # we know this is the last of the data available
-            if len(response) < chunksize:
-                break
-
-            # Break if the total results exceed the maximum we wanted to return
-            if maximum and len(results) >= maximum:
-                break
-
-        return results[0:maximum]
-
-    def getUsers(self,
-                 params=None):
-        '''
-        Get Users.
-
-        A wrapper for the listUsers function. Provides an easy mechanism to
-        return a slice of all Users between a given **offset** and **maximum**.
-
-        :param params:
-            A dictionary containing parameters to slice with.
-        :returns:
-            An array of Users.
-        '''
-
-        return self._getCollection(self.listUsers, params)
-
     def listUsers(self,
                   params=None):
         '''
@@ -532,7 +474,12 @@ class Api(object):
             raise HyperwalletException('bankCardToken is required')
 
         response = self.apiClient.doGet(
-            os.path.join('users', userToken, 'bank-cards', bankCardToken)
+            os.path.join(
+                'users',
+                userToken,
+                'bank-cards',
+                bankCardToken
+            )
         )
 
         return BankCard(response)
@@ -657,6 +604,73 @@ class Api(object):
 
         return PrepaidCard(response)
 
+    def listPrepaidCardBalances(self,
+                                userToken=None,
+                                prepaidCardToken=None,
+                                params=None):
+        '''
+        List Prepaid Card Balances.
+
+        :param userToken:
+            A token identifying the User. **REQUIRED**
+        :param prepaidCardToken:
+            A token identifying the Prepaid Card. **REQUIRED**
+        :param params:
+            A dictionary containing query parameters.
+        :returns:
+            An array of Balances.
+        '''
+
+        if not userToken:
+            raise HyperwalletException('userToken is required')
+
+        if not prepaidCardToken:
+            raise HyperwalletException('prepaidCardToken is required')
+
+        response = self.apiClient.doGet(
+            os.path.join(
+                'users',
+                userToken,
+                'prepaid-cards',
+                prepaidCardToken,
+                'balances'
+            ),
+            params
+        )
+
+        return [Balance(x) for x in response.get('data', [])]
+
+    def listPrepaidCardReceipts(self,
+                                userToken=None,
+                                prepaidCardToken=None,
+                                params=None):
+        '''
+        List Prepaid Card Receipts.
+
+        :param userToken: A token identifying the User. **REQUIRED**
+        :param prepaidCardToken:
+            A token identifying the Prepaid Card. **REQUIRED**
+        :param params: A dictionary containing query parameters.
+        :returns: The List Prepaid Card Receipts API response.
+        '''
+
+        if not userToken:
+            raise HyperwalletException('userToken is required')
+
+        if not prepaidCardToken:
+            raise HyperwalletException('prepaidCardToken is required')
+
+        return self.apiClient.doGet(
+            os.path.join(
+                'users',
+                userToken,
+                'prepaid-cards',
+                prepaidCardToken,
+                'receipts'
+            ),
+            params
+        )
+
     def listPrepaidCardStatusTransitions(self,
                                          userToken=None,
                                          prepaidCardToken=None):
@@ -755,73 +769,6 @@ class Api(object):
                 'status-transitions',
                 statusTransitionToken
             )
-        )
-
-    def listPrepaidCardBalances(self,
-                                userToken=None,
-                                prepaidCardToken=None,
-                                params=None):
-        '''
-        List Prepaid Card Balances.
-
-        :param userToken:
-            A token identifying the User. **REQUIRED**
-        :param prepaidCardToken:
-            A token identifying the Prepaid Card. **REQUIRED**
-        :param params:
-            A dictionary containing query parameters.
-        :returns:
-            An array of Balances.
-        '''
-
-        if not userToken:
-            raise HyperwalletException('userToken is required')
-
-        if not prepaidCardToken:
-            raise HyperwalletException('prepaidCardToken is required')
-
-        response = self.apiClient.doGet(
-            os.path.join(
-                'users',
-                userToken,
-                'prepaid-cards',
-                prepaidCardToken,
-                'balances'
-            ),
-            params
-        )
-
-        return [Balance(x) for x in response.get('data', [])]
-
-    def listPrepaidCardReceipts(self,
-                                userToken=None,
-                                prepaidCardToken=None,
-                                params=None):
-        '''
-        List Prepaid Card Receipts.
-
-        :param userToken: A token identifying the User. **REQUIRED**
-        :param prepaidCardToken:
-            A token identifying the Prepaid Card. **REQUIRED**
-        :param params: A dictionary containing query parameters.
-        :returns: The List Prepaid Card Receipts API response.
-        '''
-
-        if not userToken:
-            raise HyperwalletException('userToken is required')
-
-        if not prepaidCardToken:
-            raise HyperwalletException('prepaidCardToken is required')
-
-        return self.apiClient.doGet(
-            os.path.join(
-                'users',
-                userToken,
-                'prepaid-cards',
-                prepaidCardToken,
-                'receipts'
-            ),
-            params
         )
 
     def listPaperChecks(self,
@@ -1014,23 +961,6 @@ class Api(object):
                 statusTransitionToken
             )
         )
-
-    def getPayments(self,
-                    params=None):
-        '''
-        Get Payments.
-
-        A wrapper for the listPayments function. Provides an easy mechanism
-        to return a slice of all Payments between a given **offset** and
-        **maximum**.
-
-        :param params:
-            A dictionary containing parameters to slice with.
-        :returns:
-            An array of Payments.
-        '''
-
-        return self._getCollection(self.listPayments, params)
 
     def listPayments(self,
                      params=None):
@@ -1290,23 +1220,6 @@ class Api(object):
             data,
             headers
         )
-
-    def getWebhooks(self,
-                    params=None):
-        '''
-        Get Webhooks.
-
-        A wrapper for the listWebhooks function. Provides an easy mechanism
-        to return a slice of all Webhooks between a given **offset** and
-        **maximum**.
-
-        :param params:
-            A dictionary containing parameters to slice with.
-        :returns:
-            An array of Webhooks.
-        '''
-
-        return self._getCollection(self.listWebhooks, params)
 
     def listWebhooks(self,
                      params=None):
