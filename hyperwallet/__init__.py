@@ -19,11 +19,10 @@ from .models import (
     PrepaidCard,                                                         # noqa
     PaperCheck,                                                          # noqa
     Payment,                                                             # noqa
+    Balance,                                                             # noqa
     Program,                                                             # noqa
     Account,                                                             # noqa
-    Balance,                                                             # noqa
-    Webhook,                                                             # noqa
-    StatusTransition                                                     # noqa
+    Webhook                                                              # noqa
 )
 
 from .api import Api                                                     # noqa

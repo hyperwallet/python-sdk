@@ -386,6 +386,34 @@ class Payment(HyperwalletModel):
         )
 
 
+class Balance(HyperwalletModel):
+    '''
+    The Balance Model.
+
+    :param data:
+        A dictionary containing the attributes for the Balance.
+    '''
+
+    def __init__(self, data):
+        '''
+        Create a new Balance with the provided attributes.
+        '''
+
+        self.defaults = {
+            'currency': None,
+            'amount': None
+        }
+
+        for (param, default) in self.defaults.items():
+            setattr(self, param, data.get(param, default))
+
+    def __repr__(self):
+        return "Balance({currency}, {amount})".format(
+            currency=self.currency,
+            amount=self.amount
+        )
+
+
 class Program(HyperwalletModel):
     '''
     The Program Model.
@@ -446,34 +474,6 @@ class Account(HyperwalletModel):
         )
 
 
-class Balance(HyperwalletModel):
-    '''
-    The Balance Model.
-
-    :param data:
-        A dictionary containing the attributes for the Balance.
-    '''
-
-    def __init__(self, data):
-        '''
-        Create a new Balance with the provided attributes.
-        '''
-
-        self.defaults = {
-            'currency': None,
-            'amount': None
-        }
-
-        for (param, default) in self.defaults.items():
-            setattr(self, param, data.get(param, default))
-
-    def __repr__(self):
-        return "Balance({currency}, {amount})".format(
-            currency=self.currency,
-            amount=self.amount
-        )
-
-
 class Webhook(HyperwalletModel):
     '''
     The Webhook Model.
@@ -531,36 +531,3 @@ class Webhook(HyperwalletModel):
             return types[base](wh_object)
 
         return None
-
-
-class StatusTransition(HyperwalletModel):
-    '''
-    The StatusTransition Model.
-
-    :param data:
-        A dictionary containing the attributes for the Status Transition.
-    '''
-
-    def __init__(self, data):
-        '''
-        Create a new Status Transition with the provided attributes.
-        '''
-
-        self.defaults = {
-            'token': None,
-            'createdOn': None,
-            'transition': None,
-            'fromStatus': None,
-            'toStatus': None,
-            'notes': None,
-            'statusCode': None
-        }
-
-        for (param, default) in self.defaults.items():
-            setattr(self, param, data.get(param, default))
-
-    def __repr__(self):
-        return "StatusTransition({date}, {token})".format(
-            date=self.createdOn,
-            token=self.token
-        )

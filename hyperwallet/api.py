@@ -13,11 +13,10 @@ from hyperwallet import (
     PrepaidCard,
     PaperCheck,
     Payment,
+    Balance,
     Program,
     Account,
-    Balance,
-    Webhook,
-    StatusTransition
+    Webhook
 )
 
 
@@ -84,6 +83,13 @@ class Api(object):
         data['programToken'] = self.programToken
 
         return data
+
+    '''
+
+    USERS
+    https://portal.hyperwallet.com/docs/api/v3/resources/users
+
+    '''
 
     def listUsers(self,
                   params=None):
@@ -167,48 +173,12 @@ class Api(object):
 
         return User(response)
 
-    def listUserBalances(self,
-                         userToken=None,
-                         params=None):
-        '''
-        List User Balances.
+    '''
 
-        :param userToken:
-            A token identifying the User. **REQUIRED**
-        :param params:
-            A dictionary containing query parameters.
-        :returns:
-            An array of Balances.
-        '''
+    BANK ACCOUNTS
+    https://portal.hyperwallet.com/docs/api/v3/resources/bank-accounts
 
-        if not userToken:
-            raise HyperwalletException('userToken is required')
-
-        response = self.apiClient.doGet(
-            os.path.join('users', userToken, 'balances'),
-            params
-        )
-
-        return [Balance(x) for x in response.get('data', [])]
-
-    def listUserReceipts(self,
-                         userToken=None,
-                         params=None):
-        '''
-        List User Receipts.
-
-        :param userToken: A token identifying the User. **REQUIRED**
-        :param params: A dictionary containing query parameters.
-        :returns: The List User Receipts API response.
-        '''
-
-        if not userToken:
-            raise HyperwalletException('userToken is required')
-
-        return self.apiClient.doGet(
-            os.path.join('users', userToken, 'receipts'),
-            params
-        )
+    '''
 
     def listBankAccounts(self,
                          userToken=None,
@@ -330,77 +300,12 @@ class Api(object):
 
         return BankAccount(response)
 
-    def createBankAccountStatusTransition(self,
-                                          userToken=None,
-                                          bankAccountToken=None,
-                                          data=None):
-        '''
-        Create a Bank Account Status Transition.
+    '''
 
-        :param userToken: A token identifying the User. **REQUIRED**
-        :param bankAccountToken:
-            A token identifying the Bank Account. **REQUIRED**
-        :param data:
-            A dictionary containing Bank Account Status Transition information.
-            **REQUIRED**
-        :returns: The Create a Bank Account Status Transition API response.
-        '''
+    BANK CARDS
+    https://portal.hyperwallet.com/docs/api/v3/resources/bank-cards
 
-        if not userToken:
-            raise HyperwalletException('userToken is required')
-
-        if not bankAccountToken:
-            raise HyperwalletException('bankAccountToken is required')
-
-        if not data:
-            raise HyperwalletException('data is required')
-
-        return self.apiClient.doPost(
-            os.path.join(
-                'users',
-                userToken,
-                'bank-accounts',
-                bankAccountToken,
-                'status-transitions'
-            ),
-            data
-        )
-
-    def retrieveBankAccountStatusTransition(self,
-                                            userToken=None,
-                                            bankAccountToken=None,
-                                            statusTransitionToken=None):
-        '''
-        Retrieve a Bank Account Status Transition.
-
-        :param userToken: A token identifying the User. **REQUIRED**
-        :param bankAccountToken:
-            A token identifying the Bank Account. **REQUIRED**
-        :param statusTransitionToken:
-            A token identifying the Bank Account Status Transition.
-            **REQUIRED**
-        :returns: The Retrieve a Bank Account Status Transition API response.
-        '''
-
-        if not userToken:
-            raise HyperwalletException('userToken is required')
-
-        if not bankAccountToken:
-            raise HyperwalletException('bankAccountToken is required')
-
-        if not statusTransitionToken:
-            raise HyperwalletException('statusTransitionToken is required')
-
-        return self.apiClient.doGet(
-            os.path.join(
-                'users',
-                userToken,
-                'bank-accounts',
-                bankAccountToken,
-                'status-transitions',
-                statusTransitionToken
-            )
-        )
+    '''
 
     def listBankCards(self,
                       userToken=None,
@@ -522,6 +427,13 @@ class Api(object):
 
         return BankCard(response)
 
+    '''
+
+    PREPAID CARDS
+    https://portal.hyperwallet.com/docs/api/v3/resources/prepaid-cards
+
+    '''
+
     def listPrepaidCards(self,
                          userToken=None,
                          params=None):
@@ -604,172 +516,12 @@ class Api(object):
 
         return PrepaidCard(response)
 
-    def listPrepaidCardBalances(self,
-                                userToken=None,
-                                prepaidCardToken=None,
-                                params=None):
-        '''
-        List Prepaid Card Balances.
+    '''
 
-        :param userToken:
-            A token identifying the User. **REQUIRED**
-        :param prepaidCardToken:
-            A token identifying the Prepaid Card. **REQUIRED**
-        :param params:
-            A dictionary containing query parameters.
-        :returns:
-            An array of Balances.
-        '''
+    PAPER CHECKS
+    https://portal.hyperwallet.com/docs/api/v3/resources/paper-checks
 
-        if not userToken:
-            raise HyperwalletException('userToken is required')
-
-        if not prepaidCardToken:
-            raise HyperwalletException('prepaidCardToken is required')
-
-        response = self.apiClient.doGet(
-            os.path.join(
-                'users',
-                userToken,
-                'prepaid-cards',
-                prepaidCardToken,
-                'balances'
-            ),
-            params
-        )
-
-        return [Balance(x) for x in response.get('data', [])]
-
-    def listPrepaidCardReceipts(self,
-                                userToken=None,
-                                prepaidCardToken=None,
-                                params=None):
-        '''
-        List Prepaid Card Receipts.
-
-        :param userToken: A token identifying the User. **REQUIRED**
-        :param prepaidCardToken:
-            A token identifying the Prepaid Card. **REQUIRED**
-        :param params: A dictionary containing query parameters.
-        :returns: The List Prepaid Card Receipts API response.
-        '''
-
-        if not userToken:
-            raise HyperwalletException('userToken is required')
-
-        if not prepaidCardToken:
-            raise HyperwalletException('prepaidCardToken is required')
-
-        return self.apiClient.doGet(
-            os.path.join(
-                'users',
-                userToken,
-                'prepaid-cards',
-                prepaidCardToken,
-                'receipts'
-            ),
-            params
-        )
-
-    def listPrepaidCardStatusTransitions(self,
-                                         userToken=None,
-                                         prepaidCardToken=None):
-        '''
-        List Status Transitions for Prepaid Card.
-
-        :param userToken: A token identifying the User. **REQUIRED**
-        :param prepaidCardToken:
-            A token identifying the Prepaid Card. **REQUIRED**
-        :returns: The List Status Transitions for Prepaid Card API response.
-        '''
-
-        if not userToken:
-            raise HyperwalletException('userToken is required')
-
-        if not prepaidCardToken:
-            raise HyperwalletException('prepaidCardToken is required')
-
-        return self.apiClient.doGet(
-            os.path.join(
-                'users',
-                userToken,
-                'prepaid-cards',
-                prepaidCardToken,
-                'status-transitions'
-            )
-        )
-
-    def createPrepaidCardStatusTransition(self,
-                                          userToken=None,
-                                          prepaidCardToken=None,
-                                          data=None):
-        '''
-        Create a Prepaid Card Status Transition.
-
-        :param userToken: A token identifying the User. **REQUIRED**
-        :param prepaidCardToken:
-            A token identifying the Prepaid Card. **REQUIRED**
-        :param data:
-            A dictionary containing Prepaid Card Status Transition information.
-            **REQUIRED**
-        :returns: The Create a Prepaid Card Status Transition API response.
-        '''
-
-        if not userToken:
-            raise HyperwalletException('userToken is required')
-
-        if not prepaidCardToken:
-            raise HyperwalletException('prepaidCardToken is required')
-
-        if not data:
-            raise HyperwalletException('data is required')
-
-        return self.apiClient.doPost(
-            os.path.join(
-                'users',
-                userToken,
-                'prepaid-cards',
-                prepaidCardToken,
-                'status-transitions'
-            ),
-            data
-        )
-
-    def retrievePrepaidCardStatusTransition(self,
-                                            userToken=None,
-                                            prepaidCardToken=None,
-                                            statusTransitionToken=None):
-        '''
-        Retrieve a Prepaid Card Status Transition.
-
-        :param userToken: A token identifying the User. **REQUIRED**
-        :param prepaidCardToken:
-            A token identifying the Prepaid Card. **REQUIRED**
-        :param statusTransitionToken:
-            A token identifying the Prepaid Card Status Transition.
-            **REQUIRED**
-        :returns: The Retrieve a Prepaid Card Status Transition API response.
-        '''
-
-        if not userToken:
-            raise HyperwalletException('userToken is required')
-
-        if not prepaidCardToken:
-            raise HyperwalletException('prepaidCardToken is required')
-
-        if not statusTransitionToken:
-            raise HyperwalletException('statusTransitionToken is required')
-
-        return self.apiClient.doGet(
-            os.path.join(
-                'users',
-                userToken,
-                'prepaid-cards',
-                prepaidCardToken,
-                'status-transitions',
-                statusTransitionToken
-            )
-        )
+    '''
 
     def listPaperChecks(self,
                         userToken=None,
@@ -891,76 +643,12 @@ class Api(object):
 
         return PaperCheck(response)
 
-    def createPaperCheckStatusTransition(self,
-                                         userToken=None,
-                                         paperCheckToken=None,
-                                         data=None):
-        '''
-        Create a Paper Check Status Transition.
+    '''
 
-        :param userToken: A token identifying the User. **REQUIRED**
-        :param paperCheckToken:
-            A token identifying the Paper Check. **REQUIRED**
-        :param data:
-            A dictionary containing Paper Check Status Transition information.
-            **REQUIRED**
-        :returns: The Create a Paper Check Status Transition API response.
-        '''
+    PAYMENTS
+    https://portal.hyperwallet.com/docs/api/v3/resources/payments
 
-        if not userToken:
-            raise HyperwalletException('userToken is required')
-
-        if not paperCheckToken:
-            raise HyperwalletException('paperCheckToken is required')
-
-        if not data:
-            raise HyperwalletException('data is required')
-
-        return self.apiClient.doPost(
-            os.path.join(
-                'users',
-                userToken,
-                'paper-checks',
-                paperCheckToken,
-                'status-transitions'
-            ),
-            data
-        )
-
-    def retrievePaperCheckStatusTransition(self,
-                                           userToken=None,
-                                           paperCheckToken=None,
-                                           statusTransitionToken=None):
-        '''
-        Retrieve a Paper Check Status Transition.
-
-        :param userToken: A token identifying the User. **REQUIRED**
-        :param paperCheckToken:
-            A token identifying the Paper Check. **REQUIRED**
-        :param statusTransitionToken:
-            A token identifying the Paper Check Status Transition. **REQUIRED**
-        :returns: The Retrieve a Paper Check Status Transition API response.
-        '''
-
-        if not userToken:
-            raise HyperwalletException('userToken is required')
-
-        if not paperCheckToken:
-            raise HyperwalletException('paperCheckToken is required')
-
-        if not statusTransitionToken:
-            raise HyperwalletException('statusTransitionToken is required')
-
-        return self.apiClient.doGet(
-            os.path.join(
-                'users',
-                userToken,
-                'paper-checks',
-                paperCheckToken,
-                'status-transitions',
-                statusTransitionToken
-            )
-        )
+    '''
 
     def listPayments(self,
                      params=None):
@@ -1017,57 +705,72 @@ class Api(object):
 
         return Payment(response)
 
-    def retrieveProgram(self,
-                        programToken=None):
-        '''
-        Retrieve a Program.
+    '''
 
-        :param programToken:
-            A token identifying the Program. **REQUIRED**
+    BALANCES
+    https://portal.hyperwallet.com/docs/api/v3/resources/balances
+
+    '''
+
+    def listUserBalances(self,
+                         userToken=None,
+                         params=None):
+        '''
+        List User Balances.
+
+        :param userToken:
+            A token identifying the User. **REQUIRED**
+        :param params:
+            A dictionary containing query parameters.
         :returns:
-            A Program.
+            An array of Balances.
         '''
 
-        if not programToken:
-            raise HyperwalletException('programToken is required')
+        if not userToken:
+            raise HyperwalletException('userToken is required')
 
         response = self.apiClient.doGet(
-            os.path.join('programs', programToken)
+            os.path.join('users', userToken, 'balances'),
+            params
         )
 
-        return Program(response)
+        return [Balance(x) for x in response.get('data', [])]
 
-    def retrieveAccount(self,
-                        programToken=None,
-                        accountToken=None):
+    def listPrepaidCardBalances(self,
+                                userToken=None,
+                                prepaidCardToken=None,
+                                params=None):
         '''
-        Retrieve an Account.
+        List Prepaid Card Balances.
 
-        :param programToken:
-            A token identifying the Program. **REQUIRED**
-        :param accountToken:
-            A token identifying the Account. **REQUIRED**
+        :param userToken:
+            A token identifying the User. **REQUIRED**
+        :param prepaidCardToken:
+            A token identifying the Prepaid Card. **REQUIRED**
+        :param params:
+            A dictionary containing query parameters.
         :returns:
-            An Account.
+            An array of Balances.
         '''
 
-        if not programToken:
-            raise HyperwalletException('programToken is required')
+        if not userToken:
+            raise HyperwalletException('userToken is required')
 
-        if not accountToken:
-            raise HyperwalletException('accountToken is required')
+        if not prepaidCardToken:
+            raise HyperwalletException('prepaidCardToken is required')
 
         response = self.apiClient.doGet(
             os.path.join(
-                'programs',
-                programToken,
-                'accounts',
-                accountToken
-            )
+                'users',
+                userToken,
+                'prepaid-cards',
+                prepaidCardToken,
+                'balances'
+            ),
+            params
         )
 
-        return Account(response)
-
+        return [Balance(x) for x in response.get('data', [])]
 
     def listAccountBalances(self,
                             programToken=None,
@@ -1105,17 +808,52 @@ class Api(object):
 
         return [Balance(x) for x in response.get('data', [])]
 
-    def listAccountReceipts(self,
-                            programToken=None,
-                            accountToken=None,
-                            params=None):
-        '''
-        List Account Receipts.
+    '''
 
-        :param programToken: A token identifying the Program. **REQUIRED**
-        :param accountToken: A token identifying the Account. **REQUIRED**
-        :param params: A dictionary containing query parameters.
-        :returns: The List Account Receipts API response.
+    PROGRAMS
+    https://portal.hyperwallet.com/docs/api/v3/resources/programs
+
+    '''
+
+    def retrieveProgram(self,
+                        programToken=None):
+        '''
+        Retrieve a Program.
+
+        :param programToken:
+            A token identifying the Program. **REQUIRED**
+        :returns:
+            A Program.
+        '''
+
+        if not programToken:
+            raise HyperwalletException('programToken is required')
+
+        response = self.apiClient.doGet(
+            os.path.join('programs', programToken)
+        )
+
+        return Program(response)
+
+    '''
+
+    ACCOUNTS
+    https://portal.hyperwallet.com/docs/api/v3/resources/accounts
+
+    '''
+
+    def retrieveAccount(self,
+                        programToken=None,
+                        accountToken=None):
+        '''
+        Retrieve an Account.
+
+        :param programToken:
+            A token identifying the Program. **REQUIRED**
+        :param accountToken:
+            A token identifying the Account. **REQUIRED**
+        :returns:
+            An Account.
         '''
 
         if not programToken:
@@ -1124,102 +862,23 @@ class Api(object):
         if not accountToken:
             raise HyperwalletException('accountToken is required')
 
-        return self.apiClient.doGet(
+        response = self.apiClient.doGet(
             os.path.join(
                 'programs',
                 programToken,
                 'accounts',
-                accountToken,
-                'receipts'
-            ),
-            params
+                accountToken
+            )
         )
 
-    def listTransferMethodConfigurations(self,
-                                         params={}):
-        '''
-        List Transfer Method Configurations.
+        return Account(response)
 
-        :param params: A dictionary containing query parameters. **REQUIRED**
-        :returns: The List Transfer Method Configurations API response.
+    '''
 
-        .. warning::
-            **userToken** must be present in the params dictionary.
-        '''
+    WEBHOOK NOTIFICATIONS
+    https://portal.hyperwallet.com/docs/api/v3/resources/webhook-notifications
 
-        if 'userToken' not in params:
-            raise HyperwalletException('userToken is required')
-
-        return self.apiClient.doGet('transfer-method-configurations', params)
-
-    def retrieveTransferMethodConfiguration(self,
-                                            params={}):
-        '''
-        Retrieve a Transfer Method Configuration.
-
-        :param params: A dictionary containing query parameters. **REQUIRED**
-        :returns: The Retrieve a Transfer Method Configuration API response.
-
-        .. warning::
-            **userToken** must be present in the params dictionary.
-
-        .. warning::
-            **country** must be present in the params dictionary.
-
-        .. warning::
-            **currency** must be present in the params dictionary.
-
-        .. warning::
-            **type** must be present in the params dictionary.
-
-        .. warning::
-            **profileType** must be present in the params dictionary.
-        '''
-
-        if 'userToken' not in params:
-            raise HyperwalletException('userToken is required')
-
-        if 'country' not in params:
-            raise HyperwalletException('country is required')
-
-        if 'currency' not in params:
-            raise HyperwalletException('currency is required')
-
-        if 'type' not in params:
-            raise HyperwalletException('type is required')
-
-        if 'profileType' not in params:
-            raise HyperwalletException('profileType is required')
-
-        return self.apiClient.doGet('transfer-method-configurations', params)
-
-    def createTransferMethod(self,
-                             userToken=None,
-                             cacheToken=None,
-                             data=None):
-        '''
-        Create a Transfer Method.
-
-        :param userToken: A token identifying the User. **REQUIRED**
-        :param cacheToken:
-            A cache token identifying the Transfer Method. **REQUIRED**
-        :param data: A dictionary containing Field Restriction information.
-        :returns: The Create a Transfer Method API response.
-        '''
-
-        if not userToken:
-            raise HyperwalletException('userToken is required')
-
-        if not cacheToken:
-            raise HyperwalletException('cacheToken is required')
-
-        headers = {'Json-Cache-Token': cacheToken}
-
-        return self.apiClient.doPost(
-            os.path.join('users', userToken, 'transfer-methods'),
-            data,
-            headers
-        )
+    '''
 
     def listWebhooks(self,
                      params=None):
