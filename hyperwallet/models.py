@@ -21,14 +21,23 @@ class HyperwalletModel(object):
 
     def __str__(self):
         '''
-        Return a string representation of the HyperwalletModel.
+        Return a string representation of the HyperwalletModel. By default this
+        is the same as asJsonString().
         '''
 
-        return json.dumps(self._to_dict(), sort_keys=True)
+        return self.asJsonString()
 
-    def _to_dict(self):
+    def asJsonString(self):
         '''
-        Create a dictionary representation of the Model.
+        Return a JSON string of the HyperwalletModel based on key/value pairs
+        returned from the asDict() function.
+        '''
+
+        return json.dumps(self.asDict(), sort_keys=True)
+
+    def asDict(self):
+        '''
+        Return a dictionary representation of the Model.
         '''
 
         data = {}
