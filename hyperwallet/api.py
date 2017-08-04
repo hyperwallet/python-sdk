@@ -64,26 +64,6 @@ class Api(object):
 
         self.apiClient = ApiClient(self.username, self.password, self.server)
 
-    def _addProgramToken(self, data):
-        '''
-        Add the program token to the data object.
-
-        :param data:
-            A dictionary containing values defining a resource. **REQUIRED**
-        :returns:
-            A dictionary containing the provided values and the program token.
-        '''
-
-        if not isinstance(data, dict):
-            raise HyperwalletException('data must be a dictionary object')
-
-        if 'programToken' in data:
-            return data
-
-        data['programToken'] = self.programToken
-
-        return data
-
     '''
 
     USERS
@@ -119,8 +99,6 @@ class Api(object):
 
         if not data:
             raise HyperwalletException('data is required')
-
-        self._addProgramToken(data)
 
         response = self.apiClient.doPost('users', data)
 
@@ -678,8 +656,6 @@ class Api(object):
 
         if not data:
             raise HyperwalletException('data is required')
-
-        self._addProgramToken(data)
 
         response = self.apiClient.doPost('payments', data)
 
