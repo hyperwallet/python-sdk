@@ -207,7 +207,7 @@ class ApiTest(unittest.TestCase):
     def test_list_bank_cards_with_nothing(self):
 
         with self.assertRaises(HyperwalletException) as exc:
-            self.api.listBankAccounts()
+            self.api.listBankCards()
 
         self.assertEqual(exc.exception.message, 'userToken is required')
 
