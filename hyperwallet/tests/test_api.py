@@ -573,6 +573,29 @@ class ApiTest(unittest.TestCase):
 
         self.assertTrue(response.token, self.data.get('token'))
 
+    @mock.patch('hyperwallet.utils.ApiClient._makeRequest')
+    def test_list_webhooks(self, mock_get):
+
+        mock_get.return_value = {'data': [self.data]}
+        response = self.api.listWebhooks()
+
+        self.assertTrue(response[0].token, self.data.get('token'))
+
+    def test_retrieve_webhooks_with_nothing(self):
+
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.retrieveWebhook()
+
+        self.assertEqual(exc.exception.message, 'webhookToken is required')
+
+    @mock.patch('hyperwallet.utils.ApiClient._makeRequest')
+    def test_retrieve_webhook_with_webhook_token(self, mock_get):
+
+        mock_get.return_value = self.data
+        response = self.api.retrieveWebhook('token')
+
+        self.assertTrue(response.token, self.data.get('token'))
+
 
 if __name__ == '__main__':
     unittest.main()
