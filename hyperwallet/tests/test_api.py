@@ -536,6 +536,43 @@ class ApiTest(unittest.TestCase):
 
         self.assertTrue(response[0].currency, self.balance.get('currency'))
 
+    def test_retrieve_program_with_nothing(self):
+
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.retrieveProgram()
+
+        self.assertEqual(exc.exception.message, 'programToken is required')
+
+    @mock.patch('hyperwallet.utils.ApiClient._makeRequest')
+    def test_retrieve_program_with_program_token(self, mock_get):
+
+        mock_get.return_value = self.data
+        response = self.api.retrieveProgram('token')
+
+        self.assertTrue(response.token, self.data.get('token'))
+
+    def test_retrieve_account_with_nothing(self):
+
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.retrieveAccount()
+
+        self.assertEqual(exc.exception.message, 'programToken is required')
+
+    def test_retrieve_account_with_program_token(self):
+
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.retrieveAccount('token')
+
+        self.assertEqual(exc.exception.message, 'accountToken is required')
+
+    @mock.patch('hyperwallet.utils.ApiClient._makeRequest')
+    def test_retrieve_account_with_program_token_and_account_token(self, mock_get):
+
+        mock_get.return_value = self.data
+        response = self.api.retrieveAccount('token', 'token')
+
+        self.assertTrue(response.token, self.data.get('token'))
+
 
 if __name__ == '__main__':
     unittest.main()
