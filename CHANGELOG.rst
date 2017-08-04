@@ -1,6 +1,11 @@
 Changelog
 =========
 
+1.0.0 (2017-08-04)
+------------------
+
+- Added support for resource types as models
+
 0.2.0 (2016-12-22)
 ------------------
 
