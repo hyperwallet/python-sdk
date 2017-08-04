@@ -15,9 +15,12 @@ class ApiClient(object):
     '''
     The Hyperwallet API Client.
 
-    :param username: The username of this API user. **REQUIRED**
-    :param password: The password of this API user. **REQUIRED**
-    :param server: The base URL of the API. **REQUIRED**
+    :param username:
+        The username of this API user. **REQUIRED**
+    :param password:
+        The password of this API user. **REQUIRED**
+    :param server:
+        The base URL of the API. **REQUIRED**
     '''
 
     def __init__(self, username, password, server):
@@ -63,11 +66,16 @@ class ApiClient(object):
         '''
         Process an API response to ensure a JSON object is returned always.
 
-        :param method: The HTTP method to use for the request. **REQUIRED**
-        :param url: A partial URL to specify the API endpoint. **REQUIRED**
-        :param data: A dictionary containing data for the request body.
-        :param headers: A dictionary containing additional request headers.
-        :param params: A dictionary containing query parameters.
+        :param method:
+            The HTTP method to use for the request. **REQUIRED**
+        :param url:
+            A partial URL to specify the API endpoint. **REQUIRED**
+        :param data:
+            A dictionary containing data for the request body.
+        :param headers:
+            A dictionary containing additional request headers.
+        :param params:
+            A dictionary containing query parameters.
         :returns:
             A JSON object containing the response data or an error object.
 
@@ -119,8 +127,10 @@ class ApiClient(object):
 
         :param partialUrl:
             A partial URL to specify the API endpoint. **REQUIRED**
-        :param params: A dictionary containing query parameters.
-        :returns: The API response.
+        :param params:
+            A dictionary containing query parameters.
+        :returns:
+            The API response.
         '''
 
         return self._makeRequest(method='GET',
@@ -136,8 +146,10 @@ class ApiClient(object):
             A partial URL to specify the API endpoint. **REQUIRED**
         :param data:
             A dictionary containing data for the request body. **REQUIRED**
-        :param headers: A dictionary containing additional request headers.
-        :returns: The API response.
+        :param headers:
+            A dictionary containing additional request headers.
+        :returns:
+            The API response.
         '''
 
         return self._makeRequest(method='POST',
@@ -154,7 +166,8 @@ class ApiClient(object):
             A partial URL to specify the API endpoint. **REQUIRED**
         :param data:
             A dictionary containing data for the request body. **REQUIRED**
-        :returns: The API response.
+        :returns:
+            The API response.
         '''
 
         return self._makeRequest(method='PUT',
