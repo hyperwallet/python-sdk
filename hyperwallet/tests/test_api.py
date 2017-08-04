@@ -188,7 +188,7 @@ class ApiTest(unittest.TestCase):
     def test_update_bank_account_with_user_token_and_bank_token(self):
 
         with self.assertRaises(HyperwalletException) as exc:
-            self.api.updateBankAccount('token', 'bank')
+            self.api.updateBankAccount('token', 'token')
 
         self.assertEqual(exc.exception.message, 'data is required')
 
@@ -197,6 +197,94 @@ class ApiTest(unittest.TestCase):
 
         mock_put.return_value = self.data
         response = self.api.updateBankAccount('token', 'token', self.data)
+
+        self.assertTrue(response.token, self.data.get('token'))
+
+    def test_list_bank_cards_with_nothing(self):
+
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.listBankAccounts()
+
+        self.assertEqual(exc.exception.message, 'userToken is required')
+
+    @mock.patch('hyperwallet.utils.ApiClient._makeRequest')
+    def test_list_bank_cards_with_user_token(self, mock_get):
+
+        mock_get.return_value = {'data': [self.data]}
+        response = self.api.listBankCards('token')
+
+        self.assertTrue(response[0].token, self.data.get('token'))
+
+    def test_create_bank_card_with_nothing(self):
+
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.createBankCard()
+
+        self.assertEqual(exc.exception.message, 'userToken is required')
+
+    def test_create_bank_card_with_user_token(self):
+
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.createBankCard('token')
+
+        self.assertEqual(exc.exception.message, 'data is required')
+
+    @mock.patch('hyperwallet.utils.ApiClient._makeRequest')
+    def test_create_bank_card_with_user_token_and_data(self, mock_post):
+
+        mock_post.return_value = self.data
+        response = self.api.createBankCard('token', self.data)
+
+        self.assertTrue(response.token, self.data.get('token'))
+
+    def test_retrieve_bank_card_with_nothing(self):
+
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.retrieveBankCard()
+
+        self.assertEqual(exc.exception.message, 'userToken is required')
+
+    def test_retrieve_bank_card_with_user_token(self):
+
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.retrieveBankCard('token')
+
+        self.assertEqual(exc.exception.message, 'bankCardToken is required')
+
+    @mock.patch('hyperwallet.utils.ApiClient._makeRequest')
+    def test_retrieve_bank_card_with_user_token_and_card_token(self, mock_get):
+
+        mock_get.return_value = self.data
+        response = self.api.retrieveBankCard('token', 'token')
+
+        self.assertTrue(response.token, self.data.get('token'))
+
+    def test_update_bank_card_with_nothing(self):
+
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.updateBankCard()
+
+        self.assertEqual(exc.exception.message, 'userToken is required')
+
+    def test_update_bank_card_with_user_token(self):
+
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.updateBankCard('token')
+
+        self.assertEqual(exc.exception.message, 'bankCardToken is required')
+
+    def test_update_bank_card_with_user_token_and_bank_token(self):
+
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.updateBankCard('token', 'token')
+
+        self.assertEqual(exc.exception.message, 'data is required')
+
+    @mock.patch('hyperwallet.utils.ApiClient._makeRequest')
+    def test_update_bank_card_with_user_token_and_card_token_and_data(self, mock_put):
+
+        mock_put.return_value = self.data
+        response = self.api.updateBankCard('token', 'token', self.data)
 
         self.assertTrue(response.token, self.data.get('token'))
 
