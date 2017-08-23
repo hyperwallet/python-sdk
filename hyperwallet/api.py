@@ -286,34 +286,10 @@ class Api(object):
 
     '''
 
-    BANK CARDS
+    Bank Cards
     https://portal.hyperwallet.com/docs/api/v3/resources/bank-cards
 
     '''
-
-    def listBankCards(self,
-                      userToken=None,
-                      params=None):
-        '''
-        List Bank Cards.
-
-        :param userToken:
-            A token identifying the User. **REQUIRED**
-        :param params:
-            A dictionary containing query parameters.
-        :returns:
-            An array of Bank Cards.
-        '''
-
-        if not userToken:
-            raise HyperwalletException('userToken is required')
-
-        response = self.apiClient.doGet(
-            os.path.join('users', userToken, 'bank-cards'),
-            params
-        )
-
-        return [BankCard(x) for x in response.get('data', [])]
 
     def createBankCard(self,
                        userToken=None,
@@ -342,9 +318,9 @@ class Api(object):
 
         return BankCard(response)
 
-    def retrieveBankCard(self,
-                         userToken=None,
-                         bankCardToken=None):
+    def getBankCard(self,
+                    userToken=None,
+                    bankCardToken=None):
         '''
         Retrieve a Bank Card.
 
@@ -410,6 +386,30 @@ class Api(object):
         )
 
         return BankCard(response)
+
+    def listBankCards(self,
+                      userToken=None,
+                      params=None):
+        '''
+        List Bank Cards.
+
+        :param userToken:
+            A token identifying the User. **REQUIRED**
+        :param params:
+            A dictionary containing query parameters.
+        :returns:
+            An array of Bank Cards.
+        '''
+
+        if not userToken:
+            raise HyperwalletException('userToken is required')
+
+        response = self.apiClient.doGet(
+            os.path.join('users', userToken, 'bank-cards'),
+            params
+        )
+
+        return [BankCard(x) for x in response.get('data', [])]
 
     '''
 
