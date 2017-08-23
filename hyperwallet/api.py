@@ -834,8 +834,8 @@ class Api(object):
 
     '''
 
-    def retrieveProgram(self,
-                        programToken=None):
+    def getProgram(self,
+                   programToken=None):
         '''
         Retrieve a Program.
 

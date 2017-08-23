@@ -578,10 +578,16 @@ class ApiTest(unittest.TestCase):
 
         self.assertTrue(response[0].currency, self.balance.get('currency'))
 
+    '''
+
+    Programs
+
+    '''
+
     def test_retrieve_program_with_nothing(self):
 
         with self.assertRaises(HyperwalletException) as exc:
-            self.api.retrieveProgram()
+            self.api.getProgram()
 
         self.assertEqual(exc.exception.message, 'programToken is required')
 
@@ -589,7 +595,7 @@ class ApiTest(unittest.TestCase):
     def test_retrieve_program_with_program_token(self, mock_get):
 
         mock_get.return_value = self.data
-        response = self.api.retrieveProgram('token')
+        response = self.api.getProgram('token')
 
         self.assertTrue(response.token, self.data.get('token'))
 
