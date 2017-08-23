@@ -153,34 +153,10 @@ class Api(object):
 
     '''
 
-    BANK ACCOUNTS
+    Bank Accounts
     https://portal.hyperwallet.com/docs/api/v3/resources/bank-accounts
 
     '''
-
-    def listBankAccounts(self,
-                         userToken=None,
-                         params=None):
-        '''
-        List Bank Accounts.
-
-        :param userToken:
-            A token identifying the User. **REQUIRED**
-        :param params:
-            A dictionary containing query parameters.
-        :returns:
-            An array of Bank Accounts.
-        '''
-
-        if not userToken:
-            raise HyperwalletException('userToken is required')
-
-        response = self.apiClient.doGet(
-            os.path.join('users', userToken, 'bank-accounts'),
-            params
-        )
-
-        return [BankAccount(x) for x in response.get('data', [])]
 
     def createBankAccount(self,
                           userToken=None,
@@ -209,9 +185,9 @@ class Api(object):
 
         return BankAccount(response)
 
-    def retrieveBankAccount(self,
-                            userToken=None,
-                            bankAccountToken=None):
+    def getBankAccount(self,
+                       userToken=None,
+                       bankAccountToken=None):
         '''
         Retrieve a Bank Account.
 
@@ -277,6 +253,36 @@ class Api(object):
         )
 
         return BankAccount(response)
+
+    def listBankAccounts(self,
+                         userToken=None,
+                         params=None):
+        '''
+        List Bank Accounts.
+
+        :param userToken:
+            A token identifying the User. **REQUIRED**
+        :param params:
+            A dictionary containing query parameters.
+        :returns:
+            An array of Bank Accounts.
+        '''
+
+        if not userToken:
+            raise HyperwalletException('userToken is required')
+
+        response = self.apiClient.doGet(
+            os.path.join('users', userToken, 'bank-accounts'),
+            params
+        )
+
+        return [BankAccount(x) for x in response.get('data', [])]
+
+    def createBankAccountStatusTransition():
+        pass
+
+    def getBankAccountStatusTransition():
+        pass
 
     '''
 
