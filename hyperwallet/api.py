@@ -894,6 +894,22 @@ class Api(object):
 
     '''
 
+    TRANSFER METHODS
+    https://portal.hyperwallet.com/docs/api/v3/resources/transfer-method-configurations
+
+    '''
+
+    def createTransferMethod():
+        pass
+
+    def getTransferMethodConfiguration():
+        pass
+
+    def listTransferMethodConfigurations():
+        pass
+
+    '''
+
     WEBHOOK NOTIFICATIONS
     https://portal.hyperwallet.com/docs/api/v3/resources/webhook-notifications
 
