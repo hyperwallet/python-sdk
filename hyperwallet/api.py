@@ -516,30 +516,6 @@ class Api(object):
 
     '''
 
-    def listPaperChecks(self,
-                        userToken=None,
-                        params=None):
-        '''
-        List Paper Checks.
-
-        :param userToken:
-            A token identifying the User. **REQUIRED**
-        :param params:
-            A dictionary containing query parameters.
-        :returns:
-            An array of Paper Checks.
-        '''
-
-        if not userToken:
-            raise HyperwalletException('userToken is required')
-
-        response = self.apiClient.doGet(
-            os.path.join('users', userToken, 'paper-checks'),
-            params
-        )
-
-        return [PaperCheck(x) for x in response.get('data', [])]
-
     def createPaperCheck(self,
                          userToken=None,
                          data=None):
@@ -567,9 +543,9 @@ class Api(object):
 
         return PaperCheck(response)
 
-    def retrievePaperCheck(self,
-                           userToken=None,
-                           paperCheckToken=None):
+    def getPaperCheck(self,
+                      userToken=None,
+                      paperCheckToken=None):
         '''
         Retrieve a Paper Check.
 
@@ -635,6 +611,36 @@ class Api(object):
         )
 
         return PaperCheck(response)
+
+    def listPaperChecks(self,
+                        userToken=None,
+                        params=None):
+        '''
+        List Paper Checks.
+
+        :param userToken:
+            A token identifying the User. **REQUIRED**
+        :param params:
+            A dictionary containing query parameters.
+        :returns:
+            An array of Paper Checks.
+        '''
+
+        if not userToken:
+            raise HyperwalletException('userToken is required')
+
+        response = self.apiClient.doGet(
+            os.path.join('users', userToken, 'paper-checks'),
+            params
+        )
+
+        return [PaperCheck(x) for x in response.get('data', [])]
+
+    def createPaperCheckStatusTransition():
+        pass
+
+    def getPaperCheckStatusTransition():
+        pass
 
     '''
 

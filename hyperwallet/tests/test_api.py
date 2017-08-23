@@ -375,20 +375,11 @@ class ApiTest(unittest.TestCase):
 
         self.assertTrue(response[0].token, self.data.get('token'))
 
-    def test_list_paper_checks_with_nothing(self):
+    '''
 
-        with self.assertRaises(HyperwalletException) as exc:
-            self.api.listPaperChecks()
+    Paper Checks
 
-        self.assertEqual(exc.exception.message, 'userToken is required')
-
-    @mock.patch('hyperwallet.utils.ApiClient._makeRequest')
-    def test_list_paper_checks_with_user_token(self, mock_get):
-
-        mock_get.return_value = {'data': [self.data]}
-        response = self.api.listPaperChecks('token')
-
-        self.assertTrue(response[0].token, self.data.get('token'))
+    '''
 
     def test_create_paper_check_with_nothing(self):
 
@@ -412,25 +403,25 @@ class ApiTest(unittest.TestCase):
 
         self.assertTrue(response.token, self.data.get('token'))
 
-    def test_retrieve_paper_check_with_nothing(self):
+    def test_get_paper_check_with_nothing(self):
 
         with self.assertRaises(HyperwalletException) as exc:
-            self.api.retrievePaperCheck()
+            self.api.getPaperCheck()
 
         self.assertEqual(exc.exception.message, 'userToken is required')
 
-    def test_retrieve_paper_check_with_user_token(self):
+    def test_get_paper_check_with_user_token(self):
 
         with self.assertRaises(HyperwalletException) as exc:
-            self.api.retrievePaperCheck('token')
+            self.api.getPaperCheck('token')
 
         self.assertEqual(exc.exception.message, 'paperCheckToken is required')
 
     @mock.patch('hyperwallet.utils.ApiClient._makeRequest')
-    def test_retrieve_paper_check_with_user_token_and_paper_check_token(self, mock_get):
+    def test_get_paper_check_with_user_token_and_paper_check_token(self, mock_get):
 
         mock_get.return_value = self.data
-        response = self.api.retrievePaperCheck('token', 'token')
+        response = self.api.getPaperCheck('token', 'token')
 
         self.assertTrue(response.token, self.data.get('token'))
 
@@ -462,6 +453,21 @@ class ApiTest(unittest.TestCase):
         response = self.api.updatePaperCheck('token', 'token', self.data)
 
         self.assertTrue(response.token, self.data.get('token'))
+
+    def test_list_paper_checks_with_nothing(self):
+
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.listPaperChecks()
+
+        self.assertEqual(exc.exception.message, 'userToken is required')
+
+    @mock.patch('hyperwallet.utils.ApiClient._makeRequest')
+    def test_list_paper_checks_with_user_token(self, mock_get):
+
+        mock_get.return_value = {'data': [self.data]}
+        response = self.api.listPaperChecks('token')
+
+        self.assertTrue(response[0].token, self.data.get('token'))
 
     @mock.patch('hyperwallet.utils.ApiClient._makeRequest')
     def test_list_payments(self, mock_get):
