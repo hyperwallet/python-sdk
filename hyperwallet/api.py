@@ -66,25 +66,10 @@ class Api(object):
 
     '''
 
-    USERS
+    Users
     https://portal.hyperwallet.com/docs/api/v3/resources/users
 
     '''
-
-    def listUsers(self,
-                  params=None):
-        '''
-        List Users.
-
-        :param params:
-            A dictionary containing query parameters.
-        :returns:
-            An array of Users.
-        '''
-
-        response = self.apiClient.doGet('users', params)
-
-        return [User(x) for x in response.get('data', [])]
 
     def createUser(self,
                    data=None):
@@ -104,8 +89,8 @@ class Api(object):
 
         return User(response)
 
-    def retrieveUser(self,
-                     userToken=None):
+    def getUser(self,
+                userToken=None):
         '''
         Retrieve a User.
 
@@ -150,6 +135,21 @@ class Api(object):
         )
 
         return User(response)
+
+    def listUsers(self,
+                  params=None):
+        '''
+        List Users.
+
+        :param params:
+            A dictionary containing query parameters.
+        :returns:
+            An array of Users.
+        '''
+
+        response = self.apiClient.doGet('users', params)
+
+        return [User(x) for x in response.get('data', [])]
 
     '''
 

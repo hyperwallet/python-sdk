@@ -372,6 +372,7 @@ class Payment(HyperwalletModel):
 
         self.defaults = {
             'token': None,
+            'status': None,
             'createdOn': None,
             'programToken': None,
             'clientPaymentId': None,
