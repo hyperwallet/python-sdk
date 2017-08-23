@@ -915,23 +915,8 @@ class Api(object):
 
     '''
 
-    def listWebhooks(self,
-                     params=None):
-        '''
-        List Webhook Notifications.
-
-        :param params:
-            A dictionary containing query parameters.
-        :returns:
-            An array of Webhooks.
-        '''
-
-        response = self.apiClient.doGet('webhook-notifications', params)
-
-        return [Webhook(x) for x in response.get('data', [])]
-
-    def retrieveWebhook(self,
-                        webhookToken=None):
+    def getWebhookNotification(self,
+                               webhookToken=None):
         '''
         Retrieve a Webhook Notification.
 
@@ -949,3 +934,18 @@ class Api(object):
         )
 
         return Webhook(response)
+
+    def listWebhookNotifications(self,
+                                 params=None):
+        '''
+        List Webhook Notifications.
+
+        :param params:
+            A dictionary containing query parameters.
+        :returns:
+            An array of Webhooks.
+        '''
+
+        response = self.apiClient.doGet('webhook-notifications', params)
+
+        return [Webhook(x) for x in response.get('data', [])]
