@@ -284,6 +284,9 @@ class Api(object):
     def getBankAccountStatusTransition():
         pass
 
+    def listBankAccountStatusTransitions():
+        pass
+
     '''
 
     Bank Cards
