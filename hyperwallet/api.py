@@ -649,21 +649,6 @@ class Api(object):
 
     '''
 
-    def listPayments(self,
-                     params=None):
-        '''
-        List Payments.
-
-        :param params:
-            A dictionary containing query parameters.
-        :returns:
-            An array of Payments.
-        '''
-
-        response = self.apiClient.doGet('payments', params)
-
-        return [Payment(x) for x in response.get('data', [])]
-
     def createPayment(self,
                       data=None):
         '''
@@ -682,8 +667,8 @@ class Api(object):
 
         return Payment(response)
 
-    def retrievePayment(self,
-                        paymentToken=None):
+    def getPayment(self,
+                   paymentToken=None):
         '''
         Retrieve a Payment.
 
@@ -701,6 +686,27 @@ class Api(object):
         )
 
         return Payment(response)
+
+    def listPayments(self,
+                     params=None):
+        '''
+        List Payments.
+
+        :param params:
+            A dictionary containing query parameters.
+        :returns:
+            An array of Payments.
+        '''
+
+        response = self.apiClient.doGet('payments', params)
+
+        return [Payment(x) for x in response.get('data', [])]
+
+    def getPaymentStatusTransition():
+        pass
+
+    def listPaymentStatusTransitions():
+        pass
 
     '''
 

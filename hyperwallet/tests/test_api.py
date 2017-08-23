@@ -469,13 +469,11 @@ class ApiTest(unittest.TestCase):
 
         self.assertTrue(response[0].token, self.data.get('token'))
 
-    @mock.patch('hyperwallet.utils.ApiClient._makeRequest')
-    def test_list_payments(self, mock_get):
+    '''
 
-        mock_get.return_value = {'data': [self.data]}
-        response = self.api.listPayments()
+    Payments
 
-        self.assertTrue(response[0].token, self.data.get('token'))
+    '''
 
     def test_create_payment_with_nothing(self):
 
@@ -492,20 +490,28 @@ class ApiTest(unittest.TestCase):
 
         self.assertTrue(response.token, self.data.get('token'))
 
-    def test_retrieve_payment_with_nothing(self):
+    def test_get_payment_with_nothing(self):
 
         with self.assertRaises(HyperwalletException) as exc:
-            self.api.retrievePayment()
+            self.api.getPayment()
 
         self.assertEqual(exc.exception.message, 'paymentToken is required')
 
     @mock.patch('hyperwallet.utils.ApiClient._makeRequest')
-    def test_retrieve_payment_with_payment_token(self, mock_get):
+    def test_get_payment_with_payment_token(self, mock_get):
 
         mock_get.return_value = self.data
-        response = self.api.retrievePayment('token')
+        response = self.api.getPayment('token')
 
         self.assertTrue(response.token, self.data.get('token'))
+
+    @mock.patch('hyperwallet.utils.ApiClient._makeRequest')
+    def test_list_payments(self, mock_get):
+
+        mock_get.return_value = {'data': [self.data]}
+        response = self.api.listPayments()
+
+        self.assertTrue(response[0].token, self.data.get('token'))
 
     def test_list_user_balances_with_nothing(self):
 
