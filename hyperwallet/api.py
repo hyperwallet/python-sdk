@@ -416,7 +416,7 @@ class Api(object):
 
     '''
 
-    PREPAID CARDS
+    Prepaid Cards
     https://portal.hyperwallet.com/docs/api/v3/resources/prepaid-cards
 
     '''
@@ -514,7 +514,7 @@ class Api(object):
 
     '''
 
-    PAPER CHECKS
+    Paper Checks
     https://portal.hyperwallet.com/docs/api/v3/resources/paper-checks
 
     '''
@@ -647,7 +647,7 @@ class Api(object):
 
     '''
 
-    PAYMENTS
+    Payments
     https://portal.hyperwallet.com/docs/api/v3/resources/payments
 
     '''
@@ -713,7 +713,7 @@ class Api(object):
 
     '''
 
-    BALANCES
+    Balances
     https://portal.hyperwallet.com/docs/api/v3/resources/balances
 
     '''
@@ -816,7 +816,7 @@ class Api(object):
 
     '''
 
-    RECEIPTS
+    Receipts
     https://portal.hyperwallet.com/docs/api/v3/resources/receipts
 
     '''
@@ -832,7 +832,7 @@ class Api(object):
 
     '''
 
-    PROGRAMS
+    Programs
     https://portal.hyperwallet.com/docs/api/v3/resources/programs
 
     '''
@@ -859,7 +859,7 @@ class Api(object):
 
     '''
 
-    ACCOUNTS
+    Accounts
     https://portal.hyperwallet.com/docs/api/v3/resources/accounts
 
     '''
@@ -897,7 +897,7 @@ class Api(object):
 
     '''
 
-    TRANSFER METHODS
+    Transfer Methods
     https://portal.hyperwallet.com/docs/api/v3/resources/transfer-method-configurations
 
     '''
@@ -913,7 +913,7 @@ class Api(object):
 
     '''
 
-    WEBHOOK NOTIFICATIONS
+    Webhook Notifications
     https://portal.hyperwallet.com/docs/api/v3/resources/webhook-notifications
 
     '''
