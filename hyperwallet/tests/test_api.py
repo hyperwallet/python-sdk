@@ -310,20 +310,11 @@ class ApiTest(unittest.TestCase):
 
         self.assertTrue(response[0].token, self.data.get('token'))
 
-    def test_list_prepaid_cards_with_nothing(self):
+    '''
 
-        with self.assertRaises(HyperwalletException) as exc:
-            self.api.listPrepaidCards()
+    Prepaid Cards
 
-        self.assertEqual(exc.exception.message, 'userToken is required')
-
-    @mock.patch('hyperwallet.utils.ApiClient._makeRequest')
-    def test_list_prepaid_cards_with_user_token(self, mock_get):
-
-        mock_get.return_value = {'data': [self.data]}
-        response = self.api.listPrepaidCards('token')
-
-        self.assertTrue(response[0].token, self.data.get('token'))
+    '''
 
     def test_create_prepaid_card_with_nothing(self):
 
@@ -347,27 +338,42 @@ class ApiTest(unittest.TestCase):
 
         self.assertTrue(response.token, self.data.get('token'))
 
-    def test_retrieve_prepaid_card_with_nothing(self):
+    def test_get_prepaid_card_with_nothing(self):
 
         with self.assertRaises(HyperwalletException) as exc:
-            self.api.retrievePrepaidCard()
+            self.api.getPrepaidCard()
 
         self.assertEqual(exc.exception.message, 'userToken is required')
 
-    def test_retrieve_prepaid_card_with_user_token(self):
+    def test_get_prepaid_card_with_user_token(self):
 
         with self.assertRaises(HyperwalletException) as exc:
-            self.api.retrievePrepaidCard('token')
+            self.api.getPrepaidCard('token')
 
         self.assertEqual(exc.exception.message, 'prepaidCardToken is required')
 
     @mock.patch('hyperwallet.utils.ApiClient._makeRequest')
-    def test_retrieve_prepaid_card_with_user_token_and_card_token(self, mock_get):
+    def test_get_prepaid_card_with_user_token_and_card_token(self, mock_get):
 
         mock_get.return_value = self.data
-        response = self.api.retrievePrepaidCard('token', 'token')
+        response = self.api.getPrepaidCard('token', 'token')
 
         self.assertTrue(response.token, self.data.get('token'))
+
+    def test_list_prepaid_cards_with_nothing(self):
+
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.listPrepaidCards()
+
+        self.assertEqual(exc.exception.message, 'userToken is required')
+
+    @mock.patch('hyperwallet.utils.ApiClient._makeRequest')
+    def test_list_prepaid_cards_with_user_token(self, mock_get):
+
+        mock_get.return_value = {'data': [self.data]}
+        response = self.api.listPrepaidCards('token')
+
+        self.assertTrue(response[0].token, self.data.get('token'))
 
     def test_list_paper_checks_with_nothing(self):
 

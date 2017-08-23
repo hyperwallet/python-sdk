@@ -418,30 +418,6 @@ class Api(object):
 
     '''
 
-    def listPrepaidCards(self,
-                         userToken=None,
-                         params=None):
-        '''
-        List Prepaid Cards.
-
-        :param userToken:
-            A token identifying the User. **REQUIRED**
-        :param params:
-            A dictionary containing query parameters.
-        :returns:
-            An array of Prepaid Cards.
-        '''
-
-        if not userToken:
-            raise HyperwalletException('userToken is required')
-
-        response = self.apiClient.doGet(
-            os.path.join('users', userToken, 'prepaid-cards'),
-            params
-        )
-
-        return [PrepaidCard(x) for x in response.get('data', [])]
-
     def createPrepaidCard(self,
                           userToken=None,
                           data=None):
@@ -469,9 +445,9 @@ class Api(object):
 
         return PrepaidCard(response)
 
-    def retrievePrepaidCard(self,
-                            userToken=None,
-                            prepaidCardToken=None):
+    def getPrepaidCard(self,
+                       userToken=None,
+                       prepaidCardToken=None):
         '''
         Retrieve a Prepaid Card.
 
@@ -499,6 +475,39 @@ class Api(object):
         )
 
         return PrepaidCard(response)
+
+    def listPrepaidCards(self,
+                         userToken=None,
+                         params=None):
+        '''
+        List Prepaid Cards.
+
+        :param userToken:
+            A token identifying the User. **REQUIRED**
+        :param params:
+            A dictionary containing query parameters.
+        :returns:
+            An array of Prepaid Cards.
+        '''
+
+        if not userToken:
+            raise HyperwalletException('userToken is required')
+
+        response = self.apiClient.doGet(
+            os.path.join('users', userToken, 'prepaid-cards'),
+            params
+        )
+
+        return [PrepaidCard(x) for x in response.get('data', [])]
+
+    def createPrepaidCardStatusTransition():
+        pass
+
+    def getPrepaidCardStatusTransition():
+        pass
+
+    def listPrepaidCardStatusTransitions():
+        pass
 
     '''
 
