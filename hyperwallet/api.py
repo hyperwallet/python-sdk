@@ -861,9 +861,9 @@ class Api(object):
 
     '''
 
-    def retrieveAccount(self,
-                        programToken=None,
-                        accountToken=None):
+    def getAccount(self,
+                   programToken=None,
+                   accountToken=None):
         '''
         Retrieve an Account.
 
