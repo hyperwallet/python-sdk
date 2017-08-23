@@ -513,10 +513,16 @@ class ApiTest(unittest.TestCase):
 
         self.assertTrue(response[0].token, self.data.get('token'))
 
+    '''
+
+    Balances
+
+    '''
+
     def test_list_user_balances_with_nothing(self):
 
         with self.assertRaises(HyperwalletException) as exc:
-            self.api.listUserBalances()
+            self.api.listBalancesForUser()
 
         self.assertEqual(exc.exception.message, 'userToken is required')
 
@@ -524,21 +530,21 @@ class ApiTest(unittest.TestCase):
     def test_list_user_balances_with_user_token(self, mock_get):
 
         mock_get.return_value = {'data': [self.balance]}
-        response = self.api.listUserBalances('token')
+        response = self.api.listBalancesForUser('token')
 
         self.assertTrue(response[0].currency, self.balance.get('currency'))
 
     def test_list_repaid_card_balances_with_nothing(self):
 
         with self.assertRaises(HyperwalletException) as exc:
-            self.api.listPrepaidCardBalances()
+            self.api.listBalancesForPrepaidCard()
 
         self.assertEqual(exc.exception.message, 'userToken is required')
 
     def test_list_repaid_card_balances_with_user_token(self):
 
         with self.assertRaises(HyperwalletException) as exc:
-            self.api.listPrepaidCardBalances('token')
+            self.api.listBalancesForPrepaidCard('token')
 
         self.assertEqual(exc.exception.message, 'prepaidCardToken is required')
 
@@ -546,21 +552,21 @@ class ApiTest(unittest.TestCase):
     def test_list_repaid_card_balances_with_user_token_and_card_token(self, mock_get):
 
         mock_get.return_value = {'data': [self.balance]}
-        response = self.api.listPrepaidCardBalances('token', 'token')
+        response = self.api.listBalancesForPrepaidCard('token', 'token')
 
         self.assertTrue(response[0].currency, self.balance.get('currency'))
 
     def test_list_account_balances_with_nothing(self):
 
         with self.assertRaises(HyperwalletException) as exc:
-            self.api.listAccountBalances()
+            self.api.listBalancesForAccount()
 
         self.assertEqual(exc.exception.message, 'programToken is required')
 
     def test_list_account_balances_with_program_token(self):
 
         with self.assertRaises(HyperwalletException) as exc:
-            self.api.listAccountBalances('token')
+            self.api.listBalancesForAccount('token')
 
         self.assertEqual(exc.exception.message, 'accountToken is required')
 
@@ -568,7 +574,7 @@ class ApiTest(unittest.TestCase):
     def test_list_account_balances_with_program_token_and_account_token(self, mock_get):
 
         mock_get.return_value = {'data': [self.balance]}
-        response = self.api.listAccountBalances('token', 'token')
+        response = self.api.listBalancesForAccount('token', 'token')
 
         self.assertTrue(response[0].currency, self.balance.get('currency'))
 

@@ -715,9 +715,9 @@ class Api(object):
 
     '''
 
-    def listUserBalances(self,
-                         userToken=None,
-                         params=None):
+    def listBalancesForUser(self,
+                            userToken=None,
+                            params=None):
         '''
         List User Balances.
 
@@ -739,10 +739,10 @@ class Api(object):
 
         return [Balance(x) for x in response.get('data', [])]
 
-    def listPrepaidCardBalances(self,
-                                userToken=None,
-                                prepaidCardToken=None,
-                                params=None):
+    def listBalancesForPrepaidCard(self,
+                                   userToken=None,
+                                   prepaidCardToken=None,
+                                   params=None):
         '''
         List Prepaid Card Balances.
 
@@ -775,10 +775,10 @@ class Api(object):
 
         return [Balance(x) for x in response.get('data', [])]
 
-    def listAccountBalances(self,
-                            programToken=None,
-                            accountToken=None,
-                            params=None):
+    def listBalancesForAccount(self,
+                               programToken=None,
+                               accountToken=None,
+                               params=None):
         '''
         List Account Balances.
 
