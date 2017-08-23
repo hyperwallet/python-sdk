@@ -813,6 +813,22 @@ class Api(object):
 
     '''
 
+    RECEIPTS
+    https://portal.hyperwallet.com/docs/api/v3/resources/receipts
+
+    '''
+
+    def listReceiptsForUser():
+        pass
+
+    def listReceiptsForPrepaidCard():
+        pass
+
+    def listReceiptsForAccount():
+        pass
+
+    '''
+
     PROGRAMS
     https://portal.hyperwallet.com/docs/api/v3/resources/programs
 
