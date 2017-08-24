@@ -22,6 +22,7 @@ from .models import (
     Balance,                                                             # noqa
     Program,                                                             # noqa
     Account,                                                             # noqa
+    StatusTransition,                                                    # noqa
     Webhook                                                              # noqa
 )
 

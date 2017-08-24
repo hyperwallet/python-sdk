@@ -16,6 +16,7 @@ from hyperwallet import (
     Balance,
     Program,
     Account,
+    StatusTransition,
     Webhook
 )
 
@@ -278,14 +279,119 @@ class Api(object):
 
         return [BankAccount(x) for x in response.get('data', [])]
 
-    def createBankAccountStatusTransition():
-        pass
+    def createBankAccountStatusTransition(self,
+                                          userToken=None,
+                                          bankAccountToken=None,
+                                          data=None):
+        '''
+        Create a Bank Account Status Transition.
 
-    def getBankAccountStatusTransition():
-        pass
+        :param userToken:
+            A token identifying the User. **REQUIRED**
+        :param bankAccountToken:
+            A token identifying the Bank Account. **REQUIRED**
+        :param data:
+            A dictionary containing Bank Account Status Transition information. **REQUIRED**
+        :returns:
+            A Bank Account Status Transition.
+        '''
 
-    def listBankAccountStatusTransitions():
-        pass
+        if not userToken:
+            raise HyperwalletException('userToken is required')
+
+        if not bankAccountToken:
+            raise HyperwalletException('bankAccountToken is required')
+
+        if not data:
+            raise HyperwalletException('data is required')
+
+        response = self.apiClient.doPost(
+            os.path.join(
+                'users',
+                userToken,
+                'bank-accounts',
+                bankAccountToken,
+                'status-transitions'
+            ),
+            data
+        )
+
+        return StatusTransition(response)
+
+    def getBankAccountStatusTransition(self,
+                                       userToken=None,
+                                       bankAccountToken=None,
+                                       statusTransitionToken=None):
+        '''
+        Retrieve a Bank Account Status Transition.
+
+        :param userToken:
+            A token identifying the User. **REQUIRED**
+        :param bankAccountToken:
+            A token identifying the Bank Account. **REQUIRED**
+        :param statusTransitionToken:
+            A token identifying the Bank Account Status Transition. **REQUIRED**
+        :returns:
+            A Bank Account Status Transition.
+        '''
+
+        if not userToken:
+            raise HyperwalletException('userToken is required')
+
+        if not bankAccountToken:
+            raise HyperwalletException('bankAccountToken is required')
+
+        if not statusTransitionToken:
+            raise HyperwalletException('statusTransitionToken is required')
+
+        response = self.apiClient.doGet(
+            os.path.join(
+                'users',
+                userToken,
+                'bank-accounts',
+                bankAccountToken,
+                'status-transitions',
+                statusTransitionToken
+            )
+        )
+
+        return StatusTransition(response)
+
+    def listBankAccountStatusTransitions(self,
+                                         userToken=None,
+                                         bankAccountToken=None,
+                                         params=None):
+        '''
+        List Bank Account Status Transitions.
+
+        :param userToken:
+            A token identifying the User. **REQUIRED**
+        :param bankAccountToken:
+            A token identifying the Bank Account. **REQUIRED**
+        :param params:
+            A dictionary containing query parameters.
+        :returns:
+            An array of Bank Account Status Transitions.
+        '''
+
+        if not userToken:
+            raise HyperwalletException('userToken is required')
+
+        if not bankAccountToken:
+            raise HyperwalletException('bankAccountToken is required')
+
+        response = self.apiClient.doGet(
+            os.path.join(
+                'users',
+                userToken,
+                'bank-accounts',
+                bankAccountToken,
+                'status-transitions'
+            ),
+            params
+        )
+
+        return [StatusTransition(x) for x in response.get('data', [])]
 
     '''
 
