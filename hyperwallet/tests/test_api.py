@@ -455,6 +455,86 @@ class ApiTest(unittest.TestCase):
 
         self.assertTrue(response[0].token, self.data.get('token'))
 
+    def test_create_prepaid_card_status_transition_with_nothing(self):
+
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.createPrepaidCardStatusTransition()
+
+        self.assertEqual(exc.exception.message, 'userToken is required')
+
+    def test_create_prepaid_card_status_transition_with_user_token(self):
+
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.createPrepaidCardStatusTransition('token')
+
+        self.assertEqual(exc.exception.message, 'prepaidCardToken is required')
+
+    def test_create_prepaid_card_status_transition_with_user_token_and_card_token(self):
+
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.createPrepaidCardStatusTransition('token', 'token')
+
+        self.assertEqual(exc.exception.message, 'data is required')
+
+    @mock.patch('hyperwallet.utils.ApiClient._makeRequest')
+    def test_create_prepaid_card_status_transition_with_user_token_and_card_token_and_data(self, mock_post):
+
+        mock_post.return_value = self.data
+        response = self.api.createPrepaidCardStatusTransition('token', 'token', self.data)
+
+        self.assertTrue(response.token, self.data.get('token'))
+
+    def test_get_prepaid_card_status_transition_with_nothing(self):
+
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.getPrepaidCardStatusTransition()
+
+        self.assertEqual(exc.exception.message, 'userToken is required')
+
+    def test_get_prepaid_card_status_transition_with_user_token(self):
+
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.getPrepaidCardStatusTransition('token')
+
+        self.assertEqual(exc.exception.message, 'prepaidCardToken is required')
+
+    def test_get_prepaid_card_status_transition_with_user_token_and_card_token(self):
+
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.getPrepaidCardStatusTransition('token', 'token')
+
+        self.assertEqual(exc.exception.message, 'statusTransitionToken is required')
+
+    @mock.patch('hyperwallet.utils.ApiClient._makeRequest')
+    def test_get_prepaid_card_status_transition_with_user_token_and_card_token_and_transition_token(self, mock_get):
+
+        mock_get.return_value = self.data
+        response = self.api.getPrepaidCardStatusTransition('token', 'token', 'token')
+
+        self.assertTrue(response.token, self.data.get('token'))
+
+    def test_list_prepaid_card_status_transitions_with_nothing(self):
+
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.listPrepaidCardStatusTransitions()
+
+        self.assertEqual(exc.exception.message, 'userToken is required')
+
+    def test_list_prepaid_card_status_transitions_with_user_token(self):
+
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.listPrepaidCardStatusTransitions('token')
+
+        self.assertEqual(exc.exception.message, 'prepaidCardToken is required')
+
+    @mock.patch('hyperwallet.utils.ApiClient._makeRequest')
+    def test_list_prepaid_card_status_transitions_with_user_token_and_card_token(self, mock_get):
+
+        mock_get.return_value = {'data': [self.data]}
+        response = self.api.listPrepaidCardStatusTransitions('token', 'token')
+
+        self.assertTrue(response[0].token, self.data.get('token'))
+
     '''
 
     Paper Checks

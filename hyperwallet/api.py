@@ -609,14 +609,119 @@ class Api(object):
 
         return [PrepaidCard(x) for x in response.get('data', [])]
 
-    def createPrepaidCardStatusTransition():
-        pass
+    def createPrepaidCardStatusTransition(self,
+                                          userToken=None,
+                                          prepaidCardToken=None,
+                                          data=None):
+        '''
+        Create a Prepaid Card Status Transition.
 
-    def getPrepaidCardStatusTransition():
-        pass
+        :param userToken:
+            A token identifying the User. **REQUIRED**
+        :param prepaidCardToken:
+            A token identifying the Prepaid Card. **REQUIRED**
+        :param data:
+            A dictionary containing Prepaid Card Status Transition information. **REQUIRED**
+        :returns:
+            A Prepaid Card Status Transition.
+        '''
 
-    def listPrepaidCardStatusTransitions():
-        pass
+        if not userToken:
+            raise HyperwalletException('userToken is required')
+
+        if not prepaidCardToken:
+            raise HyperwalletException('prepaidCardToken is required')
+
+        if not data:
+            raise HyperwalletException('data is required')
+
+        response = self.apiClient.doPost(
+            os.path.join(
+                'users',
+                userToken,
+                'prepaid-cards',
+                prepaidCardToken,
+                'status-transitions'
+            ),
+            data
+        )
+
+        return StatusTransition(response)
+
+    def getPrepaidCardStatusTransition(self,
+                                       userToken=None,
+                                       prepaidCardToken=None,
+                                       statusTransitionToken=None):
+        '''
+        Retrieve a Prepaid Card Status Transition.
+
+        :param userToken:
+            A token identifying the User. **REQUIRED**
+        :param prepaidCardToken:
+            A token identifying the Prepaid Card. **REQUIRED**
+        :param statusTransitionToken:
+            A token identifying the Prepaid Card Status Transition. **REQUIRED**
+        :returns:
+            A Prepaid Card Status Transition.
+        '''
+
+        if not userToken:
+            raise HyperwalletException('userToken is required')
+
+        if not prepaidCardToken:
+            raise HyperwalletException('prepaidCardToken is required')
+
+        if not statusTransitionToken:
+            raise HyperwalletException('statusTransitionToken is required')
+
+        response = self.apiClient.doGet(
+            os.path.join(
+                'users',
+                userToken,
+                'prepaid-cards',
+                prepaidCardToken,
+                'status-transitions',
+                statusTransitionToken
+            )
+        )
+
+        return StatusTransition(response)
+
+    def listPrepaidCardStatusTransitions(self,
+                                         userToken=None,
+                                         prepaidCardToken=None,
+                                         params=None):
+        '''
+        List Prepaid Card Status Transitions.
+
+        :param userToken:
+            A token identifying the User. **REQUIRED**
+        :param prepaidCardToken:
+            A token identifying the Prepaid Card. **REQUIRED**
+        :param params:
+            A dictionary containing query parameters.
+        :returns:
+            An array of Prepaid Card Status Transitions.
+        '''
+
+        if not userToken:
+            raise HyperwalletException('userToken is required')
+
+        if not prepaidCardToken:
+            raise HyperwalletException('prepaidCardToken is required')
+
+        response = self.apiClient.doGet(
+            os.path.join(
+                'users',
+                userToken,
+                'prepaid-cards',
+                prepaidCardToken,
+                'status-transitions'
+            ),
+            params
+        )
+
+        return [StatusTransition(x) for x in response.get('data', [])]
 
     '''
 
