@@ -850,11 +850,119 @@ class Api(object):
 
         return [PaperCheck(x) for x in response.get('data', [])]
 
-    def createPaperCheckStatusTransition():
-        pass
+    def createPaperCheckStatusTransition(self,
+                                         userToken=None,
+                                         paperCheckToken=None,
+                                         data=None):
+        '''
+        Create a Paper Check Status Transition.
 
-    def getPaperCheckStatusTransition():
-        pass
+        :param userToken:
+            A token identifying the User. **REQUIRED**
+        :param paperCheckToken:
+            A token identifying the Paper Check. **REQUIRED**
+        :param data:
+            A dictionary containing Paper Check Status Transition information. **REQUIRED**
+        :returns:
+            A Paper Check Status Transition.
+        '''
+
+        if not userToken:
+            raise HyperwalletException('userToken is required')
+
+        if not paperCheckToken:
+            raise HyperwalletException('paperCheckToken is required')
+
+        if not data:
+            raise HyperwalletException('data is required')
+
+        response = self.apiClient.doPost(
+            os.path.join(
+                'users',
+                userToken,
+                'paper-checks',
+                paperCheckToken,
+                'status-transitions'
+            ),
+            data
+        )
+
+        return StatusTransition(response)
+
+    def getPaperCheckStatusTransition(self,
+                                      userToken=None,
+                                      paperCheckToken=None,
+                                      statusTransitionToken=None):
+        '''
+        Retrieve a Paper Check Status Transition.
+
+        :param userToken:
+            A token identifying the User. **REQUIRED**
+        :param paperCheckToken:
+            A token identifying the Paper Check. **REQUIRED**
+        :param statusTransitionToken:
+            A token identifying the Paper Check Status Transition. **REQUIRED**
+        :returns:
+            A Paper Check Status Transition.
+        '''
+
+        if not userToken:
+            raise HyperwalletException('userToken is required')
+
+        if not paperCheckToken:
+            raise HyperwalletException('paperCheckToken is required')
+
+        if not statusTransitionToken:
+            raise HyperwalletException('statusTransitionToken is required')
+
+        response = self.apiClient.doGet(
+            os.path.join(
+                'users',
+                userToken,
+                'paper-checks',
+                paperCheckToken,
+                'status-transitions',
+                statusTransitionToken
+            )
+        )
+
+        return StatusTransition(response)
+
+    def listPaperCheckStatusTransitions(self,
+                                        userToken=None,
+                                        paperCheckToken=None,
+                                        params=None):
+        '''
+        List Paper Check Status Transitions.
+
+        :param userToken:
+            A token identifying the User. **REQUIRED**
+        :param paperCheckToken:
+            A token identifying the Paper Check. **REQUIRED**
+        :param params:
+            A dictionary containing query parameters.
+        :returns:
+            An array of Paper Check Status Transitions.
+        '''
+
+        if not userToken:
+            raise HyperwalletException('userToken is required')
+
+        if not paperCheckToken:
+            raise HyperwalletException('paperCheckToken is required')
+
+        response = self.apiClient.doGet(
+            os.path.join(
+                'users',
+                userToken,
+                'paper-checks',
+                paperCheckToken,
+                'status-transitions'
+            ),
+            params
+        )
+
+        return [StatusTransition(x) for x in response.get('data', [])]
 
     '''
 

@@ -629,6 +629,86 @@ class ApiTest(unittest.TestCase):
 
         self.assertTrue(response[0].token, self.data.get('token'))
 
+    def test_create_paper_check_status_transition_with_nothing(self):
+
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.createPaperCheckStatusTransition()
+
+        self.assertEqual(exc.exception.message, 'userToken is required')
+
+    def test_create_paper_check_status_transition_with_user_token(self):
+
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.createPaperCheckStatusTransition('token')
+
+        self.assertEqual(exc.exception.message, 'paperCheckToken is required')
+
+    def test_create_paper_check_status_transition_with_user_token_and_check_token(self):
+
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.createPaperCheckStatusTransition('token', 'token')
+
+        self.assertEqual(exc.exception.message, 'data is required')
+
+    @mock.patch('hyperwallet.utils.ApiClient._makeRequest')
+    def test_create_paper_check_status_transition_with_user_token_and_check_token_and_data(self, mock_post):
+
+        mock_post.return_value = self.data
+        response = self.api.createPaperCheckStatusTransition('token', 'token', self.data)
+
+        self.assertTrue(response.token, self.data.get('token'))
+
+    def test_get_paper_check_status_transition_with_nothing(self):
+
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.getPaperCheckStatusTransition()
+
+        self.assertEqual(exc.exception.message, 'userToken is required')
+
+    def test_get_paper_check_status_transition_with_user_token(self):
+
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.getPaperCheckStatusTransition('token')
+
+        self.assertEqual(exc.exception.message, 'paperCheckToken is required')
+
+    def test_get_paper_check_status_transition_with_user_token_and_check_token(self):
+
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.getPaperCheckStatusTransition('token', 'token')
+
+        self.assertEqual(exc.exception.message, 'statusTransitionToken is required')
+
+    @mock.patch('hyperwallet.utils.ApiClient._makeRequest')
+    def test_get_paper_check_status_transition_with_user_token_and_check_token_and_transition_token(self, mock_get):
+
+        mock_get.return_value = self.data
+        response = self.api.getPaperCheckStatusTransition('token', 'token', 'token')
+
+        self.assertTrue(response.token, self.data.get('token'))
+
+    def test_list_paper_check_status_transitions_with_nothing(self):
+
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.listPaperCheckStatusTransitions()
+
+        self.assertEqual(exc.exception.message, 'userToken is required')
+
+    def test_list_paper_check_status_transitions_with_user_token(self):
+
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.listPaperCheckStatusTransitions('token')
+
+        self.assertEqual(exc.exception.message, 'paperCheckToken is required')
+
+    @mock.patch('hyperwallet.utils.ApiClient._makeRequest')
+    def test_list_paper_check_status_transitions_with_user_token_and_check_token(self, mock_get):
+
+        mock_get.return_value = {'data': [self.data]}
+        response = self.api.listPaperCheckStatusTransitions('token', 'token')
+
+        self.assertTrue(response[0].token, self.data.get('token'))
+
     '''
 
     Payments
