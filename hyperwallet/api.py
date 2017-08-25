@@ -1138,11 +1138,64 @@ class Api(object):
 
         return [Payment(x) for x in response.get('data', [])]
 
-    def getPaymentStatusTransition():
-        pass
+    def getPaymentStatusTransition(self,
+                                   paymentToken=None,
+                                   statusTransitionToken=None):
+        '''
+        Retrieve a Payment Status Transition.
 
-    def listPaymentStatusTransitions():
-        pass
+        :param paymentToken:
+            A token identifying the Payment. **REQUIRED**
+        :param statusTransitionToken:
+            A token identifying the Payment Status Transition. **REQUIRED**
+        :returns:
+            A Payment Status Transition.
+        '''
+
+        if not paymentToken:
+            raise HyperwalletException('paymentToken is required')
+
+        if not statusTransitionToken:
+            raise HyperwalletException('statusTransitionToken is required')
+
+        response = self.apiClient.doGet(
+            os.path.join(
+                'payments',
+                paymentToken,
+                'status-transitions',
+                statusTransitionToken
+            )
+        )
+
+        return StatusTransition(response)
+
+    def listPaymentStatusTransitions(self,
+                                     paymentToken=None,
+                                     params=None):
+        '''
+        List Payment Status Transitions.
+
+        :param paymentToken:
+            A token identifying the Payment. **REQUIRED**
+        :param params:
+            A dictionary containing query parameters.
+        :returns:
+            An array of Payment Status Transitions.
+        '''
+
+        if not paymentToken:
+            raise HyperwalletException('paymentToken is required')
+
+        response = self.apiClient.doGet(
+            os.path.join(
+                'payments',
+                paymentToken,
+                'status-transitions'
+            ),
+            params
+        )
+
+        return [StatusTransition(x) for x in response.get('data', [])]
 
     '''
 
