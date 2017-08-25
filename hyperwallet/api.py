@@ -520,6 +520,120 @@ class Api(object):
 
         return [BankCard(x) for x in response.get('data', [])]
 
+    def createBankCardStatusTransition(self,
+                                       userToken=None,
+                                       bankCardToken=None,
+                                       data=None):
+        '''
+        Create a Bank Card Status Transition.
+
+        :param userToken:
+            A token identifying the User. **REQUIRED**
+        :param bankCardToken:
+            A token identifying the Bank Card. **REQUIRED**
+        :param data:
+            A dictionary containing Bank Card Status Transition information. **REQUIRED**
+        :returns:
+            A Bank Card Status Transition.
+        '''
+
+        if not userToken:
+            raise HyperwalletException('userToken is required')
+
+        if not bankCardToken:
+            raise HyperwalletException('bankCardToken is required')
+
+        if not data:
+            raise HyperwalletException('data is required')
+
+        response = self.apiClient.doPost(
+            os.path.join(
+                'users',
+                userToken,
+                'bank-cards',
+                bankCardToken,
+                'status-transitions'
+            ),
+            data
+        )
+
+        return StatusTransition(response)
+
+    def getBankCardStatusTransition(self,
+                                    userToken=None,
+                                    bankCardToken=None,
+                                    statusTransitionToken=None):
+        '''
+        Retrieve a Bank Card Status Transition.
+
+        :param userToken:
+            A token identifying the User. **REQUIRED**
+        :param bankCardToken:
+            A token identifying the Bank Card. **REQUIRED**
+        :param statusTransitionToken:
+            A token identifying the Bank Card Status Transition. **REQUIRED**
+        :returns:
+            A Bank Card Status Transition.
+        '''
+
+        if not userToken:
+            raise HyperwalletException('userToken is required')
+
+        if not bankCardToken:
+            raise HyperwalletException('bankCardToken is required')
+
+        if not statusTransitionToken:
+            raise HyperwalletException('statusTransitionToken is required')
+
+        response = self.apiClient.doGet(
+            os.path.join(
+                'users',
+                userToken,
+                'bank-cards',
+                bankCardToken,
+                'status-transitions',
+                statusTransitionToken
+            )
+        )
+
+        return StatusTransition(response)
+
+    def listBankCardStatusTransitions(self,
+                                      userToken=None,
+                                      bankCardToken=None,
+                                      params=None):
+        '''
+        List Bank Card Status Transitions.
+
+        :param userToken:
+            A token identifying the User. **REQUIRED**
+        :param bankCardToken:
+            A token identifying the Bank Card. **REQUIRED**
+        :param params:
+            A dictionary containing query parameters.
+        :returns:
+            An array of Bank Card Status Transitions.
+        '''
+
+        if not userToken:
+            raise HyperwalletException('userToken is required')
+
+        if not bankCardToken:
+            raise HyperwalletException('bankCardToken is required')
+
+        response = self.apiClient.doGet(
+            os.path.join(
+                'users',
+                userToken,
+                'bank-cards',
+                bankCardToken,
+                'status-transitions'
+            ),
+            params
+        )
+
+        return [StatusTransition(x) for x in response.get('data', [])]
+
     '''
 
     Prepaid Cards
