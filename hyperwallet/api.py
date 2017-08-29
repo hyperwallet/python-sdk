@@ -8,6 +8,7 @@ from utils import ApiClient
 
 from hyperwallet import (
     User,
+    TransferMethod,
     BankAccount,
     BankCard,
     PrepaidCard,
@@ -1476,8 +1477,54 @@ class Api(object):
 
     '''
 
-    def createTransferMethod():
-        pass
+    def createTransferMethod(self,
+                             userToken=None,
+                             cacheToken=None,
+                             data=None):
+        '''
+        Create a Transfer Method.
+
+        :param userToken:
+            A token identifying the User. **REQUIRED**
+        :param cacheToken:
+            A cache token identifying the Transfer Method. **REQUIRED**
+        :param data:
+            A dictionary containing Field Restriction information.
+        :returns:
+            A Transfer Method.
+        '''
+
+        if not userToken:
+            raise HyperwalletException('userToken is required')
+
+        if not cacheToken:
+            raise HyperwalletException('cacheToken is required')
+
+        headers = {'Json-Cache-Token': cacheToken}
+
+        response = self.apiClient.doPost(
+            os.path.join(
+                'users',
+                userToken,
+                'transfer-methods'
+            ),
+            data,
+            headers
+        )
+
+        tm_types = {
+            'BANK_ACCOUNT': BankAccount,
+            'WIRE_ACCOUNT': BankAccount,
+            'BANK_CARD': BankCard,
+            'PAPER_CHECK': PaperCheck
+        }
+
+        tm_type = response.get('type')
+
+        if tm_type in tm_types:
+            return tm_types[tm_type](response)
+
+        return TransferMethod(response)
 
     def getTransferMethodConfiguration():
         pass

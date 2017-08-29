@@ -1051,6 +1051,34 @@ class ApiTest(unittest.TestCase):
 
     '''
 
+    Transfer Methods
+
+    '''
+
+    def test_create_transfer_method_with_nothing(self):
+
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.createTransferMethod()
+
+        self.assertEqual(exc.exception.message, 'userToken is required')
+
+    def test_create_transfer_method_with_user_token(self):
+
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.createTransferMethod('token')
+
+        self.assertEqual(exc.exception.message, 'cacheToken is required')
+
+    @mock.patch('hyperwallet.utils.ApiClient._makeRequest')
+    def test_create_transfer_method_with_user_token_and_cache_token(self, mock_post):
+
+        mock_post.return_value = self.data
+        response = self.api.createTransferMethod('token', 'token')
+
+        self.assertTrue(response.token, self.data.get('token'))
+
+    '''
+
     Webhook Notifications
 
     '''

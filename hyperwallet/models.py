@@ -120,7 +120,39 @@ class User(HyperwalletModel):
         )
 
 
-class BankAccount(HyperwalletModel):
+class TransferMethod(HyperwalletModel):
+    '''
+    The TransferMethod Model.
+
+    :param data:
+        A dictionary containing the attributes for the Transfer Method.
+    '''
+
+    def __init__(self, data):
+        '''
+        Create a new Transfer Method with the provided attributes.
+        '''
+
+        self.defaults = {
+            'token': None,
+            'createdOn': None,
+            'status': None,
+            'type': None,
+            'transferMethodCountry': None,
+            'transferMethodCurrency': None
+        }
+
+        for (param, default) in self.defaults.items():
+            setattr(self, param, data.get(param, default))
+
+    def __repr__(self):
+        return "TransferMethod({date}, {token})".format(
+            date=self.createdOn,
+            token=self.token
+        )
+
+
+class BankAccount(TransferMethod):
     '''
     The BankAccount Model.
 
@@ -133,11 +165,9 @@ class BankAccount(HyperwalletModel):
         Create a new Bank Account with the provided attributes.
         '''
 
+        TransferMethod.__init__(self, data)
+
         self.defaults = {
-            'token': None,
-            'createdOn': None,
-            'status': None,
-            'type': None,
             'email': None,
             'profileType': None,
             'firstName': None,
@@ -164,8 +194,6 @@ class BankAccount(HyperwalletModel):
             'stateProvince': None,
             'country': None,
             'postalCode': None,
-            'transferMethodCountry': None,
-            'transferMethodCurrency': None,
             'bankName': None,
             'bankId': None,
             'bankAccountRelationship': None,
@@ -201,7 +229,7 @@ class BankAccount(HyperwalletModel):
         )
 
 
-class BankCard(HyperwalletModel):
+class BankCard(TransferMethod):
     '''
     The BankCard Model.
 
@@ -214,11 +242,9 @@ class BankCard(HyperwalletModel):
         Create a new Bank Card with the provided attributes.
         '''
 
+        TransferMethod.__init__(self, data)
+
         self.defaults = {
-            'token': None,
-            'createdOn': None,
-            'status': None,
-            'type': None,
             'profileType': None,
             'businessName': None,
             'addressLine1': None,
@@ -226,8 +252,6 @@ class BankCard(HyperwalletModel):
             'stateProvince': None,
             'country': None,
             'postalCode': None,
-            'transferMethodCountry': None,
-            'transferMethodCurrency': None,
             'cardNumber': None,
             'cardType': None,
             'cardBrand': None,
@@ -245,7 +269,7 @@ class BankCard(HyperwalletModel):
         )
 
 
-class PrepaidCard(HyperwalletModel):
+class PrepaidCard(TransferMethod):
     '''
     The PrepaidCard Model.
 
@@ -258,13 +282,9 @@ class PrepaidCard(HyperwalletModel):
         Create a new Prepaid Card with the provided attributes.
         '''
 
+        TransferMethod.__init__(self, data)
+
         self.defaults = {
-            'token': None,
-            'createdOn': None,
-            'status': None,
-            'type': None,
-            'transferMethodCountry': None,
-            'transferMethodCurrency': None,
             'cardType': None,
             'cardPackage': None,
             'cardNumber': None,
@@ -282,7 +302,7 @@ class PrepaidCard(HyperwalletModel):
         )
 
 
-class PaperCheck(HyperwalletModel):
+class PaperCheck(TransferMethod):
     '''
     The PaperCheck Model.
 
@@ -295,11 +315,9 @@ class PaperCheck(HyperwalletModel):
         Create a new Paper Check with the provided attributes.
         '''
 
+        TransferMethod.__init__(self, data)
+
         self.defaults = {
-            'token': None,
-            'createdOn': None,
-            'status': None,
-            'type': None,
             'profileType': None,
             'firstName': None,
             'middleName': None,
@@ -318,8 +336,6 @@ class PaperCheck(HyperwalletModel):
             'stateProvince': None,
             'country': None,
             'postalCode': None,
-            'transferMethodCountry': None,
-            'transferMethodCurrency': None,
             'bankName': None,
             'bankId': None,
             'bankAccountRelationship': None,
