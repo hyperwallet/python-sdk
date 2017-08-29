@@ -20,6 +20,7 @@ from .models import (
     PaperCheck,                                                          # noqa
     Payment,                                                             # noqa
     Balance,                                                             # noqa
+    Receipt,                                                             # noqa
     Program,                                                             # noqa
     Account,                                                             # noqa
     StatusTransition,                                                    # noqa

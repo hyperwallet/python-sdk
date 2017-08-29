@@ -14,6 +14,7 @@ from hyperwallet import (
     PaperCheck,
     Payment,
     Balance,
+    Receipt,
     Program,
     Account,
     StatusTransition,
@@ -1307,14 +1308,101 @@ class Api(object):
 
     '''
 
-    def listReceiptsForUser():
-        pass
+    def listReceiptsForUser(self,
+                            userToken=None,
+                            params=None):
+        '''
+        List User Receipts.
 
-    def listReceiptsForPrepaidCard():
-        pass
+        :param userToken:
+            A token identifying the User. **REQUIRED**
+        :param params:
+            A dictionary containing query parameters.
+        :returns:
+            An array of Receipts.
+        '''
 
-    def listReceiptsForAccount():
-        pass
+        if not userToken:
+            raise HyperwalletException('userToken is required')
+
+        response = self.apiClient.doGet(
+            os.path.join('users', userToken, 'receipts'),
+            params
+        )
+
+        return [Receipt(x) for x in response.get('data', [])]
+
+    def listReceiptsForPrepaidCard(self,
+                                   userToken=None,
+                                   prepaidCardToken=None,
+                                   params=None):
+        '''
+        List Prepaid Card Receipts.
+
+        :param userToken:
+            A token identifying the User. **REQUIRED**
+        :param prepaidCardToken:
+            A token identifying the Prepaid Card. **REQUIRED**
+        :param params:
+            A dictionary containing query parameters.
+        :returns:
+            An array of Receipts.
+        '''
+
+        if not userToken:
+            raise HyperwalletException('userToken is required')
+
+        if not prepaidCardToken:
+            raise HyperwalletException('prepaidCardToken is required')
+
+        response = self.apiClient.doGet(
+            os.path.join(
+                'users',
+                userToken,
+                'prepaid-cards',
+                prepaidCardToken,
+                'receipts'
+            ),
+            params
+        )
+
+        return [Receipt(x) for x in response.get('data', [])]
+
+    def listReceiptsForAccount(self,
+                               programToken=None,
+                               accountToken=None,
+                               params=None):
+        '''
+        List Account Receipts.
+
+        :param programToken:
+            A token identifying the Program. **REQUIRED**
+        :param accountToken:
+            A token identifying the Account. **REQUIRED**
+        :param params:
+            A dictionary containing query parameters.
+        :returns:
+            An array of Receipts.
+        '''
+
+        if not programToken:
+            raise HyperwalletException('programToken is required')
+
+        if not accountToken:
+            raise HyperwalletException('accountToken is required')
+
+        response = self.apiClient.doGet(
+            os.path.join(
+                'programs',
+                programToken,
+                'accounts',
+                accountToken,
+                'receipts'
+            ),
+            params
+        )
+
+        return [Receipt(x) for x in response.get('data', [])]
 
     '''
 

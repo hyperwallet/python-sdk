@@ -937,6 +937,71 @@ class ApiTest(unittest.TestCase):
 
     '''
 
+    Receipts
+
+    '''
+
+    def test_list_user_receipts_with_nothing(self):
+
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.listReceiptsForUser()
+
+        self.assertEqual(exc.exception.message, 'userToken is required')
+
+    @mock.patch('hyperwallet.utils.ApiClient._makeRequest')
+    def test_list_user_receipts_with_user_token(self, mock_get):
+
+        mock_get.return_value = {'data': [self.balance]}
+        response = self.api.listReceiptsForUser('token')
+
+        self.assertTrue(response[0].currency, self.balance.get('currency'))
+
+    def test_list_prepaid_card_receipts_with_nothing(self):
+
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.listReceiptsForPrepaidCard()
+
+        self.assertEqual(exc.exception.message, 'userToken is required')
+
+    def test_list_prepaid_card_receipts_with_user_token(self):
+
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.listReceiptsForPrepaidCard('token')
+
+        self.assertEqual(exc.exception.message, 'prepaidCardToken is required')
+
+    @mock.patch('hyperwallet.utils.ApiClient._makeRequest')
+    def test_list_prepaid_card_receipts_with_user_token_and_card_token(self, mock_get):
+
+        mock_get.return_value = {'data': [self.balance]}
+        response = self.api.listReceiptsForPrepaidCard('token', 'token')
+
+        self.assertTrue(response[0].currency, self.balance.get('currency'))
+
+    def test_list_account_receipts_with_nothing(self):
+
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.listReceiptsForAccount()
+
+        self.assertEqual(exc.exception.message, 'programToken is required')
+
+    def test_list_account_receipts_with_program_token(self):
+
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.listReceiptsForAccount('token')
+
+        self.assertEqual(exc.exception.message, 'accountToken is required')
+
+    @mock.patch('hyperwallet.utils.ApiClient._makeRequest')
+    def test_list_account_receipts_with_program_token_and_account_token(self, mock_get):
+
+        mock_get.return_value = {'data': [self.balance]}
+        response = self.api.listReceiptsForAccount('token', 'token')
+
+        self.assertTrue(response[0].currency, self.balance.get('currency'))
+
+    '''
+
     Programs
 
     '''
