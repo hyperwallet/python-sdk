@@ -56,6 +56,12 @@ class ApiTest(unittest.TestCase):
             'currency': 'USD'
         }
 
+        self.configuration = {
+            'countries': ['US'],
+            'currencies': ['USD'],
+            'type': 'INDIVIDUAL'
+        }
+
     '''
 
     Users
@@ -1006,7 +1012,7 @@ class ApiTest(unittest.TestCase):
 
     '''
 
-    def test_retrieve_program_with_nothing(self):
+    def test_get_program_with_nothing(self):
 
         with self.assertRaises(HyperwalletException) as exc:
             self.api.getProgram()
@@ -1014,7 +1020,7 @@ class ApiTest(unittest.TestCase):
         self.assertEqual(exc.exception.message, 'programToken is required')
 
     @mock.patch('hyperwallet.utils.ApiClient._makeRequest')
-    def test_retrieve_program_with_program_token(self, mock_get):
+    def test_get_program_with_program_token(self, mock_get):
 
         mock_get.return_value = self.data
         response = self.api.getProgram('token')
@@ -1027,14 +1033,14 @@ class ApiTest(unittest.TestCase):
 
     '''
 
-    def test_retrieve_account_with_nothing(self):
+    def test_get_account_with_nothing(self):
 
         with self.assertRaises(HyperwalletException) as exc:
             self.api.getAccount()
 
         self.assertEqual(exc.exception.message, 'programToken is required')
 
-    def test_retrieve_account_with_program_token(self):
+    def test_get_account_with_program_token(self):
 
         with self.assertRaises(HyperwalletException) as exc:
             self.api.getAccount('token')
@@ -1042,7 +1048,7 @@ class ApiTest(unittest.TestCase):
         self.assertEqual(exc.exception.message, 'accountToken is required')
 
     @mock.patch('hyperwallet.utils.ApiClient._makeRequest')
-    def test_retrieve_account_with_program_token_and_account_token(self, mock_get):
+    def test_get_account_with_program_token_and_account_token(self, mock_get):
 
         mock_get.return_value = self.data
         response = self.api.getAccount('token', 'token')
@@ -1076,6 +1082,64 @@ class ApiTest(unittest.TestCase):
         response = self.api.createTransferMethod('token', 'token')
 
         self.assertTrue(response.token, self.data.get('token'))
+
+    def test_get_transfer_method_configuration_with_nothing(self):
+
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.getTransferMethodConfiguration()
+
+        self.assertEqual(exc.exception.message, 'userToken is required')
+
+    def test_get_transfer_method_configuration_with_user_token(self):
+
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.getTransferMethodConfiguration('token')
+
+        self.assertEqual(exc.exception.message, 'country is required')
+
+    def test_get_transfer_method_configuration_with_user_token_and_country(self):
+
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.getTransferMethodConfiguration('token', 'country')
+
+        self.assertEqual(exc.exception.message, 'currency is required')
+
+    def test_get_transfer_method_configuration_with_user_token_and_country_and_currency(self):
+
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.getTransferMethodConfiguration('token', 'country', 'currency')
+
+        self.assertEqual(exc.exception.message, 'type is required')
+
+    def test_get_transfer_method_configuration_with_user_token_and_country_and_currency_and_type(self):
+
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.getTransferMethodConfiguration('token', 'country', 'currency', 'type')
+
+        self.assertEqual(exc.exception.message, 'profileType is required')
+
+    @mock.patch('hyperwallet.utils.ApiClient._makeRequest')
+    def test_get_transfer_method_configuration_with_user_token_and_country_and_currency_and_type_and_program_token(self, mock_get):
+
+        mock_get.return_value = self.configuration
+        response = self.api.getTransferMethodConfiguration('token', 'country', 'currency', 'type', 'token')
+
+        self.assertTrue(response.type, self.configuration.get('type'))
+
+    def test_list_transfer_method_configurations_with_nothing(self):
+
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.listTransferMethodConfigurations()
+
+        self.assertEqual(exc.exception.message, 'userToken is required')
+
+    @mock.patch('hyperwallet.utils.ApiClient._makeRequest')
+    def test_list_transfer_method_configurations_with_user_token(self, mock_get):
+
+        mock_get.return_value = {'data': [self.configuration]}
+        response = self.api.listTransferMethodConfigurations('token')
+
+        self.assertTrue(response[0].type, self.configuration.get('type'))
 
     '''
 

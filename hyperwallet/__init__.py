@@ -25,6 +25,7 @@ from .models import (
     Program,                                                             # noqa
     Account,                                                             # noqa
     StatusTransition,                                                    # noqa
+    TransferMethodConfiguration,                                         # noqa
     Webhook                                                              # noqa
 )
 

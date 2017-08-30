@@ -633,6 +633,37 @@ class StatusTransition(HyperwalletModel):
         )
 
 
+class TransferMethodConfiguration(HyperwalletModel):
+    '''
+    The TransferMethodConfiguration Model.
+
+    :param data:
+        A dictionary containing the attributes for the Transfer Method Configuration.
+    '''
+
+    def __init__(self, data):
+        '''
+        Create a new Transfer Method Configuration with the provided attributes.
+        '''
+
+        self.defaults = {
+            'country': None,
+            'currency': None,
+            'type': None,
+            'profileType': None,
+            'fields': None
+        }
+
+        for (param, default) in self.defaults.items():
+            setattr(self, param, data.get(param, default))
+
+    def __repr__(self):
+        return "TransferMethodConfiguration({country}, {type})".format(
+            country=self.country,
+            type=self.type
+        )
+
+
 class Webhook(HyperwalletModel):
     '''
     The Webhook Model.

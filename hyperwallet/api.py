@@ -19,6 +19,7 @@ from hyperwallet import (
     Program,
     Account,
     StatusTransition,
+    TransferMethodConfiguration,
     Webhook
 )
 
@@ -1526,11 +1527,109 @@ class Api(object):
 
         return TransferMethod(response)
 
-    def getTransferMethodConfiguration():
-        pass
+    def getTransferMethodConfiguration(self,
+                                       userToken=None,
+                                       country=None,
+                                       currency=None,
+                                       transferMethodType=None,
+                                       profileType=None):
+        '''
+        Retrieve a Transfer Method Configuration.
 
-    def listTransferMethodConfigurations():
-        pass
+        :param userToken:
+            A token identifying the User. **REQUIRED**
+        :param country:
+            An ISO 3166-1 code identifying the country. **REQUIRED**
+        :param currency:
+            An ISO 4217-1 code identifying the currency. **REQUIRED**
+        :param transferMethodType:
+            A string identifying the type of Transfer Method. **REQUIRED**
+        :param profileType:
+            A string identifying the type of User. **REQUIRED**
+        :returns:
+            A Transfer Method Configuration.
+        '''
+
+        if not userToken:
+            raise HyperwalletException('userToken is required')
+
+        if not country:
+            raise HyperwalletException('country is required')
+
+        if not currency:
+            raise HyperwalletException('currency is required')
+
+        if not transferMethodType:
+            raise HyperwalletException('type is required')
+
+        if not profileType:
+            raise HyperwalletException('profileType is required')
+
+        response = self.apiClient.doGet(
+            'transfer-method-configurations',
+            {
+                'userToken': userToken,
+                'country': country,
+                'currency': currency,
+                'type': transferMethodType,
+                'profileType': profileType
+            }
+        )
+
+        if 'countries' in response:
+            # Rename the countries array to a single country
+            countries = response.pop('countries', [])
+            response.update({'country': countries[0]})
+
+        if 'currencies' in response:
+            # Rename the currencies array to a single currency
+            currencies = response.pop('currencies', [])
+            response.update({'currency': currencies[0]})
+
+        return TransferMethodConfiguration(response)
+
+    def listTransferMethodConfigurations(self,
+                                         userToken=None,
+                                         params={}):
+        '''
+        List Transfer Method Configurations.
+
+        :param userToken:
+            A token identifying the User. **REQUIRED**
+        :param params:
+            A dictionary containing query parameters.
+        :returns:
+            An array of Transfer Method Configurations.
+        '''
+
+        if not userToken:
+            raise HyperwalletException('userToken is required')
+
+        params.update({'userToken': userToken})
+
+        response = self.apiClient.doGet(
+            'transfer-method-configurations',
+            params
+        )
+
+        configurations = []
+
+        data = response.get('data')
+
+        for collection in data:
+            countries = collection.pop('countries', [])
+            currencies = collection.pop('currencies', [])
+
+            for country in countries:
+                for currency in currencies:
+                    collection.update({'country': country})
+                    collection.update({'currency': currency})
+
+                    configuration = TransferMethodConfiguration(collection)
+
+                    configurations.append(configuration)
+
+        return configurations
 
     '''
 
