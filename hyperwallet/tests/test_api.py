@@ -41,11 +41,10 @@ class ApiTest(unittest.TestCase):
 
     def setUp(self):
 
-        self.program_token = 'prg-12345'
         self.api = hyperwallet.Api(
             'test-user',
             'test-pass',
-            self.program_token
+            'prg-12345'
         )
 
         self.data = {
