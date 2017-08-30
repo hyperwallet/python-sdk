@@ -1625,11 +1625,9 @@ class Api(object):
                     collection.update({'country': country})
                     collection.update({'currency': currency})
 
-                    configuration = TransferMethodConfiguration(collection)
+                    configurations.append(collection)
 
-                    configurations.append(configuration)
-
-        return configurations
+        return [TransferMethodConfiguration(x) for x in configurations]
 
     '''
 

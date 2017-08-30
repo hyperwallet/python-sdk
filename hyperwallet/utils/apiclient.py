@@ -95,14 +95,13 @@ class ApiClient(object):
         }
 
         try:
-            response = self.session.request(method=method,
-                                            url=urlparse.urljoin(
-                                                self.baseUrl, url
-                                            ),
-                                            data=data,
-                                            headers=headers,
-                                            params=params
-                                            )
+            response = self.session.request(
+                method=method,
+                url=urlparse.urljoin(self.baseUrl, url),
+                data=data,
+                headers=headers,
+                params=params
+            )
         except:
             return body
 
@@ -133,10 +132,11 @@ class ApiClient(object):
             The API response.
         '''
 
-        return self._makeRequest(method='GET',
-                                 url=partialUrl,
-                                 params=params
-                                 )
+        return self._makeRequest(
+            method='GET',
+            url=partialUrl,
+            params=params
+        )
 
     def doPost(self, partialUrl, data, headers={}):
         '''
@@ -152,11 +152,12 @@ class ApiClient(object):
             The API response.
         '''
 
-        return self._makeRequest(method='POST',
-                                 url=partialUrl,
-                                 data=json.dumps(data).encode('utf-8'),
-                                 headers=headers
-                                 )
+        return self._makeRequest(
+            method='POST',
+            url=partialUrl,
+            data=json.dumps(data).encode('utf-8'),
+            headers=headers
+        )
 
     def doPut(self, partialUrl, data):
         '''
@@ -170,7 +171,8 @@ class ApiClient(object):
             The API response.
         '''
 
-        return self._makeRequest(method='PUT',
-                                 url=partialUrl,
-                                 data=json.dumps(data).encode('utf-8')
-                                 )
+        return self._makeRequest(
+            method='PUT',
+            url=partialUrl,
+            data=json.dumps(data).encode('utf-8')
+        )
