@@ -4,7 +4,6 @@ import mock
 import unittest
 import hyperwallet
 
-from hyperwallet.config import SERVER
 from hyperwallet.exceptions import HyperwalletException
 
 
