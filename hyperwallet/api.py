@@ -396,6 +396,36 @@ class Api(object):
 
         return [StatusTransition(x) for x in response.get('data', [])]
 
+    def deactivateBankAccount(self,
+                              userToken=None,
+                              bankAccountToken=None,
+                              notes=None):
+        '''
+        Deactivate a Bank Account.
+
+        :param userToken:
+            A token identifying the User. **REQUIRED**
+        :param bankAccountToken:
+            A token identifying the Bank Account. **REQUIRED**
+        :param notes:
+            A string describing the deactivation.
+        :returns:
+            A Bank Account Status Transition.
+        '''
+
+        data = {
+            'transition': 'DE_ACTIVATED'
+        }
+
+        if type(notes) is str:
+            data.update({'notes': notes})
+
+        return self.createBankAccountStatusTransition(
+            userToken,
+            bankAccountToken,
+            data
+        )
+
     '''
 
     Bank Cards
@@ -637,6 +667,36 @@ class Api(object):
 
         return [StatusTransition(x) for x in response.get('data', [])]
 
+    def deactivateBankCard(self,
+                           userToken=None,
+                           bankCardToken=None,
+                           notes=None):
+        '''
+        Deactivate a Bank Card.
+
+        :param userToken:
+            A token identifying the User. **REQUIRED**
+        :param bankCardToken:
+            A token identifying the Bank Card. **REQUIRED**
+        :param notes:
+            A string describing the deactivation.
+        :returns:
+            A Bank Card Status Transition.
+        '''
+
+        data = {
+            'transition': 'DE_ACTIVATED'
+        }
+
+        if type(notes) is str:
+            data.update({'notes': notes})
+
+        return self.createBankCardStatusTransition(
+            userToken,
+            bankCardToken,
+            data
+        )
+
     '''
 
     Prepaid Cards
@@ -839,6 +899,186 @@ class Api(object):
         )
 
         return [StatusTransition(x) for x in response.get('data', [])]
+
+    def deactivatePrepaidCard(self,
+                              userToken=None,
+                              prepaidCardToken=None,
+                              notes=None):
+        '''
+        Deactivate a Prepaid Card.
+
+        :param userToken:
+            A token identifying the User. **REQUIRED**
+        :param prepaidCardToken:
+            A token identifying the Prepaid Card. **REQUIRED**
+        :param notes:
+            A string describing the deactivation.
+        :returns:
+            A Prepaid Card Status Transition.
+        '''
+
+        data = {
+            'transition': 'DE_ACTIVATED'
+        }
+
+        if type(notes) is str:
+            data.update({'notes': notes})
+
+        return self.createPrepaidCardStatusTransition(
+            userToken,
+            prepaidCardToken,
+            data
+        )
+
+    def suspendPrepaidCard(self,
+                           userToken=None,
+                           prepaidCardToken=None,
+                           notes=None):
+        '''
+        Suspend a Prepaid Card.
+
+        :param userToken:
+            A token identifying the User. **REQUIRED**
+        :param prepaidCardToken:
+            A token identifying the Prepaid Card. **REQUIRED**
+        :param notes:
+            A string describing the suspension.
+        :returns:
+            A Prepaid Card Status Transition.
+        '''
+
+        data = {
+            'transition': 'SUSPENDED'
+        }
+
+        if type(notes) is str:
+            data.update({'notes': notes})
+
+        return self.createPrepaidCardStatusTransition(
+            userToken,
+            prepaidCardToken,
+            data
+        )
+
+    def unsuspendPrepaidCard(self,
+                            userToken=None,
+                            prepaidCardToken=None,
+                            notes=None):
+        '''
+        Unsuspend a Prepaid Card.
+
+        :param userToken:
+            A token identifying the User. **REQUIRED**
+        :param prepaidCardToken:
+            A token identifying the Prepaid Card. **REQUIRED**
+        :param notes:
+            A string describing the unsuspension.
+        :returns:
+            A Prepaid Card Status Transition.
+        '''
+
+        data = {
+            'transition': 'UNSUSPENDED'
+        }
+
+        if type(notes) is str:
+            data.update({'notes': notes})
+
+        return self.createPrepaidCardStatusTransition(
+            userToken,
+            prepaidCardToken,
+            data
+        )
+
+    def lostOrStolenPrepaidCard(self,
+                                userToken=None,
+                                prepaidCardToken=None,
+                                notes=None):
+        '''
+        Report a Prepaid Card lost or stolen.
+
+        :param userToken:
+            A token identifying the User. **REQUIRED**
+        :param prepaidCardToken:
+            A token identifying the Prepaid Card. **REQUIRED**
+        :param notes:
+            A string describing the lost or stolen report.
+        :returns:
+            A Prepaid Card Status Transition.
+        '''
+
+        data = {
+            'transition': 'LOST_OR_STOLEN'
+        }
+
+        if type(notes) is str:
+            data.update({'notes': notes})
+
+        return self.createPrepaidCardStatusTransition(
+            userToken,
+            prepaidCardToken,
+            data
+        )
+
+    def lockPrepaidCard(self,
+                        userToken=None,
+                        prepaidCardToken=None,
+                        notes=None):
+        '''
+        Lock a Prepaid Card.
+
+        :param userToken:
+            A token identifying the User. **REQUIRED**
+        :param prepaidCardToken:
+            A token identifying the Prepaid Card. **REQUIRED**
+        :param notes:
+            A string describing the lock.
+        :returns:
+            A Prepaid Card Status Transition.
+        '''
+
+        data = {
+            'transition': 'LOCKED'
+        }
+
+        if type(notes) is str:
+            data.update({'notes': notes})
+
+        return self.createPrepaidCardStatusTransition(
+            userToken,
+            prepaidCardToken,
+            data
+        )
+
+    def unlockPrepaidCard(self,
+                          userToken=None,
+                          prepaidCardToken=None,
+                          notes=None):
+        '''
+        Unlock a Prepaid Card.
+
+        :param userToken:
+            A token identifying the User. **REQUIRED**
+        :param prepaidCardToken:
+            A token identifying the Prepaid Card. **REQUIRED**
+        :param notes:
+            A string describing the unlock.
+        :returns:
+            A Prepaid Card Status Transition.
+        '''
+
+        data = {
+            'transition': 'UNLOCKED'
+        }
+
+        if type(notes) is str:
+            data.update({'notes': notes})
+
+        return self.createPrepaidCardStatusTransition(
+            userToken,
+            prepaidCardToken,
+            data
+        )
 
     '''
 
@@ -1080,6 +1320,36 @@ class Api(object):
         )
 
         return [StatusTransition(x) for x in response.get('data', [])]
+
+    def deactivatePaperCheck(self,
+                             userToken=None,
+                             paperCheckToken=None,
+                             notes=None):
+        '''
+        Deactivate a Paper Check.
+
+        :param userToken:
+            A token identifying the User. **REQUIRED**
+        :param paperCheckToken:
+            A token identifying the Paper Check. **REQUIRED**
+        :param notes:
+            A string describing the deactivation.
+        :returns:
+            A Paper Check Status Transition.
+        '''
+
+        data = {
+            'transition': 'DE_ACTIVATED'
+        }
+
+        if type(notes) is str:
+            data.update({'notes': notes})
+
+        return self.createPaperCheckStatusTransition(
+            userToken,
+            paperCheckToken,
+            data
+        )
 
     '''
 

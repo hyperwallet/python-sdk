@@ -305,6 +305,39 @@ class ApiTest(unittest.TestCase):
 
         self.assertTrue(response[0].token, self.data.get('token'))
 
+    def test_deactivate_bank_account_with_nothing(self):
+
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.deactivateBankAccount()
+
+        self.assertEqual(exc.exception.message, 'userToken is required')
+
+    def test_deactivate_bank_account_with_user_token(self):
+
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.deactivateBankAccount('token')
+
+        self.assertEqual(exc.exception.message, 'bankAccountToken is required')
+
+    @mock.patch('hyperwallet.utils.ApiClient._makeRequest')
+    def test_deactivate_bank_account_with_user_token_and_bank_token(self, mock_post):
+
+        mock_post.return_value = self.data
+        response = self.api.deactivateBankAccount('token', 'token')
+
+        self.assertTrue(response.token, self.data.get('token'))
+
+    @mock.patch('hyperwallet.utils.ApiClient._makeRequest')
+    def test_deactivate_bank_account_with_user_token_and_bank_token_and_notes(self, mock_post):
+
+        data = self.data.copy()
+        data.update({'notes': 'closing'})
+
+        mock_post.return_value = data
+        response = self.api.deactivateBankAccount('token', 'token', 'notes')
+
+        self.assertTrue(response.notes, data.get('notes'))
+
     '''
 
     Bank Cards
@@ -479,6 +512,39 @@ class ApiTest(unittest.TestCase):
 
         self.assertTrue(response[0].token, self.data.get('token'))
 
+    def test_deactivate_bank_card_with_nothing(self):
+
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.deactivateBankCard()
+
+        self.assertEqual(exc.exception.message, 'userToken is required')
+
+    def test_deactivate_bank_card_with_user_token(self):
+
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.deactivateBankCard('token')
+
+        self.assertEqual(exc.exception.message, 'bankCardToken is required')
+
+    @mock.patch('hyperwallet.utils.ApiClient._makeRequest')
+    def test_deactivate_bank_card_with_user_token_and_card_token(self, mock_post):
+
+        mock_post.return_value = self.data
+        response = self.api.deactivateBankCard('token', 'token')
+
+        self.assertTrue(response.token, self.data.get('token'))
+
+    @mock.patch('hyperwallet.utils.ApiClient._makeRequest')
+    def test_deactivate_bank_card_with_user_token_and_card_token_and_notes(self, mock_post):
+
+        data = self.data.copy()
+        data.update({'notes': 'closing'})
+
+        mock_post.return_value = data
+        response = self.api.deactivateBankCard('token', 'token', 'notes')
+
+        self.assertTrue(response.notes, data.get('notes'))
+
     '''
 
     Prepaid Cards
@@ -623,6 +689,204 @@ class ApiTest(unittest.TestCase):
         response = self.api.listPrepaidCardStatusTransitions('token', 'token')
 
         self.assertTrue(response[0].token, self.data.get('token'))
+
+    def test_deactivate_prepaid_card_with_nothing(self):
+
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.deactivatePrepaidCard()
+
+        self.assertEqual(exc.exception.message, 'userToken is required')
+
+    def test_deactivate_prepaid_card_with_user_token(self):
+
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.deactivatePrepaidCard('token')
+
+        self.assertEqual(exc.exception.message, 'prepaidCardToken is required')
+
+    @mock.patch('hyperwallet.utils.ApiClient._makeRequest')
+    def test_deactivate_prepaid_card_with_user_token_and_card_token(self, mock_post):
+
+        mock_post.return_value = self.data
+        response = self.api.deactivatePrepaidCard('token', 'token')
+
+        self.assertTrue(response.token, self.data.get('token'))
+
+    @mock.patch('hyperwallet.utils.ApiClient._makeRequest')
+    def test_deactivate_prepaid_card_with_user_token_and_card_token_and_notes(self, mock_post):
+
+        data = self.data.copy()
+        data.update({'notes': 'closing'})
+
+        mock_post.return_value = data
+        response = self.api.deactivatePrepaidCard('token', 'token', 'notes')
+
+        self.assertTrue(response.notes, data.get('notes'))
+
+    def test_suspend_prepaid_card_with_nothing(self):
+
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.suspendPrepaidCard()
+
+        self.assertEqual(exc.exception.message, 'userToken is required')
+
+    def test_suspend_prepaid_card_with_user_token(self):
+
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.suspendPrepaidCard('token')
+
+        self.assertEqual(exc.exception.message, 'prepaidCardToken is required')
+
+    @mock.patch('hyperwallet.utils.ApiClient._makeRequest')
+    def test_suspend_prepaid_card_with_user_token_and_card_token(self, mock_post):
+
+        mock_post.return_value = self.data
+        response = self.api.suspendPrepaidCard('token', 'token')
+
+        self.assertTrue(response.token, self.data.get('token'))
+
+    @mock.patch('hyperwallet.utils.ApiClient._makeRequest')
+    def test_suspend_prepaid_card_with_user_token_and_card_token_and_notes(self, mock_post):
+
+        data = self.data.copy()
+        data.update({'notes': 'closing'})
+
+        mock_post.return_value = data
+        response = self.api.suspendPrepaidCard('token', 'token', 'notes')
+
+        self.assertTrue(response.notes, data.get('notes'))
+
+    def test_unsuspend_prepaid_card_with_nothing(self):
+
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.unsuspendPrepaidCard()
+
+        self.assertEqual(exc.exception.message, 'userToken is required')
+
+    def test_unsuspend_prepaid_card_with_user_token(self):
+
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.unsuspendPrepaidCard('token')
+
+        self.assertEqual(exc.exception.message, 'prepaidCardToken is required')
+
+    @mock.patch('hyperwallet.utils.ApiClient._makeRequest')
+    def test_unsuspend_prepaid_card_with_user_token_and_card_token(self, mock_post):
+
+        mock_post.return_value = self.data
+        response = self.api.unsuspendPrepaidCard('token', 'token')
+
+        self.assertTrue(response.token, self.data.get('token'))
+
+    @mock.patch('hyperwallet.utils.ApiClient._makeRequest')
+    def test_unsuspend_prepaid_card_with_user_token_and_card_token_and_notes(self, mock_post):
+
+        data = self.data.copy()
+        data.update({'notes': 'closing'})
+
+        mock_post.return_value = data
+        response = self.api.unsuspendPrepaidCard('token', 'token', 'notes')
+
+        self.assertTrue(response.notes, data.get('notes'))
+
+    def test_lost_or_stolen_prepaid_card_with_nothing(self):
+
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.lostOrStolenPrepaidCard()
+
+        self.assertEqual(exc.exception.message, 'userToken is required')
+
+    def test_lost_or_stolen_prepaid_card_with_user_token(self):
+
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.lostOrStolenPrepaidCard('token')
+
+        self.assertEqual(exc.exception.message, 'prepaidCardToken is required')
+
+    @mock.patch('hyperwallet.utils.ApiClient._makeRequest')
+    def test_lost_or_stolen_prepaid_card_with_user_token_and_card_token(self, mock_post):
+
+        mock_post.return_value = self.data
+        response = self.api.lostOrStolenPrepaidCard('token', 'token')
+
+        self.assertTrue(response.token, self.data.get('token'))
+
+    @mock.patch('hyperwallet.utils.ApiClient._makeRequest')
+    def test_lost_or_stolen_prepaid_card_with_user_token_and_card_token_and_notes(self, mock_post):
+
+        data = self.data.copy()
+        data.update({'notes': 'closing'})
+
+        mock_post.return_value = data
+        response = self.api.lostOrStolenPrepaidCard('token', 'token', 'notes')
+
+        self.assertTrue(response.notes, data.get('notes'))
+
+    def test_lock_prepaid_card_with_nothing(self):
+
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.lockPrepaidCard()
+
+        self.assertEqual(exc.exception.message, 'userToken is required')
+
+    def test_lock_prepaid_card_with_user_token(self):
+
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.lockPrepaidCard('token')
+
+        self.assertEqual(exc.exception.message, 'prepaidCardToken is required')
+
+    @mock.patch('hyperwallet.utils.ApiClient._makeRequest')
+    def test_lock_prepaid_card_with_user_token_and_card_token(self, mock_post):
+
+        mock_post.return_value = self.data
+        response = self.api.lockPrepaidCard('token', 'token')
+
+        self.assertTrue(response.token, self.data.get('token'))
+
+    @mock.patch('hyperwallet.utils.ApiClient._makeRequest')
+    def test_lock_prepaid_card_with_user_token_and_card_token_and_notes(self, mock_post):
+
+        data = self.data.copy()
+        data.update({'notes': 'closing'})
+
+        mock_post.return_value = data
+        response = self.api.lockPrepaidCard('token', 'token', 'notes')
+
+        self.assertTrue(response.notes, data.get('notes'))
+
+    def test_unlock_prepaid_card_with_nothing(self):
+
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.unlockPrepaidCard()
+
+        self.assertEqual(exc.exception.message, 'userToken is required')
+
+    def test_unlock_prepaid_card_with_user_token(self):
+
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.unlockPrepaidCard('token')
+
+        self.assertEqual(exc.exception.message, 'prepaidCardToken is required')
+
+    @mock.patch('hyperwallet.utils.ApiClient._makeRequest')
+    def test_unlock_prepaid_card_with_user_token_and_card_token(self, mock_post):
+
+        mock_post.return_value = self.data
+        response = self.api.unlockPrepaidCard('token', 'token')
+
+        self.assertTrue(response.token, self.data.get('token'))
+
+    @mock.patch('hyperwallet.utils.ApiClient._makeRequest')
+    def test_unlock_prepaid_card_with_user_token_and_card_token_and_notes(self, mock_post):
+
+        data = self.data.copy()
+        data.update({'notes': 'closing'})
+
+        mock_post.return_value = data
+        response = self.api.unlockPrepaidCard('token', 'token', 'notes')
+
+        self.assertTrue(response.notes, data.get('notes'))
 
     '''
 
@@ -797,6 +1061,39 @@ class ApiTest(unittest.TestCase):
         response = self.api.listPaperCheckStatusTransitions('token', 'token')
 
         self.assertTrue(response[0].token, self.data.get('token'))
+
+    def test_deactivate_paper_check_with_nothing(self):
+
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.deactivatePaperCheck()
+
+        self.assertEqual(exc.exception.message, 'userToken is required')
+
+    def test_deactivate_paper_check_with_user_token(self):
+
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.deactivatePaperCheck('token')
+
+        self.assertEqual(exc.exception.message, 'paperCheckToken is required')
+
+    @mock.patch('hyperwallet.utils.ApiClient._makeRequest')
+    def test_deactivate_paper_check_with_user_token_and_check_token(self, mock_post):
+
+        mock_post.return_value = self.data
+        response = self.api.deactivatePaperCheck('token', 'token')
+
+        self.assertTrue(response.token, self.data.get('token'))
+
+    @mock.patch('hyperwallet.utils.ApiClient._makeRequest')
+    def test_deactivate_paper_check_with_user_token_and_check_token_and_notes(self, mock_post):
+
+        data = self.data.copy()
+        data.update({'notes': 'closing'})
+
+        mock_post.return_value = data
+        response = self.api.deactivatePaperCheck('token', 'token', 'notes')
+
+        self.assertTrue(response.notes, data.get('notes'))
 
     '''
 
