@@ -1513,17 +1513,17 @@ class Api(object):
             headers
         )
 
-        tm_types = {
+        transfer_method_types = {
             'BANK_ACCOUNT': BankAccount,
             'WIRE_ACCOUNT': BankAccount,
             'BANK_CARD': BankCard,
             'PAPER_CHECK': PaperCheck
         }
 
-        tm_type = response.get('type')
+        transfer_method_type = response.get('type')
 
-        if tm_type in tm_types:
-            return tm_types[tm_type](response)
+        if transfer_method_type in transfer_method_types:
+            return transfer_method_types[transfer_method_type](response)
 
         return TransferMethod(response)
 
@@ -1576,16 +1576,6 @@ class Api(object):
             }
         )
 
-        if 'countries' in response:
-            # Rename the countries array to a single country
-            countries = response.pop('countries', [])
-            response.update({'country': countries[0]})
-
-        if 'currencies' in response:
-            # Rename the currencies array to a single currency
-            currencies = response.pop('currencies', [])
-            response.update({'currency': currencies[0]})
-
         return TransferMethodConfiguration(response)
 
     def listTransferMethodConfigurations(self,
@@ -1622,8 +1612,8 @@ class Api(object):
 
             for country in countries:
                 for currency in currencies:
-                    collection.update({'country': country})
-                    collection.update({'currency': currency})
+                    collection.update({'countries': [country]})
+                    collection.update({'currencies': [currency]})
 
                     configurations.append(collection)
 

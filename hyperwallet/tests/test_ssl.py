@@ -21,3 +21,7 @@ class ApiClientInitializationTest(unittest.TestCase):
             'test-pass',
             SERVER
         )
+
+
+if __name__ == '__main__':
+    unittest.main()

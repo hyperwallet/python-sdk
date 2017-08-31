@@ -1,11 +1,13 @@
 #!/usr/bin/env python
 
+import json
 import unittest
 import hyperwallet
 
 from hyperwallet.exceptions import HyperwalletException
 
 from hyperwallet import (
+    HyperwalletModel,
     User,
     TransferMethod,
     BankAccount,
@@ -27,6 +29,46 @@ class ModelTest(unittest.TestCase):
 
     def setUp(self):
 
+        self.simple_data = {
+            'key': 'value',
+            'dict': {
+                'key': 'value'
+            },
+            'list': [
+                'item',
+                'value',
+                {
+                    'key': 'value'
+                }
+            ]
+        }
+
+        self.hyperwallet_data = {
+            "token": "usr-00000000-0000-0000-0000-000000000000",
+            "status": "PRE_ACTIVATED",
+            "createdOn": "2017-01-01T00:00:00",
+            "clientUserId": "1234567890",
+            "profileType": "INDIVIDUAL",
+            "firstName": "Hyperwallet",
+            "lastName": "User",
+            "dateOfBirth": "1990-01-01",
+            "addressLine1": "575 Market Street",
+            "city": "San Francisco",
+            "stateProvince": "CA",
+            "country": "US",
+            "postalCode": "94105",
+            "language": "en",
+            "programToken": "prg-00000000-0000-0000-0000-000000000000",
+            "links": [
+                {
+                    "params": {
+                        "rel": "self"
+                    },
+                    "href": "https://api.paylution.com/rest/v3/users/usr-00000000-0000-0000-0000-000000000000"
+                }
+            ]
+        }
+
         self.user_data = {
             'token': 'usr-12345',
             'createdOn': '2017-01-01'
@@ -44,6 +86,35 @@ class ModelTest(unittest.TestCase):
                 'clientPaymentId': '12345'
             }
         }
+
+    '''
+
+    Hyperwallet Model
+
+    '''
+
+    def test_hyperwallet_model_simple_data(self):
+
+        test_hyperwallet = HyperwalletModel(self.simple_data)
+
+        self.assertEqual(
+            json.dumps(
+                self.simple_data,
+                sort_keys=True,
+                separators=(',', ':'),
+                indent=4
+            ),
+            test_hyperwallet.__str__()
+        )
+
+    def test_hyperwallet_model_hyperwallet_data(self):
+
+        test_hyperwallet = HyperwalletModel(self.hyperwallet_data)
+
+        self.assertEqual(
+            json.dumps(self.hyperwallet_data, sort_keys=True),
+            json.dumps(test_hyperwallet.asDict(), sort_keys=True)
+        )
 
     '''
 
@@ -306,16 +377,17 @@ class ModelTest(unittest.TestCase):
     def test_transfer_method_configuration_model(self):
 
         transfer_method_configuration_data = {
-            'country': 'US',
+            'countries': ['US'],
             'type': 'BANK_ACCOUNT'
         }
 
         test_transfer_method_configuration = TransferMethodConfiguration(transfer_method_configuration_data)
 
+        print transfer_method_configuration_data.get('countries')
         self.assertEqual(
             test_transfer_method_configuration.__repr__(),
             'TransferMethodConfiguration({country}, {type})'.format(
-                country=transfer_method_configuration_data.get('country'),
+                country=transfer_method_configuration_data.get('countries')[0],
                 type=transfer_method_configuration_data.get('type')
             )
         )
@@ -389,3 +461,7 @@ class ModelTest(unittest.TestCase):
         test_webhook = Webhook(webhook_data)
 
         self.assertEqual(test_webhook.object, webhook_data.get('object'))
+
+
+if __name__ == '__main__':
+    unittest.main()

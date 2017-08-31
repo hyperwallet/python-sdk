@@ -17,7 +17,11 @@ class HyperwalletModel(object):
         Create an instance of the base HyperwalletModel.
         '''
 
-        self.defaults = {}
+        self.defaults = {
+            '_raw_json': None
+        }
+
+        setattr(self, '_raw_json', data)
 
     def __str__(self):
         '''
@@ -33,7 +37,12 @@ class HyperwalletModel(object):
         returned from the asDict() function.
         '''
 
-        return json.dumps(self.asDict(), sort_keys=True)
+        return json.dumps(
+            self.asDict(),
+            sort_keys=True,
+            separators=(',', ':'),
+            indent=4
+        )
 
     def asDict(self):
         '''
@@ -42,20 +51,14 @@ class HyperwalletModel(object):
 
         data = {}
 
-        for (key, value) in self.defaults.items():
-            if isinstance(getattr(self, key, None), (list, tuple, set)):
+        for (key, value) in self._raw_json.items():
+            if isinstance(self._raw_json.get(key, None), (list, tuple, set)):
                 data[key] = list()
-                for subobj in getattr(self, key, None):
-                    if getattr(subobj, '_to_dict', None):
-                        data[key].append(subobj._to_dict())
-                    else:
-                        data[key].append(subobj)
+                for subobj in self._raw_json.get(key, None):
+                    data[key].append(subobj)
 
-            elif getattr(getattr(self, key, None), '_to_dict', None):
-                data[key] = getattr(self, key)._to_dict()
-
-            elif getattr(self, key, None):
-                data[key] = getattr(self, key, None)
+            elif self._raw_json.get(key, None):
+                data[key] = self._raw_json.get(key, None)
 
         return data
 
@@ -72,6 +75,8 @@ class User(HyperwalletModel):
         '''
         Create a new User with the provided attributes.
         '''
+
+        super(User, self).__init__(data)
 
         self.defaults = {
             'token': None,
@@ -133,6 +138,8 @@ class TransferMethod(HyperwalletModel):
         Create a new Transfer Method with the provided attributes.
         '''
 
+        super(TransferMethod, self).__init__(data)
+
         self.defaults = {
             'token': None,
             'createdOn': None,
@@ -165,7 +172,7 @@ class BankAccount(TransferMethod):
         Create a new Bank Account with the provided attributes.
         '''
 
-        TransferMethod.__init__(self, data)
+        super(BankAccount, self).__init__(data)
 
         self.defaults = {
             'email': None,
@@ -242,7 +249,7 @@ class BankCard(TransferMethod):
         Create a new Bank Card with the provided attributes.
         '''
 
-        TransferMethod.__init__(self, data)
+        super(BankCard, self).__init__(data)
 
         self.defaults = {
             'profileType': None,
@@ -282,7 +289,7 @@ class PrepaidCard(TransferMethod):
         Create a new Prepaid Card with the provided attributes.
         '''
 
-        TransferMethod.__init__(self, data)
+        super(PrepaidCard, self).__init__(data)
 
         self.defaults = {
             'cardType': None,
@@ -315,7 +322,7 @@ class PaperCheck(TransferMethod):
         Create a new Paper Check with the provided attributes.
         '''
 
-        TransferMethod.__init__(self, data)
+        super(PaperCheck, self).__init__(data)
 
         self.defaults = {
             'profileType': None,
@@ -386,6 +393,8 @@ class Payment(HyperwalletModel):
         Create a new Payment with the provided attributes.
         '''
 
+        super(Payment, self).__init__(data)
+
         self.defaults = {
             'token': None,
             'status': None,
@@ -425,6 +434,8 @@ class Balance(HyperwalletModel):
         Create a new Balance with the provided attributes.
         '''
 
+        super(Balance, self).__init__(data)
+
         self.defaults = {
             'currency': None,
             'amount': None
@@ -452,6 +463,8 @@ class ReceiptDetail(HyperwalletModel):
         '''
         Create a new Receipt Detail with the provided attributes.
         '''
+
+        super(ReceiptDetail, self).__init__(data)
 
         self.defaults = {
             'clientPaymentId': None,
@@ -512,6 +525,8 @@ class Receipt(HyperwalletModel):
         Create a new Receipt with the provided attributes.
         '''
 
+        super(Receipt, self).__init__(data)
+
         self.defaults = {
             'journalId': None,
             'type': None,
@@ -530,8 +545,10 @@ class Receipt(HyperwalletModel):
         for (param, default) in self.defaults.items():
             setattr(self, param, data.get(param, default))
 
-        if type(self.details) is dict:
-            self.details = ReceiptDetail(self.details)
+        if type(self.details) is not dict:
+            return
+
+        self.details = ReceiptDetail(self.details)
 
     def __repr__(self):
         return "Receipt({entry}, {amount})".format(
@@ -552,6 +569,8 @@ class Program(HyperwalletModel):
         '''
         Create a new Program with the provided attributes.
         '''
+
+        super(Program, self).__init__(data)
 
         self.defaults = {
             'token': None,
@@ -583,6 +602,8 @@ class Account(HyperwalletModel):
         Create a new Account with the provided attributes.
         '''
 
+        super(Account, self).__init__(data)
+
         self.defaults = {
             'token': None,
             'createdOn': None,
@@ -612,6 +633,8 @@ class StatusTransition(HyperwalletModel):
         '''
         Create a new Status Transition with the provided attributes.
         '''
+
+        super(StatusTransition, self).__init__(data)
 
         self.defaults = {
             'token': None,
@@ -646,6 +669,8 @@ class TransferMethodConfiguration(HyperwalletModel):
         Create a new Transfer Method Configuration with the provided attributes.
         '''
 
+        super(TransferMethodConfiguration, self).__init__(data)
+
         self.defaults = {
             'country': None,
             'currency': None,
@@ -656,6 +681,14 @@ class TransferMethodConfiguration(HyperwalletModel):
 
         for (param, default) in self.defaults.items():
             setattr(self, param, data.get(param, default))
+
+        # Rename the countries array to a single country
+        countries = data.get('countries', ['NONE'])
+        setattr(self, 'country', countries[0])
+
+        # Rename the currencies array to a single currency
+        currencies = data.get('currencies', ['NONE'])
+        setattr(self, 'currency', currencies[0])
 
     def __repr__(self):
         return "TransferMethodConfiguration({country}, {type})".format(
@@ -668,13 +701,16 @@ class Webhook(HyperwalletModel):
     '''
     The Webhook Model.
 
-    :param data: A dictionary containing the attributes for the Webhook.
+    :param data:
+        A dictionary containing the attributes for the Webhook.
     '''
 
     def __init__(self, data):
         '''
         Create a new Webhook with the provided attributes.
         '''
+
+        super(Webhook, self).__init__(data)
 
         self.defaults = {
             'token': None,
@@ -686,25 +722,11 @@ class Webhook(HyperwalletModel):
         for (param, default) in self.defaults.items():
             setattr(self, param, data.get(param, default))
 
-        wh_object = Webhook.make_object(self.type, self.object)
+        if self.type is None:
+            return
 
-        if wh_object is not None:
-            self.object = wh_object
-
-    def __repr__(self):
-        return "Webhook({date}, {token})".format(
-            date=self.createdOn,
-            token=self.token
-        )
-
-    @staticmethod
-    def make_object(wh_type, wh_object):
-
-        if wh_type is None:
-            return None
-
-        if type(wh_object) is not dict:
-            return None
+        if type(self.object) is not dict:
+            return
 
         types = {
             'PAYMENTS': Payment,
@@ -713,11 +735,15 @@ class Webhook(HyperwalletModel):
             'USERS': User
         }
 
-        base, sub = wh_type.split('.')[:2]
+        base, sub = self.type.split('.')[:2]
 
         if sub in types:
-            return types[sub](wh_object)
+            self.object = types[sub](self.object)
         elif base in types:
-            return types[base](wh_object)
+            self.object = types[base](self.object)
 
-        return None
+    def __repr__(self):
+        return "Webhook({date}, {token})".format(
+            date=self.createdOn,
+            token=self.token
+        )

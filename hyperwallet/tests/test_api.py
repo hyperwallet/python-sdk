@@ -47,7 +47,12 @@ class ApiTest(unittest.TestCase):
         )
 
         self.data = {
-            'token': '123'
+            'token': 'tkn-12345'
+        }
+
+        self.data_with_type = {
+            'token': 'tkn-12345',
+            'type': 'BANK_ACCOUNT'
         }
 
         self.balance = {
@@ -1077,6 +1082,14 @@ class ApiTest(unittest.TestCase):
     def test_create_transfer_method_with_user_token_and_cache_token(self, mock_post):
 
         mock_post.return_value = self.data
+        response = self.api.createTransferMethod('token', 'token')
+
+        self.assertTrue(response.token, self.data.get('token'))
+
+    @mock.patch('hyperwallet.utils.ApiClient._makeRequest')
+    def test_create_transfer_method_with_user_token_and_cache_token_and_type(self, mock_post):
+
+        mock_post.return_value = self.data_with_type
         response = self.api.createTransferMethod('token', 'token')
 
         self.assertTrue(response.token, self.data.get('token'))
