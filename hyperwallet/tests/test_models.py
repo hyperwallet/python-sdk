@@ -288,17 +288,6 @@ class ModelTest(unittest.TestCase):
             )
         )
 
-    def test_receipt_detail_model(self):
-
-        test_receipt = Receipt(self.receipt_data)
-
-        self.assertEqual(
-            test_receipt.details.__repr__(),
-            'ReceiptDetail({identifier})'.format(
-                identifier=self.receipt_data.get('details').get('clientPaymentId')
-            )
-        )
-
     '''
 
     Program

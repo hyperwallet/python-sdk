@@ -451,67 +451,6 @@ class Balance(HyperwalletModel):
         )
 
 
-class ReceiptDetail(HyperwalletModel):
-    '''
-    The Receipt Detail Model.
-
-    :param data:
-        A dictionary containing the attributes for the Receipt Detail.
-    '''
-
-    def __init__(self, data):
-        '''
-        Create a new Receipt Detail with the provided attributes.
-        '''
-
-        super(ReceiptDetail, self).__init__(data)
-
-        self.defaults = {
-            'clientPaymentId': None,
-            'notes': None,
-            'memo': None,
-            'returnOrRecallReason': None,
-            'website': None,
-            'payerName': None,
-            'payeeName': None,
-            'charityName': None,
-            'cardHolderName': None,
-            'bankName': None,
-            'bankId': None,
-            'branchName': None,
-            'branchId': None,
-            'bankAccountId': None,
-            'bankAccountPurpose': None,
-            'branchAddressLine1': None,
-            'branchAddressLine2': None,
-            'branchCity': None,
-            'branchStateProvince': None,
-            'branchCountry': None,
-            'branchPostalCode': None,
-            'checkNumber': None,
-            'cardNumber': None,
-            'cardExpiryDate': None,
-            'payeeEmail': None,
-            'payeeAddressLine1': None,
-            'payeeAddressLine2': None,
-            'payeeCity': None,
-            'payeeStateProvince': None,
-            'payeeCountry': None,
-            'payeePostalCode': None,
-            'paymentExpiryDate': None,
-            'securityQuestion': None,
-            'securityAnswer': None
-        }
-
-        for (param, default) in self.defaults.items():
-            setattr(self, param, data.get(param, default))
-
-    def __repr__(self):
-        return "ReceiptDetail({identifier})".format(
-            identifier=self.clientPaymentId or self.cardNumber or 'Unknown'
-        )
-
-
 class Receipt(HyperwalletModel):
     '''
     The Receipt Model.
@@ -544,11 +483,6 @@ class Receipt(HyperwalletModel):
 
         for (param, default) in self.defaults.items():
             setattr(self, param, data.get(param, default))
-
-        if type(self.details) is not dict:
-            return
-
-        self.details = ReceiptDetail(self.details)
 
     def __repr__(self):
         return "Receipt({entry}, {amount})".format(
