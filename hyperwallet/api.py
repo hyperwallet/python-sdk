@@ -1941,10 +1941,11 @@ class Api(object):
 
             for country in countries:
                 for currency in currencies:
-                    collection.update({'countries': [country]})
-                    collection.update({'currencies': [currency]})
+                    configuration = collection.copy()
+                    configuration.update({'countries': [country]})
+                    configuration.update({'currencies': [currency]})
 
-                    configurations.append(collection)
+                    configurations.append(configuration)
 
         return [TransferMethodConfiguration(x) for x in configurations]
 
