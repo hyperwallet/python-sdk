@@ -131,6 +131,28 @@ class ApiTest(unittest.TestCase):
 
         self.assertEqual(response[0].token, self.data.get('token'))
 
+    def test_create_user_status_transition_with_nothing(self):
+
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.createUserStatusTransition()
+
+        self.assertEqual(exc.exception.message, 'userToken is required')
+
+    def test_create_user_status_transition_with_user_token(self):
+
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.createUserStatusTransition('token')
+
+        self.assertEqual(exc.exception.message, 'data is required')
+
+    @mock.patch('hyperwallet.utils.ApiClient._makeRequest')
+    def test_create_user_status_transition_with_user_token_and_data(self, mock_post):
+
+        mock_post.return_value = self.data
+        response = self.api.createUserStatusTransition('token', self.data)
+
+        self.assertTrue(response.token, self.data.get('token'))
+
     def test_get_user_status_transition_with_nothing(self):
 
         with self.assertRaises(HyperwalletException) as exc:

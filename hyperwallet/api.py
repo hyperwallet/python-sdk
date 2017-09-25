@@ -155,6 +155,37 @@ class Api(object):
 
         return [User(x) for x in response.get('data', [])]
 
+    def createUserStatusTransition(self,
+                                   userToken=None,
+                                   data=None):
+        '''
+        Create a User Status Transition.
+
+        :param userToken:
+            A token identifying the User. **REQUIRED**
+        :param data:
+            A dictionary containing User Status Transition information. **REQUIRED**
+        :returns:
+            A User Status Transition.
+        '''
+
+        if not userToken:
+            raise HyperwalletException('userToken is required')
+
+        if not data:
+            raise HyperwalletException('data is required')
+
+        response = self.apiClient.doPost(
+            os.path.join(
+                'users',
+                userToken,
+                'status-transitions'
+            ),
+            data
+        )
+
+        return StatusTransition(response)
+
     def getUserStatusTransition(self,
                                 userToken=None,
                                 statusTransitionToken=None):
