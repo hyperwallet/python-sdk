@@ -6,7 +6,7 @@ import json
 import urlparse
 import requests
 
-from hyperwallet.exceptions import HyperwalletException
+from hyperwallet.exceptions import HyperwalletAPIException
 from requests_toolbelt.adapters.ssl import SSLAdapter
 from hyperwallet import __version__
 
@@ -28,11 +28,6 @@ class ApiClient(object):
         Create an instance of the API client.
         This client is used to make the calls to the Hyperwallet API.
         '''
-
-        if not hasattr(ssl, 'PROTOCOL_TLSv1_2'):
-            raise HyperwalletException(
-                'Please update your SSL library to one with TLS 1.2 support.'
-            )
 
         # Base headers and the custom User-Agent to identify this client as the
         # Hyperwallet SDK.
@@ -83,17 +78,6 @@ class ApiClient(object):
             The Hyperwallet API supports **GET**, **POST**, and **PUT**.
         '''
 
-        body = {
-            'errors': [
-                {
-                    'message': 'Could not communicate with {}'.format(
-                        self.server
-                    ),
-                    'code': 'COMMUNICATION_ERROR'
-                }
-            ]
-        }
-
         try:
             response = self.session.request(
                 method=method,
@@ -102,21 +86,37 @@ class ApiClient(object):
                 headers=headers,
                 params=params
             )
-        except:
-            return body
-
-        content = response.content.decode('utf-8')
+        except Exception as e:
+            # The request failed to connect
+            raise HyperwalletAPIException({
+                'errors': [{
+                    'code': 'COMMUNICATION_ERROR',
+                    'message': 'Connection to {} failed: {}'.format(
+                        self.server,
+                        e.message
+                    )
+                }]
+            })
 
         if response.status_code is 204:
             return {}
 
+        content = response.content.decode('utf-8')
+
         try:
             json_body = json.loads(content)
         except ValueError as e:
-            raise HyperwalletException(e.message)
+            # The response is not JSON
+            raise HyperwalletAPIException({
+                'errors': [{
+                    'code': 'GARBAGE_RESPONSE',
+                    'message': 'Invalid response: {}'.format(e.message)
+                }]
+            })
 
         if 'errors' in json_body:
-            raise HyperwalletException(json_body)
+            # The response is a valid JSON error object
+            raise HyperwalletAPIException(json_body)
 
         return json_body
 
