@@ -79,40 +79,40 @@ class User(HyperwalletModel):
         super(User, self).__init__(data)
 
         self.defaults = {
-            'token': None,
-            'createdOn': None,
-            'status': None,
-            'verificationStatus': None,
-            'email': None,
-            'profileType': None,
-            'firstName': None,
-            'middleName': None,
-            'lastName': None,
-            'dateOfBirth': None,
-            'countryOfBirth': None,
-            'countryOfNationality': None,
-            'gender': None,
-            'phoneNumber': None,
-            'mobileNumber': None,
-            'governmentId': None,
-            'passportId': None,
-            'driversLicenseId': None,
-            'employerId': None,
-            'businessType': None,
-            'businessName': None,
-            'businessRegistrationId': None,
-            'businessRegistrationStateProvince': None,
-            'businessRegistrationCountry': None,
-            'businessContactRole': None,
             'addressLine1': None,
             'addressLine2': None,
+            'businessContactRole': None,
+            'businessName': None,
+            'businessRegistrationCountry': None,
+            'businessRegistrationId': None,
+            'businessRegistrationStateProvince': None,
+            'businessType': None,
             'city': None,
-            'stateProvince': None,
+            'clientUserId': None,
             'country': None,
-            'postalCode': None,
+            'countryOfBirth': None,
+            'countryOfNationality': None,
+            'createdOn': None,
+            'dateOfBirth': None,
+            'driversLicenseId': None,
+            'email': None,
+            'employerId': None,
+            'firstName': None,
+            'gender': None,
+            'governmentId': None,
             'language': None,
+            'lastName': None,
+            'middleName': None,
+            'mobileNumber': None,
+            'passportId': None,
+            'phoneNumber': None,
+            'postalCode': None,
+            'profileType': None,
             'programToken': None,
-            'clientUserId': None
+            'stateProvince': None,
+            'status': None,
+            'token': None,
+            'verificationStatus': None
         }
 
         for (param, default) in self.defaults.items():
@@ -141,12 +141,12 @@ class TransferMethod(HyperwalletModel):
         super(TransferMethod, self).__init__(data)
 
         self.defaults = {
-            'token': None,
             'createdOn': None,
             'status': None,
-            'type': None,
+            'token': None,
             'transferMethodCountry': None,
-            'transferMethodCurrency': None
+            'transferMethodCurrency': None,
+            'type': None
         }
 
         for (param, default) in self.defaults.items():
@@ -175,55 +175,56 @@ class BankAccount(TransferMethod):
         super(BankAccount, self).__init__(data)
 
         self.defaults = {
-            'email': None,
-            'profileType': None,
-            'firstName': None,
-            'middleName': None,
-            'lastName': None,
-            'dateOfBirth': None,
-            'countryOfBirth': None,
-            'countryOfNationality': None,
-            'gender': None,
-            'phoneNumber': None,
-            'mobileNumber': None,
-            'governmentId': None,
-            'passportId': None,
-            'driverLicenseId': None,
-            'businessType': None,
-            'businessName': None,
-            'businessRegistrationId': None,
-            'businessRegistrationStateProvince': None,
-            'businessRegistrationCountry': None,
-            'businessContactRole': None,
             'addressLine1': None,
             'addressLine2': None,
-            'city': None,
-            'stateProvince': None,
-            'country': None,
-            'postalCode': None,
-            'bankName': None,
-            'bankId': None,
-            'bankAccountRelationship': None,
-            'branchName': None,
-            'branchId': None,
             'bankAccountId': None,
             'bankAccountPurpose': None,
+            'bankAccountRelationship': None,
+            'bankId': None,
+            'bankName': None,
             'branchAddressLine1': None,
             'branchAddressLine2': None,
             'branchCity': None,
-            'branchStateProvince': None,
             'branchCountry': None,
+            'branchId': None,
+            'branchName': None,
             'branchPostalCode': None,
-            'wireInstructions': None,
-            'intermediaryBankId': None,
-            'intermediaryBankName': None,
+            'branchStateProvince': None,
+            'businessContactRole': None,
+            'businessName': None,
+            'businessRegistrationCountry': None,
+            'businessRegistrationId': None,
+            'businessRegistrationStateProvince': None,
+            'businessType': None,
+            'city': None,
+            'country': None,
+            'countryOfBirth': None,
+            'countryOfNationality': None,
+            'dateOfBirth': None,
+            'driverLicenseId': None,
+            'email': None,
+            'firstName': None,
+            'gender': None,
+            'governmentId': None,
             'intermediaryBankAccountId': None,
             'intermediaryBankAddressLine1': None,
             'intermediaryBankAddressLine2': None,
             'intermediaryBankCity': None,
-            'intermediaryBankStateProvince': None,
             'intermediaryBankCountry': None,
-            'intermediaryBankPostalCode': None
+            'intermediaryBankId': None,
+            'intermediaryBankName': None,
+            'intermediaryBankPostalCode': None,
+            'intermediaryBankStateProvince': None,
+            'isDefaultTransferMethod': None,
+            'lastName': None,
+            'middleName': None,
+            'mobileNumber': None,
+            'passportId': None,
+            'phoneNumber': None,
+            'postalCode': None,
+            'profileType': None,
+            'stateProvince': None,
+            'wireInstructions': None
         }
 
         for (param, default) in self.defaults.items():
@@ -252,18 +253,18 @@ class BankCard(TransferMethod):
         super(BankCard, self).__init__(data)
 
         self.defaults = {
-            'profileType': None,
-            'businessName': None,
             'addressLine1': None,
-            'city': None,
-            'stateProvince': None,
-            'country': None,
-            'postalCode': None,
+            'businessName': None,
+            'cardBrand': None,
             'cardNumber': None,
             'cardType': None,
-            'cardBrand': None,
+            'city': None,
+            'country': None,
             'dateOfExpiry': None,
-            'isDefaultTransferMethod': None
+            'isDefaultTransferMethod': None,
+            'postalCode': None,
+            'profileType': None,
+            'stateProvince': None
         }
 
         for (param, default) in self.defaults.items():
@@ -292,10 +293,10 @@ class PrepaidCard(TransferMethod):
         super(PrepaidCard, self).__init__(data)
 
         self.defaults = {
-            'cardType': None,
-            'cardPackage': None,
-            'cardNumber': None,
             'cardBrand': None,
+            'cardNumber': None,
+            'cardPackage': None,
+            'cardType': None,
             'dateOfExpiry': None
         }
 
@@ -325,49 +326,19 @@ class PaperCheck(TransferMethod):
         super(PaperCheck, self).__init__(data)
 
         self.defaults = {
-            'profileType': None,
-            'firstName': None,
-            'middleName': None,
-            'lastName': None,
-            'dateOfBirth': None,
-            'countryOfBirth': None,
-            'countryOfNationality': None,
-            'phoneNumber': None,
-            'mobileNumber': None,
-            'governmentId': None,
-            'businessName': None,
-            'businessRegistrationId': None,
-            'businessRegistrationCountry': None,
             'addressLine1': None,
-            'city': None,
-            'stateProvince': None,
-            'country': None,
-            'postalCode': None,
-            'bankName': None,
-            'bankId': None,
             'bankAccountRelationship': None,
-            'branchName': None,
-            'branchId': None,
-            'bankAccountId': None,
-            'bankAccountPurpose': None,
-            'branchAddressLine1': None,
-            'branchAddressLine2': None,
-            'branchCity': None,
-            'branchStateProvince': None,
-            'branchCountry': None,
-            'branchPostalCode': None,
-            'wireInstructions': None,
-            'intermediaryBankId': None,
-            'intermediaryBankName': None,
-            'intermediaryBankAccountId': None,
-            'intermediaryBankAddressLine1': None,
-            'intermediaryBankAddressLine2': None,
-            'intermediaryBankCity': None,
-            'intermediaryBankStateProvince': None,
-            'intermediaryBankCountry': None,
-            'intermediaryBankPostalCode': None,
+            'businessName': None,
+            'city': None,
+            'country': None,
+            'firstName': None,
+            'isDefaultTransferMethod': None,
+            'lastName': None,
+            'middleName': None,
+            'postalCode': None,
+            'profileType': None,
             'shippingMethod': None,
-            'isDefaultTransferMethod': None
+            'stateProvince': None
         }
 
         for (param, default) in self.defaults.items():
@@ -396,19 +367,19 @@ class Payment(HyperwalletModel):
         super(Payment, self).__init__(data)
 
         self.defaults = {
-            'token': None,
-            'status': None,
-            'createdOn': None,
-            'programToken': None,
-            'clientPaymentId': None,
             'amount': None,
+            'clientPaymentId': None,
+            'createdOn': None,
             'currency': None,
-            'notes': None,
+            'destinationToken': None,
+            'expiresOn': None,
             'memo': None,
+            'notes': None,
+            'programToken': None,
             'purpose': None,
             'releaseOn': None,
-            'expiresOn': None,
-            'destinationToken': None
+            'status': None,
+            'token': None
         }
 
         for (param, default) in self.defaults.items():
@@ -437,8 +408,8 @@ class Balance(HyperwalletModel):
         super(Balance, self).__init__(data)
 
         self.defaults = {
-            'currency': None,
-            'amount': None
+            'amount': None,
+            'currency': None
         }
 
         for (param, default) in self.defaults.items():
@@ -467,18 +438,18 @@ class Receipt(HyperwalletModel):
         super(Receipt, self).__init__(data)
 
         self.defaults = {
-            'journalId': None,
-            'type': None,
-            'createdOn': None,
-            'entry': None,
-            'sourceToken': None,
-            'destinationToken': None,
             'amount': None,
-            'fee': None,
+            'createdOn': None,
             'currency': None,
-            'foreignExchangeRate': None,
-            'foreignExchangeCurrency': None,
+            'destinationToken': None,
             'details': None,
+            'entry': None,
+            'fee': None,
+            'foreignExchangeCurrency': None,
+            'foreignExchangeRate': None,
+            'journalId': None,
+            'sourceToken': None,
+            'type': None
         }
 
         for (param, default) in self.defaults.items():
@@ -507,10 +478,10 @@ class Program(HyperwalletModel):
         super(Program, self).__init__(data)
 
         self.defaults = {
-            'token': None,
             'createdOn': None,
             'name': None,
-            'parentToken': None
+            'parentToken': None,
+            'token': None
         }
 
         for (param, default) in self.defaults.items():
@@ -539,10 +510,10 @@ class Account(HyperwalletModel):
         super(Account, self).__init__(data)
 
         self.defaults = {
-            'token': None,
             'createdOn': None,
-            'type': None,
-            'email': None
+            'email': None,
+            'token': None,
+            'type': None
         }
 
         for (param, default) in self.defaults.items():
@@ -571,13 +542,13 @@ class StatusTransition(HyperwalletModel):
         super(StatusTransition, self).__init__(data)
 
         self.defaults = {
-            'token': None,
             'createdOn': None,
-            'transition': None,
             'fromStatus': None,
-            'toStatus': None,
             'notes': None,
-            'statusCode': None
+            'statusCode': None,
+            'token': None,
+            'toStatus': None,
+            'transition': None
         }
 
         for (param, default) in self.defaults.items():
@@ -608,9 +579,9 @@ class TransferMethodConfiguration(HyperwalletModel):
         self.defaults = {
             'country': None,
             'currency': None,
-            'type': None,
+            'fields': None,
             'profileType': None,
-            'fields': None
+            'type': None
         }
 
         for (param, default) in self.defaults.items():
@@ -647,10 +618,10 @@ class Webhook(HyperwalletModel):
         super(Webhook, self).__init__(data)
 
         self.defaults = {
-            'token': None,
-            'type': None,
             'createdOn': None,
-            'object': None
+            'object': None,
+            'token': None,
+            'type': None
         }
 
         for (param, default) in self.defaults.items():

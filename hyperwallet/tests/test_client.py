@@ -60,9 +60,9 @@ class ApiClientTest(unittest.TestCase):
     def test_receive_valid_json_error_response(self, session_mock):
 
         data = {
-            "errors" : [{
-                "message" : "Houston, we have a problem",
-                "code" : "FORBIDDEN"
+            "errors": [{
+                "message": "Houston, we have a problem",
+                "code": "FORBIDDEN"
             }]
         }
 
