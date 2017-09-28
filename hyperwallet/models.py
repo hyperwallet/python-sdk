@@ -1,5 +1,4 @@
-# Thanks to Twitter Python SDK
-# https://github.com/bear/python-twitter/blob/master/twitter/models.py
+#!/usr/bin/env python
 
 import json
 
