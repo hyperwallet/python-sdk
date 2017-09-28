@@ -370,7 +370,9 @@ class ModelTest(unittest.TestCase):
             'type': 'BANK_ACCOUNT'
         }
 
-        test_transfer_method_configuration = TransferMethodConfiguration(transfer_method_configuration_data)
+        test_transfer_method_configuration = TransferMethodConfiguration(
+            transfer_method_configuration_data
+        )
 
         print transfer_method_configuration_data.get('countries')
         self.assertEqual(
