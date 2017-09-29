@@ -1,6 +1,13 @@
 Changelog
 =========
 
+1.1.0 (2017-09-29)
+------------------
+
+- Completed coverage of all endpoints
+- 100% code coverage
+- Audited available attributes for each model
+
 1.0.0 (2017-08-04)
 ------------------
 
