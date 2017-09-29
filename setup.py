@@ -16,7 +16,6 @@ def read(filename):
 metadata = read(os.path.join(ground, 'hyperwallet', '__init__.py'))
 
 def extract_metaitem(meta):
-    # swiped from https://hynek.me 's attr package
     meta_match = re.search(r"""^__{meta}__\s+=\s+['\"]([^'\"]*)['\"]""".format(meta=meta), metadata, re.MULTILINE)
     if meta_match:
         return meta_match.group(1)
