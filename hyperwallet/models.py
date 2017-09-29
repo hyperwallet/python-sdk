@@ -141,6 +141,7 @@ class TransferMethod(HyperwalletModel):
 
         self.defaults = {
             'createdOn': None,
+            'isDefaultTransferMethod': None,
             'status': None,
             'token': None,
             'transferMethodCountry': None,
@@ -189,6 +190,7 @@ class BankAccount(TransferMethod):
             'branchName': None,
             'branchPostalCode': None,
             'branchStateProvince': None,
+            'buildingSocietyAccount': None,
             'businessContactRole': None,
             'businessName': None,
             'businessRegistrationCountry': None,
@@ -200,8 +202,7 @@ class BankAccount(TransferMethod):
             'countryOfBirth': None,
             'countryOfNationality': None,
             'dateOfBirth': None,
-            'driverLicenseId': None,
-            'email': None,
+            'employerId': None,
             'firstName': None,
             'gender': None,
             'governmentId': None,
@@ -214,7 +215,7 @@ class BankAccount(TransferMethod):
             'intermediaryBankName': None,
             'intermediaryBankPostalCode': None,
             'intermediaryBankStateProvince': None,
-            'isDefaultTransferMethod': None,
+            'kpp': None,
             'lastName': None,
             'middleName': None,
             'mobileNumber': None,
@@ -223,6 +224,7 @@ class BankAccount(TransferMethod):
             'postalCode': None,
             'profileType': None,
             'stateProvince': None,
+            'taxId': None,
             'wireInstructions': None
         }
 
@@ -252,18 +254,10 @@ class BankCard(TransferMethod):
         super(BankCard, self).__init__(data)
 
         self.defaults = {
-            'addressLine1': None,
-            'businessName': None,
             'cardBrand': None,
             'cardNumber': None,
             'cardType': None,
-            'city': None,
-            'country': None,
             'dateOfExpiry': None,
-            'isDefaultTransferMethod': None,
-            'postalCode': None,
-            'profileType': None,
-            'stateProvince': None
         }
 
         for (param, default) in self.defaults.items():
@@ -326,14 +320,29 @@ class PaperCheck(TransferMethod):
 
         self.defaults = {
             'addressLine1': None,
+            'addressLine2': None,
             'bankAccountRelationship': None,
+            'businessContactRole': None,
             'businessName': None,
+            'businessRegistrationCountry': None,
+            'businessRegistrationId': None,
+            'businessRegistrationStateProvince': None,
+            'businessType': None,
             'city': None,
             'country': None,
+            'countryOfBirth': None,
+            'countryOfNationality': None,
+            'dateOfBirth': None,
+            'driversLicenseId': None,
+            'employerId': None,
             'firstName': None,
-            'isDefaultTransferMethod': None,
+            'gender': None,
+            'governmentId': None,
             'lastName': None,
             'middleName': None,
+            'mobileNumber': None,
+            'passportId': None,
+            'phoneNumber': None,
             'postalCode': None,
             'profileType': None,
             'shippingMethod': None,
