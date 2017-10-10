@@ -1508,6 +1508,14 @@ class ApiTest(unittest.TestCase):
 
         self.assertTrue(response[0].type, self.configuration.get('type'))
 
+    @mock.patch('hyperwallet.utils.ApiClient._makeRequest')
+    def test_list_transfer_method_configurations_success_empty(self, mock_get):
+
+        mock_get.return_value = {}
+        response = self.api.listTransferMethodConfigurations('token')
+
+        self.assertEqual(response, [])
+
     '''
 
     Webhook Notifications

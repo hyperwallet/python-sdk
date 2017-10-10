@@ -1966,6 +1966,9 @@ class Api(object):
 
         data = response.get('data')
 
+        if not data:
+            return []
+
         for collection in data:
             countries = collection.pop('countries', [])
             currencies = collection.pop('currencies', [])
