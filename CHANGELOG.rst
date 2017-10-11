@@ -1,6 +1,11 @@
 Changelog
 =========
 
+1.1.1 (2017-10-11)
+------------------
+
+- Bumped version and first public release!
+
 1.1.0 (2017-09-29)
 ------------------
 
