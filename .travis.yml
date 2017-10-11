@@ -9,3 +9,5 @@ script:
 - make dev
 - make docs
 - make test
+after_success:
+- coveralls
