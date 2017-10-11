@@ -1,7 +1,4 @@
-.. image:: https://travis-ci.org/hyperwallet/python-sdk.svg?branch=master
-:target: https://travis-ci.org/hyperwallet/python-sdk.svg?branch=master
-.. image:: https://coveralls.io/repos/github/hyperwallet/python-sdk/badge.svg?branch=master
-:target: https://coveralls.io/github/hyperwallet/python-sdk?branch=master
+.. image:: https://travis-ci.org/hyperwallet/python-sdk.svg?branch=master .. image:: https://coveralls.io/repos/github/hyperwallet/python-sdk/badge.svg?branch=master
 
 ===========================
 Hyperwallet REST SDK (Beta)
