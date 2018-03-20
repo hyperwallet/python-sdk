@@ -1,14 +1,16 @@
 #!/usr/bin/env python
 
-import sys
 import ssl
 import json
-import urlparse
 import requests
 
 from hyperwallet.exceptions import HyperwalletAPIException
 from requests_toolbelt.adapters.ssl import SSLAdapter
 from hyperwallet import __version__
+try:
+    from urllib.parse import urljoin
+except ImportError:
+    from urlparse import urljoin  # Python 2
 
 
 class ApiClient(object):
@@ -42,7 +44,7 @@ class ApiClient(object):
         self.server = server
 
         # The complete base URL of the API.
-        self.baseUrl = urlparse.urljoin(self.server, '/rest/v3/')
+        self.baseUrl = urljoin(self.server, '/rest/v3/')
 
         # The default connection to persist authentication and SSL settings.
         defaultSession = requests.Session()
@@ -81,7 +83,7 @@ class ApiClient(object):
         try:
             response = self.session.request(
                 method=method,
-                url=urlparse.urljoin(self.baseUrl, url),
+                url=urljoin(self.baseUrl, url),
                 data=data,
                 headers=headers,
                 params=params
@@ -93,7 +95,7 @@ class ApiClient(object):
                     'code': 'COMMUNICATION_ERROR',
                     'message': 'Connection to {} failed: {}'.format(
                         self.server,
-                        e.message
+                        e.args[0]
                     )
                 }]
             })
@@ -101,7 +103,9 @@ class ApiClient(object):
         if response.status_code is 204:
             return {}
 
-        content = response.content.decode('utf-8')
+        content = response.content
+        if hasattr(content, 'decode'):  # Python 2
+            content = content.decode('utf-8')
 
         try:
             json_body = json.loads(content)
@@ -110,7 +114,7 @@ class ApiClient(object):
             raise HyperwalletAPIException({
                 'errors': [{
                     'code': 'GARBAGE_RESPONSE',
-                    'message': 'Invalid response: {}'.format(e.message)
+                    'message': 'Invalid response: {}'.format(e.args[0])
                 }]
             })
 

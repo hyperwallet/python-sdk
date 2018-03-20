@@ -2,9 +2,9 @@
 
 import os
 
-from config import SERVER
-from exceptions import HyperwalletException
-from utils import ApiClient
+from .config import SERVER
+from .exceptions import HyperwalletException
+from .utils import ApiClient
 
 from hyperwallet import (
     User,

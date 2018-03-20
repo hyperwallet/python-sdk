@@ -2,9 +2,6 @@
 
 import json
 import unittest
-import hyperwallet
-
-from hyperwallet.exceptions import HyperwalletException
 
 from hyperwallet import (
     HyperwalletModel,
@@ -374,7 +371,7 @@ class ModelTest(unittest.TestCase):
             transfer_method_configuration_data
         )
 
-        print transfer_method_configuration_data.get('countries')
+        print(transfer_method_configuration_data.get('countries'))
         self.assertEqual(
             test_transfer_method_configuration.__repr__(),
             'TransferMethodConfiguration({country}, {type})'.format(
