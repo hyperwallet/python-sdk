@@ -731,6 +731,44 @@ class Api(object):
 
         return PrepaidCard(response)
 
+    def updatePrepaidCard(self,
+                          userToken=None,
+                          prepaidCardToken=None,
+                          data=None):
+        '''
+        Update a Prepaid Card.
+
+        :param userToken:
+            A token identifying the User. **REQUIRED**
+        :param prepaidCardToken:
+            A token identifying the Prepaid Card. **REQUIRED**
+        :param data:
+            A dictionary containing Prepaid Card information. **REQUIRED**
+        :returns:
+            A Prepaid Card.
+        '''
+
+        if not userToken:
+            raise HyperwalletException('userToken is required')
+
+        if not prepaidCardToken:
+            raise HyperwalletException('prepaidCardToken is required')
+
+        if not data:
+            raise HyperwalletException('data is required')
+
+        response = self.apiClient.doPut(
+            os.path.join(
+                'users',
+                userToken,
+                'prepaid-cards',
+                prepaidCardToken
+            ),
+            data
+        )
+
+        return PrepaidCard(response)
+
     def getPrepaidCard(self,
                        userToken=None,
                        prepaidCardToken=None):
