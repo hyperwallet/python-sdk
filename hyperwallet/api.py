@@ -155,6 +155,65 @@ class Api(object):
 
         return [User(x) for x in response.get('data', [])]
 
+    def getUserStatusTransition(self,
+                                userToken=None,
+                                statusTransitionToken=None):
+        '''
+        Retrieve a User Status Transition.
+
+        :param userToken:
+            A token identifying the User. **REQUIRED**
+        :param statusTransitionToken:
+            A token identifying the User Status Transition. **REQUIRED**
+        :returns:
+            A User Status Transition.
+        '''
+
+        if not userToken:
+            raise HyperwalletException('userToken is required')
+
+        if not statusTransitionToken:
+            raise HyperwalletException('statusTransitionToken is required')
+
+        response = self.apiClient.doGet(
+            os.path.join(
+                'users',
+                userToken,
+                'status-transitions',
+                statusTransitionToken
+            )
+        )
+
+        return StatusTransition(response)
+
+    def listUserStatusTransitions(self,
+                                  userToken=None,
+                                  params=None):
+        '''
+        List User Status Transitions.
+
+        :param userToken:
+            A token identifying the User. **REQUIRED**
+        :param params:
+            A dictionary containing query parameters.
+        :returns:
+            An array of User Status Transitions.
+        '''
+
+        if not userToken:
+            raise HyperwalletException('userToken is required')
+
+        response = self.apiClient.doGet(
+            os.path.join(
+                'users',
+                userToken,
+                'status-transitions'
+            ),
+            params
+        )
+
+        return [StatusTransition(x) for x in response.get('data', [])]
+
     '''
 
     Bank Accounts
