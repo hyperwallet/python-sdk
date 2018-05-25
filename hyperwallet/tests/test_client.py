@@ -91,9 +91,13 @@ class ApiClientTest(unittest.TestCase):
             content=json.dumps(data)
         )
 
+        encoded = json.dumps(data)
+        if hasattr(encoded, 'decode'):  # Python 2
+            encoded = encoded.decode('utf-8')
+
         self.assertEqual(
             self.client._makeRequest(),
-            json.loads(json.dumps(data).decode('utf-8'))
+            json.loads(encoded)
         )
 
 

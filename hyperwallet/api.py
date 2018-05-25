@@ -2,9 +2,9 @@
 
 import os
 
-from config import SERVER
-from exceptions import HyperwalletException
-from utils import ApiClient
+from .config import SERVER
+from .exceptions import HyperwalletException
+from .utils import ApiClient
 
 from hyperwallet import (
     User,
@@ -154,37 +154,6 @@ class Api(object):
         response = self.apiClient.doGet('users', params)
 
         return [User(x) for x in response.get('data', [])]
-
-    def createUserStatusTransition(self,
-                                   userToken=None,
-                                   data=None):
-        '''
-        Create a User Status Transition.
-
-        :param userToken:
-            A token identifying the User. **REQUIRED**
-        :param data:
-            A dictionary containing User Status Transition information. **REQUIRED**
-        :returns:
-            A User Status Transition.
-        '''
-
-        if not userToken:
-            raise HyperwalletException('userToken is required')
-
-        if not data:
-            raise HyperwalletException('data is required')
-
-        response = self.apiClient.doPost(
-            os.path.join(
-                'users',
-                userToken,
-                'status-transitions'
-            ),
-            data
-        )
-
-        return StatusTransition(response)
 
     def getUserStatusTransition(self,
                                 userToken=None,
@@ -816,6 +785,44 @@ class Api(object):
 
         response = self.apiClient.doPost(
             os.path.join('users', userToken, 'prepaid-cards'),
+            data
+        )
+
+        return PrepaidCard(response)
+
+    def updatePrepaidCard(self,
+                          userToken=None,
+                          prepaidCardToken=None,
+                          data=None):
+        '''
+        Update a Prepaid Card.
+
+        :param userToken:
+            A token identifying the User. **REQUIRED**
+        :param prepaidCardToken:
+            A token identifying the Prepaid Card. **REQUIRED**
+        :param data:
+            A dictionary containing Prepaid Card information. **REQUIRED**
+        :returns:
+            A Prepaid Card.
+        '''
+
+        if not userToken:
+            raise HyperwalletException('userToken is required')
+
+        if not prepaidCardToken:
+            raise HyperwalletException('prepaidCardToken is required')
+
+        if not data:
+            raise HyperwalletException('data is required')
+
+        response = self.apiClient.doPut(
+            os.path.join(
+                'users',
+                userToken,
+                'prepaid-cards',
+                prepaidCardToken
+            ),
             data
         )
 
@@ -1559,6 +1566,37 @@ class Api(object):
         )
 
         return [StatusTransition(x) for x in response.get('data', [])]
+
+    def createPaymentStatusTransition(self,
+                                      paymentToken=None,
+                                      data=None):
+        '''
+        Create Payment Status Transition.
+
+        :param paymentToken:
+            A token identifying the Payment. **REQUIRED**
+        :param data:
+            A dictionary containing User Status Transition information. **REQUIRED**
+        :returns:
+            A Payment Status Transition.
+        '''
+
+        if not paymentToken:
+            raise HyperwalletException('paymentToken is required')
+
+        if not data:
+            raise HyperwalletException('data is required')
+
+        response = self.apiClient.doPost(
+            os.path.join(
+                'payments',
+                paymentToken,
+                'status-transitions'
+            ),
+            data
+        )
+
+        return StatusTransition(response)
 
     '''
 
