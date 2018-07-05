@@ -1,7 +1,12 @@
 Changelog
 =========
 
-1.1.2 (current)
+1.1.3 (current)
+------------------
+
+- Added transfer endpoint
+
+1.1.2 (2018-03-20)
 ------------------
 
 - Added bank card endpoint

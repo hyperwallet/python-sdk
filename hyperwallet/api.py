@@ -13,6 +13,7 @@ from hyperwallet import (
     BankCard,
     PrepaidCard,
     PaperCheck,
+    Transfer,
     Payment,
     Balance,
     Receipt,
@@ -1447,6 +1448,115 @@ class Api(object):
             paperCheckToken,
             data
         )
+
+    '''
+
+    Transfers
+    https://portal.hyperwallet.com/docs/api/v3/resources/transfers
+
+    '''
+
+    def createTransfer(self,
+                         data=None):
+        '''
+        Create a Transfer.
+
+        :param data:
+            A dictionary containing Transfer information. **REQUIRED**
+        :returns:
+            A Transfer.
+        '''
+
+        if not data:
+            raise HyperwalletException('data is required')
+
+        if not('sourceToken' in data) or not(data['sourceToken']):
+            raise HyperwalletException('sourceToken is required')
+
+        if not('destinationToken' in data) or not(data['destinationToken']):
+            raise HyperwalletException('destinationToken is required')
+
+        if not('clientTransferId' in data) or not(data['clientTransferId']):
+            raise HyperwalletException('clientTransferId is required')
+
+        response = self.apiClient.doPost(
+            os.path.join('transfers'),
+            data
+        )
+
+        return Transfer(response)
+
+    def getTransfer(self,
+                      transferToken=None):
+        '''
+        Retrieve a Transfer.
+
+        :param transferToken:
+            A token identifying the Transfer. **REQUIRED**
+        :returns:
+            A Transfer.
+        '''
+
+        if not transferToken:
+            raise HyperwalletException('transferToken is required')
+
+        response = self.apiClient.doGet(
+            os.path.join(
+                'transfers',
+                transferToken
+            )
+        )
+
+        return Transfer(response)
+
+    def listTransfers(self,
+                        params=None):
+        '''
+        List Transfers.
+
+        :param params:
+            A dictionary containing query parameters.
+        :returns:
+            An array of Transfers.
+        '''
+
+        response = self.apiClient.doGet(
+            os.path.join('transfers'),
+            params
+        )
+
+        return [Transfer(x) for x in response.get('data', [])]
+
+    def createTransferStatusTransition(self,
+                                         transferToken=None,
+                                         data=None):
+        '''
+        Create a Transfer Status Transition.
+
+        :param transferToken:
+            A token identifying the Transfer. **REQUIRED**
+        :param data:
+            A dictionary containing Transfer Status Transition information. **REQUIRED**
+        :returns:
+            A Transfer Status Transition.
+        '''
+
+        if not transferToken:
+            raise HyperwalletException('transferToken is required')
+
+        if not data:
+            raise HyperwalletException('data is required')
+
+        response = self.apiClient.doPost(
+            os.path.join(
+                'transfers',
+                transferToken,
+                'status-transitions'
+            ),
+            data
+        )
+
+        return StatusTransition(response)
 
     '''
 

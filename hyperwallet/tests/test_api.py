@@ -1163,6 +1163,105 @@ class ApiTest(unittest.TestCase):
 
     '''
 
+    Transfers
+
+    '''
+
+    def test_create_transfer_fail_need_data(self):
+
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.createTransfer()
+
+        self.assertEqual(exc.exception.message, 'data is required')
+
+    def test_create_transfer_fail_need_source_token(self):
+
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.createTransfer(self.data)
+
+        self.assertEqual(exc.exception.message, 'sourceToken is required')
+
+    def test_create_transfer_fail_need_destination_token(self):
+
+        transfer_data = {
+            'sourceToken' : 'test-source-token'
+        }
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.createTransfer(transfer_data)
+
+        self.assertEqual(exc.exception.message, 'destinationToken is required')
+
+    def test_create_transfer_fail_need_client_transfer_id(self):
+
+        transfer_data = {
+            'sourceToken' : 'test-source-token',
+            'destinationToken' : 'test-destination-token'
+        }
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.createTransfer(transfer_data)
+
+        self.assertEqual(exc.exception.message, 'clientTransferId is required')
+
+    @mock.patch('hyperwallet.utils.ApiClient._makeRequest')
+    def test_create_transfer_success(self, mock_post):
+
+        transfer_data = {
+            'sourceToken' : 'test-source-token',
+            'destinationToken' : 'test-destination-token',
+            'clientTransferId' : 'test-clientTransferId'
+        }
+        mock_post.return_value = transfer_data
+        response = self.api.createTransfer(transfer_data)
+
+        self.assertTrue(response.sourceToken, transfer_data.get('sourceToken'))
+
+    def test_get_transfer_fail_need_transfer_token(self):
+
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.getTransfer()
+
+        self.assertEqual(exc.exception.message, 'transferToken is required')
+
+    @mock.patch('hyperwallet.utils.ApiClient._makeRequest')
+    def test_get_transfer_success(self, mock_get):
+
+        mock_get.return_value = self.data
+        response = self.api.getTransfer('token')
+
+        self.assertTrue(response.token, self.data.get('token'))
+
+    @mock.patch('hyperwallet.utils.ApiClient._makeRequest')
+    def test_list_transfers_success(self, mock_get):
+
+        mock_get.return_value = {'data': [self.data]}
+        response = self.api.listTransfers('token')
+
+        self.assertTrue(response[0].token, self.data.get('token'))
+
+    def test_create_transfer_status_transition_fail_need_transfer_token(self):
+
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.createTransferStatusTransition()
+
+        self.assertEqual(exc.exception.message, 'transferToken is required')
+
+    def test_create_transfer_status_transition_fail_need_data(self):
+
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.createTransferStatusTransition('token')
+
+        self.assertEqual(exc.exception.message, 'data is required')
+
+    @mock.patch('hyperwallet.utils.ApiClient._makeRequest')
+    def test_create_transfer_status_transition_success(self, mock_post):
+
+        mock_post.return_value = self.data
+        response = self.api.createTransferStatusTransition('token', self.data)
+
+        self.assertTrue(response.token, self.data.get('token'))
+
+    '''
+
     Payments
 
     '''

@@ -363,6 +363,50 @@ class PaperCheck(TransferMethod):
         )
 
 
+class Transfer(HyperwalletModel):
+    '''
+    The Transfer Model.
+
+    :param data:
+        A dictionary containing the attributes for the Transfer.
+    '''
+
+    def __init__(self, data):
+        '''
+        Create a new Transfer with the provided attributes.
+        '''
+
+        super(Transfer, self).__init__(data)
+
+        self.defaults = {
+            'token': None,
+            'status': None,
+            'createdOn': None,
+            'clientTransferId': None,
+            'sourceToken': None,
+            'sourceAmount': None,
+            'sourceFeeAmount': None,
+            'sourceCurrency': None,
+            'destinationToken': None,
+            'destinationAmount': None,
+            'destinationFeeAmount': None,
+            'destinationCurrency': None,
+            'foreignExchanges': None,
+            'notes': None,
+            'memo': None,
+            'expiresOn': None
+        }
+
+        for (param, default) in self.defaults.items():
+            setattr(self, param, data.get(param, default))
+
+    def __repr__(self):
+        return "Transfer({date}, {token})".format(
+            date=self.createdOn,
+            token=self.token
+        )
+
+
 class Payment(HyperwalletModel):
     '''
     The Payment Model.
