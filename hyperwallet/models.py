@@ -406,6 +406,33 @@ class Transfer(HyperwalletModel):
             token=self.token
         )
 
+class PayPalAccount(TransferMethod):
+    '''
+    The PayPalAccount Model.
+
+    :param data:
+        A dictionary containing the attributes for the PayPal Account.
+    '''
+
+    def __init__(self, data):
+        '''
+        Create a new PayPal Account with the provided attributes.
+        '''
+
+        super(PayPalAccount, self).__init__(data)
+
+        self.defaults = {
+            'email': None
+        }
+
+        for (param, default) in self.defaults.items():
+            setattr(self, param, data.get(param, default))
+
+    def __repr__(self):
+        return "PayPalAccount({date}, {token})".format(
+            date=self.createdOn,
+            token=self.token
+        )
 
 class Payment(HyperwalletModel):
     '''
