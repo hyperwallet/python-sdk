@@ -1,7 +1,12 @@
 Changelog
 =========
 
-1.1.3 (current)
+1.1.4 (current)
+------------------
+
+- Added PayPal account endpoint
+
+1.1.3 (2018-07-05)
 ------------------
 
 - Added transfer endpoint

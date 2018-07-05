@@ -14,6 +14,7 @@ from hyperwallet import (
     PrepaidCard,
     PaperCheck,
     Transfer,
+    PayPalAccount,
     Payment,
     Balance,
     Receipt,
@@ -1557,6 +1558,103 @@ class Api(object):
         )
 
         return StatusTransition(response)
+
+    '''
+
+    PayPal Accounts
+
+    '''
+
+    def createPayPalAccount(self,
+                         userToken=None,
+                         data=None):
+        '''
+        Create a PayPal Account.
+
+        :param userToken:
+            A token identifying the User. **REQUIRED**
+        :param data:
+            A dictionary containing PayPal Account information. **REQUIRED**
+        :returns:
+            A PayPal Account.
+        '''
+
+        if not userToken:
+            raise HyperwalletException('userToken is required')
+
+        if not data:
+            raise HyperwalletException('data is required')
+
+        if not('transferMethodCountry' in data) or not(data['transferMethodCountry']):
+            raise HyperwalletException('transferMethodCountry is required')
+
+        if not('transferMethodCurrency' in data) or not(data['transferMethodCurrency']):
+            raise HyperwalletException('transferMethodCurrency is required')
+
+        if not('email' in data) or not(data['email']):
+            raise HyperwalletException('email is required')
+
+        response = self.apiClient.doPost(
+            os.path.join('users', userToken, 'paypal-accounts'),
+            data
+        )
+
+        return PayPalAccount(response)
+
+    def getPayPalAccount(self,
+                      userToken=None,
+                      payPalAccountToken=None):
+        '''
+        Retrieve a PayPal Account.
+
+        :param userToken:
+            A token identifying the User. **REQUIRED**
+        :param payPalAccountToken:
+            A token identifying the PayPal Account. **REQUIRED**
+        :returns:
+            A PayPal Account.
+        '''
+
+        if not userToken:
+            raise HyperwalletException('userToken is required')
+
+        if not payPalAccountToken:
+            raise HyperwalletException('payPalAccountToken is required')
+
+        response = self.apiClient.doGet(
+            os.path.join(
+                'users',
+                userToken,
+                'paypal-accounts',
+                payPalAccountToken
+            )
+        )
+
+        return PayPalAccount(response)
+
+    def listPayPalAccounts(self,
+                        userToken=None,
+                        params=None):
+        '''
+        List PayPal Accounts.
+
+        :param userToken:
+            A token identifying the User. **REQUIRED**
+        :param params:
+            A dictionary containing query parameters.
+        :returns:
+            An array of PayPal Accounts.
+        '''
+
+        if not userToken:
+            raise HyperwalletException('userToken is required')
+
+        response = self.apiClient.doGet(
+            os.path.join('users', userToken, 'paypal-accounts'),
+            params
+        )
+
+        return [PayPalAccount(x) for x in response.get('data', [])]
 
     '''
 
