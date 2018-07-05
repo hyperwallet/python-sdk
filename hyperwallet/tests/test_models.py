@@ -12,6 +12,7 @@ from hyperwallet import (
     PrepaidCard,
     PaperCheck,
     Transfer,
+    PayPalAccount,
     Payment,
     Balance,
     Receipt,
@@ -235,6 +236,24 @@ class ModelTest(unittest.TestCase):
         self.assertEqual(
             test_transfer.__repr__(),
             'Transfer({date}, {token})'.format(
+                date=self.transfer_method_data.get('createdOn'),
+                token=self.transfer_method_data.get('token')
+            )
+        )
+
+    '''
+
+    PayPal Account
+
+    '''
+
+    def test_paypal_account_model(self):
+
+        test_paypal_account = PayPalAccount(self.transfer_method_data)
+
+        self.assertEqual(
+            test_paypal_account.__repr__(),
+            'PayPalAccount({date}, {token})'.format(
                 date=self.transfer_method_data.get('createdOn'),
                 token=self.transfer_method_data.get('token')
             )
