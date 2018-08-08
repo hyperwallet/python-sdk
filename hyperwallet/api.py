@@ -38,6 +38,8 @@ class Api(object):
         The token for the program this user is accessing. **REQUIRED**
     :param server:
         Your UAT or Production API URL if applicable.
+    :param encryptionData:
+        Dictionary with params for encrypted requests (keys: clientPrivateKeySetLocation, hyperwalletKeySetLocation, etc).
 
     .. note::
         **server** defaults to the Hyperwallet Sandbox URL if not provided.
@@ -48,7 +50,8 @@ class Api(object):
                  username=None,
                  password=None,
                  programToken=None,
-                 server=SERVER):
+                 server=SERVER,
+                 encryptionData=None):
         '''
         Create an instance of the API interface.
         This is the main interface the user will call to interact with the API.
@@ -68,7 +71,7 @@ class Api(object):
         self.programToken = programToken
         self.server = server
 
-        self.apiClient = ApiClient(self.username, self.password, self.server)
+        self.apiClient = ApiClient(self.username, self.password, self.server, encryptionData)
 
     '''
 

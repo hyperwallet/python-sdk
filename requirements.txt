@@ -1,2 +1,5 @@
 requests
 requests-toolbelt
+jwcrypto
+python-jose
+django
