@@ -34,7 +34,7 @@ setup(
     maintainer = extract_metaitem('author'),
     maintainer_email = extract_metaitem('email'),
     packages = find_packages(exclude = ('tests', 'doc')),
-    install_requires = ['requests', 'requests-toolbelt'],
+    install_requires = ['requests', 'requests-toolbelt', 'jwcrypto', 'python-jose', 'django<2'],
     test_suite = 'nose.collector',
     tests_require = [ 'mock', 'nose'],
     keywords='hyperwallet api',

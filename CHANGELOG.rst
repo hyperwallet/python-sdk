@@ -1,7 +1,12 @@
 Changelog
 =========
 
-1.1.4 (current)
+1.1.5 (2018-09-05)
+------------------
+
+- Added Layer 7 encryption for Hyperwallet client
+
+1.1.4 (2018-08-05)
 ------------------
 
 - Added PayPal account endpoint
@@ -11,7 +16,7 @@ Changelog
 
 - Added transfer endpoint
 
-1.1.2 (2018-03-20)
+1.1.2 (2018-08-03)
 ------------------
 
 - Added bank card endpoint
