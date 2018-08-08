@@ -1,7 +1,12 @@
 Changelog
 =========
 
-1.1.2 (current)
+1.1.3 (current)
+------------------
+
+- Added Layer 7 encryption for Hyperwallet client
+
+1.1.2 (2018-08-03)
 ------------------
 
 - Added bank card endpoint
