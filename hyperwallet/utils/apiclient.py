@@ -94,7 +94,7 @@ class ApiClient(object):
             response = self.session.request(
                 method=method,
                 url=urljoin(self.baseUrl, url),
-                data=(data if data is None else self.encryption.encrypt(data)) if self.encrypted else data,
+                data=self.__getRequestData(data),
                 headers=headers,
                 params=params
             )
@@ -192,3 +192,15 @@ class ApiClient(object):
             url=partialUrl,
             data=json.dumps(data).encode('utf-8')
         )
+
+    def __getRequestData(data):
+        '''
+        If encryption is enabled try to encrypt request data, otherwise no action required.
+
+        :param data:
+            Not encrypted request data. **REQUIRED**
+        :returns:
+            Request data, encrypted if necessary.
+        '''
+
+        return (data if data is None else self.encryption.encrypt(data)) if self.encrypted else data

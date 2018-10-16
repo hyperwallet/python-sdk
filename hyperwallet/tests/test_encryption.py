@@ -157,7 +157,6 @@ class EncryptionTest(unittest.TestCase):
 
         self.assertEqual(exc.exception.message, 'JWS signature has expired, checked by [exp] JWS header')
 
-
     def __getJwkKeySet(self, location):
 
         try:
@@ -183,6 +182,7 @@ class EncryptionTest(unittest.TestCase):
                 return key
 
         raise HyperwalletException('JWK set doesn\'t contain key with algorithm = ' + algorithm)
+
 
 if __name__ == '__main__':
     unittest.main()
