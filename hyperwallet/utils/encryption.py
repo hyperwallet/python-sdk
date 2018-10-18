@@ -12,10 +12,7 @@ from jwcrypto.common import base64url_decode, base64url_encode
 from jose import jws
 
 from hyperwallet.exceptions import HyperwalletException
-try:
-    from urlparse import urlparse
-except:
-    from urllib.parse import urlparse
+from six.moves.urllib.parse import urlparse
 
 
 class Encryption(object):
@@ -121,17 +118,17 @@ class Encryption(object):
         :returns:
             JWK key set found at given location.
         '''
-    try:
-        url = urlparse(location)
-        if url.scheme and url.netloc and url.path:
-            return requests.get(location).text
-        raise HyperwalletException('Failed to parse url from string = ' + location)
-    except:
-        if os.path.isfile(location):
-            with open(location) as f:
-                return f.read()
-        else:
-            raise HyperwalletException('Wrong JWK key set location path = ' + location)
+        try:
+            url = urlparse(location)
+            if url.scheme and url.netloc and url.path:
+                return requests.get(location).text
+            raise HyperwalletException('Failed to parse url from string = ' + location)
+        except Exception as e:
+            if os.path.isfile(location):
+                with open(location) as f:
+                    return f.read()
+            else:
+                raise HyperwalletException('Wrong JWK key set location path = ' + location)
 
     def __findJwkKeyByAlgorithm(self, jwkKeySet, algorithm):
         '''
