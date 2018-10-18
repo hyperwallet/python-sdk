@@ -1184,7 +1184,7 @@ class ApiTest(unittest.TestCase):
     def test_create_transfer_fail_need_destination_token(self):
 
         transfer_data = {
-            'sourceToken' : 'test-source-token'
+            'sourceToken': 'test-source-token'
         }
         with self.assertRaises(HyperwalletException) as exc:
             self.api.createTransfer(transfer_data)
@@ -1194,8 +1194,8 @@ class ApiTest(unittest.TestCase):
     def test_create_transfer_fail_need_client_transfer_id(self):
 
         transfer_data = {
-            'sourceToken' : 'test-source-token',
-            'destinationToken' : 'test-destination-token'
+            'sourceToken': 'test-source-token',
+            'destinationToken': 'test-destination-token'
         }
         with self.assertRaises(HyperwalletException) as exc:
             self.api.createTransfer(transfer_data)
@@ -1206,9 +1206,9 @@ class ApiTest(unittest.TestCase):
     def test_create_transfer_success(self, mock_post):
 
         transfer_data = {
-            'sourceToken' : 'test-source-token',
-            'destinationToken' : 'test-destination-token',
-            'clientTransferId' : 'test-clientTransferId'
+            'sourceToken': 'test-source-token',
+            'destinationToken': 'test-destination-token',
+            'clientTransferId': 'test-clientTransferId'
         }
         mock_post.return_value = transfer_data
         response = self.api.createTransfer(transfer_data)
