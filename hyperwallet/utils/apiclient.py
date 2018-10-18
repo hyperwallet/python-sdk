@@ -193,7 +193,7 @@ class ApiClient(object):
             data=json.dumps(data).encode('utf-8')
         )
 
-    def __getRequestData(data):
+    def __getRequestData(self, data):
         '''
         If encryption is enabled try to encrypt request data, otherwise no action required.
 
