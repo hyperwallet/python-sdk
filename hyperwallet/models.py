@@ -406,6 +406,7 @@ class Transfer(HyperwalletModel):
             token=self.token
         )
 
+
 class PayPalAccount(TransferMethod):
     '''
     The PayPalAccount Model.
@@ -433,6 +434,7 @@ class PayPalAccount(TransferMethod):
             date=self.createdOn,
             token=self.token
         )
+
 
 class Payment(HyperwalletModel):
     '''

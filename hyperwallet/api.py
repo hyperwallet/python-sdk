@@ -1461,7 +1461,6 @@ class Api(object):
                        data=None):
         '''
         Create a Transfer.
-
         :param data:
             A dictionary containing Transfer information. **REQUIRED**
         :returns:
@@ -1488,10 +1487,9 @@ class Api(object):
         return Transfer(response)
 
     def getTransfer(self,
-                      transferToken=None):
+                    transferToken=None):
         '''
         Retrieve a Transfer.
-
         :param transferToken:
             A token identifying the Transfer. **REQUIRED**
         :returns:
@@ -1511,10 +1509,9 @@ class Api(object):
         return Transfer(response)
 
     def listTransfers(self,
-                        params=None):
+                      params=None):
         '''
         List Transfers.
-
         :param params:
             A dictionary containing query parameters.
         :returns:
@@ -1529,11 +1526,10 @@ class Api(object):
         return [Transfer(x) for x in response.get('data', [])]
 
     def createTransferStatusTransition(self,
-                                         transferToken=None,
-                                         data=None):
+                                       transferToken=None,
+                                       data=None):
         '''
         Create a Transfer Status Transition.
-
         :param transferToken:
             A token identifying the Transfer. **REQUIRED**
         :param data:
@@ -1566,11 +1562,10 @@ class Api(object):
     '''
 
     def createPayPalAccount(self,
-                         userToken=None,
-                         data=None):
+                            userToken=None,
+                            data=None):
         '''
         Create a PayPal Account.
-
         :param userToken:
             A token identifying the User. **REQUIRED**
         :param data:
@@ -1602,11 +1597,10 @@ class Api(object):
         return PayPalAccount(response)
 
     def getPayPalAccount(self,
-                      userToken=None,
-                      payPalAccountToken=None):
+                         userToken=None,
+                         payPalAccountToken=None):
         '''
         Retrieve a PayPal Account.
-
         :param userToken:
             A token identifying the User. **REQUIRED**
         :param payPalAccountToken:
@@ -1633,11 +1627,10 @@ class Api(object):
         return PayPalAccount(response)
 
     def listPayPalAccounts(self,
-                        userToken=None,
-                        params=None):
+                           userToken=None,
+                           params=None):
         '''
         List PayPal Accounts.
-
         :param userToken:
             A token identifying the User. **REQUIRED**
         :param params:
