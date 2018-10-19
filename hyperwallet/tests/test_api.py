@@ -1163,6 +1163,209 @@ class ApiTest(unittest.TestCase):
 
     '''
 
+    Transfers
+
+    '''
+
+    def test_create_transfer_fail_need_data(self):
+
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.createTransfer()
+
+        self.assertEqual(exc.exception.message, 'data is required')
+
+    def test_create_transfer_fail_need_source_token(self):
+
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.createTransfer(self.data)
+
+        self.assertEqual(exc.exception.message, 'sourceToken is required')
+
+    def test_create_transfer_fail_need_destination_token(self):
+
+        transfer_data = {
+            'sourceToken': 'test-source-token'
+        }
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.createTransfer(transfer_data)
+
+        self.assertEqual(exc.exception.message, 'destinationToken is required')
+
+    def test_create_transfer_fail_need_client_transfer_id(self):
+
+        transfer_data = {
+            'sourceToken': 'test-source-token',
+            'destinationToken': 'test-destination-token'
+        }
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.createTransfer(transfer_data)
+
+        self.assertEqual(exc.exception.message, 'clientTransferId is required')
+
+    @mock.patch('hyperwallet.utils.ApiClient._makeRequest')
+    def test_create_transfer_success(self, mock_post):
+
+        transfer_data = {
+            'sourceToken': 'test-source-token',
+            'destinationToken': 'test-destination-token',
+            'clientTransferId': 'test-clientTransferId'
+        }
+        mock_post.return_value = transfer_data
+        response = self.api.createTransfer(transfer_data)
+
+        self.assertTrue(response.sourceToken, transfer_data.get('sourceToken'))
+
+    def test_get_transfer_fail_need_transfer_token(self):
+
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.getTransfer()
+
+        self.assertEqual(exc.exception.message, 'transferToken is required')
+
+    @mock.patch('hyperwallet.utils.ApiClient._makeRequest')
+    def test_get_transfer_success(self, mock_get):
+
+        mock_get.return_value = self.data
+        response = self.api.getTransfer('token')
+
+        self.assertTrue(response.token, self.data.get('token'))
+
+    @mock.patch('hyperwallet.utils.ApiClient._makeRequest')
+    def test_list_transfers_success(self, mock_get):
+
+        mock_get.return_value = {'data': [self.data]}
+        response = self.api.listTransfers('token')
+
+        self.assertTrue(response[0].token, self.data.get('token'))
+
+    def test_create_transfer_status_transition_fail_need_transfer_token(self):
+
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.createTransferStatusTransition()
+
+        self.assertEqual(exc.exception.message, 'transferToken is required')
+
+    def test_create_transfer_status_transition_fail_need_data(self):
+
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.createTransferStatusTransition('token')
+
+        self.assertEqual(exc.exception.message, 'data is required')
+
+    @mock.patch('hyperwallet.utils.ApiClient._makeRequest')
+    def test_create_transfer_status_transition_success(self, mock_post):
+
+        mock_post.return_value = self.data
+        response = self.api.createTransferStatusTransition('token', self.data)
+
+        self.assertTrue(response.token, self.data.get('token'))
+
+    '''
+
+    PayPal Accounts
+
+    '''
+
+    def test_create_paypal_account_fail_need_user_token(self):
+
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.createPayPalAccount()
+
+        self.assertEqual(exc.exception.message, 'userToken is required')
+
+    def test_create_paypal_account_fail_need_data(self):
+
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.createPayPalAccount('token')
+
+        self.assertEqual(exc.exception.message, 'data is required')
+
+    def test_create_paypal_account_fail_need_transfer_method_country(self):
+
+        paypal_account_data = {
+            'token': 'test-token'
+        }
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.createPayPalAccount('token', paypal_account_data)
+
+        self.assertEqual(exc.exception.message, 'transferMethodCountry is required')
+
+    def test_create_paypal_account_fail_need_transfer_method_currency(self):
+
+        paypal_account_data = {
+            'transferMethodCountry': 'test-transfer-method-country'
+        }
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.createPayPalAccount('token', paypal_account_data)
+
+        self.assertEqual(exc.exception.message, 'transferMethodCurrency is required')
+
+    def test_create_paypal_account_fail_need_email(self):
+
+        paypal_account_data = {
+            'transferMethodCountry': 'test-transfer-method-country',
+            'transferMethodCurrency': 'test-transfer-method-currency'
+        }
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.createPayPalAccount('token', paypal_account_data)
+
+        self.assertEqual(exc.exception.message, 'email is required')
+
+    @mock.patch('hyperwallet.utils.ApiClient._makeRequest')
+    def test_create_paypal_account_success(self, mock_post):
+
+        paypal_account_data = {
+            'transferMethodCountry': 'test-transfer-method-country',
+            'transferMethodCurrency': 'test-transfer-method-currency',
+            'email': 'test-email'
+        }
+        mock_post.return_value = paypal_account_data
+        response = self.api.createPayPalAccount('token', paypal_account_data)
+
+        self.assertTrue(response.email, paypal_account_data.get('token'))
+
+    def test_get_paypal_account_fail_need_user_token(self):
+
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.getPayPalAccount()
+
+        self.assertEqual(exc.exception.message, 'userToken is required')
+
+    def test_get_paypal_account_fail_need_paypal_account_token(self):
+
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.getPayPalAccount('token')
+
+        self.assertEqual(exc.exception.message, 'payPalAccountToken is required')
+
+    @mock.patch('hyperwallet.utils.ApiClient._makeRequest')
+    def test_get_paypal_account_success(self, mock_get):
+
+        paypal_account_data = {
+            'email': 'test-email'
+        }
+        mock_get.return_value = paypal_account_data
+        response = self.api.getPayPalAccount('token', 'token')
+
+        self.assertTrue(response.email, paypal_account_data.get('email'))
+
+    def test_list_paypal_accounts_fail_need_user_token(self):
+
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.listPayPalAccounts()
+
+        self.assertEqual(exc.exception.message, 'userToken is required')
+
+    @mock.patch('hyperwallet.utils.ApiClient._makeRequest')
+    def test_list_paypal_accounts_success(self, mock_get):
+
+        mock_get.return_value = {'data': [self.data]}
+        response = self.api.listPayPalAccounts('token')
+
+        self.assertTrue(response[0].token, self.data.get('token'))
+
+    '''
+
     Payments
 
     '''
