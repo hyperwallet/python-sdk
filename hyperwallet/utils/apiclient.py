@@ -54,7 +54,7 @@ class ApiClient(object):
 
         # The default connection to persist authentication and SSL settings.
         defaultSession = requests.Session()
-        defaultSession.mount(self.server, SSLAdapter(ssl.PROTOCOL_TLSv1_2))
+        defaultSession.mount(self.server, SSLAdapter())
         defaultSession.auth = (self.username, self.password)
         defaultSession.headers = self.baseHeaders
 
