@@ -1366,6 +1366,30 @@ class ApiTest(unittest.TestCase):
 
     '''
 
+    ClientToken
+
+    '''
+
+    def test_get_client_token_fail_need_user_token(self):
+
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.getClientToken()
+
+        self.assertEqual(exc.exception.message, 'userToken is required')
+
+    @mock.patch('hyperwallet.utils.ApiClient._makeRequest')
+    def test_get_client_token_success(self, mock_post):
+
+        client_token_data = {
+            'value': 'test-value'
+        }
+        mock_post.return_value = client_token_data
+        response = self.api.getClientToken('user-token')
+
+        self.assertTrue(response.value, client_token_data.get('value'))
+
+    '''
+
     Payments
 
     '''

@@ -9,8 +9,7 @@ from jwcrypto import jwk, jws as cryptoJWS
 from jwcrypto.common import json_encode
 from hyperwallet.exceptions import HyperwalletException
 from hyperwallet.utils.encryption import Encryption
-from django.core.validators import URLValidator
-from django.core.exceptions import ValidationError
+from six.moves.urllib.parse import urlparse
 
 
 class EncryptionTest(unittest.TestCase):
@@ -158,19 +157,37 @@ class EncryptionTest(unittest.TestCase):
         self.assertEqual(exc.exception.message, 'JWS signature has expired, checked by [exp] JWS header')
 
     def __getJwkKeySet(self, location):
+        '''
+        Retrieves JWK key data from given location.
 
+        :param location:
+            Location(can be a URL or path to file) of JWK key data. **REQUIRED**
+        :returns:
+            JWK key set found at given location.
+        '''
         try:
-            URLValidator()(location)
-        except ValidationError:
+            url = urlparse(location)
+            if url.scheme and url.netloc and url.path:
+                return requests.get(location).text
+            raise HyperwalletException('Failed to parse url from string = ' + location)
+        except Exception as e:
             if os.path.isfile(location):
                 with open(location) as f:
                     return f.read()
             else:
                 raise HyperwalletException('Wrong JWK key set location path = ' + location)
 
-        return requests.get(location).text
-
     def __findJwkKeyByAlgorithm(self, jwkKeySet, algorithm):
+        '''
+        Finds JWK key by given algorithm.
+
+        :param jwkKeySet:
+            JSON representation of JWK key set. **REQUIRED**
+        :param algorithm:
+            Algorithm of the JWK key to be found in key set. **REQUIRED**
+        :returns:
+            JWK key with given algorithm.
+        '''
 
         try:
             keySet = json.loads(jwkKeySet)
