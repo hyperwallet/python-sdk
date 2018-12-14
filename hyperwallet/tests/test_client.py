@@ -62,7 +62,9 @@ class ApiClientTest(unittest.TestCase):
         data = {
             "errors": [{
                 "message": "Houston, we have a problem",
-                "code": "FORBIDDEN"
+                "code": "FORBIDDEN",
+                "relatedResources": ["trm-f3d38df1-adb7-4127-9858-e72ebe682a79",
+                    "trm-601b1401-4464-4f3f-97b3-09079ee7723b"]
             }]
         }
 
@@ -77,6 +79,16 @@ class ApiClientTest(unittest.TestCase):
         self.assertEqual(
             exc.exception.message.get('errors')[0].get('code'),
             'FORBIDDEN'
+        )
+
+        self.assertEqual(
+            exc.exception.message.get('errors')[0].get('relatedResources')[0],
+            'trm-f3d38df1-adb7-4127-9858-e72ebe682a79'
+        )
+
+        self.assertEqual(
+            exc.exception.message.get('errors')[0].get('relatedResources')[1],
+            'trm-601b1401-4464-4f3f-97b3-09079ee7723b'
         )
 
     @mock.patch('requests.Session.request')
