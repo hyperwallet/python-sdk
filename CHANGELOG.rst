@@ -1,7 +1,12 @@
 Changelog
 =========
 
-1.1.4 (current)
+1.1.5 (current)
+------------------
+
+- Added Client Token endpoint
+
+1.1.4 (2018-12-04)
 ------------------
 
 - Added PayPal account endpoint

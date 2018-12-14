@@ -12,6 +12,7 @@ from hyperwallet import (
     PrepaidCard,
     PaperCheck,
     Transfer,
+    ClientToken,
     PayPalAccount,
     Payment,
     Balance,
@@ -71,6 +72,10 @@ class ModelTest(unittest.TestCase):
         self.user_data = {
             'token': 'usr-12345',
             'createdOn': '2017-01-01'
+        }
+
+        self.client_token_data = {
+            'value': 'test-client-token'
         }
 
         self.transfer_method_data = {
@@ -238,6 +243,23 @@ class ModelTest(unittest.TestCase):
             'Transfer({date}, {token})'.format(
                 date=self.transfer_method_data.get('createdOn'),
                 token=self.transfer_method_data.get('token')
+            )
+        )
+
+    '''
+
+    ClientToken
+
+    '''
+
+    def test_client_token_model(self):
+
+        test_client_token = ClientToken(self.client_token_data)
+
+        self.assertEqual(
+            test_client_token.__repr__(),
+            'ClientToken({value})'.format(
+                value=self.client_token_data.get('value')
             )
         )
 
