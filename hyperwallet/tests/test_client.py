@@ -45,7 +45,10 @@ class ApiClientTest(unittest.TestCase):
 
         session_mock.return_value = mock.MagicMock(
             status_code=404,
-            content=data
+            content=data,
+            headers={
+                "Content-Type": "application/json"
+            }
         )
 
         with self.assertRaises(HyperwalletAPIException) as exc:
@@ -70,7 +73,10 @@ class ApiClientTest(unittest.TestCase):
 
         session_mock.return_value = mock.MagicMock(
             status_code=400,
-            content=json.dumps(data)
+            content=json.dumps(data),
+            headers={
+                "Content-Type": "application/json"
+            }
         )
 
         with self.assertRaises(HyperwalletAPIException) as exc:
@@ -100,7 +106,10 @@ class ApiClientTest(unittest.TestCase):
 
         session_mock.return_value = mock.MagicMock(
             status_code=200,
-            content=json.dumps(data)
+            content=json.dumps(data),
+            headers={
+                "Content-Type": "application/json"
+            }
         )
 
         encoded = json.dumps(data)
@@ -110,6 +119,29 @@ class ApiClientTest(unittest.TestCase):
         self.assertEqual(
             self.client._makeRequest(),
             json.loads(encoded)
+        )
+
+    @mock.patch('requests.Session.request')
+    def test_receive_json_error_response_when_content_type_is_not_valid(self, session_mock):
+
+        data = {
+            'key': 'value'
+        }
+
+        session_mock.return_value = mock.MagicMock(
+            status_code=200,
+            content=json.dumps(data),
+            headers={
+                "Content-Type": "wrongContentType"
+            }
+        )
+
+        with self.assertRaises(HyperwalletAPIException) as exc:
+            self.client._makeRequest()
+
+        self.assertEqual(
+            exc.exception.message,
+            'Invalid Content-Type specified in Response Header'
         )
 
 

@@ -41,7 +41,7 @@ class ApiClient(object):
         # Hyperwallet SDK.
         self.baseHeaders = {
             'User-Agent': 'Hyperwallet Python SDK v{}'.format(__version__),
-            'Accept': 'application/json',
+            'Accept': 'application/jose+json' if self.encrypted else 'application/json',
             'Content-Type': 'application/jose+json' if self.encrypted else 'application/json'
         }
 
@@ -112,6 +112,8 @@ class ApiClient(object):
 
         if response.status_code is 204:
             return {}
+
+        self.__checkResponseHeaderContentType(response)
 
         content = response.content
         if hasattr(content, 'decode'):  # Python 2
@@ -192,6 +194,20 @@ class ApiClient(object):
             url=partialUrl,
             data=json.dumps(data).encode('utf-8')
         )
+
+    def __checkResponseHeaderContentType(self, response):
+        '''
+        Check response header Content-Type.
+
+        :param response:
+            Response to be checked. **REQUIRED**
+        '''
+
+        if response is None:
+            return
+        contentType = response.headers['Content-Type']
+        if (not self.encrypted and contentType != 'application/json') or (self.encrypted and contentType != 'application/jose+json'):
+            raise HyperwalletAPIException('Invalid Content-Type specified in Response Header')
 
     def __getRequestData(self, data):
         '''
