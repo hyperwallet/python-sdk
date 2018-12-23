@@ -1,7 +1,11 @@
 Changelog
 =========
 
-1.1.5 (current)
+1.2.1 (current)
+------------------
+
+
+1.2.0 (2018-12-18)
 ------------------
 
 - Added Client Token endpoint
