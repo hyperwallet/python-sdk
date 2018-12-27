@@ -1,14 +1,12 @@
 Changelog
 =========
 
-1.2.1 (current)
+1.2.0 (2018-12-20)
 ------------------
 
-
-1.2.0 (2018-12-18)
-------------------
-
-- Added Client Token endpoint
+- Restricted “Accept” & “Content-Type” headers to support only “application/json” or “application/jose+json”
+- Related resources “relatedResources” in error representation is added
+- Get client token for new authentication format is added
 
 1.1.4 (2018-12-04)
 ------------------
