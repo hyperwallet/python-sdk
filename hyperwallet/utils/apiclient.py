@@ -203,8 +203,6 @@ class ApiClient(object):
             Response to be checked. **REQUIRED**
         '''
 
-        if response is None:
-            return
         contentType = response.headers['Content-Type']
         if (not self.encrypted and contentType != 'application/json') or (self.encrypted and contentType != 'application/jose+json'):
             raise HyperwalletAPIException('Invalid Content-Type specified in Response Header')

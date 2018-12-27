@@ -4,6 +4,7 @@ import unittest
 import time
 import json
 import os.path
+import mock
 
 from jwcrypto import jwk, jws as cryptoJWS
 from jwcrypto.common import json_encode
@@ -176,6 +177,42 @@ class EncryptionTest(unittest.TestCase):
                     return f.read()
             else:
                 raise HyperwalletException('Wrong JWK key set location path = ' + location)
+
+    def test_should_throw_exception_when_jwk_set_file_has_invalid_json_format(self):
+
+        localDir = os.path.abspath(os.path.dirname(__file__))
+        clientPath = os.path.join(localDir, 'resources', 'private-jwkset1-invalid')
+        hyperwalletPath = os.path.join(localDir, 'resources', 'public-jwkset1')
+        encryption = Encryption(clientPath, hyperwalletPath)
+
+        with self.assertRaises(HyperwalletException) as exc:
+            encryption.encrypt('testMessage')
+
+        self.assertEqual(exc.exception.message, 'Wrong JWK key set invalid jwkset')
+
+    @mock.patch('requests.Session.request')
+    def test_should_throw_exception_when_jwk_set_file_retrieved_from_url_is_invalid(self, session_mock):
+
+        data = {
+            'key': 'value'
+        }
+
+        session_mock.return_value = mock.MagicMock(
+            status_code=200,
+            content=data,
+            headers={
+                "Content-Type": "application/json"
+            }
+        )
+
+        localDir = os.path.abspath(os.path.dirname(__file__))
+        hyperwalletPath = os.path.join(localDir, 'resources', 'public-jwkset1')
+        encryption = Encryption('https://api.sandbox.hyperwallet.com/', hyperwalletPath)
+
+        with self.assertRaises(TypeError) as exc:
+            encryption.encrypt('testMessage')
+
+        self.assertEqual(exc.exception.message, 'expected string or buffer')
 
     def __findJwkKeyByAlgorithm(self, jwkKeySet, algorithm):
         '''

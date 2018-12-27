@@ -145,7 +145,7 @@ class Encryption(object):
         try:
             keySet = json.loads(jwkKeySet)
         except ValueError:
-            raise HyperwalletException('Wrong JWK key set' + jwkKeySet)
+            raise HyperwalletException('Wrong JWK key set ' + jwkKeySet)
 
         for key in keySet['keys']:
             if key['alg'] == algorithm:
