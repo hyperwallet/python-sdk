@@ -121,6 +121,54 @@ class ApiClientTest(unittest.TestCase):
         )
 
     @mock.patch('requests.Session.request')
+    def test_receive_valid_json_response_when_content_type_contains_charset(self, session_mock):
+
+        data = {
+            'key': 'value'
+        }
+
+        session_mock.return_value = mock.MagicMock(
+            status_code=200,
+            content=json.dumps(data),
+            headers={
+                "Content-Type": "application/json;charset=utf-8"
+            }
+        )
+
+        encoded = json.dumps(data)
+        if hasattr(encoded, 'decode'):  # Python 2
+            encoded = encoded.decode('utf-8')
+
+        self.assertEqual(
+            self.client._makeRequest(),
+            json.loads(encoded)
+        )
+
+    @mock.patch('requests.Session.request')
+    def test_receive_valid_json_response_when_content_type_starts_with_charset(self, session_mock):
+
+        data = {
+            'key': 'value'
+        }
+
+        session_mock.return_value = mock.MagicMock(
+            status_code=200,
+            content=json.dumps(data),
+            headers={
+                "Content-Type": "charset=utf-8;application/json"
+            }
+        )
+
+        encoded = json.dumps(data)
+        if hasattr(encoded, 'decode'):  # Python 2
+            encoded = encoded.decode('utf-8')
+
+        self.assertEqual(
+            self.client._makeRequest(),
+            json.loads(encoded)
+        )
+
+    @mock.patch('requests.Session.request')
     def test_receive_json_error_response_when_content_type_is_not_valid(self, session_mock):
 
         data = {
