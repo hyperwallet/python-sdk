@@ -9,6 +9,11 @@ Hyperwallet REST SDK (Beta)
 
 A library to manage users, transfer methods and payments through the Hyperwallet API
 
+Prerequisites
+-------------
+
+Hyperwallet's Python server SDK requires at minimum Python 2.7 and above.
+
 Installation
 ------------
 
