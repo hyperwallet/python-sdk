@@ -21,7 +21,7 @@ from .models import (
     PrepaidCard,                                                         # noqa
     PaperCheck,                                                          # noqa
     Transfer,                                                            # noqa
-    ClientToken,                                                         # noqa
+    AuthenticationToken,                                                 # noqa
     PayPalAccount,                                                       # noqa
     Payment,                                                             # noqa
     Balance,                                                             # noqa
