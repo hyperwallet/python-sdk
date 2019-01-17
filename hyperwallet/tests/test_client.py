@@ -3,10 +3,12 @@
 import mock
 import json
 import unittest
+import os.path
 
 from hyperwallet.utils import ApiClient
 from hyperwallet.config import SERVER
 from hyperwallet.exceptions import HyperwalletAPIException
+from hyperwallet.utils.encryption import Encryption
 
 
 class ApiClientTest(unittest.TestCase):
@@ -17,6 +19,17 @@ class ApiClientTest(unittest.TestCase):
             'test-user',
             'test-pass',
             SERVER
+        )
+
+        localDir = os.path.abspath(os.path.dirname(__file__))
+        clientPath = os.path.join(localDir, 'resources', 'private-jwkset1')
+        hyperwalletPath = os.path.join(localDir, 'resources', 'public-jwkset1')
+
+        self.clientWithEncryption = ApiClient(
+            'test-user',
+            'test-pass',
+            SERVER,
+            {'clientPrivateKeySetLocation': clientPath, 'hyperwalletKeySetLocation': hyperwalletPath}
         )
 
     def test_failed_connection(self):
@@ -108,6 +121,173 @@ class ApiClientTest(unittest.TestCase):
             content=json.dumps(data),
             headers={
                 "Content-Type": "application/json"
+            }
+        )
+
+        encoded = json.dumps(data)
+        if hasattr(encoded, 'decode'):  # Python 2
+            encoded = encoded.decode('utf-8')
+
+        self.assertEqual(
+            self.client._makeRequest(),
+            json.loads(encoded)
+        )
+
+    @mock.patch('requests.Session.request')
+    def test_request_with_encryption_successful(self, session_mock):
+
+        data = {
+            'key': 'value'
+        }
+
+        localDir = os.path.abspath(os.path.dirname(__file__))
+        clientPath = os.path.join(localDir, 'resources', 'private-jwkset1')
+        hyperwalletPath = os.path.join(localDir, 'resources', 'public-jwkset1')
+        encryption = Encryption(clientPath, hyperwalletPath)
+        encryptedMessage = encryption.encrypt(json.dumps(data))
+
+        session_mock.return_value = mock.MagicMock(
+            status_code=200,
+            content=encryptedMessage,
+            headers={
+                "Content-Type": "application/jose+json"
+            }
+        )
+
+        encoded = json.dumps(data)
+        if hasattr(encoded, 'decode'):  # Python 2
+            encoded = encoded.decode('utf-8')
+
+        self.assertEqual(
+            self.clientWithEncryption._makeRequest(),
+            json.loads(encoded)
+        )
+
+    @mock.patch('requests.Session.request')
+    def test_request_with_encryption_when_content_type_contains_charset(self, session_mock):
+
+        data = {
+            'key': 'value'
+        }
+
+        localDir = os.path.abspath(os.path.dirname(__file__))
+        clientPath = os.path.join(localDir, 'resources', 'private-jwkset1')
+        hyperwalletPath = os.path.join(localDir, 'resources', 'public-jwkset1')
+        encryption = Encryption(clientPath, hyperwalletPath)
+        encryptedMessage = encryption.encrypt(json.dumps(data))
+
+        session_mock.return_value = mock.MagicMock(
+            status_code=200,
+            content=encryptedMessage,
+            headers={
+                "Content-Type": "application/jose+json;charset=utf-8"
+            }
+        )
+
+        encoded = json.dumps(data)
+        if hasattr(encoded, 'decode'):  # Python 2
+            encoded = encoded.decode('utf-8')
+
+        self.assertEqual(
+            self.clientWithEncryption._makeRequest(),
+            json.loads(encoded)
+        )
+
+    @mock.patch('requests.Session.request')
+    def test_request_with_encryption_when_content_type_contains_charset_ahead(self, session_mock):
+
+        data = {
+            'key': 'value'
+        }
+
+        localDir = os.path.abspath(os.path.dirname(__file__))
+        clientPath = os.path.join(localDir, 'resources', 'private-jwkset1')
+        hyperwalletPath = os.path.join(localDir, 'resources', 'public-jwkset1')
+        encryption = Encryption(clientPath, hyperwalletPath)
+        encryptedMessage = encryption.encrypt(json.dumps(data))
+
+        session_mock.return_value = mock.MagicMock(
+            status_code=200,
+            content=encryptedMessage,
+            headers={
+                "Content-Type": "charset=utf-8;application/jose+json"
+            }
+        )
+
+        encoded = json.dumps(data)
+        if hasattr(encoded, 'decode'):  # Python 2
+            encoded = encoded.decode('utf-8')
+
+        self.assertEqual(
+            self.clientWithEncryption._makeRequest(),
+            json.loads(encoded)
+        )
+
+    @mock.patch('requests.Session.request')
+    def test_request_with_encryption_when_response_content_type_is_not_valid(self, session_mock):
+
+        data = {
+            'key': 'value'
+        }
+
+        localDir = os.path.abspath(os.path.dirname(__file__))
+        clientPath = os.path.join(localDir, 'resources', 'private-jwkset1')
+        hyperwalletPath = os.path.join(localDir, 'resources', 'public-jwkset1')
+        encryption = Encryption(clientPath, hyperwalletPath)
+        encryptedMessage = encryption.encrypt(json.dumps(data))
+
+        session_mock.return_value = mock.MagicMock(
+            status_code=200,
+            content=encryptedMessage,
+            headers={
+                "Content-Type": "wrongContentType"
+            }
+        )
+
+        with self.assertRaises(HyperwalletAPIException) as exc:
+            self.clientWithEncryption._makeRequest()
+
+        self.assertEqual(
+            exc.exception.message,
+            'Invalid Content-Type specified in Response Header'
+        )
+
+    @mock.patch('requests.Session.request')
+    def test_receive_valid_json_response_when_content_type_contains_charset(self, session_mock):
+
+        data = {
+            'key': 'value'
+        }
+
+        session_mock.return_value = mock.MagicMock(
+            status_code=200,
+            content=json.dumps(data),
+            headers={
+                "Content-Type": "application/json;charset=utf-8"
+            }
+        )
+
+        encoded = json.dumps(data)
+        if hasattr(encoded, 'decode'):  # Python 2
+            encoded = encoded.decode('utf-8')
+
+        self.assertEqual(
+            self.client._makeRequest(),
+            json.loads(encoded)
+        )
+
+    @mock.patch('requests.Session.request')
+    def test_receive_valid_json_response_when_content_type_starts_with_charset(self, session_mock):
+
+        data = {
+            'key': 'value'
+        }
+
+        session_mock.return_value = mock.MagicMock(
+            status_code=200,
+            content=json.dumps(data),
+            headers={
+                "Content-Type": "charset=utf-8;application/json"
             }
         )
 
