@@ -125,20 +125,20 @@ class User(HyperwalletModel):
         )
 
 
-class ClientToken(HyperwalletModel):
+class AuthenticationToken(HyperwalletModel):
     '''
-    The ClientToken Model.
+    The AuthenticationToken Model.
 
     :param data:
-        A dictionary containing the attributes for the Client Token.
+        A dictionary containing the attributes for the Authentication Token.
     '''
 
     def __init__(self, data):
         '''
-        Create a new Client Token with the provided attributes.
+        Create a new Authentication Token with the provided attributes.
         '''
 
-        super(ClientToken, self).__init__(data)
+        super(AuthenticationToken, self).__init__(data)
 
         self.defaults = {
             'value': None,
@@ -148,7 +148,7 @@ class ClientToken(HyperwalletModel):
             setattr(self, param, data.get(param, default))
 
     def __repr__(self):
-        return "ClientToken({value})".format(
+        return "AuthenticationToken({value})".format(
             value=self.value
         )
 

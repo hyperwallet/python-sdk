@@ -14,7 +14,7 @@ from hyperwallet import (
     PrepaidCard,
     PaperCheck,
     Transfer,
-    ClientToken,
+    AuthenticationToken,
     PayPalAccount,
     Payment,
     Balance,
@@ -1655,29 +1655,29 @@ class Api(object):
 
     '''
 
-    ClientToken
+    AuthenticationToken
 
     '''
 
-    def getClientToken(self,
-                       userToken=None):
+    def getAuthenticationToken(self,
+                               userToken=None):
         '''
-        Get a ClientToken.
+        Get a AuthenticationToken.
         :param userToken:
              A user token. **REQUIRED**
         :returns:
-            A ClientToken.
+            An AuthenticationToken.
         '''
 
         if not userToken:
             raise HyperwalletException('userToken is required')
 
         response = self.apiClient.doPost(
-            os.path.join('users', userToken, 'client-token'),
+            os.path.join('users', userToken, 'authentication-token'),
             None
         )
 
-        return ClientToken(response)
+        return AuthenticationToken(response)
 
     '''
 
