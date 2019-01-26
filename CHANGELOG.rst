@@ -1,6 +1,11 @@
 Changelog
 =========
 
+1.3.0
+-------------------
+- Added field "VerificationStatus" to User
+- Client-token endpoint renamed to authentication-token
+
 1.2.1 (2019-01-17)
 ------------------
 
