@@ -253,6 +253,32 @@ class ApiClientTest(unittest.TestCase):
         )
 
     @mock.patch('requests.Session.request')
+    def test_request_with_encryption_when_status_code_204_and_content_type_is_not_set(self, session_mock):
+
+        data = {}
+
+        localDir = os.path.abspath(os.path.dirname(__file__))
+        clientPath = os.path.join(localDir, 'resources', 'private-jwkset1')
+        hyperwalletPath = os.path.join(localDir, 'resources', 'public-jwkset1')
+        encryption = Encryption(clientPath, hyperwalletPath)
+        encryptedMessage = encryption.encrypt(json.dumps(data))
+
+        session_mock.return_value = mock.MagicMock(
+            status_code=204,
+            content=encryptedMessage,
+            headers={}
+        )
+
+        encoded = json.dumps(data)
+        if hasattr(encoded, 'decode'):  # Python 2
+            encoded = encoded.decode('utf-8')
+
+        self.assertEqual(
+            self.clientWithEncryption._makeRequest(),
+            json.loads(encoded)
+        )
+
+    @mock.patch('requests.Session.request')
     def test_receive_valid_json_response_when_content_type_contains_charset(self, session_mock):
 
         data = {
@@ -289,6 +315,26 @@ class ApiClientTest(unittest.TestCase):
             headers={
                 "Content-Type": "charset=utf-8;application/json"
             }
+        )
+
+        encoded = json.dumps(data)
+        if hasattr(encoded, 'decode'):  # Python 2
+            encoded = encoded.decode('utf-8')
+
+        self.assertEqual(
+            self.client._makeRequest(),
+            json.loads(encoded)
+        )
+
+    @mock.patch('requests.Session.request')
+    def test_receive_no_content_response_when_status_code_204_and_content_type_is_not_set(self, session_mock):
+
+        data = {}
+
+        session_mock.return_value = mock.MagicMock(
+            status_code=204,
+            content=json.dumps(data),
+            headers={}
         )
 
         encoded = json.dumps(data)

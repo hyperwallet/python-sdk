@@ -204,7 +204,9 @@ class ApiClient(object):
         '''
 
         contentType = response.headers['Content-Type']
-        if (not self.encrypted and 'application/json' not in contentType) or (self.encrypted and 'application/jose+json' not in contentType):
+        expectedContentType = 'application/jose+json' if self.encrypted else 'application/json'
+        invalidContentType = response.status_code is not 204 and contentType is not None and expectedContentType not in contentType
+        if (invalidContentType):
             raise HyperwalletAPIException('Invalid Content-Type specified in Response Header')
 
     def __getRequestData(self, data):
