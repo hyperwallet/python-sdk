@@ -98,7 +98,7 @@ class Encryption(object):
         try:
             jweToken.deserialize(body, key=privateKeyToDecrypt)
         except Exception as e:
-            raise HyperwalletException(e.message)
+            raise HyperwalletException(str(e))
         payload = jweToken.payload
 
         self.checkJwsExpiration(payload)
@@ -107,7 +107,7 @@ class Encryption(object):
         try:
             return jws.verify(payload, json.dumps(jwkCheckSignKey), algorithms=self.signAlgorithm)
         except Exception as e:
-            raise HyperwalletException(e.message)
+            raise HyperwalletException(str(e))
 
     def __getJwkKeySet(self, location):
         '''
