@@ -24,7 +24,7 @@ class EncryptionTest(unittest.TestCase):
         testMessage = 'Message for test'
         encryptedMessage = encryption.encrypt(testMessage)
         decryptedMessage = encryption.decrypt(encryptedMessage)
-        self.assertEqual(decryptedMessage, testMessage)
+        self.assertEqual(decryptedMessage.decode(), testMessage)
 
     def test_should_fail_decryption_when_wrong_private_key_is_used(self):
 
@@ -41,7 +41,7 @@ class EncryptionTest(unittest.TestCase):
         with self.assertRaises(HyperwalletException) as exc:
             encryption2.decrypt(encryptedMessage)
 
-        self.assertEqual(exc.exception.message, 'No recipient matched the provided key["Failed: [ValueError(\'Decryption failed.\',)]"]')
+        self.assertTrue(str(exc.exception).startswith('No recipient matched the provided key["Failed: [ValueError(\'Decryption failed.\''))
 
     def test_should_fail_signature_verification_when_wrong_public_key_is_used(self):
 
@@ -58,7 +58,7 @@ class EncryptionTest(unittest.TestCase):
         with self.assertRaises(HyperwalletException) as exc:
             encryption2.decrypt(encryptedMessage)
 
-        self.assertEqual(exc.exception.message, 'Signature verification failed.')
+        self.assertEqual(str(exc.exception), 'Signature verification failed.')
 
     def test_should_throw_exception_when_wrong_jwk_key_set_location_is_given(self):
 
@@ -212,7 +212,9 @@ class EncryptionTest(unittest.TestCase):
         with self.assertRaises(TypeError) as exc:
             encryption.encrypt('testMessage')
 
-        self.assertEqual(exc.exception.message, 'expected string or buffer')
+        errorMessages = ['expected string or buffer', 'the JSON object must be str, bytes or bytearray, not MagicMock']
+
+        self.assertTrue(str(exc.exception) in errorMessages)
 
     def __findJwkKeyByAlgorithm(self, jwkKeySet, algorithm):
         '''
