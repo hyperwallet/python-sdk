@@ -230,7 +230,7 @@ class ApiTest(unittest.TestCase):
         with self.assertRaises(HyperwalletException) as exc:
             self.api.updateBankAccount('token')
 
-        self.assertEqual(exc.exception.message, 'bankAccountToken is required')
+        self.assertEqual(exc.exception.message, 'transfer method token is required')
 
     def test_update_bank_account_fail_need_data(self):
 
@@ -437,7 +437,7 @@ class ApiTest(unittest.TestCase):
         with self.assertRaises(HyperwalletException) as exc:
             self.api.updateBankCard('token')
 
-        self.assertEqual(exc.exception.message, 'bankCardToken is required')
+        self.assertEqual(exc.exception.message, 'transfer method token is required')
 
     def test_update_bank_card_fail_need_data(self):
 
@@ -622,7 +622,7 @@ class ApiTest(unittest.TestCase):
         with self.assertRaises(HyperwalletException) as exc:
             self.api.updatePrepaidCard('token')
 
-        self.assertEqual(exc.exception.message, 'prepaidCardToken is required')
+        self.assertEqual(exc.exception.message, 'transfer method token is required')
 
     def test_update_prepaid_card_fail_need_data(self):
 
@@ -1016,7 +1016,7 @@ class ApiTest(unittest.TestCase):
         with self.assertRaises(HyperwalletException) as exc:
             self.api.updatePaperCheck('token')
 
-        self.assertEqual(exc.exception.message, 'paperCheckToken is required')
+        self.assertEqual(exc.exception.message, 'transfer method token is required')
 
     def test_update_paper_check_fail_need_data(self):
 
@@ -1323,6 +1323,35 @@ class ApiTest(unittest.TestCase):
         response = self.api.createPayPalAccount('token', paypal_account_data)
 
         self.assertTrue(response.email, paypal_account_data.get('token'))
+
+    def test_update_paypal_account_fail_need_user_token(self):
+
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.updatePayPalAccount()
+
+        self.assertEqual(exc.exception.message, 'userToken is required')
+
+    def test_update_paypal_account_fail_need_check_token(self):
+
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.updatePayPalAccount('token')
+
+        self.assertEqual(exc.exception.message, 'transfer method token is required')
+
+    def test_update_paypal_account_fail_need_data(self):
+
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.updatePayPalAccount('token', 'token')
+
+        self.assertEqual(exc.exception.message, 'data is required')
+
+    @mock.patch('hyperwallet.utils.ApiClient._makeRequest')
+    def test_update_paypal_account_success(self, mock_put):
+
+        mock_put.return_value = self.data
+        response = self.api.updatePayPalAccount('token', 'token', self.data)
+
+        self.assertTrue(response.token, self.data.get('token'))
 
     def test_get_paypal_account_fail_need_user_token(self):
 
