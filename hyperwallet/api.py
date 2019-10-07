@@ -302,26 +302,8 @@ class Api(object):
             A Bank Account.
         '''
 
-        if not userToken:
-            raise HyperwalletException('userToken is required')
-
-        if not bankAccountToken:
-            raise HyperwalletException('bankAccountToken is required')
-
-        if not data:
-            raise HyperwalletException('data is required')
-
-        response = self.apiClient.doPut(
-            os.path.join(
-                'users',
-                userToken,
-                'bank-accounts',
-                bankAccountToken
-            ),
-            data
-        )
-
-        return BankAccount(response)
+        body = self.__updateTransferMethod(userToken, bankAccountToken, 'bank-accounts', data)
+        return BankAccount(body)
 
     def listBankAccounts(self,
                          userToken=None,
@@ -573,26 +555,8 @@ class Api(object):
             A Bank Card.
         '''
 
-        if not userToken:
-            raise HyperwalletException('userToken is required')
-
-        if not bankCardToken:
-            raise HyperwalletException('bankCardToken is required')
-
-        if not data:
-            raise HyperwalletException('data is required')
-
-        response = self.apiClient.doPut(
-            os.path.join(
-                'users',
-                userToken,
-                'bank-cards',
-                bankCardToken
-            ),
-            data
-        )
-
-        return BankCard(response)
+        body = self.__updateTransferMethod(userToken, bankCardToken, 'bank-cards', data)
+        return BankCard(body)
 
     def listBankCards(self,
                       userToken=None,
@@ -813,26 +777,8 @@ class Api(object):
             A Prepaid Card.
         '''
 
-        if not userToken:
-            raise HyperwalletException('userToken is required')
-
-        if not prepaidCardToken:
-            raise HyperwalletException('prepaidCardToken is required')
-
-        if not data:
-            raise HyperwalletException('data is required')
-
-        response = self.apiClient.doPut(
-            os.path.join(
-                'users',
-                userToken,
-                'prepaid-cards',
-                prepaidCardToken
-            ),
-            data
-        )
-
-        return PrepaidCard(response)
+        body = self.__updateTransferMethod(userToken, prepaidCardToken, 'prepaid-cards', data)
+        return PrepaidCard(body)
 
     def getPrepaidCard(self,
                        userToken=None,
@@ -1265,26 +1211,8 @@ class Api(object):
             A Paper Check.
         '''
 
-        if not userToken:
-            raise HyperwalletException('userToken is required')
-
-        if not paperCheckToken:
-            raise HyperwalletException('paperCheckToken is required')
-
-        if not data:
-            raise HyperwalletException('data is required')
-
-        response = self.apiClient.doPut(
-            os.path.join(
-                'users',
-                userToken,
-                'paper-checks',
-                paperCheckToken
-            ),
-            data
-        )
-
-        return PaperCheck(response)
+        body = self.__updateTransferMethod(userToken, paperCheckToken, 'paper-checks', data)
+        return PaperCheck(body)
 
     def listPaperChecks(self,
                         userToken=None,
@@ -1599,6 +1527,26 @@ class Api(object):
         )
 
         return PayPalAccount(response)
+
+    def updatePayPalAccount(self,
+                            userToken=None,
+                            payPalAccountToken=None,
+                            data=None):
+        '''
+        Update a PayPal Account.
+
+        :param userToken:
+            A token identifying the User. **REQUIRED**
+        :param payPalAccountToken:
+            A token identifying the PayPal Account. **REQUIRED**
+        :param data:
+            A dictionary containing PayPal Account information. **REQUIRED**
+        :returns:
+            A PayPal Account.
+        '''
+
+        body = self.__updateTransferMethod(userToken, payPalAccountToken, 'paypal-accounts', data)
+        return PayPalAccount(body)
 
     def getPayPalAccount(self,
                          userToken=None,
@@ -2251,6 +2199,45 @@ class Api(object):
                     configurations.append(configuration)
 
         return [TransferMethodConfiguration(x) for x in configurations]
+
+    def __updateTransferMethod(self,
+                               userToken=None,
+                               transferMethodToken=None,
+                               transferMethodName=None,
+                               data=None):
+        '''
+        Update a Transfer method.
+
+        :param userToken:
+            A token identifying the User. **REQUIRED**
+        :param transferMethodToken:
+            A token identifying the Transfer Method. **REQUIRED**
+        :param transferMethodName:
+            A Transfer Method name used in url. **REQUIRED**
+        :param data:
+            A dictionary containing Transfer Method information. **REQUIRED**
+        :returns:
+            An updated Transfer Method object.
+        '''
+
+        if not userToken:
+            raise HyperwalletException('userToken is required')
+
+        if not transferMethodToken:
+            raise HyperwalletException('transfer method token is required')
+
+        if not data:
+            raise HyperwalletException('data is required')
+
+        return self.apiClient.doPut(
+            os.path.join(
+                'users',
+                userToken,
+                transferMethodName,
+                transferMethodToken
+            ),
+            data
+        )
 
     '''
 
