@@ -1,7 +1,5 @@
 #!/usr/bin/env python
 
-import os
-
 from .config import SERVER
 from .exceptions import HyperwalletException
 from .utils import ApiClient
@@ -25,6 +23,10 @@ from hyperwallet import (
     TransferMethodConfiguration,
     Webhook
 )
+
+
+def build_url(*paths):
+    return '/'.join(s.strip('/') for s in paths)
 
 
 class Api(object):
@@ -114,7 +116,7 @@ class Api(object):
             raise HyperwalletException('userToken is required')
 
         response = self.apiClient.doGet(
-            os.path.join('users', userToken)
+            build_url('users', userToken)
         )
 
         return User(response)
@@ -140,7 +142,7 @@ class Api(object):
             raise HyperwalletException('data is required')
 
         response = self.apiClient.doPut(
-            os.path.join('users', userToken),
+            build_url('users', userToken),
             data
         )
 
@@ -182,7 +184,7 @@ class Api(object):
             raise HyperwalletException('statusTransitionToken is required')
 
         response = self.apiClient.doGet(
-            os.path.join(
+            build_url(
                 'users',
                 userToken,
                 'status-transitions',
@@ -210,7 +212,7 @@ class Api(object):
             raise HyperwalletException('userToken is required')
 
         response = self.apiClient.doGet(
-            os.path.join(
+            build_url(
                 'users',
                 userToken,
                 'status-transitions'
@@ -248,7 +250,7 @@ class Api(object):
             raise HyperwalletException('data is required')
 
         response = self.apiClient.doPost(
-            os.path.join('users', userToken, 'bank-accounts'),
+            build_url('users', userToken, 'bank-accounts'),
             data
         )
 
@@ -275,7 +277,7 @@ class Api(object):
             raise HyperwalletException('bankAccountToken is required')
 
         response = self.apiClient.doGet(
-            os.path.join(
+            build_url(
                 'users',
                 userToken,
                 'bank-accounts',
@@ -323,7 +325,7 @@ class Api(object):
             raise HyperwalletException('userToken is required')
 
         response = self.apiClient.doGet(
-            os.path.join('users', userToken, 'bank-accounts'),
+            build_url('users', userToken, 'bank-accounts'),
             params
         )
 
@@ -356,7 +358,7 @@ class Api(object):
             raise HyperwalletException('data is required')
 
         response = self.apiClient.doPost(
-            os.path.join(
+            build_url(
                 'users',
                 userToken,
                 'bank-accounts',
@@ -395,7 +397,7 @@ class Api(object):
             raise HyperwalletException('statusTransitionToken is required')
 
         response = self.apiClient.doGet(
-            os.path.join(
+            build_url(
                 'users',
                 userToken,
                 'bank-accounts',
@@ -431,7 +433,7 @@ class Api(object):
             raise HyperwalletException('bankAccountToken is required')
 
         response = self.apiClient.doGet(
-            os.path.join(
+            build_url(
                 'users',
                 userToken,
                 'bank-accounts',
@@ -501,7 +503,7 @@ class Api(object):
             raise HyperwalletException('data is required')
 
         response = self.apiClient.doPost(
-            os.path.join('users', userToken, 'bank-cards'),
+            build_url('users', userToken, 'bank-cards'),
             data
         )
 
@@ -528,7 +530,7 @@ class Api(object):
             raise HyperwalletException('bankCardToken is required')
 
         response = self.apiClient.doGet(
-            os.path.join(
+            build_url(
                 'users',
                 userToken,
                 'bank-cards',
@@ -576,7 +578,7 @@ class Api(object):
             raise HyperwalletException('userToken is required')
 
         response = self.apiClient.doGet(
-            os.path.join('users', userToken, 'bank-cards'),
+            build_url('users', userToken, 'bank-cards'),
             params
         )
 
@@ -609,7 +611,7 @@ class Api(object):
             raise HyperwalletException('data is required')
 
         response = self.apiClient.doPost(
-            os.path.join(
+            build_url(
                 'users',
                 userToken,
                 'bank-cards',
@@ -648,7 +650,7 @@ class Api(object):
             raise HyperwalletException('statusTransitionToken is required')
 
         response = self.apiClient.doGet(
-            os.path.join(
+            build_url(
                 'users',
                 userToken,
                 'bank-cards',
@@ -684,7 +686,7 @@ class Api(object):
             raise HyperwalletException('bankCardToken is required')
 
         response = self.apiClient.doGet(
-            os.path.join(
+            build_url(
                 'users',
                 userToken,
                 'bank-cards',
@@ -754,7 +756,7 @@ class Api(object):
             raise HyperwalletException('data is required')
 
         response = self.apiClient.doPost(
-            os.path.join('users', userToken, 'prepaid-cards'),
+            build_url('users', userToken, 'prepaid-cards'),
             data
         )
 
@@ -801,7 +803,7 @@ class Api(object):
             raise HyperwalletException('prepaidCardToken is required')
 
         response = self.apiClient.doGet(
-            os.path.join(
+            build_url(
                 'users',
                 userToken,
                 'prepaid-cards',
@@ -829,7 +831,7 @@ class Api(object):
             raise HyperwalletException('userToken is required')
 
         response = self.apiClient.doGet(
-            os.path.join('users', userToken, 'prepaid-cards'),
+            build_url('users', userToken, 'prepaid-cards'),
             params
         )
 
@@ -862,7 +864,7 @@ class Api(object):
             raise HyperwalletException('data is required')
 
         response = self.apiClient.doPost(
-            os.path.join(
+            build_url(
                 'users',
                 userToken,
                 'prepaid-cards',
@@ -901,7 +903,7 @@ class Api(object):
             raise HyperwalletException('statusTransitionToken is required')
 
         response = self.apiClient.doGet(
-            os.path.join(
+            build_url(
                 'users',
                 userToken,
                 'prepaid-cards',
@@ -937,7 +939,7 @@ class Api(object):
             raise HyperwalletException('prepaidCardToken is required')
 
         response = self.apiClient.doGet(
-            os.path.join(
+            build_url(
                 'users',
                 userToken,
                 'prepaid-cards',
@@ -1157,7 +1159,7 @@ class Api(object):
             raise HyperwalletException('data is required')
 
         response = self.apiClient.doPost(
-            os.path.join('users', userToken, 'paper-checks'),
+            build_url('users', userToken, 'paper-checks'),
             data
         )
 
@@ -1184,7 +1186,7 @@ class Api(object):
             raise HyperwalletException('paperCheckToken is required')
 
         response = self.apiClient.doGet(
-            os.path.join(
+            build_url(
                 'users',
                 userToken,
                 'paper-checks',
@@ -1232,7 +1234,7 @@ class Api(object):
             raise HyperwalletException('userToken is required')
 
         response = self.apiClient.doGet(
-            os.path.join('users', userToken, 'paper-checks'),
+            build_url('users', userToken, 'paper-checks'),
             params
         )
 
@@ -1265,7 +1267,7 @@ class Api(object):
             raise HyperwalletException('data is required')
 
         response = self.apiClient.doPost(
-            os.path.join(
+            build_url(
                 'users',
                 userToken,
                 'paper-checks',
@@ -1304,7 +1306,7 @@ class Api(object):
             raise HyperwalletException('statusTransitionToken is required')
 
         response = self.apiClient.doGet(
-            os.path.join(
+            build_url(
                 'users',
                 userToken,
                 'paper-checks',
@@ -1340,7 +1342,7 @@ class Api(object):
             raise HyperwalletException('paperCheckToken is required')
 
         response = self.apiClient.doGet(
-            os.path.join(
+            build_url(
                 'users',
                 userToken,
                 'paper-checks',
@@ -1402,17 +1404,17 @@ class Api(object):
         if not data:
             raise HyperwalletException('data is required')
 
-        if not('sourceToken' in data) or not(data['sourceToken']):
+        if not ('sourceToken' in data) or not (data['sourceToken']):
             raise HyperwalletException('sourceToken is required')
 
-        if not('destinationToken' in data) or not(data['destinationToken']):
+        if not ('destinationToken' in data) or not (data['destinationToken']):
             raise HyperwalletException('destinationToken is required')
 
-        if not('clientTransferId' in data) or not(data['clientTransferId']):
+        if not ('clientTransferId' in data) or not (data['clientTransferId']):
             raise HyperwalletException('clientTransferId is required')
 
         response = self.apiClient.doPost(
-            os.path.join('transfers'),
+            build_url('transfers'),
             data
         )
 
@@ -1432,7 +1434,7 @@ class Api(object):
             raise HyperwalletException('transferToken is required')
 
         response = self.apiClient.doGet(
-            os.path.join(
+            build_url(
                 'transfers',
                 transferToken
             )
@@ -1451,7 +1453,7 @@ class Api(object):
         '''
 
         response = self.apiClient.doGet(
-            os.path.join('transfers'),
+            build_url('transfers'),
             params
         )
 
@@ -1477,7 +1479,7 @@ class Api(object):
             raise HyperwalletException('data is required')
 
         response = self.apiClient.doPost(
-            os.path.join(
+            build_url(
                 'transfers',
                 transferToken,
                 'status-transitions'
@@ -1512,17 +1514,17 @@ class Api(object):
         if not data:
             raise HyperwalletException('data is required')
 
-        if not('transferMethodCountry' in data) or not(data['transferMethodCountry']):
+        if not ('transferMethodCountry' in data) or not (data['transferMethodCountry']):
             raise HyperwalletException('transferMethodCountry is required')
 
-        if not('transferMethodCurrency' in data) or not(data['transferMethodCurrency']):
+        if not ('transferMethodCurrency' in data) or not (data['transferMethodCurrency']):
             raise HyperwalletException('transferMethodCurrency is required')
 
-        if not('email' in data) or not(data['email']):
+        if not ('email' in data) or not (data['email']):
             raise HyperwalletException('email is required')
 
         response = self.apiClient.doPost(
-            os.path.join('users', userToken, 'paypal-accounts'),
+            build_url('users', userToken, 'paypal-accounts'),
             data
         )
 
@@ -1568,7 +1570,7 @@ class Api(object):
             raise HyperwalletException('payPalAccountToken is required')
 
         response = self.apiClient.doGet(
-            os.path.join(
+            build_url(
                 'users',
                 userToken,
                 'paypal-accounts',
@@ -1595,7 +1597,7 @@ class Api(object):
             raise HyperwalletException('userToken is required')
 
         response = self.apiClient.doGet(
-            os.path.join('users', userToken, 'paypal-accounts'),
+            build_url('users', userToken, 'paypal-accounts'),
             params
         )
 
@@ -1621,7 +1623,7 @@ class Api(object):
             raise HyperwalletException('userToken is required')
 
         response = self.apiClient.doPost(
-            os.path.join('users', userToken, 'authentication-token'),
+            build_url('users', userToken, 'authentication-token'),
             None
         )
 
@@ -1667,7 +1669,7 @@ class Api(object):
             raise HyperwalletException('paymentToken is required')
 
         response = self.apiClient.doGet(
-            os.path.join('payments', paymentToken)
+            build_url('payments', paymentToken)
         )
 
         return Payment(response)
@@ -1708,7 +1710,7 @@ class Api(object):
             raise HyperwalletException('statusTransitionToken is required')
 
         response = self.apiClient.doGet(
-            os.path.join(
+            build_url(
                 'payments',
                 paymentToken,
                 'status-transitions',
@@ -1736,7 +1738,7 @@ class Api(object):
             raise HyperwalletException('paymentToken is required')
 
         response = self.apiClient.doGet(
-            os.path.join(
+            build_url(
                 'payments',
                 paymentToken,
                 'status-transitions'
@@ -1767,7 +1769,7 @@ class Api(object):
             raise HyperwalletException('data is required')
 
         response = self.apiClient.doPost(
-            os.path.join(
+            build_url(
                 'payments',
                 paymentToken,
                 'status-transitions'
@@ -1802,7 +1804,7 @@ class Api(object):
             raise HyperwalletException('userToken is required')
 
         response = self.apiClient.doGet(
-            os.path.join('users', userToken, 'balances'),
+            build_url('users', userToken, 'balances'),
             params
         )
 
@@ -1832,7 +1834,7 @@ class Api(object):
             raise HyperwalletException('prepaidCardToken is required')
 
         response = self.apiClient.doGet(
-            os.path.join(
+            build_url(
                 'users',
                 userToken,
                 'prepaid-cards',
@@ -1868,7 +1870,7 @@ class Api(object):
             raise HyperwalletException('accountToken is required')
 
         response = self.apiClient.doGet(
-            os.path.join(
+            build_url(
                 'programs',
                 programToken,
                 'accounts',
@@ -1905,7 +1907,7 @@ class Api(object):
             raise HyperwalletException('userToken is required')
 
         response = self.apiClient.doGet(
-            os.path.join('users', userToken, 'receipts'),
+            build_url('users', userToken, 'receipts'),
             params
         )
 
@@ -1935,7 +1937,7 @@ class Api(object):
             raise HyperwalletException('prepaidCardToken is required')
 
         response = self.apiClient.doGet(
-            os.path.join(
+            build_url(
                 'users',
                 userToken,
                 'prepaid-cards',
@@ -1971,7 +1973,7 @@ class Api(object):
             raise HyperwalletException('accountToken is required')
 
         response = self.apiClient.doGet(
-            os.path.join(
+            build_url(
                 'programs',
                 programToken,
                 'accounts',
@@ -2005,7 +2007,7 @@ class Api(object):
             raise HyperwalletException('programToken is required')
 
         response = self.apiClient.doGet(
-            os.path.join('programs', programToken)
+            build_url('programs', programToken)
         )
 
         return Program(response)
@@ -2038,7 +2040,7 @@ class Api(object):
             raise HyperwalletException('accountToken is required')
 
         response = self.apiClient.doGet(
-            os.path.join(
+            build_url(
                 'programs',
                 programToken,
                 'accounts',
@@ -2081,7 +2083,7 @@ class Api(object):
         headers = {'Json-Cache-Token': cacheToken}
 
         response = self.apiClient.doPost(
-            os.path.join(
+            build_url(
                 'users',
                 userToken,
                 'transfer-methods'
@@ -2230,7 +2232,7 @@ class Api(object):
             raise HyperwalletException('data is required')
 
         return self.apiClient.doPut(
-            os.path.join(
+            build_url(
                 'users',
                 userToken,
                 transferMethodName,
@@ -2261,7 +2263,7 @@ class Api(object):
             raise HyperwalletException('webhookToken is required')
 
         response = self.apiClient.doGet(
-            os.path.join('webhook-notifications', webhookToken)
+            build_url('webhook-notifications', webhookToken)
         )
 
         return Webhook(response)
