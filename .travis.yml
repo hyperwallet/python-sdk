@@ -10,4 +10,5 @@ script:
 - make docs
 - make test
 after_success:
+- if [ $TRAVIS_BRANCH = 'master' ] && [ $TRAVIS_PULL_REQUEST = 'false' ]; then sh ./scripts/travisPublishDocs.sh; fi
 - coveralls
