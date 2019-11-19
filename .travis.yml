@@ -10,5 +10,9 @@ script:
 - make docs
 - make test
 after_success:
-- if [ $TRAVIS_BRANCH = 'master' ] && [ $TRAVIS_PULL_REQUEST = 'false' ]; then sh ./scripts/travisPublishDocs.sh; fi
+- if [ $TRAVIS_BRANCH = 'master' ] && [ $TRAVIS_PULL_REQUEST = 'false' ]; then sh
+  ./scripts/travisPublishDocs.sh; fi
 - coveralls
+env:
+  global:
+    secure: uoE8+YGw9b3eg78DuXRqkzbkNPkE1qh6wDnAvYf0QVZ/bkJW0MTuAhoxwMGhQXzwNe1PaGk2EFsvKs+dowVbnH/b8P2SZePZf4otFIUgePkFsbihcBonDdJxbJQLOKChlpXEeDWMLxJEd/M2Drb7CKs/WphIxOtsA0K9Tf3AaQQyKwuCLsxMaYsEWV5lxO3YEN6Y4kuZtqBfvHjwaj0m0jxUmL4rCKZxdwWQli+X3t7OTZegvSpaRnD/QRhOZBILqKOJTCc9kRVCdaKaacLtxWMH8QGyuaus8oys5VlvqgiEhxA2Pxkv+zvcg/XTaE+aBPK9/FDuW+rcJf1ktgOTpSvB0fi2lFvKw97IHwbsOiETJAjlI3j+Ryc+F8EvKuyk/nj0XtMBRQLT/N4FlFksUVPqvjojRrUWmLX8P4Z7eDtKkl/MDafFymUVC3UpdQkqg+MFfS5NKDEblVPBVBS2TtViGNCH/eYnTWZ3r7SNpk2ybOFbm1j6rSF1TnL745eAvWxRJfNV/LPM2d6FNDlEFJ+sh1nhvK+ieJD4pqL91DUSkEP3auG0Hl7EQqzui/jOfkTndOHpY/A82smy62oMhMLmnMQikyTY0kvDfOC2Uei8fGgbXSxi3FSLDMyOIK/t1uGazQqElvylb0dcqEcgaSLKiO5LIyOnRrRlAfRvGzs=
