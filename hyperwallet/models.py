@@ -288,6 +288,7 @@ class BankCard(TransferMethod):
             'cardBrand': None,
             'cardNumber': None,
             'cardType': None,
+            'cvv': None,
             'dateOfExpiry': None,
         }
 
