@@ -208,7 +208,6 @@ class BankAccount(TransferMethod):
             'addressLine2': None,
             'bankAccountId': None,
             'bankAccountPurpose': None,
-            'bankAccountRelationship': None,
             'bankId': None,
             'bankName': None,
             'branchAddressLine1': None,
@@ -353,7 +352,6 @@ class PaperCheck(TransferMethod):
         self.defaults = {
             'addressLine1': None,
             'addressLine2': None,
-            'bankAccountRelationship': None,
             'businessContactRole': None,
             'businessName': None,
             'businessRegistrationCountry': None,
