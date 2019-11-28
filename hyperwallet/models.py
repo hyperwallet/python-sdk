@@ -221,6 +221,7 @@ class BankAccount(TransferMethod):
             'buildingSocietyAccount': None,
             'businessContactRole': None,
             'businessName': None,
+            'businessOperatingName': None,
             'businessRegistrationCountry': None,
             'businessRegistrationId': None,
             'businessRegistrationStateProvince': None,
