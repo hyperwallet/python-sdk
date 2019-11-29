@@ -1429,7 +1429,7 @@ class ApiTest(unittest.TestCase):
 
         self.assertEqual(exc.exception.message, 'userToken is required')
 
-    def test_get_paypal_account_status_transition_fail_need_check_token(self):
+    def test_get_paypal_account_status_transition_fail_need_paypal_token(self):
 
         with self.assertRaises(HyperwalletException) as exc:
             self.api.getPayPalAccountStatusTransition('token')
@@ -1458,7 +1458,7 @@ class ApiTest(unittest.TestCase):
 
         self.assertEqual(exc.exception.message, 'userToken is required')
 
-    def test_list_paypal_account_status_transitions_fail_need_check_token(self):
+    def test_list_paypal_account_status_transitions_fail_need_paypal_token(self):
 
         with self.assertRaises(HyperwalletException) as exc:
             self.api.listPayPalAccountStatusTransitions('token')
@@ -1480,7 +1480,7 @@ class ApiTest(unittest.TestCase):
 
         self.assertEqual(exc.exception.message, 'userToken is required')
 
-    def test_deactivate_paypal_account_fail_need_check_token(self):
+    def test_deactivate_paypal_account_fail_need_paypal_token(self):
 
         with self.assertRaises(HyperwalletException) as exc:
             self.api.deactivatePayPalAccount('token')
