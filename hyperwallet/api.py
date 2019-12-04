@@ -1599,6 +1599,150 @@ class Api(object):
 
         return [PayPalAccount(x) for x in response.get('data', [])]
 
+    def createPayPalAccountStatusTransition(self,
+                                            userToken=None,
+                                            payPalAccountToken=None,
+                                            data=None):
+        '''
+        Create a PayPal Account Status Transition.
+
+        :param userToken:
+            A token identifying the User. **REQUIRED**
+        :param payPalAccountToken:
+            A token identifying the PayPal Account. **REQUIRED**
+        :param data:
+            A dictionary containing PayPal Account Status Transition information. **REQUIRED**
+        :returns:
+            A PayPal Account Status Transition.
+        '''
+
+        if not userToken:
+            raise HyperwalletException('userToken is required')
+
+        if not payPalAccountToken:
+            raise HyperwalletException('payPalAccountToken is required')
+
+        if not data:
+            raise HyperwalletException('data is required')
+
+        response = self.apiClient.doPost(
+            self.__buildUrl(
+                'users',
+                userToken,
+                'paypal-accounts',
+                payPalAccountToken,
+                'status-transitions'
+            ),
+            data
+        )
+
+        return StatusTransition(response)
+
+    def getPayPalAccountStatusTransition(self,
+                                         userToken=None,
+                                         payPalAccountToken=None,
+                                         statusTransitionToken=None):
+        '''
+        Retrieve a PayPal Account Status Transition.
+
+        :param userToken:
+            A token identifying the User. **REQUIRED**
+        :param payPalAccountToken:
+            A token identifying the PayPal Account. **REQUIRED**
+        :param statusTransitionToken:
+            A token identifying the PayPal Account Status Transition. **REQUIRED**
+        :returns:
+            A PayPal Account Status Transition.
+        '''
+
+        if not userToken:
+            raise HyperwalletException('userToken is required')
+
+        if not payPalAccountToken:
+            raise HyperwalletException('payPalAccountToken is required')
+
+        if not statusTransitionToken:
+            raise HyperwalletException('statusTransitionToken is required')
+
+        response = self.apiClient.doGet(
+            self.__buildUrl(
+                'users',
+                userToken,
+                'paypal-accounts',
+                payPalAccountToken,
+                'status-transitions',
+                statusTransitionToken
+            )
+        )
+
+        return StatusTransition(response)
+
+    def listPayPalAccountStatusTransitions(self,
+                                           userToken=None,
+                                           payPalAccountToken=None,
+                                           params=None):
+        '''
+        List PayPal Account Status Transitions.
+
+        :param userToken:
+            A token identifying the User. **REQUIRED**
+        :param payPalAccountToken:
+            A token identifying the PayPal Account. **REQUIRED**
+        :param params:
+            A dictionary containing query parameters.
+        :returns:
+            An array of PayPal Account Status Transitions.
+        '''
+
+        if not userToken:
+            raise HyperwalletException('userToken is required')
+
+        if not payPalAccountToken:
+            raise HyperwalletException('payPalAccountToken is required')
+
+        response = self.apiClient.doGet(
+            self.__buildUrl(
+                'users',
+                userToken,
+                'paypal-accounts',
+                payPalAccountToken,
+                'status-transitions'
+            ),
+            params
+        )
+
+        return [StatusTransition(x) for x in response.get('data', [])]
+
+    def deactivatePayPalAccount(self,
+                                userToken=None,
+                                payPalAccountToken=None,
+                                notes=None):
+        '''
+        Deactivate a PayPal Account.
+
+        :param userToken:
+            A token identifying the User. **REQUIRED**
+        :param payPalAccountToken:
+            A token identifying the PayPal Account. **REQUIRED**
+        :param notes:
+            A string describing the deactivation.
+        :returns:
+            A PayPal Account Status Transition.
+        '''
+
+        data = {
+            'transition': 'DE_ACTIVATED'
+        }
+
+        if type(notes) is str:
+            data.update({'notes': notes})
+
+        return self.createPayPalAccountStatusTransition(
+            userToken,
+            payPalAccountToken,
+            data
+        )
+
     '''
 
     AuthenticationToken

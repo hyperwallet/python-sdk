@@ -1393,6 +1393,119 @@ class ApiTest(unittest.TestCase):
 
         self.assertTrue(response[0].token, self.data.get('token'))
 
+    def test_create_paypal_account_status_transition_fail_need_user_token(self):
+
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.createPayPalAccountStatusTransition()
+
+        self.assertEqual(exc.exception.message, 'userToken is required')
+
+    def test_create_paypal_account_status_transition_fail_need_paypal_token(self):
+
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.createPayPalAccountStatusTransition('token')
+
+        self.assertEqual(exc.exception.message, 'payPalAccountToken is required')
+
+    def test_create_paypal_account_status_transition_fail_need_data(self):
+
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.createPayPalAccountStatusTransition('token', 'token')
+
+        self.assertEqual(exc.exception.message, 'data is required')
+
+    @mock.patch('hyperwallet.utils.ApiClient._makeRequest')
+    def test_create_paypal_account_status_transition_success(self, mock_post):
+
+        mock_post.return_value = self.data
+        response = self.api.createPayPalAccountStatusTransition('token', 'token', self.data)
+
+        self.assertTrue(response.token, self.data.get('token'))
+
+    def test_get_paypal_account_status_transition_fail_need_user_token(self):
+
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.getPayPalAccountStatusTransition()
+
+        self.assertEqual(exc.exception.message, 'userToken is required')
+
+    def test_get_paypal_account_status_transition_fail_need_paypal_token(self):
+
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.getPayPalAccountStatusTransition('token')
+
+        self.assertEqual(exc.exception.message, 'payPalAccountToken is required')
+
+    def test_get_paypal_account_status_transition_fail_need_transition_token(self):
+
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.getPayPalAccountStatusTransition('token', 'token')
+
+        self.assertEqual(exc.exception.message, 'statusTransitionToken is required')
+
+    @mock.patch('hyperwallet.utils.ApiClient._makeRequest')
+    def test_get_paypal_account_status_transition_success(self, mock_get):
+
+        mock_get.return_value = self.data
+        response = self.api.getPayPalAccountStatusTransition('token', 'token', 'token')
+
+        self.assertTrue(response.token, self.data.get('token'))
+
+    def test_list_paypal_account_status_transitions_fail_need_user_token(self):
+
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.listPayPalAccountStatusTransitions()
+
+        self.assertEqual(exc.exception.message, 'userToken is required')
+
+    def test_list_paypal_account_status_transitions_fail_need_paypal_token(self):
+
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.listPayPalAccountStatusTransitions('token')
+
+        self.assertEqual(exc.exception.message, 'payPalAccountToken is required')
+
+    @mock.patch('hyperwallet.utils.ApiClient._makeRequest')
+    def test_list_paypal_account_status_transitions_success(self, mock_get):
+
+        mock_get.return_value = {'data': [self.data]}
+        response = self.api.listPayPalAccountStatusTransitions('token', 'token')
+
+        self.assertTrue(response[0].token, self.data.get('token'))
+
+    def test_deactivate_paypal_account_fail_need_user_token(self):
+
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.deactivatePayPalAccount()
+
+        self.assertEqual(exc.exception.message, 'userToken is required')
+
+    def test_deactivate_paypal_account_fail_need_paypal_token(self):
+
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.deactivatePayPalAccount('token')
+
+        self.assertEqual(exc.exception.message, 'payPalAccountToken is required')
+
+    @mock.patch('hyperwallet.utils.ApiClient._makeRequest')
+    def test_deactivate_paypal_account_success(self, mock_post):
+
+        mock_post.return_value = self.data
+        response = self.api.deactivatePayPalAccount('token', 'token')
+
+        self.assertTrue(response.token, self.data.get('token'))
+
+    @mock.patch('hyperwallet.utils.ApiClient._makeRequest')
+    def test_deactivate_paypal_account_success_with_notes(self, mock_post):
+
+        data = self.data.copy()
+        data.update({'notes': 'closing'})
+
+        mock_post.return_value = data
+        response = self.api.deactivatePayPalAccount('token', 'token', 'notes')
+
+        self.assertTrue(response.notes, data.get('notes'))
+
     '''
 
     AuthenticationToken
