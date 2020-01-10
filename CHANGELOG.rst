@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.4.0 (2019-01-28)
+1.4.0
 -------------------
 - Fix TypeError thrown when response status is 204 No content
 - Fix tests for python 3

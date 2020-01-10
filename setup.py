@@ -31,6 +31,7 @@ setup(
     description = extract_metaitem('description'),
     long_description = (read('README.rst') + '\n\n' +
                         read('CHANGELOG.rst')),
+    long_description_content_type = 'text/x-rst',
     maintainer = extract_metaitem('author'),
     maintainer_email = extract_metaitem('email'),
     packages = find_packages(exclude = ('tests', 'doc')),
