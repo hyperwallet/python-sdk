@@ -64,7 +64,8 @@ To write an app using the SDK
         city: "Austin",
         stateProvince: "TX",
         country: "US",
-        postalCode: "78701"
+        postalCode: "78701",
+        programToken: "[PROGRAM TOKEN]"
     }
 
     response = api.createUser(data)
