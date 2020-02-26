@@ -9,6 +9,9 @@ mkdir ../gh-pages
 cp -r doc/_build/html/* ../gh-pages/
 cd ../gh-pages
 
+# because of directories starting with underscore
+touch .nojekyll
+
 # Add branch
 git init
 git remote add origin https://${GH_TOKEN}@github.com/hyperwallet/python-sdk.git > /dev/null
