@@ -1508,6 +1508,252 @@ class ApiTest(unittest.TestCase):
 
     '''
 
+    Venmo Accounts
+
+    '''
+
+    def test_create_venmo_account_fail_need_user_token(self):
+
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.createVenmoAccount()
+
+        self.assertEqual(exc.exception.message, 'userToken is required')
+
+    def test_create_venmo_account_fail_need_data(self):
+
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.createVenmoAccount('token')
+
+        self.assertEqual(exc.exception.message, 'data is required')
+
+    def test_create_venmo_account_fail_need_transfer_method_country(self):
+
+        venmo_account_data = {
+            'token': 'test-token'
+        }
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.createVenmoAccount('token', venmo_account_data)
+
+        self.assertEqual(exc.exception.message, 'transferMethodCountry is required')
+
+    def test_create_venmo_account_fail_need_transfer_method_currency(self):
+
+        venmo_account_data = {
+            'transferMethodCountry': 'test-transfer-method-country'
+        }
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.createVenmoAccount('token', venmo_account_data)
+
+        self.assertEqual(exc.exception.message, 'transferMethodCurrency is required')
+
+    def test_create_venmo_account_fail_need_account_id(self):
+
+        venmo_account_data = {
+            'transferMethodCountry': 'test-transfer-method-country',
+            'transferMethodCurrency': 'test-transfer-method-currency'
+        }
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.createVenmoAccount('token', venmo_account_data)
+
+        self.assertEqual(exc.exception.message, 'accountId is required')
+
+    @mock.patch('hyperwallet.utils.ApiClient._makeRequest')
+    def test_create_venmo_account_success(self, mock_post):
+
+        venmo_account_data = {
+            'transferMethodCountry': 'test-transfer-method-country',
+            'transferMethodCurrency': 'test-transfer-method-currency',
+            'accountId': 'test-account-id'
+        }
+        mock_post.return_value = venmo_account_data
+        response = self.api.createVenmoAccount('token', venmo_account_data)
+
+        self.assertTrue(response.accountId, venmo_account_data.get('token'))
+
+    def test_update_venmo_account_fail_need_user_token(self):
+
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.updateVenmoAccount()
+
+        self.assertEqual(exc.exception.message, 'userToken is required')
+
+    def test_update_venmo_account_fail_need_check_token(self):
+
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.updateVenmoAccount('token')
+
+        self.assertEqual(exc.exception.message, 'transfer method token is required')
+
+    def test_update_venmo_account_fail_need_data(self):
+
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.updateVenmoAccount('token', 'token')
+
+        self.assertEqual(exc.exception.message, 'data is required')
+
+    @mock.patch('hyperwallet.utils.ApiClient._makeRequest')
+    def test_update_venmo_account_success(self, mock_put):
+
+        mock_put.return_value = self.data
+        response = self.api.updateVenmoAccount('token', 'token', self.data)
+
+        self.assertTrue(response.token, self.data.get('token'))
+
+    def test_get_venmo_account_fail_need_user_token(self):
+
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.getVenmoAccount()
+
+        self.assertEqual(exc.exception.message, 'userToken is required')
+
+    def test_get_venmo_account_fail_need_venmo_account_token(self):
+
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.getVenmoAccount('token')
+
+        self.assertEqual(exc.exception.message, 'venmoAccountToken is required')
+
+    @mock.patch('hyperwallet.utils.ApiClient._makeRequest')
+    def test_get_venmo_account_success(self, mock_get):
+
+        venmo_account_data = {
+            'accountId': 'test-account-id'
+        }
+        mock_get.return_value = venmo_account_data
+        response = self.api.getVenmoAccount('token', 'token')
+
+        self.assertTrue(response.accountId, venmo_account_data.get('accountId'))
+
+    def test_list_venmo_accounts_fail_need_user_token(self):
+
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.listVenmoAccounts()
+
+        self.assertEqual(exc.exception.message, 'userToken is required')
+
+    @mock.patch('hyperwallet.utils.ApiClient._makeRequest')
+    def test_list_venmo_accounts_success(self, mock_get):
+
+        mock_get.return_value = {'data': [self.data]}
+        response = self.api.listVenmoAccounts('token')
+
+        self.assertTrue(response[0].token, self.data.get('token'))
+
+    def test_create_venmo_account_status_transition_fail_need_user_token(self):
+
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.createVenmoAccountStatusTransition()
+
+        self.assertEqual(exc.exception.message, 'userToken is required')
+
+    def test_create_venmo_account_status_transition_fail_need_venmo_token(self):
+
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.createVenmoAccountStatusTransition('token')
+
+        self.assertEqual(exc.exception.message, 'venmoAccountToken is required')
+
+    def test_create_venmo_account_status_transition_fail_need_data(self):
+
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.createVenmoAccountStatusTransition('token', 'token')
+
+        self.assertEqual(exc.exception.message, 'data is required')
+
+    @mock.patch('hyperwallet.utils.ApiClient._makeRequest')
+    def test_create_venmo_account_status_transition_success(self, mock_post):
+
+        mock_post.return_value = self.data
+        response = self.api.createVenmoAccountStatusTransition('token', 'token', self.data)
+
+        self.assertTrue(response.token, self.data.get('token'))
+
+    def test_get_venmo_account_status_transition_fail_need_user_token(self):
+
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.getVenmoAccountStatusTransition()
+
+        self.assertEqual(exc.exception.message, 'userToken is required')
+
+    def test_get_venmo_account_status_transition_fail_need_venmo_token(self):
+
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.getVenmoAccountStatusTransition('token')
+
+        self.assertEqual(exc.exception.message, 'venmoAccountToken is required')
+
+    def test_get_venmo_account_status_transition_fail_need_transition_token(self):
+
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.getVenmoAccountStatusTransition('token', 'token')
+
+        self.assertEqual(exc.exception.message, 'statusTransitionToken is required')
+
+    @mock.patch('hyperwallet.utils.ApiClient._makeRequest')
+    def test_get_venmo_account_status_transition_success(self, mock_get):
+
+        mock_get.return_value = self.data
+        response = self.api.getVenmoAccountStatusTransition('token', 'token', 'token')
+
+        self.assertTrue(response.token, self.data.get('token'))
+
+    def test_list_venmo_account_status_transitions_fail_need_user_token(self):
+
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.listVenmoAccountStatusTransitions()
+
+        self.assertEqual(exc.exception.message, 'userToken is required')
+
+    def test_list_venmo_account_status_transitions_fail_need_venmo_token(self):
+
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.listVenmoAccountStatusTransitions('token')
+
+        self.assertEqual(exc.exception.message, 'venmoAccountToken is required')
+
+    @mock.patch('hyperwallet.utils.ApiClient._makeRequest')
+    def test_list_venmo_account_status_transitions_success(self, mock_get):
+
+        mock_get.return_value = {'data': [self.data]}
+        response = self.api.listVenmoAccountStatusTransitions('token', 'token')
+
+        self.assertTrue(response[0].token, self.data.get('token'))
+
+    def test_deactivate_venmo_account_fail_need_user_token(self):
+
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.deactivateVenmoAccount()
+
+        self.assertEqual(exc.exception.message, 'userToken is required')
+
+    def test_deactivate_venmo_account_fail_need_venmo_token(self):
+
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.deactivateVenmoAccount('token')
+
+        self.assertEqual(exc.exception.message, 'venmoAccountToken is required')
+
+    @mock.patch('hyperwallet.utils.ApiClient._makeRequest')
+    def test_deactivate_venmo_account_success(self, mock_post):
+
+        mock_post.return_value = self.data
+        response = self.api.deactivateVenmoAccount('token', 'token')
+
+        self.assertTrue(response.token, self.data.get('token'))
+
+    @mock.patch('hyperwallet.utils.ApiClient._makeRequest')
+    def test_deactivate_venmo_account_success_with_notes(self, mock_post):
+
+        data = self.data.copy()
+        data.update({'notes': 'closing'})
+
+        mock_post.return_value = data
+        response = self.api.deactivateVenmoAccount('token', 'token', 'notes')
+
+        self.assertTrue(response.notes, data.get('notes'))
+
+    '''
+
     AuthenticationToken
 
     '''

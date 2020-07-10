@@ -466,6 +466,35 @@ class PayPalAccount(TransferMethod):
         )
 
 
+class VenmoAccount(TransferMethod):
+    '''
+    The VenmoAccount Model.
+
+    :param data:
+        A dictionary containing the attributes for the Venmo Account.
+    '''
+
+    def __init__(self, data):
+        '''
+        Create a new Venmo Account with the provided attributes.
+        '''
+
+        super(VenmoAccount, self).__init__(data)
+
+        self.defaults = {
+            'accountId': None
+        }
+
+        for (param, default) in self.defaults.items():
+            setattr(self, param, data.get(param, default))
+
+    def __repr__(self):
+        return "VenmoAccount({date}, {token})".format(
+            date=self.createdOn,
+            token=self.token
+        )
+
+
 class Payment(HyperwalletModel):
     '''
     The Payment Model.
