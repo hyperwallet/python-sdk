@@ -14,6 +14,7 @@ from hyperwallet import (
     Transfer,
     AuthenticationToken,
     PayPalAccount,
+    VenmoAccount,
     Payment,
     Balance,
     Receipt,
@@ -276,6 +277,24 @@ class ModelTest(unittest.TestCase):
         self.assertEqual(
             test_paypal_account.__repr__(),
             'PayPalAccount({date}, {token})'.format(
+                date=self.transfer_method_data.get('createdOn'),
+                token=self.transfer_method_data.get('token')
+            )
+        )
+
+    '''
+
+    Venmo Account
+
+    '''
+
+    def test_venmo_account_model(self):
+
+        test_venmo_account = VenmoAccount(self.transfer_method_data)
+
+        self.assertEqual(
+            test_venmo_account.__repr__(),
+            'VenmoAccount({date}, {token})'.format(
                 date=self.transfer_method_data.get('createdOn'),
                 token=self.transfer_method_data.get('token')
             )

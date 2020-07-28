@@ -14,6 +14,7 @@ from hyperwallet import (
     Transfer,
     AuthenticationToken,
     PayPalAccount,
+    VenmoAccount,
     Payment,
     Balance,
     Receipt,
@@ -1740,6 +1741,264 @@ class Api(object):
         return self.createPayPalAccountStatusTransition(
             userToken,
             payPalAccountToken,
+            data
+        )
+
+    '''
+
+    Venmo Accounts
+
+    '''
+
+    def createVenmoAccount(self,
+                           userToken=None,
+                           data=None):
+        '''
+        Create a Venmo Account.
+        :param userToken:
+            A token identifying the User. **REQUIRED**
+        :param data:
+            A dictionary containing Venmo Account information. **REQUIRED**
+        :returns:
+            A Venmo Account.
+        '''
+
+        if not userToken:
+            raise HyperwalletException('userToken is required')
+
+        if not data:
+            raise HyperwalletException('data is required')
+
+        if not ('transferMethodCountry' in data) or not (data['transferMethodCountry']):
+            raise HyperwalletException('transferMethodCountry is required')
+
+        if not ('transferMethodCurrency' in data) or not (data['transferMethodCurrency']):
+            raise HyperwalletException('transferMethodCurrency is required')
+
+        if not ('accountId' in data) or not (data['accountId']):
+            raise HyperwalletException('accountId is required')
+
+        response = self.apiClient.doPost(
+            self.__buildUrl('users', userToken, 'venmo-accounts'),
+            data
+        )
+
+        return VenmoAccount(response)
+
+    def updateVenmoAccount(self,
+                           userToken=None,
+                           venmoAccountToken=None,
+                           data=None):
+        '''
+        Update a Venmo Account.
+
+        :param userToken:
+            A token identifying the User. **REQUIRED**
+        :param VenmoAccountToken:
+            A token identifying the Venmo Account. **REQUIRED**
+        :param data:
+            A dictionary containing Venmo Account information. **REQUIRED**
+        :returns:
+            A Venmo Account.
+        '''
+
+        body = self.__updateTransferMethod(userToken, venmoAccountToken, 'venmo-accounts', data)
+        return VenmoAccount(body)
+
+    def getVenmoAccount(self,
+                        userToken=None,
+                        venmoAccountToken=None):
+        '''
+        Retrieve a Venmo Account.
+        :param userToken:
+            A token identifying the User. **REQUIRED**
+        :param VenmoAccountToken:
+            A token identifying the Venmo Account. **REQUIRED**
+        :returns:
+            A Venmo Account.
+        '''
+
+        if not userToken:
+            raise HyperwalletException('userToken is required')
+
+        if not venmoAccountToken:
+            raise HyperwalletException('venmoAccountToken is required')
+
+        response = self.apiClient.doGet(
+            self.__buildUrl(
+                'users',
+                userToken,
+                'venmo-accounts',
+                venmoAccountToken
+            )
+        )
+
+        return VenmoAccount(response)
+
+    def listVenmoAccounts(self,
+                          userToken=None,
+                          params=None):
+        '''
+        List Venmo Accounts.
+        :param userToken:
+            A token identifying the User. **REQUIRED**
+        :param params:
+            A dictionary containing query parameters.
+        :returns:
+            An array of Venmo Accounts.
+        '''
+
+        if not userToken:
+            raise HyperwalletException('userToken is required')
+
+        response = self.apiClient.doGet(
+            self.__buildUrl('users', userToken, 'venmo-accounts'),
+            params
+        )
+
+        return [VenmoAccount(x) for x in response.get('data', [])]
+
+    def createVenmoAccountStatusTransition(self,
+                                           userToken=None,
+                                           venmoAccountToken=None,
+                                           data=None):
+        '''
+        Create a Venmo Account Status Transition.
+
+        :param userToken:
+            A token identifying the User. **REQUIRED**
+        :param VenmoAccountToken:
+            A token identifying the Venmo Account. **REQUIRED**
+        :param data:
+            A dictionary containing Venmo Account Status Transition information. **REQUIRED**
+        :returns:
+            A Venmo Account Status Transition.
+        '''
+
+        if not userToken:
+            raise HyperwalletException('userToken is required')
+
+        if not venmoAccountToken:
+            raise HyperwalletException('venmoAccountToken is required')
+
+        if not data:
+            raise HyperwalletException('data is required')
+
+        response = self.apiClient.doPost(
+            self.__buildUrl(
+                'users',
+                userToken,
+                'venmo-accounts',
+                venmoAccountToken,
+                'status-transitions'
+            ),
+            data
+        )
+
+        return StatusTransition(response)
+
+    def getVenmoAccountStatusTransition(self,
+                                        userToken=None,
+                                        venmoAccountToken=None,
+                                        statusTransitionToken=None):
+        '''
+        Retrieve a Venmo Account Status Transition.
+
+        :param userToken:
+            A token identifying the User. **REQUIRED**
+        :param VenmoAccountToken:
+            A token identifying the Venmo Account. **REQUIRED**
+        :param statusTransitionToken:
+            A token identifying the Venmo Account Status Transition. **REQUIRED**
+        :returns:
+            A Venmo Account Status Transition.
+        '''
+
+        if not userToken:
+            raise HyperwalletException('userToken is required')
+
+        if not venmoAccountToken:
+            raise HyperwalletException('venmoAccountToken is required')
+
+        if not statusTransitionToken:
+            raise HyperwalletException('statusTransitionToken is required')
+
+        response = self.apiClient.doGet(
+            self.__buildUrl(
+                'users',
+                userToken,
+                'venmo-accounts',
+                venmoAccountToken,
+                'status-transitions',
+                statusTransitionToken
+            )
+        )
+
+        return StatusTransition(response)
+
+    def listVenmoAccountStatusTransitions(self,
+                                          userToken=None,
+                                          venmoAccountToken=None,
+                                          params=None):
+        '''
+        List Venmo Account Status Transitions.
+
+        :param userToken:
+            A token identifying the User. **REQUIRED**
+        :param venmoAccountToken:
+            A token identifying the Venmo Account. **REQUIRED**
+        :param params:
+            A dictionary containing query parameters.
+        :returns:
+            An array of Venmo Account Status Transitions.
+        '''
+
+        if not userToken:
+            raise HyperwalletException('userToken is required')
+
+        if not venmoAccountToken:
+            raise HyperwalletException('venmoAccountToken is required')
+
+        response = self.apiClient.doGet(
+            self.__buildUrl(
+                'users',
+                userToken,
+                'venmo-accounts',
+                venmoAccountToken,
+                'status-transitions'
+            ),
+            params
+        )
+
+        return [StatusTransition(x) for x in response.get('data', [])]
+
+    def deactivateVenmoAccount(self,
+                               userToken=None,
+                               venmoAccountToken=None,
+                               notes=None):
+        '''
+        Deactivate a Venmo Account.
+
+        :param userToken:
+            A token identifying the User. **REQUIRED**
+        :param venmoAccountToken:
+            A token identifying the Venmo Account. **REQUIRED**
+        :param notes:
+            A string describing the deactivation.
+        :returns:
+            A Venmo Account Status Transition.
+        '''
+
+        data = {
+            'transition': 'DE_ACTIVATED'
+        }
+
+        if type(notes) is str:
+            data.update({'notes': notes})
+
+        return self.createVenmoAccountStatusTransition(
+            userToken,
+            venmoAccountToken,
             data
         )
 

@@ -23,6 +23,7 @@ from .models import (
     Transfer,                                                            # noqa
     AuthenticationToken,                                                 # noqa
     PayPalAccount,                                                       # noqa
+    VenmoAccount,                                                        # noqa
     Payment,                                                             # noqa
     Balance,                                                             # noqa
     Receipt,                                                             # noqa
