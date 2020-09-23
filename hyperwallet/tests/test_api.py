@@ -65,6 +65,9 @@ class ApiTest(unittest.TestCase):
             'type': 'INDIVIDUAL'
         }
 
+        self.value = {
+            'data': ['{"documents": [{"type": "DRIVERS_LICENSE", "country": "AL", "category": "IDENTIFICATION"}]}']
+        }
     '''
 
     Users
@@ -2188,6 +2191,26 @@ class ApiTest(unittest.TestCase):
         response = self.api.listWebhookNotifications()
 
         self.assertTrue(response[0].token, self.data.get('token'))
+
+    '''
+
+    Upload Documents
+
+    '''
+    def test_uploadDocumentsForUser_fail_need_user_token(self):
+
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.uploadDocumentsForUser()
+
+        self.assertEqual(exc.exception.message, 'userToken is required')
+
+    @mock.patch('hyperwallet.utils.ApiClient._makeRequest')
+    def test_uploadDocumentsForUser_success(self, mock_put):
+
+        mock_put.return_value = self.data
+        response = self.api.uploadDocumentsForUser('token', self.value)
+
+        self.assertTrue(response.token, self.data.get('token'))
 
 
 if __name__ == '__main__':

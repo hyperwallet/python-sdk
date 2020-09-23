@@ -69,7 +69,8 @@ class ApiClient(object):
                      url=None,
                      data=None,
                      headers=None,
-                     params=None):
+                     params=None,
+                     files=None):
         '''
         Process an API response to ensure a JSON object is returned always.
 
@@ -96,7 +97,8 @@ class ApiClient(object):
                 url=urljoin(self.baseUrl, url),
                 data=self.__getRequestData(data),
                 headers=headers,
-                params=params
+                params=params,
+                files=files
             )
         except Exception as e:
             # The request failed to connect
@@ -220,3 +222,23 @@ class ApiClient(object):
         '''
 
         return (data if data is None else self.encryption.encrypt(data)) if self.encrypted else data
+
+    def putDocument(self, partialUrl, data, files):
+        '''
+        Submit a PUT to the API.
+
+        :param partialUrl:
+            A partial URL to specify the API endpoint. **REQUIRED**
+        :param data:
+            A dictionary containing data for the input documents. **REQUIRED**
+        :returns:
+            The API response.
+        '''
+
+        return self._makeRequest(
+            method='PUT',
+            url=partialUrl,
+            data=data,
+            headers='',
+            files=files
+        )
