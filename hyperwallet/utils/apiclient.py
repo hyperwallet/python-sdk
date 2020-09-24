@@ -231,6 +231,8 @@ class ApiClient(object):
             A partial URL to specify the API endpoint. **REQUIRED**
         :param data:
             A dictionary containing data for the input documents. **REQUIRED**
+        :param files: Dictionary of ``'filename': file-like-objects``
+            for multipart encoding upload. **REQUIRED**
         :returns:
             The API response.
         '''
