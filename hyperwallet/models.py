@@ -114,8 +114,8 @@ class User(HyperwalletModel):
             'status': None,
             'token': None,
             'verificationStatus': None,
-            'timeZone' : None,
-            'documents' : None
+            'timeZone': None,
+            'documents': None
         }
 
         for (param, default) in self.defaults.items():
