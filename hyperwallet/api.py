@@ -2684,3 +2684,41 @@ class Api(object):
 
     def __buildUrl(self, *paths):
         return '/'.join(s.strip('/') for s in paths)
+
+    def uploadDocumentsForUser(self,
+                               userToken=None,
+                               data=None,
+                               files=None):
+        '''
+        Upload documents for Users
+
+        :param userToken:
+            A token identifying the User. **REQUIRED**
+        :param data:
+            A dictionary containing data for the input documents. **REQUIRED**
+            sample data:
+            jsonData={'data': ['{"documents": [{"type": "DRIVERS_LICENSE", "country": "US", "category": "IDENTIFICATION"}]}']};
+        :param files: Dictionary of ``'filename': file-like-objects``
+            for multipart encoding upload. **REQUIRED**
+            sample data:
+            files = {
+            'drivers_license_front': open('F1.png', 'rb'),
+            'drivers_license_back': open('F22.png', 'rb')
+            }
+        :returns:
+            A User with documents information
+        '''
+
+        if not userToken:
+            raise HyperwalletException('userToken is required')
+
+        response = self.apiClient.putDocument(
+            self.__buildUrl(
+                'users',
+                userToken
+            ),
+            data,
+            files
+        )
+
+        return User(response)
