@@ -798,3 +798,47 @@ class Webhook(HyperwalletModel):
             date=self.createdOn,
             token=self.token
         )
+'''
+
+   Transfer Refunds
+
+'''
+
+class TransferRefunds(HyperwalletModel):
+    '''
+    The TransferRefunds Model.
+
+    :param data:
+        A dictionary containing the attributes for the Transfer Refunds.
+    '''
+
+    def __init__(self, data):
+        '''
+        Create a new Transfer Refunds with the provided attributes.
+        '''
+
+        super(TransferRefunds, self).__init__(data)
+
+        self.defaults = {
+            'token': None,
+            'status': None,
+            'clientRefundId': None,
+            'sourceToken': None,
+            'sourceAmount': None,
+            'sourceCurrency': None,
+            'destinationToken': None,
+            'destinationAmount': None,
+            'destinationCurrency': None,
+            'createdOn': None,
+            'notes': None,
+            'memo': None
+        }
+
+        for (param, default) in self.defaults.items():
+            setattr(self, param, data.get(param, default))
+
+    def __repr__(self):
+        return "TransferRefunds({date}, {token})".format(
+            date=self.createdOn,
+            token=self.token
+        )
