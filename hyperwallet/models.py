@@ -823,7 +823,7 @@ class TransferRefunds(HyperwalletModel):
             'token': None,
             'status': None,
             'createdOn': None,
-            'clientTransferId': None,
+            'clientRefundId': None,
             'sourceToken': None,
             'sourceAmount': None,
             'sourceFeeAmount': None,
