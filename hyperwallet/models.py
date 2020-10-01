@@ -822,16 +822,20 @@ class TransferRefunds(HyperwalletModel):
         self.defaults = {
             'token': None,
             'status': None,
-            'clientRefundId': None,
+            'createdOn': None,
+            'clientTransferId': None,
             'sourceToken': None,
             'sourceAmount': None,
+            'sourceFeeAmount': None,
             'sourceCurrency': None,
             'destinationToken': None,
             'destinationAmount': None,
+            'destinationFeeAmount': None,
             'destinationCurrency': None,
-            'createdOn': None,
+            'foreignExchanges': None,
             'notes': None,
-            'memo': None
+            'memo': None,
+            'expiresOn': None
         }
 
         for (param, default) in self.defaults.items():

@@ -2219,20 +2219,20 @@ class ApiTest(unittest.TestCase):
     '''
 
     @mock.patch('hyperwallet.utils.ApiClient._makeRequest')
-    def test_transfer_refunds_success(self, mock_post):
+    def test_create_transfer_refunds_success(self, mock_post):
 
         mock_post.return_value = self.data
         response = self.api.createTransferRefund('token',self.data)
         self.assertTrue(response.token, self.data.get('token'))
 
-    def test_transfer_refunds_fail_need_payment_token(self):
+    def test_create_transfer_refunds_fail_need_payment_token(self):
 
         with self.assertRaises(HyperwalletException) as exc:
             self.api.createTransferRefund()
 
         self.assertEqual(exc.exception.message, 'transferToken is required')
 
-    def test_transfer_refunds_fail_need_data(self):
+    def test_create_transfer_refunds_fail_need_data(self):
 
         with self.assertRaises(HyperwalletException) as exc:
             self.api.createTransferRefund('token')
@@ -2245,14 +2245,14 @@ class ApiTest(unittest.TestCase):
 
     '''
 
-    def test_transfer_spend_back_refunds_user_token(self):
+    def test_create_transfer_spend_back_refunds_user_token(self):
 
         with self.assertRaises(HyperwalletException) as exc:
             self.api.createTransferSpendBackRefund()
 
         self.assertEqual(exc.exception.message, 'transferToken is required')
 
-    def test_transfer_spend_back_refunds_fail_need_payment_token(self):
+    def test_create_transfer_spend_back_refunds_fail_need_payment_token(self):
 
         with self.assertRaises(HyperwalletException) as exc:
             self.api.createTransferSpendBackRefund('token')
@@ -2260,7 +2260,7 @@ class ApiTest(unittest.TestCase):
         self.assertEqual(exc.exception.message, 'sourceToken is required')
 
     @mock.patch('hyperwallet.utils.ApiClient._makeRequest')
-    def test_transfer_spend_back_refunds_success(self, mock_get):
+    def test_create_transfer_spend_back_refunds_success(self, mock_get):
 
         mock_get.return_value = self.data
         response = self.api.createTransferSpendBackRefund('token', 'token')
