@@ -22,7 +22,8 @@ from hyperwallet import (
     Account,
     StatusTransition,
     TransferMethodConfiguration,
-    Webhook
+    Webhook,
+    TransferRefunds
 )
 
 
@@ -2722,3 +2723,72 @@ class Api(object):
         )
 
         return User(response)
+
+    '''
+
+    Transfer Refunds
+
+    '''
+
+
+    def createTransferRefund(self,
+                             transferToken=None,
+                             data=None):
+        '''
+        Create a Transfer Refund.
+        :param transferToken:
+            A token identifying the Transfer. **REQUIRED**
+        :param data:
+            A dictionary containing Transfer Refund information. **REQUIRED**
+        :returns:
+            A Transfer Refund.
+        '''
+
+        if not transferToken:
+            raise HyperwalletException('transferToken is required')
+
+        if not data:
+            raise HyperwalletException('data is required')
+
+        response = self.apiClient.doPost(
+            self.__buildUrl(
+                'transfers',
+                transferToken,
+                'refunds'
+            ),
+            data
+        )
+
+        return TransferRefunds(response)
+
+    def createTransferSpendBackRefund(self,
+                                      transferToken=None,
+                                      sourceToken=None,
+                                      params=None):
+        '''
+        Create a Transfer Refund.
+        :param transferToken:
+            A token identifying the Transfer. **REQUIRED**
+        :param data:
+            A dictionary containing Transfer Refund information. **REQUIRED**
+        :returns:
+            A Transfer Refund.
+        '''
+
+        if not transferToken:
+            raise HyperwalletException('transferToken is required')
+
+        if not sourceToken:
+            raise HyperwalletException('sourceToken is required')
+
+        response = self.apiClient.doGet(
+            self.__buildUrl(
+                'transfers',
+                transferToken,
+                'refunds',
+                sourceToken
+            ),
+            params
+        )
+
+        return TransferRefunds(response)

@@ -2212,6 +2212,60 @@ class ApiTest(unittest.TestCase):
 
         self.assertTrue(response.token, self.data.get('token'))
 
+    '''
+
+    Transfer Refunds
+
+    '''
+
+    @mock.patch('hyperwallet.utils.ApiClient._makeRequest')
+    def test_create_transfer_refunds_success(self, mock_post):
+
+        mock_post.return_value = self.data
+        response = self.api.createTransferRefund('token',self.data)
+        self.assertTrue(response.token, self.data.get('token'))
+
+    def test_create_transfer_refunds_fail_need_payment_token(self):
+
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.createTransferRefund()
+
+        self.assertEqual(exc.exception.message, 'transferToken is required')
+
+    def test_create_transfer_refunds_fail_need_data(self):
+
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.createTransferRefund('token')
+
+        self.assertEqual(exc.exception.message, 'data is required')
+
+    '''
+
+    Transfer Spend Back Refunds
+
+    '''
+
+    def test_create_transfer_spend_back_refunds_user_token(self):
+
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.createTransferSpendBackRefund()
+
+        self.assertEqual(exc.exception.message, 'transferToken is required')
+
+    def test_create_transfer_spend_back_refunds_fail_need_payment_token(self):
+
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.createTransferSpendBackRefund('token')
+
+        self.assertEqual(exc.exception.message, 'sourceToken is required')
+
+    @mock.patch('hyperwallet.utils.ApiClient._makeRequest')
+    def test_create_transfer_spend_back_refunds_success(self, mock_get):
+
+        mock_get.return_value = self.data
+        response = self.api.createTransferSpendBackRefund('token', 'token')
+
+        self.assertTrue(response.token, self.data.get('token'))
 
 if __name__ == '__main__':
     unittest.main()
