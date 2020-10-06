@@ -32,8 +32,7 @@ from .models import (
     StatusTransition,                                                    # noqa
     TransferMethodConfiguration,                                         # noqa
     Webhook,                                                             # noqa
-    TransferRefunds,                                                     # naqa
-    CreateUserStatusTransition                                           # naqa
+    TransferRefunds                                                     # naqa
 )
 
 from .api import Api                                                     # noqa

@@ -23,8 +23,7 @@ from hyperwallet import (
     StatusTransition,
     TransferMethodConfiguration,
     Webhook,
-    TransferRefunds,
-    CreateUserStatusTransition
+    TransferRefunds
 )
 
 
@@ -2802,7 +2801,7 @@ class Api(object):
 
     def createUserStatusTransition(self,
                                    userToken=None,
-                             data=None):
+                                   data=None):
         '''
         Create User Status Transition.
         :param userToken:
@@ -2825,4 +2824,113 @@ class Api(object):
             data
         )
 
-        return CreateUserStatusTransition(response)
+        return StatusTransition(response)
+
+    def activateUser(self,
+                     userToken=None):
+
+        '''
+         Create User Activate Status Transition.
+         :param userToken:
+             A token identifying the User Create UserToken. **REQUIRED**
+         :returns:
+             CreateUserStatusTransition.
+         '''
+        if not userToken:
+            raise HyperwalletException('userToken is required')
+
+        data = {
+            'transition': 'ACTIVATED'
+        }
+
+        return self.createUserStatusTransition(
+            userToken,
+            data
+        )
+
+    def deactivateUser(self,
+                       userToken=None):
+
+        '''
+         Create User DeActivate Status Transition.
+         :param userToken:
+             A token identifying the User Create UserToken. **REQUIRED**
+         :returns:
+             CreateUserStatusTransition.
+         '''
+        if not userToken:
+            raise HyperwalletException('userToken is required')
+
+        data = {
+            'transition': 'DE_ACTIVATED'
+        }
+
+        return self.createUserStatusTransition(
+            userToken,
+            data
+        )
+
+    def preactivateUser(self,
+                        userToken=None):
+
+        '''
+         Create User Pre Activate Status Transition.
+         :param userToken:
+             A token identifying the User Create UserToken. **REQUIRED**
+         :returns:
+             CreateUserStatusTransition.
+         '''
+        if not userToken:
+            raise HyperwalletException('userToken is required')
+        data = {
+            'transition': 'PRE-ACTIVATED'
+        }
+
+        return self.createUserStatusTransition(
+            userToken,
+            data
+        )
+
+    def freezeUser(self,
+                   userToken=None):
+
+        '''
+         Create User Freeze Status Transition.
+         :param userToken:
+             A token identifying the User Create UserToken. **REQUIRED**
+         :returns:
+             CreateUserStatusTransition.
+         '''
+        if not userToken:
+            raise HyperwalletException('userToken is required')
+
+        data = {
+            'transition': 'FROZEN'
+        }
+
+        return self.createUserStatusTransition(
+            userToken,
+            data
+        )
+
+    def lockUser(self,
+                 userToken=None):
+
+        '''
+         Create User Lock Status Transition.
+         :param userToken:
+             A token identifying the User Create UserToken. **REQUIRED**
+         :returns:
+             CreateUserStatusTransition.
+         '''
+        if not userToken:
+            raise HyperwalletException('userToken is required')
+
+        data = {
+            'transition': 'LOCKED'
+        }
+
+        return self.createUserStatusTransition(
+            userToken,
+            data
+        )
