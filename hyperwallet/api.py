@@ -23,7 +23,8 @@ from hyperwallet import (
     StatusTransition,
     TransferMethodConfiguration,
     Webhook,
-    TransferRefunds
+    TransferRefunds,
+    CreateUserStatusTransition
 )
 
 
@@ -2792,3 +2793,40 @@ class Api(object):
         )
 
         return TransferRefunds(response)
+
+    '''
+
+    Create User Transition
+
+    '''
+
+    def createUserStatusTransition(self,
+                                   userToken=None,
+                             data=None):
+        '''
+        Create User Transition.
+
+        :param data:
+            A dictionary containing User Create UserToken information. **REQUIRED**
+        :param data:
+            A dictionary containing User Create Data information. **REQUIRED**
+        :returns:
+            CreateUserStatusTransition.
+        '''
+
+        if not userToken:
+            raise HyperwalletException('userToken is required')
+
+        if not data:
+            raise HyperwalletException('data is required')
+
+        response = self.apiClient.doPost(
+            self.__buildUrl(
+                'users',
+                userToken,
+                'status-transitions'
+            ),
+            data
+        )
+
+        return CreateUserStatusTransition(response)

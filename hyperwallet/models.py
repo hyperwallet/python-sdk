@@ -846,3 +846,42 @@ class TransferRefunds(HyperwalletModel):
             date=self.createdOn,
             token=self.token
         )
+'''
+
+   Create User Transition
+
+'''
+
+class CreateUserStatusTransition(HyperwalletModel):
+    '''
+    The StatusTransition Model.
+
+    :param data:
+        A dictionary containing the attributes for the Status Transition.
+    '''
+
+    def __init__(self, data):
+        '''
+        Create a new Status Transition with the provided attributes.
+        '''
+
+        super(CreateUserStatusTransition, self).__init__(data)
+
+        self.defaults = {
+            'createdOn': None,
+            'fromStatus': None,
+            'notes': None,
+            'statusCode': None,
+            'token': None,
+            'toStatus': None,
+            'transition': None
+        }
+
+        for (param, default) in self.defaults.items():
+            setattr(self, param, data.get(param, default))
+
+    def __repr__(self):
+        return "CreateUserStatusTransition({date}, {token})".format(
+            date=self.createdOn,
+            token=self.token
+        )
