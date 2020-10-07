@@ -1,5 +1,11 @@
 Changelog
 =========
+1.5.0
+-------------------
+- Added Venmo accounts
+- Added User status transitions
+- Added Transfer refunds
+- Added upload multipart documents feature
 
 1.4.0
 -------------------
