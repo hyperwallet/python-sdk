@@ -531,7 +531,7 @@ class ModelTest(unittest.TestCase):
         self.assertEqual(test_webhook.object, webhook_data.get('object'))
 
     '''
-    
+
     Transfer Refunds
 
     '''
@@ -553,6 +553,7 @@ class ModelTest(unittest.TestCase):
                 token=status_transfer_refunds_data.get('token')
             )
         )
+
 
 if __name__ == '__main__':
     unittest.main()

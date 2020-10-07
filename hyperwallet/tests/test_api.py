@@ -2222,7 +2222,7 @@ class ApiTest(unittest.TestCase):
     def test_create_transfer_refunds_success(self, mock_post):
 
         mock_post.return_value = self.data
-        response = self.api.createTransferRefund('token',self.data)
+        response = self.api.createTransferRefund('token', self.data)
         self.assertTrue(response.token, self.data.get('token'))
 
     def test_create_transfer_refunds_fail_need_payment_token(self):
@@ -2343,6 +2343,7 @@ class ApiTest(unittest.TestCase):
         mock_get.return_value = self.data
         response = self.api.activateUser('token')
         self.assertTrue(response.token, self.data.get('token'))
+
 
 if __name__ == '__main__':
     unittest.main()
