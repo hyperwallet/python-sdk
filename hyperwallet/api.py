@@ -2809,7 +2809,7 @@ class Api(object):
         :param data:
             A dictionary containing User Status Create Data information. **REQUIRED**
         :returns:
-            CreateUserStatusTransition.
+            StatusTransition.
         '''
         if not userToken:
             raise HyperwalletException('userToken is required')
@@ -2834,7 +2834,7 @@ class Api(object):
          :param userToken:
              A token identifying the User Create UserToken. **REQUIRED**
          :returns:
-             CreateUserStatusTransition.
+             StatusTransition.
          '''
         if not userToken:
             raise HyperwalletException('userToken is required')
@@ -2856,7 +2856,7 @@ class Api(object):
          :param userToken:
              A token identifying the User Create UserToken. **REQUIRED**
          :returns:
-             CreateUserStatusTransition.
+             StatusTransition.
          '''
         if not userToken:
             raise HyperwalletException('userToken is required')
@@ -2878,7 +2878,7 @@ class Api(object):
          :param userToken:
              A token identifying the User Create UserToken. **REQUIRED**
          :returns:
-             CreateUserStatusTransition.
+             StatusTransition.
          '''
         if not userToken:
             raise HyperwalletException('userToken is required')
@@ -2899,7 +2899,7 @@ class Api(object):
          :param userToken:
              A token identifying the User Create UserToken. **REQUIRED**
          :returns:
-             CreateUserStatusTransition.
+             StatusTransition.
          '''
         if not userToken:
             raise HyperwalletException('userToken is required')
@@ -2921,7 +2921,7 @@ class Api(object):
          :param userToken:
              A token identifying the User Create UserToken. **REQUIRED**
          :returns:
-             CreateUserStatusTransition.
+             StatusTransition.
          '''
         if not userToken:
             raise HyperwalletException('userToken is required')

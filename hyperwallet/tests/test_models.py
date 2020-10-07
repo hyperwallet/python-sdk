@@ -23,8 +23,7 @@ from hyperwallet import (
     StatusTransition,
     TransferMethodConfiguration,
     Webhook,
-    TransferRefunds,
-    CreateUserStatusTransition
+    TransferRefunds
 )
 
 
@@ -550,29 +549,6 @@ class ModelTest(unittest.TestCase):
         self.assertEqual(
             status_transfer_refunds.__repr__(),
             'TransferRefunds({date}, {token})'.format(
-                date=status_transfer_refunds_data.get('createdOn'),
-                token=status_transfer_refunds_data.get('token')
-            )
-        )
-
-
-    '''
-    
-    Create User Status Transition
-
-    '''
-
-    def test_create_user_status_transition(self):
-
-        status_transfer_refunds_data = {
-            "transition" : "LOCKED"
-        }
-
-        status_create_user_status_transition = CreateUserStatusTransition(status_transfer_refunds_data)
-
-        self.assertEqual(
-            status_create_user_status_transition.__repr__(),
-            'CreateUserStatusTransition({date}, {token})'.format(
                 date=status_transfer_refunds_data.get('createdOn'),
                 token=status_transfer_refunds_data.get('token')
             )
