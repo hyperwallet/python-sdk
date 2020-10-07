@@ -65,6 +65,9 @@ class ApiTest(unittest.TestCase):
             'type': 'INDIVIDUAL'
         }
 
+        self.value = {
+            'data': ['{"documents": [{"type": "DRIVERS_LICENSE", "country": "AL", "category": "IDENTIFICATION"}]}']
+        }
     '''
 
     Users
@@ -2188,6 +2191,158 @@ class ApiTest(unittest.TestCase):
         response = self.api.listWebhookNotifications()
 
         self.assertTrue(response[0].token, self.data.get('token'))
+
+    '''
+
+    Upload Documents
+
+    '''
+    def test_uploadDocumentsForUser_fail_need_user_token(self):
+
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.uploadDocumentsForUser()
+
+        self.assertEqual(exc.exception.message, 'userToken is required')
+
+    @mock.patch('hyperwallet.utils.ApiClient._makeRequest')
+    def test_uploadDocumentsForUser_success(self, mock_put):
+
+        mock_put.return_value = self.data
+        response = self.api.uploadDocumentsForUser('token', self.value)
+
+        self.assertTrue(response.token, self.data.get('token'))
+
+    '''
+
+    Transfer Refunds
+
+    '''
+
+    @mock.patch('hyperwallet.utils.ApiClient._makeRequest')
+    def test_create_transfer_refunds_success(self, mock_post):
+
+        mock_post.return_value = self.data
+        response = self.api.createTransferRefund('token', self.data)
+        self.assertTrue(response.token, self.data.get('token'))
+
+    def test_create_transfer_refunds_fail_need_payment_token(self):
+
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.createTransferRefund()
+
+        self.assertEqual(exc.exception.message, 'transferToken is required')
+
+    def test_create_transfer_refunds_fail_need_data(self):
+
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.createTransferRefund('token')
+
+        self.assertEqual(exc.exception.message, 'data is required')
+
+    '''
+
+    Transfer Spend Back Refunds
+
+    '''
+
+    def test_create_transfer_spend_back_refunds_user_token(self):
+
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.createTransferSpendBackRefund()
+
+        self.assertEqual(exc.exception.message, 'transferToken is required')
+
+    def test_create_transfer_spend_back_refunds_fail_need_payment_token(self):
+
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.createTransferSpendBackRefund('token')
+
+        self.assertEqual(exc.exception.message, 'sourceToken is required')
+
+    @mock.patch('hyperwallet.utils.ApiClient._makeRequest')
+    def test_create_transfer_spend_back_refunds_success(self, mock_get):
+
+        mock_get.return_value = self.data
+        response = self.api.createTransferSpendBackRefund('token', 'token')
+
+        self.assertTrue(response.token, self.data.get('token'))
+
+    '''
+
+        Create User Status Transition
+
+    '''
+
+    def test_create_user_status_transition_user_token(self):
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.createUserStatusTransition()
+        self.assertEqual(exc.exception.message, 'userToken is required')
+
+    def test_create_user_status_transition_data(self):
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.createUserStatusTransition('token')
+        self.assertEqual(exc.exception.message, 'data is required')
+
+    @mock.patch('hyperwallet.utils.ApiClient._makeRequest')
+    def test_create_user_status_transition_success(self, mock_get):
+        mock_get.return_value = self.data
+        response = self.api.createUserStatusTransition('token', 'token')
+        self.assertTrue(response.token, self.data.get('token'))
+
+    def test_create_user_lockUser_status_transition_user_token(self):
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.lockUser()
+        self.assertEqual(exc.exception.message, 'userToken is required')
+
+    @mock.patch('hyperwallet.utils.ApiClient._makeRequest')
+    def test_create_user_lockUser_status_transition_success(self, mock_get):
+        mock_get.return_value = self.data
+        response = self.api.lockUser('token')
+        self.assertTrue(response.token, self.data.get('token'))
+
+    def test_create_user_freezeUser_status_transition_user_token(self):
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.freezeUser()
+        self.assertEqual(exc.exception.message, 'userToken is required')
+
+    @mock.patch('hyperwallet.utils.ApiClient._makeRequest')
+    def test_create_user_freezeUser_status_transition_success(self, mock_get):
+        mock_get.return_value = self.data
+        response = self.api.freezeUser('token')
+        self.assertTrue(response.token, self.data.get('token'))
+
+    def test_create_user_preactivate_status_transition_user_token(self):
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.preactivateUser()
+        self.assertEqual(exc.exception.message, 'userToken is required')
+
+    @mock.patch('hyperwallet.utils.ApiClient._makeRequest')
+    def test_create_user_preactivate_status_transition_success(self, mock_get):
+        mock_get.return_value = self.data
+        response = self.api.preactivateUser('token')
+        self.assertTrue(response.token, self.data.get('token'))
+
+    def test_create_user_deactivate_status_transition_user_token(self):
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.deactivateUser()
+        self.assertEqual(exc.exception.message, 'userToken is required')
+
+    @mock.patch('hyperwallet.utils.ApiClient._makeRequest')
+    def test_create_user_deactivate_status_transition_success(self, mock_get):
+        mock_get.return_value = self.data
+        response = self.api.deactivateUser('token')
+        self.assertTrue(response.token, self.data.get('token'))
+
+    def test_create_user_activate_status_transition_user_token(self):
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.activateUser()
+        self.assertEqual(exc.exception.message, 'userToken is required')
+
+    @mock.patch('hyperwallet.utils.ApiClient._makeRequest')
+    def test_create_user_activate_status_transition_success(self, mock_get):
+        mock_get.return_value = self.data
+        response = self.api.activateUser('token')
+        self.assertTrue(response.token, self.data.get('token'))
 
 
 if __name__ == '__main__':

@@ -113,7 +113,9 @@ class User(HyperwalletModel):
             'stateProvince': None,
             'status': None,
             'token': None,
-            'verificationStatus': None
+            'verificationStatus': None,
+            'timeZone': None,
+            'documents': None
         }
 
         for (param, default) in self.defaults.items():
@@ -793,6 +795,57 @@ class Webhook(HyperwalletModel):
 
     def __repr__(self):
         return "Webhook({date}, {token})".format(
+            date=self.createdOn,
+            token=self.token
+        )
+
+
+'''
+
+   Transfer Refunds
+
+'''
+
+
+class TransferRefunds(HyperwalletModel):
+    '''
+    The TransferRefunds Model.
+
+    :param data:
+        A dictionary containing the attributes for the Transfer Refunds.
+    '''
+
+    def __init__(self, data):
+        '''
+        Create a new Transfer Refunds with the provided attributes.
+        '''
+
+        super(TransferRefunds, self).__init__(data)
+
+        self.defaults = {
+            'token': None,
+            'status': None,
+            'createdOn': None,
+            'clientRefundId': None,
+            'sourceToken': None,
+            'sourceAmount': None,
+            'sourceFeeAmount': None,
+            'sourceCurrency': None,
+            'destinationToken': None,
+            'destinationAmount': None,
+            'destinationFeeAmount': None,
+            'destinationCurrency': None,
+            'foreignExchanges': None,
+            'notes': None,
+            'memo': None,
+            'expiresOn': None
+        }
+
+        for (param, default) in self.defaults.items():
+            setattr(self, param, data.get(param, default))
+
+    def __repr__(self):
+        return "TransferRefunds({date}, {token})".format(
             date=self.createdOn,
             token=self.token
         )

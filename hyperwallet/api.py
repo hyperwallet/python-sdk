@@ -22,7 +22,8 @@ from hyperwallet import (
     Account,
     StatusTransition,
     TransferMethodConfiguration,
-    Webhook
+    Webhook,
+    TransferRefunds
 )
 
 
@@ -2684,3 +2685,251 @@ class Api(object):
 
     def __buildUrl(self, *paths):
         return '/'.join(s.strip('/') for s in paths)
+
+    def uploadDocumentsForUser(self,
+                               userToken=None,
+                               data=None,
+                               files=None):
+        '''
+        Upload documents for Users
+
+        :param userToken:
+            A token identifying the User. **REQUIRED**
+        :param data:
+            A dictionary containing data for the input documents. **REQUIRED**
+            sample data:
+            jsonData={'data': ['{"documents": [{"type": "DRIVERS_LICENSE", "country": "US", "category": "IDENTIFICATION"}]}']};
+        :param files: Dictionary of ``'filename': file-like-objects``
+            for multipart encoding upload. **REQUIRED**
+            sample data:
+            files = {
+            'drivers_license_front': open('F1.png', 'rb'),
+            'drivers_license_back': open('F22.png', 'rb')
+            }
+        :returns:
+            A User with documents information
+        '''
+
+        if not userToken:
+            raise HyperwalletException('userToken is required')
+
+        response = self.apiClient.putDocument(
+            self.__buildUrl(
+                'users',
+                userToken
+            ),
+            data,
+            files
+        )
+
+        return User(response)
+
+    '''
+
+    Transfer Refunds
+
+    '''
+
+    def createTransferRefund(self,
+                             transferToken=None,
+                             data=None):
+        '''
+        Create a Transfer Refund.
+        :param transferToken:
+            A token identifying the Transfer. **REQUIRED**
+        :param data:
+            A dictionary containing Transfer Refund information. **REQUIRED**
+        :returns:
+            A Transfer Refund.
+        '''
+
+        if not transferToken:
+            raise HyperwalletException('transferToken is required')
+
+        if not data:
+            raise HyperwalletException('data is required')
+
+        response = self.apiClient.doPost(
+            self.__buildUrl(
+                'transfers',
+                transferToken,
+                'refunds'
+            ),
+            data
+        )
+
+        return TransferRefunds(response)
+
+    def createTransferSpendBackRefund(self,
+                                      transferToken=None,
+                                      sourceToken=None,
+                                      params=None):
+        '''
+        Create a Transfer Refund.
+        :param transferToken:
+            A token identifying the Transfer. **REQUIRED**
+        :param data:
+            A dictionary containing Transfer Refund information. **REQUIRED**
+        :returns:
+            A Transfer Refund.
+        '''
+
+        if not transferToken:
+            raise HyperwalletException('transferToken is required')
+
+        if not sourceToken:
+            raise HyperwalletException('sourceToken is required')
+
+        response = self.apiClient.doGet(
+            self.__buildUrl(
+                'transfers',
+                transferToken,
+                'refunds',
+                sourceToken
+            ),
+            params
+        )
+
+        return TransferRefunds(response)
+
+    '''
+
+        Create User Status Transition
+
+    '''
+
+    def createUserStatusTransition(self,
+                                   userToken=None,
+                                   data=None):
+        '''
+        Create User Status Transition.
+        :param userToken:
+            A token identifying the User Create UserToken. **REQUIRED**
+        :param data:
+            A dictionary containing User Status Create Data information. **REQUIRED**
+        :returns:
+            StatusTransition.
+        '''
+        if not userToken:
+            raise HyperwalletException('userToken is required')
+        if not data:
+            raise HyperwalletException('data is required')
+        response = self.apiClient.doPost(
+            self.__buildUrl(
+                'users',
+                userToken,
+                'status-transitions'
+            ),
+            data
+        )
+
+        return StatusTransition(response)
+
+    def activateUser(self,
+                     userToken=None):
+
+        '''
+         Create User Activate Status Transition.
+         :param userToken:
+             A token identifying the User Create UserToken. **REQUIRED**
+         :returns:
+             StatusTransition.
+         '''
+        if not userToken:
+            raise HyperwalletException('userToken is required')
+
+        data = {
+            'transition': 'ACTIVATED'
+        }
+
+        return self.createUserStatusTransition(
+            userToken,
+            data
+        )
+
+    def deactivateUser(self,
+                       userToken=None):
+
+        '''
+         Create User DeActivate Status Transition.
+         :param userToken:
+             A token identifying the User Create UserToken. **REQUIRED**
+         :returns:
+             StatusTransition.
+         '''
+        if not userToken:
+            raise HyperwalletException('userToken is required')
+
+        data = {
+            'transition': 'DE_ACTIVATED'
+        }
+
+        return self.createUserStatusTransition(
+            userToken,
+            data
+        )
+
+    def preactivateUser(self,
+                        userToken=None):
+
+        '''
+         Create User Pre Activate Status Transition.
+         :param userToken:
+             A token identifying the User Create UserToken. **REQUIRED**
+         :returns:
+             StatusTransition.
+         '''
+        if not userToken:
+            raise HyperwalletException('userToken is required')
+        data = {
+            'transition': 'PRE-ACTIVATED'
+        }
+
+        return self.createUserStatusTransition(
+            userToken,
+            data
+        )
+
+    def freezeUser(self,
+                   userToken=None):
+
+        '''
+         Create User Freeze Status Transition.
+         :param userToken:
+             A token identifying the User Create UserToken. **REQUIRED**
+         :returns:
+             StatusTransition.
+         '''
+        if not userToken:
+            raise HyperwalletException('userToken is required')
+
+        data = {
+            'transition': 'FROZEN'
+        }
+
+        return self.createUserStatusTransition(
+            userToken,
+            data
+        )
+
+    def lockUser(self,
+                 userToken=None):
+
+        '''
+         Create User Lock Status Transition.
+         :param userToken:
+             A token identifying the User Create UserToken. **REQUIRED**
+         :returns:
+             StatusTransition.
+         '''
+        if not userToken:
+            raise HyperwalletException('userToken is required')
+
+        data = {
+            'transition': 'LOCKED'
+        }
+
+        return self.createUserStatusTransition(
+            userToken,
+            data
+        )

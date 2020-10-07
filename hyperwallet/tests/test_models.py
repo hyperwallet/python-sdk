@@ -22,7 +22,8 @@ from hyperwallet import (
     Account,
     StatusTransition,
     TransferMethodConfiguration,
-    Webhook
+    Webhook,
+    TransferRefunds
 )
 
 
@@ -528,6 +529,30 @@ class ModelTest(unittest.TestCase):
         test_webhook = Webhook(webhook_data)
 
         self.assertEqual(test_webhook.object, webhook_data.get('object'))
+
+    '''
+
+    Transfer Refunds
+
+    '''
+
+    def test_transfer_refunds(self):
+
+        status_transfer_refunds_data = {
+            "clientRefundId": "12312312312412112",
+            "notes": "Merchant Payment return to Wallet Balance",
+            "memo": "TransferClientId123456"
+        }
+
+        status_transfer_refunds = TransferRefunds(status_transfer_refunds_data)
+
+        self.assertEqual(
+            status_transfer_refunds.__repr__(),
+            'TransferRefunds({date}, {token})'.format(
+                date=status_transfer_refunds_data.get('createdOn'),
+                token=status_transfer_refunds_data.get('token')
+            )
+        )
 
 
 if __name__ == '__main__':
