@@ -292,6 +292,7 @@ class BankCard(TransferMethod):
             'cardNumber': None,
             'cardType': None,
             'cvv': None,
+            'processingTime': None,
             'dateOfExpiry': None,
         }
 
@@ -524,6 +525,7 @@ class Payment(HyperwalletModel):
             'programToken': None,
             'purpose': None,
             'releaseOn': None,
+            'expiresOn': None,
             'status': None,
             'token': None
         }
