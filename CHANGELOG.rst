@@ -1,5 +1,11 @@
 Changelog
 =========
+
+1.5.1
+-------------------
+- Added field 'processingTime' to BankCards
+- Added field 'expiresOn' to Payments
+
 1.5.0
 -------------------
 - Added Venmo accounts
