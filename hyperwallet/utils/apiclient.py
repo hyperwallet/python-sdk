@@ -3,6 +3,7 @@
 import ssl
 import json
 import requests
+import uuid
 
 from hyperwallet.exceptions import HyperwalletAPIException
 from requests_toolbelt.adapters.ssl import SSLAdapter
@@ -41,6 +42,9 @@ class ApiClient(object):
         # Hyperwallet SDK.
         self.baseHeaders = {
             'User-Agent': 'Hyperwallet Python SDK v{}'.format(__version__),
+            'x-sdk-type': 'Python',
+            'x-sdk-version': __version__,
+            'x-sdk-contextId': str(uuid.uuid4()),
             'Accept': 'application/jose+json' if self.encrypted else 'application/json',
             'Content-Type': 'application/jose+json' if self.encrypted else 'application/json'
         }
@@ -50,7 +54,7 @@ class ApiClient(object):
         self.server = server
 
         # The complete base URL of the API.
-        self.baseUrl = urljoin(self.server, '/rest/v3/')
+        self.baseUrl = urljoin(self.server, '/rest/v4/')
 
         # The default connection to persist authentication and SSL settings.
         defaultSession = requests.Session()
