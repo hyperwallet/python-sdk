@@ -2992,7 +2992,7 @@ class Api(object):
         if not transferToken:
             raise HyperwalletException('transferToken is required')
 
-        if params and not StatusTransition.filter_array.issubset(params.keys()):
+        if params and not StatusTransition.filter_array >= params.keys():
             raise HyperwalletException('Invalid filter')
 
         #print(params)

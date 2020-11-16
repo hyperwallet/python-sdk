@@ -682,7 +682,7 @@ class StatusTransition(HyperwalletModel):
         A dictionary containing the attributes for the Status Transition.
     '''
 
-    filter_array = set(['transition'])
+    filter_array = {'transition'}
 
     def __init__(self, data):
         '''
