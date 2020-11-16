@@ -2935,9 +2935,7 @@ class Api(object):
         )
 
     '''
-
        Get Transfer Status Transition 
-
     '''
 
     def getTransferStatusTransition(self,
@@ -2972,9 +2970,7 @@ class Api(object):
         return StatusTransition(response)
 
     '''
-
        List Transfer Status Transition 
-
     '''
 
     def listTransferStatusTransitions(self,
