@@ -126,6 +126,13 @@ class ApiTest(unittest.TestCase):
 
         self.assertTrue(response.token, self.data.get('token'))
 
+    def test_list_users_with_params_invalid(self):
+        options={'city':'US'}
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.listUsers(options)
+
+        self.assertEqual(exc.exception.message, 'Invalid filter')
+
     @mock.patch('hyperwallet.utils.ApiClient._makeRequest')
     def test_list_users_success(self, mock_get):
 
@@ -162,6 +169,14 @@ class ApiTest(unittest.TestCase):
             self.api.listUserStatusTransitions()
 
         self.assertEqual(exc.exception.message, 'userToken is required')
+
+    def test_list_user_status_transitions_fail_need_params_invalid(self):
+
+        options={'fromStatus':'test'}
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.listUserStatusTransitions('token',options)
+
+        self.assertEqual(exc.exception.message, 'Invalid filter')
 
     @mock.patch('hyperwallet.utils.ApiClient._makeRequest')
     def test_list_user_status_transitions_success(self, mock_get):
@@ -257,6 +272,14 @@ class ApiTest(unittest.TestCase):
 
         self.assertEqual(exc.exception.message, 'userToken is required')
 
+    def test_list_bank_accounts_fail_need_params_invalid(self):
+
+        options={'bankName':'test'}
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.listBankAccounts('token',options)
+
+        self.assertEqual(exc.exception.message, 'Invalid filter')
+
     @mock.patch('hyperwallet.utils.ApiClient._makeRequest')
     def test_list_bank_accounts_success(self, mock_get):
 
@@ -329,6 +352,14 @@ class ApiTest(unittest.TestCase):
             self.api.listBankAccountStatusTransitions()
 
         self.assertEqual(exc.exception.message, 'userToken is required')
+
+    def test_list_bank_account_status_transitions_fail_need_params_invalid(self):
+
+        options={'fromStatus':'test'}
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.listBankAccountStatusTransitions('token','token',options)
+
+        self.assertEqual(exc.exception.message, 'Invalid filter')
 
     def test_list_bank_account_status_transitions_fail_need_bank_token(self):
 
@@ -464,6 +495,14 @@ class ApiTest(unittest.TestCase):
 
         self.assertEqual(exc.exception.message, 'userToken is required')
 
+    def test_list_bank_cards_fail_need_params_invalid(self):
+
+        options={'cardNumber':'test'}
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.listBankCards('token',options)
+
+        self.assertEqual(exc.exception.message, 'Invalid filter')
+
     @mock.patch('hyperwallet.utils.ApiClient._makeRequest')
     def test_list_bank_cards_success(self, mock_get):
 
@@ -543,6 +582,14 @@ class ApiTest(unittest.TestCase):
             self.api.listBankCardStatusTransitions('token')
 
         self.assertEqual(exc.exception.message, 'bankCardToken is required')
+
+    def test_list_bank_card_status_transitions_fail_need_params_invalid(self):
+
+        options={'fromStatus':'test'}
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.listBankCardStatusTransitions('token','token',options)
+
+        self.assertEqual(exc.exception.message, 'Invalid filter')
 
     @mock.patch('hyperwallet.utils.ApiClient._makeRequest')
     def test_list_bank_card_status_transitions_success(self, mock_get):
@@ -671,6 +718,14 @@ class ApiTest(unittest.TestCase):
 
         self.assertEqual(exc.exception.message, 'userToken is required')
 
+    def test_list_prepaid_cards_fail_need_params_invalid(self):
+
+        options={'cardPackage':'test'}
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.listPrepaidCards('token',options)
+
+        self.assertEqual(exc.exception.message, 'Invalid filter')
+
     @mock.patch('hyperwallet.utils.ApiClient._makeRequest')
     def test_list_prepaid_cards_success(self, mock_get):
 
@@ -750,6 +805,14 @@ class ApiTest(unittest.TestCase):
             self.api.listPrepaidCardStatusTransitions('token')
 
         self.assertEqual(exc.exception.message, 'prepaidCardToken is required')
+
+    def test_list_prepaid_card_status_transitions_fail_need_params_invalid(self):
+
+        options={'status':'test'}
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.listPrepaidCardStatusTransitions('token','token',options)
+
+        self.assertEqual(exc.exception.message, 'Invalid filter')
 
     @mock.patch('hyperwallet.utils.ApiClient._makeRequest')
     def test_list_prepaid_card_status_transitions_success(self, mock_get):
@@ -1043,6 +1106,14 @@ class ApiTest(unittest.TestCase):
 
         self.assertEqual(exc.exception.message, 'userToken is required')
 
+    def test_list_paper_checks_fail_need_params_invalid(self):
+
+        options={'city':'test'}
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.listPaperChecks('token',options)
+
+        self.assertEqual(exc.exception.message, 'Invalid filter')
+
     @mock.patch('hyperwallet.utils.ApiClient._makeRequest')
     def test_list_paper_checks_success(self, mock_get):
 
@@ -1122,6 +1193,14 @@ class ApiTest(unittest.TestCase):
             self.api.listPaperCheckStatusTransitions('token')
 
         self.assertEqual(exc.exception.message, 'paperCheckToken is required')
+
+    def test_list_paper_check_status_transitions_fail_need_params_invalid(self):
+
+        options={'city':'test'}
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.listPaperCheckStatusTransitions('token','token',options)
+
+        self.assertEqual(exc.exception.message, 'Invalid filter')
 
     @mock.patch('hyperwallet.utils.ApiClient._makeRequest')
     def test_list_paper_check_status_transitions_success(self, mock_get):
@@ -1233,11 +1312,19 @@ class ApiTest(unittest.TestCase):
 
         self.assertTrue(response.token, self.data.get('token'))
 
+    def test_list_transfers_fail_need_params_invalid(self):
+
+        options={'status':'test'}
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.listTransfers(options)
+
+        self.assertEqual(exc.exception.message, 'Invalid filter')
+
     @mock.patch('hyperwallet.utils.ApiClient._makeRequest')
     def test_list_transfers_success(self, mock_get):
 
         mock_get.return_value = {'data': [self.data]}
-        response = self.api.listTransfers('token')
+        response = self.api.listTransfers()
 
         self.assertTrue(response[0].token, self.data.get('token'))
 
@@ -1388,6 +1475,14 @@ class ApiTest(unittest.TestCase):
 
         self.assertEqual(exc.exception.message, 'userToken is required')
 
+    def test_list_transfers_fail_need_params_invalid(self):
+
+        options={'email':'test'}
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.listPayPalAccounts('token',options)
+
+        self.assertEqual(exc.exception.message, 'Invalid filter')
+
     @mock.patch('hyperwallet.utils.ApiClient._makeRequest')
     def test_list_paypal_accounts_success(self, mock_get):
 
@@ -1467,6 +1562,14 @@ class ApiTest(unittest.TestCase):
             self.api.listPayPalAccountStatusTransitions('token')
 
         self.assertEqual(exc.exception.message, 'payPalAccountToken is required')
+
+    def test_list_paypal_account_status_transitions_fail_need_params_invalid(self):
+
+        options={'email':'test'}
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.listPayPalAccountStatusTransitions('token','token',options)
+
+        self.assertEqual(exc.exception.message, 'Invalid filter')
 
     @mock.patch('hyperwallet.utils.ApiClient._makeRequest')
     def test_list_paypal_account_status_transitions_success(self, mock_get):
@@ -1852,6 +1955,14 @@ class ApiTest(unittest.TestCase):
 
         self.assertEqual(exc.exception.message, 'paymentToken is required')
 
+    def test_list_payment_status_transitions_fail_need_params_invalid(self):
+
+        options={'token':'test'}
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.listPaymentStatusTransitions('token',options)
+
+        self.assertEqual(exc.exception.message, 'Invalid filter')
+
     @mock.patch('hyperwallet.utils.ApiClient._makeRequest')
     def test_list_payment_status_transitions_success(self, mock_get):
 
@@ -1938,6 +2049,14 @@ class ApiTest(unittest.TestCase):
             self.api.listBalancesForAccount('token')
 
         self.assertEqual(exc.exception.message, 'accountToken is required')
+
+    def test_list_account_balances_fail_need_params_invalid(self):
+
+        options={'token':'test'}
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.listBalancesForAccount('token','token',options)
+
+        self.assertEqual(exc.exception.message, 'Invalid filter')
 
     @mock.patch('hyperwallet.utils.ApiClient._makeRequest')
     def test_list_account_balances_success(self, mock_get):
@@ -2183,6 +2302,15 @@ class ApiTest(unittest.TestCase):
         response = self.api.getWebhookNotification('token')
 
         self.assertTrue(response.token, self.data.get('token'))
+
+    def test_list_webhooks_with_params_invalid(self):
+
+         options={'token':'test'}
+         with self.assertRaises(HyperwalletException) as exc:
+          self.api.listWebhookNotifications(options)
+
+         self.assertEqual(exc.exception.message, 'Invalid filter')
+
 
     @mock.patch('hyperwallet.utils.ApiClient._makeRequest')
     def test_list_webhooks_success(self, mock_get):
