@@ -2385,13 +2385,22 @@ class ApiTest(unittest.TestCase):
 
         self.assertEqual(exc.exception.message, 'transferToken is required')
 
+    def test_list_transfer_status_transitions_fail_need_transfer_token_invalid_params(self):
+
+        options={'token':'testToken'};
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.listTransferStatusTransitions('token',options)
+
+        self.assertEqual(exc.exception.message, 'Invalid filter')
+
     @mock.patch('hyperwallet.utils.ApiClient._makeRequest')
     def test_list_transfer_status_transitions_success(self, mock_get):
 
-        mock_get.return_value = {'data': [self.data]}
-        response = self.api.listTransferStatusTransitions('token')
+        options={'transition':'SCHEDULED'};
+        mock_get.return_value = self.data
+        response = self.api.listTransferStatusTransitions('token',options)
 
-        self.assertTrue(response[0].token, self.data.get('token'))
+        self.assertTrue(response.token, self.data.get('token'))
 
 if __name__ == '__main__':
     unittest.main()

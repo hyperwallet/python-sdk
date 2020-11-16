@@ -2992,6 +2992,10 @@ class Api(object):
         if not transferToken:
             raise HyperwalletException('transferToken is required')
 
+        if params and not StatusTransition.filter_array.issubset(params.keys()):
+            raise HyperwalletException('Invalid filter')
+
+        #print(params)
         response = self.apiClient.doGet(
             self.__buildUrl(
                 'transfers',
@@ -3001,4 +3005,4 @@ class Api(object):
             params
         )
 
-        return [StatusTransition(x) for x in response.get('data', [])]
+        return StatusTransition(response)
