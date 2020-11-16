@@ -2942,7 +2942,7 @@ class Api(object):
 
     def getTransferRefund(self,
                              transferToken=None,
-                             refundToken=None):
+                            refundToken=None):
 
         '''
         Get a Transfer Refund.
@@ -3007,9 +3007,7 @@ class Api(object):
         return TransferRefunds(response)
 
     '''
-    
         List Transfer Methods
-    
     '''
 
     def listTransferMethods(self,

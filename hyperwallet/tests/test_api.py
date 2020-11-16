@@ -2345,9 +2345,7 @@ class ApiTest(unittest.TestCase):
         self.assertTrue(response.token, self.data.get('token'))
 
     '''
-    
         Get Transfer Refund
-        
     '''
 
     def test_get_transfer_refund_fail_need_transfer_token(self):
@@ -2373,9 +2371,7 @@ class ApiTest(unittest.TestCase):
         self.assertTrue(response.token, self.data.get('token'))
 
     '''
-    
        List Transfer Refunds 
-       
     '''
 
     def test_list_transfer_refunds_fail_need_transfer_token(self):
@@ -2387,7 +2383,7 @@ class ApiTest(unittest.TestCase):
 
     def test_list_transfer_refunds_fail_need_transfer_token_invalid_params(self):
 
-        options={'token':'testToken'};
+        options={'token' : 'testToken'}
         with self.assertRaises(HyperwalletException) as exc:
             self.api.listTransferRefunds('token',options)
 
@@ -2396,16 +2392,14 @@ class ApiTest(unittest.TestCase):
     @mock.patch('hyperwallet.utils.ApiClient._makeRequest')
     def test_list_transfer_refunds_success(self, mock_get):
 
-        options={'clientRefundId':'test'}
+        options={'clientRefundId' : 'test'}
         mock_get.return_value = self.data
         response = self.api.listTransferRefunds('token', options)
 
         self.assertTrue(response.token, self.data.get('token'))
 
     '''
-        
-        List Transfer Methods 
-           
+        List Transfer Methods     
     '''
 
     def test_list_transfer_methods_fail_need_user_token(self):
