@@ -2941,8 +2941,8 @@ class Api(object):
     '''
 
     def getTransferRefund(self,
-                             transferToken=None,
-                            refundToken=None):
+                          transferToken=None,
+                          refundToken=None):
 
         '''
         Get a Transfer Refund.
@@ -2978,8 +2978,8 @@ class Api(object):
     '''
 
     def listTransferRefunds(self,
-                          transferToken=None,
-                          params=None):
+                            transferToken=None,
+                            params=None):
 
         '''
         List a Transfer Refund.
