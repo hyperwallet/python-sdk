@@ -127,7 +127,7 @@ class ApiTest(unittest.TestCase):
         self.assertTrue(response.token, self.data.get('token'))
 
     def test_list_users_with_params_invalid(self):
-        options={'city':'US'}
+        options = {'city': 'US'}
         with self.assertRaises(HyperwalletException) as exc:
             self.api.listUsers(options)
 
@@ -172,9 +172,9 @@ class ApiTest(unittest.TestCase):
 
     def test_list_user_status_transitions_fail_need_params_invalid(self):
 
-        options={'fromStatus':'test'}
+        options = {'fromStatus': 'test'}
         with self.assertRaises(HyperwalletException) as exc:
-            self.api.listUserStatusTransitions('token',options)
+            self.api.listUserStatusTransitions('token', options)
 
         self.assertEqual(exc.exception.message, 'Invalid filter')
 
@@ -274,9 +274,9 @@ class ApiTest(unittest.TestCase):
 
     def test_list_bank_accounts_fail_need_params_invalid(self):
 
-        options={'bankName':'test'}
+        options = {'bankName': 'test'}
         with self.assertRaises(HyperwalletException) as exc:
-            self.api.listBankAccounts('token',options)
+            self.api.listBankAccounts('token', options)
 
         self.assertEqual(exc.exception.message, 'Invalid filter')
 
@@ -355,9 +355,9 @@ class ApiTest(unittest.TestCase):
 
     def test_list_bank_account_status_transitions_fail_need_params_invalid(self):
 
-        options={'fromStatus':'test'}
+        options = {'fromStatus': 'test'}
         with self.assertRaises(HyperwalletException) as exc:
-            self.api.listBankAccountStatusTransitions('token','token',options)
+            self.api.listBankAccountStatusTransitions('token', 'token', options)
 
         self.assertEqual(exc.exception.message, 'Invalid filter')
 
@@ -497,9 +497,9 @@ class ApiTest(unittest.TestCase):
 
     def test_list_bank_cards_fail_need_params_invalid(self):
 
-        options={'cardNumber':'test'}
+        options = {'cardNumber': 'test'}
         with self.assertRaises(HyperwalletException) as exc:
-            self.api.listBankCards('token',options)
+            self.api.listBankCards('token', options)
 
         self.assertEqual(exc.exception.message, 'Invalid filter')
 
@@ -585,9 +585,9 @@ class ApiTest(unittest.TestCase):
 
     def test_list_bank_card_status_transitions_fail_need_params_invalid(self):
 
-        options={'fromStatus':'test'}
+        options = {'fromStatus': 'test'}
         with self.assertRaises(HyperwalletException) as exc:
-            self.api.listBankCardStatusTransitions('token','token',options)
+            self.api.listBankCardStatusTransitions('token', 'token', options)
 
         self.assertEqual(exc.exception.message, 'Invalid filter')
 
@@ -720,9 +720,9 @@ class ApiTest(unittest.TestCase):
 
     def test_list_prepaid_cards_fail_need_params_invalid(self):
 
-        options={'cardPackage':'test'}
+        options = {'cardPackage': 'test'}
         with self.assertRaises(HyperwalletException) as exc:
-            self.api.listPrepaidCards('token',options)
+            self.api.listPrepaidCards('token', options)
 
         self.assertEqual(exc.exception.message, 'Invalid filter')
 
@@ -808,9 +808,9 @@ class ApiTest(unittest.TestCase):
 
     def test_list_prepaid_card_status_transitions_fail_need_params_invalid(self):
 
-        options={'status':'test'}
+        options = {'status': 'test'}
         with self.assertRaises(HyperwalletException) as exc:
-            self.api.listPrepaidCardStatusTransitions('token','token',options)
+            self.api.listPrepaidCardStatusTransitions('token', 'token', options)
 
         self.assertEqual(exc.exception.message, 'Invalid filter')
 
@@ -1108,9 +1108,9 @@ class ApiTest(unittest.TestCase):
 
     def test_list_paper_checks_fail_need_params_invalid(self):
 
-        options={'city':'test'}
+        options = {'city': 'test'}
         with self.assertRaises(HyperwalletException) as exc:
-            self.api.listPaperChecks('token',options)
+            self.api.listPaperChecks('token', options)
 
         self.assertEqual(exc.exception.message, 'Invalid filter')
 
@@ -1196,9 +1196,9 @@ class ApiTest(unittest.TestCase):
 
     def test_list_paper_check_status_transitions_fail_need_params_invalid(self):
 
-        options={'city':'test'}
+        options = {'city': 'test'}
         with self.assertRaises(HyperwalletException) as exc:
-            self.api.listPaperCheckStatusTransitions('token','token',options)
+            self.api.listPaperCheckStatusTransitions('token', 'token', options)
 
         self.assertEqual(exc.exception.message, 'Invalid filter')
 
@@ -1314,7 +1314,7 @@ class ApiTest(unittest.TestCase):
 
     def test_list_transfers_fail_need_params_invalid(self):
 
-        options={'status':'test'}
+        options = {'status': 'test'}
         with self.assertRaises(HyperwalletException) as exc:
             self.api.listTransfers(options)
 
@@ -1477,9 +1477,9 @@ class ApiTest(unittest.TestCase):
 
     def test_list_transfers_fail_need_params_invalid(self):
 
-        options={'email':'test'}
+        options = {'email': 'test'}
         with self.assertRaises(HyperwalletException) as exc:
-            self.api.listPayPalAccounts('token',options)
+            self.api.listPayPalAccounts('token', options)
 
         self.assertEqual(exc.exception.message, 'Invalid filter')
 
@@ -1565,9 +1565,9 @@ class ApiTest(unittest.TestCase):
 
     def test_list_paypal_account_status_transitions_fail_need_params_invalid(self):
 
-        options={'email':'test'}
+        options = {'email': 'test'}
         with self.assertRaises(HyperwalletException) as exc:
-            self.api.listPayPalAccountStatusTransitions('token','token',options)
+            self.api.listPayPalAccountStatusTransitions('token', 'token', options)
 
         self.assertEqual(exc.exception.message, 'Invalid filter')
 
@@ -1957,9 +1957,9 @@ class ApiTest(unittest.TestCase):
 
     def test_list_payment_status_transitions_fail_need_params_invalid(self):
 
-        options={'token':'test'}
+        options = {'token': 'test'}
         with self.assertRaises(HyperwalletException) as exc:
-            self.api.listPaymentStatusTransitions('token',options)
+            self.api.listPaymentStatusTransitions('token', options)
 
         self.assertEqual(exc.exception.message, 'Invalid filter')
 
@@ -2052,9 +2052,9 @@ class ApiTest(unittest.TestCase):
 
     def test_list_account_balances_fail_need_params_invalid(self):
 
-        options={'token':'test'}
+        options = {'token': 'test'}
         with self.assertRaises(HyperwalletException) as exc:
-            self.api.listBalancesForAccount('token','token',options)
+            self.api.listBalancesForAccount('token', 'token', options)
 
         self.assertEqual(exc.exception.message, 'Invalid filter')
 
@@ -2305,12 +2305,11 @@ class ApiTest(unittest.TestCase):
 
     def test_list_webhooks_with_params_invalid(self):
 
-         options={'token':'test'}
+         options = {'token': 'test'}
          with self.assertRaises(HyperwalletException) as exc:
-          self.api.listWebhookNotifications(options)
+             self.api.listWebhookNotifications(options)
 
          self.assertEqual(exc.exception.message, 'Invalid filter')
-
 
     @mock.patch('hyperwallet.utils.ApiClient._makeRequest')
     def test_list_webhooks_success(self, mock_get):

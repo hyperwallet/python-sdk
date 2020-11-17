@@ -70,7 +70,7 @@ class User(HyperwalletModel):
         A dictionary containing the attributes for the User.
     '''
 
-    filters_array={'clientUserId','email','programToken','status','verificationStatus'}
+    filters_array = {'clientUserId', 'email', 'programToken', 'status', 'verificationStatus'}
 
     def __init__(self, data):
         '''
@@ -201,7 +201,7 @@ class BankAccount(TransferMethod):
         A dictionary containing the attributes for the Bank Account.
     '''
 
-    filters_array={'type','status'}
+    filters_array = {'type', 'status'}
 
     def __init__(self, data):
         '''
@@ -284,7 +284,7 @@ class BankCard(TransferMethod):
         A dictionary containing the attributes for the Bank Card.
     '''
 
-    filters_array={'status'}
+    filters_array = {'status'}
 
     def __init__(self, data):
         '''
@@ -320,7 +320,7 @@ class PrepaidCard(TransferMethod):
         A dictionary containing the attributes for the Prepaid Card.
     '''
 
-    filters_array={'status'}
+    filters_array = {'status'}
 
     def __init__(self, data):
         '''
@@ -355,7 +355,7 @@ class PaperCheck(TransferMethod):
         A dictionary containing the attributes for the Paper Check.
     '''
 
-    filters_array={'status'}
+    filters_array = {'status'}
 
     def __init__(self, data):
         '''
@@ -414,7 +414,7 @@ class Transfer(HyperwalletModel):
         A dictionary containing the attributes for the Transfer.
     '''
 
-    filters_array={'clientTransferId','sourceToken','destinationToken'}
+    filters_array = {'clientTransferId', 'sourceToken', 'destinationToken'}
 
     def __init__(self, data):
         '''
@@ -460,7 +460,7 @@ class PayPalAccount(TransferMethod):
         A dictionary containing the attributes for the PayPal Account.
     '''
 
-    filters_array={'status'}
+    filters_array = {'status'}
 
     def __init__(self, data):
         '''
@@ -520,7 +520,7 @@ class Payment(HyperwalletModel):
         A dictionary containing the attributes for the Payment.
     '''
 
-    filters_array={'clientPaymentId','releaseOn'}
+    filters_array = {'clientPaymentId', 'releaseOn'}
 
     def __init__(self, data):
         '''
@@ -564,7 +564,7 @@ class Balance(HyperwalletModel):
         A dictionary containing the attributes for the Balance.
     '''
 
-    filters_array={'currency'}
+    filters_array = {'currency'}
 
     def __init__(self, data):
         '''
@@ -700,7 +700,7 @@ class StatusTransition(HyperwalletModel):
         A dictionary containing the attributes for the Status Transition.
     '''
 
-    filters_array={'transition'}
+    filters_array = {'transition'}
 
     def __init__(self, data):
         '''
@@ -778,7 +778,7 @@ class Webhook(HyperwalletModel):
         A dictionary containing the attributes for the Webhook.
     '''
 
-    filters_array={'programToken'}
+    filters_array = {'programToken'}
 
     def __init__(self, data):
         '''
@@ -839,7 +839,7 @@ class TransferRefunds(HyperwalletModel):
         A dictionary containing the attributes for the Transfer Refunds.
     '''
 
-    filter_array={'programToken'}
+    filter_array = {'programToken'}
 
     def __init__(self, data):
         '''
