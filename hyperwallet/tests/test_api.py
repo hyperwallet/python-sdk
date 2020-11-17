@@ -2383,14 +2383,6 @@ class ApiTest(unittest.TestCase):
 
         self.assertEqual(exc.exception.message, 'transferToken is required')
 
-    def test_list_transfer_refunds_fail_need_transfer_token_invalid_params(self):
-
-        options = {'token': 'testToken'}
-        with self.assertRaises(HyperwalletException) as exc:
-            self.api.listTransferRefunds('token', options)
-
-        self.assertEqual(exc.exception.message, 'Invalid filter')
-
     @mock.patch('hyperwallet.utils.ApiClient._makeRequest')
     def test_list_transfer_refunds_success(self, mock_get):
 
