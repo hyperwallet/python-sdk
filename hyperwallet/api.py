@@ -2935,7 +2935,9 @@ class Api(object):
         )
 
     '''
-       Get Transfer Status Transition 
+
+        Get Transfer Status Transition
+
     '''
 
     def getTransferStatusTransition(self,
@@ -2970,7 +2972,9 @@ class Api(object):
         return StatusTransition(response)
 
     '''
-       List Transfer Status Transition 
+
+        List Transfer Status Transition
+
     '''
 
     def listTransferStatusTransitions(self,
@@ -2991,7 +2995,6 @@ class Api(object):
         if params and not StatusTransition.filter_array >= params.keys():
             raise HyperwalletException('Invalid filter')
 
-        #print(params)
         response = self.apiClient.doGet(
             self.__buildUrl(
                 'transfers',
