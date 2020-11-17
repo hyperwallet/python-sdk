@@ -3035,3 +3035,75 @@ class Api(object):
         )
 
         return TransferMethod(response)
+      
+    '''
+
+        Get Transfer Status Transition
+
+    '''
+
+    def getTransferStatusTransition(self,
+                                    transferToken=None,
+                                    statusTransitionToken=None):
+        '''
+        Retrieve a Transfer Status Transition.
+
+        :param transferToken:
+            A token identifying the Transfer. **REQUIRED**
+        :param statusTransitionToken:
+            A token identifying the Transfer Status Transition. **REQUIRED**
+        :returns:
+            A Transfer Status Transition.
+        '''
+
+        if not transferToken:
+            raise HyperwalletException('transferToken is required')
+
+        if not statusTransitionToken:
+            raise HyperwalletException('statusTransitionToken is required')
+
+        response = self.apiClient.doGet(
+            self.__buildUrl(
+                'transfers',
+                transferToken,
+                'status-transitions',
+                statusTransitionToken
+            )
+        )
+
+        return StatusTransition(response)
+
+    '''
+
+        List Transfer Status Transition
+
+    '''
+
+    def listTransferStatusTransitions(self,
+                                      transferToken=None,
+                                      params=None):
+        '''
+        Retrieve a Transfer Status Transition.
+
+        :param transferToken:
+            A token identifying the Transfer. **REQUIRED**
+        :returns:
+            A Transfer Status Transition.
+        '''
+
+        if not transferToken:
+            raise HyperwalletException('transferToken is required')
+
+        if params and not StatusTransition.filter_array >= params.keys():
+            raise HyperwalletException('Invalid filter')
+
+        response = self.apiClient.doGet(
+            self.__buildUrl(
+                'transfers',
+                transferToken,
+                'status-transitions'
+            ),
+            params
+        )
+
+        return StatusTransition(response)

@@ -2345,32 +2345,56 @@ class ApiTest(unittest.TestCase):
         self.assertTrue(response.token, self.data.get('token'))
 
     '''
-        Get Transfer Refund
+
+        Get Transfer Status Transition
+
     '''
 
-    def test_get_transfer_refund_fail_need_transfer_token(self):
+    def test_get_transfer_status_transition_fail_need_transfer_token(self):
 
         with self.assertRaises(HyperwalletException) as exc:
-            self.api.getTransferRefund()
+            self.api.getTransferStatusTransition()
 
         self.assertEqual(exc.exception.message, 'transferToken is required')
 
-    def test_get_transfer_refund_fail_need_refund_token(self):
+    def test_get_transfer_status_transition_fail_need_transition_token(self):
 
         with self.assertRaises(HyperwalletException) as exc:
-            self.api.getTransferRefund('token')
+            self.api.getTransferStatusTransition('token')
 
-        self.assertEqual(exc.exception.message, 'refundToken is required')
+        self.assertEqual(exc.exception.message, 'statusTransitionToken is required')
 
     @mock.patch('hyperwallet.utils.ApiClient._makeRequest')
-    def test_get_transfer_refund_success(self, mock_get):
+    def test_get_transfer_status_transition_success(self, mock_get):
 
         mock_get.return_value = self.data
-        response = self.api.getTransferRefund('token', 'token')
+        response = self.api.getTransferStatusTransition('token', 'token')
 
         self.assertTrue(response.token, self.data.get('token'))
 
     '''
+
+        List Transfer Status Transition
+
+    '''
+
+    def test_list_transfer_status_transitions_fail_need_transfer_token(self):
+
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.listTransferStatusTransitions()
+
+        self.assertEqual(exc.exception.message, 'transferToken is required')
+
+    @mock.patch('hyperwallet.utils.ApiClient._makeRequest')
+    def test_list_transfer_status_transitions_success(self, mock_get):
+
+        options = {'transition': 'SCHEDULED'}
+        mock_get.return_value = self.data
+        response = self.api.listTransferStatusTransitions('token', options)
+
+        self.assertTrue(response.token, self.data.get('token'))
+        
+   '''
 
         List Transfer Refunds
 
@@ -2412,7 +2436,7 @@ class ApiTest(unittest.TestCase):
         response = self.api.listTransferMethods('token')
 
         self.assertTrue(response.token, self.data.get('token'))
-
+        
 
 if __name__ == '__main__':
     unittest.main()
