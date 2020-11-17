@@ -54,7 +54,7 @@ class ApiClient(object):
         self.server = server
 
         # The complete base URL of the API.
-        self.baseUrl = urljoin(self.server, '/rest/v4/')
+        self.baseUrl = urljoin(self.server, '/rest/v3/')
 
         # The default connection to persist authentication and SSL settings.
         defaultSession = requests.Session()

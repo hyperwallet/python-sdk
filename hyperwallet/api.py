@@ -3035,7 +3035,7 @@ class Api(object):
         )
 
         return TransferMethod(response)
-      
+
     '''
 
         Get Transfer Status Transition

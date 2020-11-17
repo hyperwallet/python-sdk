@@ -2393,8 +2393,36 @@ class ApiTest(unittest.TestCase):
         response = self.api.listTransferStatusTransitions('token', options)
 
         self.assertTrue(response.token, self.data.get('token'))
+
+    '''
+    
+        Get Transfer Refund
         
-   '''
+    '''
+
+    def test_get_transfer_refund_fail_need_transfer_token(self):
+
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.getTransferRefund()
+
+        self.assertEqual(exc.exception.message, 'transferToken is required')
+
+    def test_get_transfer_refund_fail_need_refund_token(self):
+
+        with self.assertRaises(HyperwalletException) as exc:
+            self.api.getTransferRefund('token')
+
+        self.assertEqual(exc.exception.message, 'refundToken is required')
+
+    @mock.patch('hyperwallet.utils.ApiClient._makeRequest')
+    def test_get_transfer_refund_success(self, mock_get):
+
+        mock_get.return_value = self.data
+        response = self.api.getTransferRefund('token', 'token')
+
+        self.assertTrue(response.token, self.data.get('token'))
+
+    '''
 
         List Transfer Refunds
 
@@ -2436,7 +2464,7 @@ class ApiTest(unittest.TestCase):
         response = self.api.listTransferMethods('token')
 
         self.assertTrue(response.token, self.data.get('token'))
-        
+
 
 if __name__ == '__main__':
     unittest.main()
