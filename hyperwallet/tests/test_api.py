@@ -2402,5 +2402,6 @@ class ApiTest(unittest.TestCase):
 
         self.assertTrue(response.token, self.data.get('token'))
 
+
 if __name__ == '__main__':
     unittest.main()

@@ -2941,8 +2941,8 @@ class Api(object):
     '''
 
     def getTransferStatusTransition(self,
-                                transferToken=None,
-                                statusTransitionToken=None):
+                                    transferToken=None,
+                                    statusTransitionToken=None):
         '''
         Retrieve a Transfer Status Transition.
 
@@ -2978,8 +2978,8 @@ class Api(object):
     '''
 
     def listTransferStatusTransitions(self,
-                                    transferToken=None,
-                                    params=None):
+                                      transferToken=None,
+                                      params=None):
         '''
         Retrieve a Transfer Status Transition.
 
