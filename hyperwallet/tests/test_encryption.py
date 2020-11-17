@@ -41,7 +41,7 @@ class EncryptionTest(unittest.TestCase):
         with self.assertRaises(HyperwalletException) as exc:
             encryption2.decrypt(encryptedMessage)
 
-        self.assertFalse(str(exc.exception).startswith('No recipient matched the provided key["Failed: [ValueError(\'Decryption failed.\''))
+        self.assertTrue(str(exc.exception).startswith('No recipient matched the provided key'))
 
     def test_should_fail_signature_verification_when_wrong_public_key_is_used(self):
 
