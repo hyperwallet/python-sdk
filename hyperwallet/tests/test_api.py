@@ -2371,7 +2371,9 @@ class ApiTest(unittest.TestCase):
         self.assertTrue(response.token, self.data.get('token'))
 
     '''
-        List Transfer Refunds 
+
+        List Transfer Refunds
+
     '''
 
     def test_list_transfer_refunds_fail_need_transfer_token(self):
@@ -2399,7 +2401,9 @@ class ApiTest(unittest.TestCase):
         self.assertTrue(response.token, self.data.get('token'))
 
     '''
-        List Transfer Methods 
+
+        List Transfer Methods
+
     '''
 
     def test_list_transfer_methods_fail_need_user_token(self):
@@ -2416,6 +2420,7 @@ class ApiTest(unittest.TestCase):
         response = self.api.listTransferMethods('token')
 
         self.assertTrue(response.token, self.data.get('token'))
+
 
 if __name__ == '__main__':
     unittest.main()
