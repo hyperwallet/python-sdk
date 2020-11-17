@@ -2303,14 +2303,6 @@ class ApiTest(unittest.TestCase):
 
         self.assertTrue(response.token, self.data.get('token'))
 
-    def test_list_webhooks_with_params_invalid(self):
-
-         options = {'token': 'test'}
-         with self.assertRaises(HyperwalletException) as exc:
-             self.api.listWebhookNotifications(options)
-
-         self.assertEqual(exc.exception.message, 'Invalid filter')
-
     @mock.patch('hyperwallet.utils.ApiClient._makeRequest')
     def test_list_webhooks_success(self, mock_get):
 
