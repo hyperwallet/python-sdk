@@ -156,7 +156,7 @@ class Api(object):
         :returns:
             An array of Users.
         '''
-        if params and not User.filters_array >= params.keys():
+        if params and not User.filters_array.issubset(params):
             raise HyperwalletException('Invalid filter')
 
         response = self.apiClient.doGet('users', params)
@@ -211,7 +211,7 @@ class Api(object):
         if not userToken:
             raise HyperwalletException('userToken is required')
 
-        if params and not StatusTransition.filters_array >= params.keys():
+        if params and not StatusTransition.filters_array.issubset(params):
             raise HyperwalletException('Invalid filter')
 
         response = self.apiClient.doGet(
@@ -327,7 +327,7 @@ class Api(object):
         if not userToken:
             raise HyperwalletException('userToken is required')
 
-        if params and not BankAccount.filters_array >= params.keys():
+        if params and not BankAccount.filters_array.issubset(params):
             raise HyperwalletException('Invalid filter')
 
         response = self.apiClient.doGet(
@@ -438,7 +438,7 @@ class Api(object):
         if not bankAccountToken:
             raise HyperwalletException('bankAccountToken is required')
 
-        if params and not StatusTransition.filters_array >= params.keys():
+        if params and not StatusTransition.filters_array.issubset(params):
             raise HyperwalletException('Invalid filter')
 
         response = self.apiClient.doGet(
@@ -586,7 +586,7 @@ class Api(object):
         if not userToken:
             raise HyperwalletException('userToken is required')
 
-        if params and not BankCard.filters_array >= params.keys():
+        if params and not BankCard.filters_array.issubset(params):
             raise HyperwalletException('Invalid filter')
 
         response = self.apiClient.doGet(
@@ -697,7 +697,7 @@ class Api(object):
         if not bankCardToken:
             raise HyperwalletException('bankCardToken is required')
 
-        if params and not StatusTransition.filters_array >= params.keys():
+        if params and not StatusTransition.filters_array.issubset(params):
             raise HyperwalletException('Invalid filter')
 
         response = self.apiClient.doGet(
@@ -845,7 +845,7 @@ class Api(object):
         if not userToken:
             raise HyperwalletException('userToken is required')
 
-        if params and not PrepaidCard.filters_array >= params.keys():
+        if params and not PrepaidCard.filters_array.issubset(params):
             raise HyperwalletException('Invalid filter')
 
         response = self.apiClient.doGet(
@@ -956,7 +956,7 @@ class Api(object):
         if not prepaidCardToken:
             raise HyperwalletException('prepaidCardToken is required')
 
-        if params and not StatusTransition.filters_array >= params.keys():
+        if params and not StatusTransition.filters_array.issubset(params):
             raise HyperwalletException('Invalid filter')
 
         response = self.apiClient.doGet(
@@ -1254,7 +1254,7 @@ class Api(object):
         if not userToken:
             raise HyperwalletException('userToken is required')
 
-        if params and not PaperCheck.filters_array >= params.keys():
+        if params and not PaperCheck.filters_array.issubset(params):
             raise HyperwalletException('Invalid filter')
 
         response = self.apiClient.doGet(
@@ -1365,7 +1365,7 @@ class Api(object):
         if not paperCheckToken:
             raise HyperwalletException('paperCheckToken is required')
 
-        if params and not StatusTransition.filters_array >= params.keys():
+        if params and not StatusTransition.filters_array.issubset(params):
             raise HyperwalletException('Invalid filter')
 
         response = self.apiClient.doGet(
@@ -1479,7 +1479,7 @@ class Api(object):
             An array of Transfers.
         '''
 
-        if params and not Transfer.filters_array >= params.keys():
+        if params and not Transfer.filters_array.issubset(params):
             raise HyperwalletException('Invalid filter')
 
         response = self.apiClient.doGet(
@@ -1626,7 +1626,7 @@ class Api(object):
         if not userToken:
             raise HyperwalletException('userToken is required')
 
-        if params and not PayPalAccount.filters_array >= params.keys():
+        if params and not PayPalAccount.filters_array.issubset(params):
             raise HyperwalletException('Invalid filter')
 
         response = self.apiClient.doGet(
@@ -1737,7 +1737,7 @@ class Api(object):
         if not payPalAccountToken:
             raise HyperwalletException('payPalAccountToken is required')
 
-        if params and not StatusTransition.filters_array >= params.keys():
+        if params and not StatusTransition.filters_array.issubset(params):
             raise HyperwalletException('Invalid filter')
 
         response = self.apiClient.doGet(
@@ -2123,7 +2123,7 @@ class Api(object):
             An array of Payments.
         '''
 
-        if params and not Payment.filters_array >= params.keys():
+        if params and not Payment.filters_array.issubset(params):
             raise HyperwalletException('Invalid filter')
 
         response = self.apiClient.doGet('payments', params)
@@ -2178,7 +2178,7 @@ class Api(object):
         if not paymentToken:
             raise HyperwalletException('paymentToken is required')
 
-        if params and not StatusTransition.filters_array >= params.keys():
+        if params and not StatusTransition.filters_array.issubset(params):
             raise HyperwalletException('Invalid filter')
 
         response = self.apiClient.doGet(
@@ -2247,7 +2247,7 @@ class Api(object):
         if not userToken:
             raise HyperwalletException('userToken is required')
 
-        if params and not Balance.filters_array >= params.keys():
+        if params and not Balance.filters_array.issubset(params):
             raise HyperwalletException('Invalid filter')
 
         response = self.apiClient.doGet(
@@ -2280,7 +2280,7 @@ class Api(object):
         if not prepaidCardToken:
             raise HyperwalletException('prepaidCardToken is required')
 
-        if params and not Balance.filters_array >= params.keys():
+        if params and not Balance.filters_array.issubset(params):
             raise HyperwalletException('Invalid filter')
 
         response = self.apiClient.doGet(
@@ -2319,7 +2319,7 @@ class Api(object):
         if not accountToken:
             raise HyperwalletException('accountToken is required')
 
-        if params and not Balance.filters_array >= params.keys():
+        if params and not Balance.filters_array.issubset(params):
             raise HyperwalletException('Invalid filter')
 
         response = self.apiClient.doGet(
@@ -2732,7 +2732,7 @@ class Api(object):
             An array of Webhooks.
         '''
 
-        if params and not Webhook.filters_array >= params.keys():
+        if params and not Webhook.filters_array.issubset(params):
             raise HyperwalletException('Invalid filter')
 
         response = self.apiClient.doGet('webhook-notifications', params)
