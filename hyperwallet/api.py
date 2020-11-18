@@ -2989,3 +2989,177 @@ class Api(object):
             userToken,
             data
         )
+
+    '''
+
+        Get Transfer Refund
+
+    '''
+
+    def getTransferRefund(self,
+                          transferToken=None,
+                          refundToken=None):
+
+        '''
+        Get a Transfer Refund.
+        :param transferToken:
+            A token identifying the Transfer. **REQUIRED**
+        :param refundToken:
+            A token identifying Transfer Refund . **REQUIRED**
+        :returns:
+            Get Transfer Refund.
+        '''
+
+        if not transferToken:
+            raise HyperwalletException('transferToken is required')
+
+        if not refundToken:
+            raise HyperwalletException('refundToken is required')
+
+        response = self.apiClient.doGet(
+            self.__buildUrl(
+                'transfers',
+                transferToken,
+                'refunds',
+                refundToken
+            )
+        )
+
+        return TransferRefunds(response)
+
+    '''
+
+        List Transfer Refunds
+
+    '''
+
+    def listTransferRefunds(self,
+                            transferToken=None,
+                            params=None):
+
+        '''
+        List a Transfer Refund.
+        :param transferToken:
+            A token identifying the Transfer. **REQUIRED**
+        :returns:
+            List Transfer Refund.
+        '''
+
+        if not transferToken:
+            raise HyperwalletException('transferToken is required')
+
+        if params and not TransferRefunds.filter_array >= params.keys():
+            raise HyperwalletException('Invalid filter')
+
+        response = self.apiClient.doGet(
+            self.__buildUrl(
+                'transfers',
+                transferToken,
+                'refunds'
+            ),
+            params
+        )
+
+        return TransferRefunds(response)
+
+    '''
+        List Transfer Methods
+    '''
+
+    def listTransferMethods(self,
+                            userToken=None,
+                            params=None):
+
+        '''
+        List a Transfer Methods.
+        :param userToken:
+            A token identifying the Transfer. **REQUIRED**
+        :returns:
+            List Transfer Methods.
+        '''
+
+        if not userToken:
+            raise HyperwalletException('userToken is required')
+
+        response = self.apiClient.doGet(
+            self.__buildUrl(
+                'users',
+                userToken,
+                'transfer-methods'
+            ),
+            params
+        )
+
+        return TransferMethod(response)
+
+    '''
+
+        Get Transfer Status Transition
+
+    '''
+
+    def getTransferStatusTransition(self,
+                                    transferToken=None,
+                                    statusTransitionToken=None):
+        '''
+        Retrieve a Transfer Status Transition.
+
+        :param transferToken:
+            A token identifying the Transfer. **REQUIRED**
+        :param statusTransitionToken:
+            A token identifying the Transfer Status Transition. **REQUIRED**
+        :returns:
+            A Transfer Status Transition.
+        '''
+
+        if not transferToken:
+            raise HyperwalletException('transferToken is required')
+
+        if not statusTransitionToken:
+            raise HyperwalletException('statusTransitionToken is required')
+
+        response = self.apiClient.doGet(
+            self.__buildUrl(
+                'transfers',
+                transferToken,
+                'status-transitions',
+                statusTransitionToken
+            )
+        )
+
+        return StatusTransition(response)
+
+    '''
+
+        List Transfer Status Transition
+
+    '''
+
+    def listTransferStatusTransitions(self,
+                                      transferToken=None,
+                                      params=None):
+        '''
+        Retrieve a Transfer Status Transition.
+
+        :param transferToken:
+            A token identifying the Transfer. **REQUIRED**
+        :returns:
+            A Transfer Status Transition.
+        '''
+
+        if not transferToken:
+            raise HyperwalletException('transferToken is required')
+
+        if params and not StatusTransition.filter_array >= params.keys():
+            raise HyperwalletException('Invalid filter')
+
+        response = self.apiClient.doGet(
+            self.__buildUrl(
+                'transfers',
+                transferToken,
+                'status-transitions'
+            ),
+            params
+        )
+
+        return StatusTransition(response)
