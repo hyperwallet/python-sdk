@@ -819,6 +819,8 @@ class TransferRefunds(HyperwalletModel):
         A dictionary containing the attributes for the Transfer Refunds.
     '''
 
+    filter_array = {'clientRefundId', 'sourceToken', 'destinationTokens'}
+
     def __init__(self, data):
         '''
         Create a new Transfer Refunds with the provided attributes.
