@@ -839,7 +839,7 @@ class TransferRefunds(HyperwalletModel):
         A dictionary containing the attributes for the Transfer Refunds.
     '''
 
-    filter_array = {'programToken'}
+    filters_array = {'programToken'}
 
     def __init__(self, data):
         '''

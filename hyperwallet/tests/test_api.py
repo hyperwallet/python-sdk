@@ -2557,7 +2557,7 @@ class ApiTest(unittest.TestCase):
     @mock.patch('hyperwallet.utils.ApiClient._makeRequest')
     def test_list_transfer_refunds_success(self, mock_get):
 
-        options = {'clientRefundId': 'test'}
+        options = {'programToken': 'test'}
         mock_get.return_value = self.data
         response = self.api.listTransferRefunds('token', options)
 
