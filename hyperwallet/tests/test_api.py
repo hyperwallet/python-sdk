@@ -2395,9 +2395,7 @@ class ApiTest(unittest.TestCase):
         self.assertTrue(response.token, self.data.get('token'))
 
     '''
-    
-        Get Transfer Refund
-        
+        Get Transfer Refund 
     '''
 
     def test_get_transfer_refund_fail_need_transfer_token(self):
