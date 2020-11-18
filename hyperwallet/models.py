@@ -839,8 +839,6 @@ class TransferRefunds(HyperwalletModel):
         A dictionary containing the attributes for the Transfer Refunds.
     '''
 
-    filters_array = {'programToken'}
-
     def __init__(self, data):
         '''
         Create a new Transfer Refunds with the provided attributes.

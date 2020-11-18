@@ -156,7 +156,6 @@ class Api(object):
         :returns:
             An array of Users.
         '''
-        #if params:
 
         if params and not set(list(params)).issubset(User.filters_array):
             raise HyperwalletException('Invalid filter')
@@ -3049,9 +3048,6 @@ class Api(object):
 
         if not transferToken:
             raise HyperwalletException('transferToken is required')
-
-        if params and not set(list(params)).issubset(TransferRefunds.filters_array):
-            raise HyperwalletException('Invalid filter')
 
         response = self.apiClient.doGet(
             self.__buildUrl(
