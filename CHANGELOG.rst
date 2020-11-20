@@ -1,6 +1,12 @@
 Changelog
 =========
 
+1.6.0
+-------------------
+- Added custom headers
+- Added filters
+- Added status transitions for Transfers, TransferRefunds
+
 1.5.1
 -------------------
 - Added field 'processingTime' to BankCards
