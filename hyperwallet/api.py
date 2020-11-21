@@ -157,6 +157,9 @@ class Api(object):
             An array of Users.
         '''
 
+        if params and not set(list(params)).issubset(User.filters_array):
+            raise HyperwalletException('Invalid filter')
+
         response = self.apiClient.doGet('users', params)
 
         return [User(x) for x in response.get('data', [])]
@@ -208,6 +211,9 @@ class Api(object):
 
         if not userToken:
             raise HyperwalletException('userToken is required')
+
+        if params and not set(list(params)).issubset(StatusTransition.filters_array):
+            raise HyperwalletException('Invalid filter')
 
         response = self.apiClient.doGet(
             self.__buildUrl(
@@ -322,6 +328,9 @@ class Api(object):
         if not userToken:
             raise HyperwalletException('userToken is required')
 
+        if params and not set(list(params)).issubset(BankAccount.filters_array):
+            raise HyperwalletException('Invalid filter')
+
         response = self.apiClient.doGet(
             self.__buildUrl('users', userToken, 'bank-accounts'),
             params
@@ -429,6 +438,9 @@ class Api(object):
 
         if not bankAccountToken:
             raise HyperwalletException('bankAccountToken is required')
+
+        if params and not set(list(params)).issubset(StatusTransition.filters_array):
+            raise HyperwalletException('Invalid filter')
 
         response = self.apiClient.doGet(
             self.__buildUrl(
@@ -575,6 +587,9 @@ class Api(object):
         if not userToken:
             raise HyperwalletException('userToken is required')
 
+        if params and not set(list(params)).issubset(BankCard.filters_array):
+            raise HyperwalletException('Invalid filter')
+
         response = self.apiClient.doGet(
             self.__buildUrl('users', userToken, 'bank-cards'),
             params
@@ -682,6 +697,9 @@ class Api(object):
 
         if not bankCardToken:
             raise HyperwalletException('bankCardToken is required')
+
+        if params and not set(list(params)).issubset(StatusTransition.filters_array):
+            raise HyperwalletException('Invalid filter')
 
         response = self.apiClient.doGet(
             self.__buildUrl(
@@ -828,6 +846,9 @@ class Api(object):
         if not userToken:
             raise HyperwalletException('userToken is required')
 
+        if params and not set(list(params)).issubset(PrepaidCard.filters_array):
+            raise HyperwalletException('Invalid filter')
+
         response = self.apiClient.doGet(
             self.__buildUrl('users', userToken, 'prepaid-cards'),
             params
@@ -935,6 +956,9 @@ class Api(object):
 
         if not prepaidCardToken:
             raise HyperwalletException('prepaidCardToken is required')
+
+        if params and not set(list(params)).issubset(StatusTransition.filters_array):
+            raise HyperwalletException('Invalid filter')
 
         response = self.apiClient.doGet(
             self.__buildUrl(
@@ -1231,6 +1255,9 @@ class Api(object):
         if not userToken:
             raise HyperwalletException('userToken is required')
 
+        if params and not set(list(params)).issubset(PaperCheck.filters_array):
+            raise HyperwalletException('Invalid filter')
+
         response = self.apiClient.doGet(
             self.__buildUrl('users', userToken, 'paper-checks'),
             params
@@ -1338,6 +1365,9 @@ class Api(object):
 
         if not paperCheckToken:
             raise HyperwalletException('paperCheckToken is required')
+
+        if params and not set(list(params)).issubset(StatusTransition.filters_array):
+            raise HyperwalletException('Invalid filter')
 
         response = self.apiClient.doGet(
             self.__buildUrl(
@@ -1449,6 +1479,9 @@ class Api(object):
         :returns:
             An array of Transfers.
         '''
+
+        if params and not set(list(params)).issubset(Transfer.filters_array):
+            raise HyperwalletException('Invalid filter')
 
         response = self.apiClient.doGet(
             self.__buildUrl('transfers'),
@@ -1594,6 +1627,9 @@ class Api(object):
         if not userToken:
             raise HyperwalletException('userToken is required')
 
+        if params and not set(list(params)).issubset(PayPalAccount.filters_array):
+            raise HyperwalletException('Invalid filter')
+
         response = self.apiClient.doGet(
             self.__buildUrl('users', userToken, 'paypal-accounts'),
             params
@@ -1701,6 +1737,9 @@ class Api(object):
 
         if not payPalAccountToken:
             raise HyperwalletException('payPalAccountToken is required')
+
+        if params and not set(list(params)).issubset(StatusTransition.filters_array):
+            raise HyperwalletException('Invalid filter')
 
         response = self.apiClient.doGet(
             self.__buildUrl(
@@ -2085,6 +2124,9 @@ class Api(object):
             An array of Payments.
         '''
 
+        if params and not set(list(params)).issubset(Payment.filters_array):
+            raise HyperwalletException('Invalid filter')
+
         response = self.apiClient.doGet('payments', params)
 
         return [Payment(x) for x in response.get('data', [])]
@@ -2136,6 +2178,9 @@ class Api(object):
 
         if not paymentToken:
             raise HyperwalletException('paymentToken is required')
+
+        if params and not set(list(params)).issubset(StatusTransition.filters_array):
+            raise HyperwalletException('Invalid filter')
 
         response = self.apiClient.doGet(
             self.__buildUrl(
@@ -2203,6 +2248,9 @@ class Api(object):
         if not userToken:
             raise HyperwalletException('userToken is required')
 
+        if params and not set(list(params)).issubset(Balance.filters_array):
+            raise HyperwalletException('Invalid filter')
+
         response = self.apiClient.doGet(
             self.__buildUrl('users', userToken, 'balances'),
             params
@@ -2232,6 +2280,9 @@ class Api(object):
 
         if not prepaidCardToken:
             raise HyperwalletException('prepaidCardToken is required')
+
+        if params and not set(list(params)).issubset(Balance.filters_array):
+            raise HyperwalletException('Invalid filter')
 
         response = self.apiClient.doGet(
             self.__buildUrl(
@@ -2268,6 +2319,9 @@ class Api(object):
 
         if not accountToken:
             raise HyperwalletException('accountToken is required')
+
+        if params and not set(list(params)).issubset(Balance.filters_array):
+            raise HyperwalletException('Invalid filter')
 
         response = self.apiClient.doGet(
             self.__buildUrl(
@@ -2679,6 +2733,9 @@ class Api(object):
             An array of Webhooks.
         '''
 
+        if params and not set(list(params)).issubset(Webhook.filters_array):
+            raise HyperwalletException('Invalid filter')
+
         response = self.apiClient.doGet('webhook-notifications', params)
 
         return [Webhook(x) for x in response.get('data', [])]
@@ -2933,3 +2990,174 @@ class Api(object):
             userToken,
             data
         )
+
+    '''
+
+        Get Transfer Refund
+
+    '''
+
+    def getTransferRefund(self,
+                          transferToken=None,
+                          refundToken=None):
+
+        '''
+        Get a Transfer Refund.
+        :param transferToken:
+            A token identifying the Transfer. **REQUIRED**
+        :param refundToken:
+            A token identifying Transfer Refund . **REQUIRED**
+        :returns:
+            Get Transfer Refund.
+        '''
+
+        if not transferToken:
+            raise HyperwalletException('transferToken is required')
+
+        if not refundToken:
+            raise HyperwalletException('refundToken is required')
+
+        response = self.apiClient.doGet(
+            self.__buildUrl(
+                'transfers',
+                transferToken,
+                'refunds',
+                refundToken
+            )
+        )
+
+        return TransferRefunds(response)
+
+    '''
+
+        List Transfer Refunds
+
+    '''
+
+    def listTransferRefunds(self,
+                            transferToken=None,
+                            params=None):
+
+        '''
+        List a Transfer Refund.
+        :param transferToken:
+            A token identifying the Transfer. **REQUIRED**
+        :returns:
+            List Transfer Refund.
+        '''
+
+        if not transferToken:
+            raise HyperwalletException('transferToken is required')
+
+        response = self.apiClient.doGet(
+            self.__buildUrl(
+                'transfers',
+                transferToken,
+                'refunds'
+            ),
+            params
+        )
+
+        return TransferRefunds(response)
+
+    '''
+        List Transfer Methods
+    '''
+
+    def listTransferMethods(self,
+                            userToken=None,
+                            params=None):
+
+        '''
+        List a Transfer Methods.
+        :param userToken:
+            A token identifying the Transfer. **REQUIRED**
+        :returns:
+            List Transfer Methods.
+        '''
+
+        if not userToken:
+            raise HyperwalletException('userToken is required')
+
+        response = self.apiClient.doGet(
+            self.__buildUrl(
+                'users',
+                userToken,
+                'transfer-methods'
+            ),
+            params
+        )
+
+        return TransferMethod(response)
+
+    '''
+
+        Get Transfer Status Transition
+
+    '''
+
+    def getTransferStatusTransition(self,
+                                    transferToken=None,
+                                    statusTransitionToken=None):
+        '''
+        Retrieve a Transfer Status Transition.
+
+        :param transferToken:
+            A token identifying the Transfer. **REQUIRED**
+        :param statusTransitionToken:
+            A token identifying the Transfer Status Transition. **REQUIRED**
+        :returns:
+            A Transfer Status Transition.
+        '''
+
+        if not transferToken:
+            raise HyperwalletException('transferToken is required')
+
+        if not statusTransitionToken:
+            raise HyperwalletException('statusTransitionToken is required')
+
+        response = self.apiClient.doGet(
+            self.__buildUrl(
+                'transfers',
+                transferToken,
+                'status-transitions',
+                statusTransitionToken
+            )
+        )
+
+        return StatusTransition(response)
+
+    '''
+
+        List Transfer Status Transition
+
+    '''
+
+    def listTransferStatusTransitions(self,
+                                      transferToken=None,
+                                      params=None):
+        '''
+        Retrieve a Transfer Status Transition.
+
+        :param transferToken:
+            A token identifying the Transfer. **REQUIRED**
+        :returns:
+            A Transfer Status Transition.
+        '''
+
+        if not transferToken:
+            raise HyperwalletException('transferToken is required')
+
+        if params and not set(list(params)).issubset(StatusTransition.filters_array):
+            raise HyperwalletException('Invalid filter')
+
+        response = self.apiClient.doGet(
+            self.__buildUrl(
+                'transfers',
+                transferToken,
+                'status-transitions'
+            ),
+            params
+        )
+
+        return StatusTransition(response)

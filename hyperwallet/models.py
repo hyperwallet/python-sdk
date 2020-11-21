@@ -70,6 +70,8 @@ class User(HyperwalletModel):
         A dictionary containing the attributes for the User.
     '''
 
+    filters_array = {'clientUserId', 'email', 'programToken', 'status', 'verificationStatus'}
+
     def __init__(self, data):
         '''
         Create a new User with the provided attributes.
@@ -199,6 +201,8 @@ class BankAccount(TransferMethod):
         A dictionary containing the attributes for the Bank Account.
     '''
 
+    filters_array = {'type', 'status'}
+
     def __init__(self, data):
         '''
         Create a new Bank Account with the provided attributes.
@@ -280,6 +284,8 @@ class BankCard(TransferMethod):
         A dictionary containing the attributes for the Bank Card.
     '''
 
+    filters_array = {'status'}
+
     def __init__(self, data):
         '''
         Create a new Bank Card with the provided attributes.
@@ -314,6 +320,8 @@ class PrepaidCard(TransferMethod):
         A dictionary containing the attributes for the Prepaid Card.
     '''
 
+    filters_array = {'status'}
+
     def __init__(self, data):
         '''
         Create a new Prepaid Card with the provided attributes.
@@ -346,6 +354,8 @@ class PaperCheck(TransferMethod):
     :param data:
         A dictionary containing the attributes for the Paper Check.
     '''
+
+    filters_array = {'status'}
 
     def __init__(self, data):
         '''
@@ -404,6 +414,8 @@ class Transfer(HyperwalletModel):
         A dictionary containing the attributes for the Transfer.
     '''
 
+    filters_array = {'clientTransferId', 'sourceToken', 'destinationToken'}
+
     def __init__(self, data):
         '''
         Create a new Transfer with the provided attributes.
@@ -447,6 +459,8 @@ class PayPalAccount(TransferMethod):
     :param data:
         A dictionary containing the attributes for the PayPal Account.
     '''
+
+    filters_array = {'status'}
 
     def __init__(self, data):
         '''
@@ -506,6 +520,8 @@ class Payment(HyperwalletModel):
         A dictionary containing the attributes for the Payment.
     '''
 
+    filters_array = {'clientPaymentId', 'releaseOn'}
+
     def __init__(self, data):
         '''
         Create a new Payment with the provided attributes.
@@ -547,6 +563,8 @@ class Balance(HyperwalletModel):
     :param data:
         A dictionary containing the attributes for the Balance.
     '''
+
+    filters_array = {'currency'}
 
     def __init__(self, data):
         '''
@@ -682,6 +700,8 @@ class StatusTransition(HyperwalletModel):
         A dictionary containing the attributes for the Status Transition.
     '''
 
+    filters_array = {'transition'}
+
     def __init__(self, data):
         '''
         Create a new Status Transition with the provided attributes.
@@ -757,6 +777,8 @@ class Webhook(HyperwalletModel):
     :param data:
         A dictionary containing the attributes for the Webhook.
     '''
+
+    filters_array = {'programToken'}
 
     def __init__(self, data):
         '''
