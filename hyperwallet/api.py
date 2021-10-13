@@ -1891,6 +1891,9 @@ class Api(object):
         if not userToken:
             raise HyperwalletException('userToken is required')
 
+        if params and not set(list(params)).issubset(VenmoAccount.filters_array):
+            raise HyperwalletException('Invalid filter')
+
         response = self.apiClient.doGet(
             self.__buildUrl('users', userToken, 'venmo-accounts'),
             params
@@ -1998,6 +2001,9 @@ class Api(object):
 
         if not venmoAccountToken:
             raise HyperwalletException('venmoAccountToken is required')
+
+        if params and not set(list(params)).issubset(StatusTransition.filters_array):
+            raise HyperwalletException('Invalid filter')
 
         response = self.apiClient.doGet(
             self.__buildUrl(
@@ -2248,7 +2254,7 @@ class Api(object):
         if not userToken:
             raise HyperwalletException('userToken is required')
 
-        if params and not set(list(params)).issubset(Balance.filters_array):
+        if params and not set(list(params)).issubset(Balance.filters_array_user):
             raise HyperwalletException('Invalid filter')
 
         response = self.apiClient.doGet(
@@ -2281,7 +2287,7 @@ class Api(object):
         if not prepaidCardToken:
             raise HyperwalletException('prepaidCardToken is required')
 
-        if params and not set(list(params)).issubset(Balance.filters_array):
+        if params and not set(list(params)).issubset(Balance.filters_array_prepaid_card):
             raise HyperwalletException('Invalid filter')
 
         response = self.apiClient.doGet(
@@ -2320,7 +2326,7 @@ class Api(object):
         if not accountToken:
             raise HyperwalletException('accountToken is required')
 
-        if params and not set(list(params)).issubset(Balance.filters_array):
+        if params and not set(list(params)).issubset(Balance.filters_array_account):
             raise HyperwalletException('Invalid filter')
 
         response = self.apiClient.doGet(
@@ -2360,6 +2366,9 @@ class Api(object):
         if not userToken:
             raise HyperwalletException('userToken is required')
 
+        if params and not set(list(params)).issubset(Receipt.filters_array_user):
+            raise HyperwalletException('Invalid filter')
+
         response = self.apiClient.doGet(
             self.__buildUrl('users', userToken, 'receipts'),
             params
@@ -2389,6 +2398,9 @@ class Api(object):
 
         if not prepaidCardToken:
             raise HyperwalletException('prepaidCardToken is required')
+
+        if params and not set(list(params)).issubset(Receipt.filters_array_prepaid_card):
+            raise HyperwalletException('Invalid filter')
 
         response = self.apiClient.doGet(
             self.__buildUrl(
@@ -2425,6 +2437,9 @@ class Api(object):
 
         if not accountToken:
             raise HyperwalletException('accountToken is required')
+
+        if params and not set(list(params)).issubset(Receipt.filters_array_account):
+            raise HyperwalletException('Invalid filter')
 
         response = self.apiClient.doGet(
             self.__buildUrl(
@@ -2627,6 +2642,9 @@ class Api(object):
 
         if not userToken:
             raise HyperwalletException('userToken is required')
+
+        if params and not set(list(params)).issubset(TransferMethodConfiguration.filters_array):
+            raise HyperwalletException('Invalid filter')
 
         params.update({'userToken': userToken})
 
@@ -3078,6 +3096,9 @@ class Api(object):
 
         if not userToken:
             raise HyperwalletException('userToken is required')
+        
+        if params and not set(list(params)).issubset(TransferMethod.filters_array):
+            raise HyperwalletException('Invalid filter')
 
         response = self.apiClient.doGet(
             self.__buildUrl(
