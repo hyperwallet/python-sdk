@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 import json
-
+from enum import Enum
 
 class HyperwalletModel(object):
     '''
@@ -129,6 +129,76 @@ class User(HyperwalletModel):
             token=self.token
         )
 
+class HyperwalletVerificationDocument(HyperwalletModel):
+    '''
+    The HyperwalletVerificationDocument Model.
+
+    :param data:
+        A dictionary containing the attributes for the HyperwalletVerificationDocument.
+    '''
+
+    def __init__(self, data):
+        '''
+        Create a new HyperwalletVerificationDocument with the provided attributes.
+        '''
+
+        super(HyperwalletVerificationDocument, self).__init__(data)
+
+        self.defaults = {
+            'category': None,
+            'type': None,
+            'status': None,
+            'country': None,
+            'reasons': None,
+            'createdOn': None,
+            'uploadFiles': None,
+        }
+
+        for (param, default) in self.defaults.items():
+            setattr(self, param, data.get(param, default))
+
+    def __repr__(self):
+        return "HyperwalletVerificationDocument({category}, {createdOn})".format(
+            createdOn=self.createdOn, category=self.category
+        )
+
+class HyperwalletVerificationDocumentReason(HyperwalletModel):
+    '''
+    The HyperwalletVerificationDocumentReason Model.
+
+    :param data:
+        A dictionary containing the attributes for the HyperwalletVerificationDocumentReason.
+    '''
+
+    def __init__(self, data):
+        '''
+        Create a new HyperwalletVerificationDocumentReason with the provided attributes.
+        '''
+
+        super(HyperwalletVerificationDocumentReason, self).__init__(data)
+
+        self.defaults = {
+            'name': None,
+            'description': None,
+        }
+
+        for (param, default) in self.defaults.items():
+            setattr(self, param, data.get(param, default))
+
+    def __repr__(self):
+        return "HyperwalletVerificationDocumentReason({name}, {description})".format(
+            name=self.name, description=self.description
+        )
+
+class RejectReason(Enum):
+    DOCUMENT_EXPIRED = 0
+    DOCUMENT_NOT_RELATED_TO_PROFILE = 1
+    DOCUMENT_NOT_READABLE = 2
+    DOCUMENT_NOT_DECISIVE = 3
+    DOCUMENT_NOT_COMPLETE = 4
+    DOCUMENT_CORRECTION_REQUIRED = 5
+    DOCUMENT_NOT_VALID_WITH_NOTES = 6
+    DOCUMENT_TYPE_NOT_VALID = 7
 
 class AuthenticationToken(HyperwalletModel):
     '''

@@ -64,6 +64,37 @@ class ApiTest(unittest.TestCase):
             'currencies': ['USD'],
             'type': 'INDIVIDUAL'
         }
+        
+        self.uploadSuccessData = {
+            'token': 'tkn-12345',
+            "documents": [{
+                "category": "IDENTIFICATION",
+                "type": "DRIVERS_LICENSE",
+                "country": "AL",
+                "status": "NEW"
+            }]
+        }
+
+        self.uploadRejectionData = {
+            'token': 'tkn-12345',
+            "documents": [{
+                "category": "IDENTIFICATION",
+                "type": "DRIVERS_LICENSE",
+                "country": "AL",
+                "status": "INVALID",
+                "reasons": [
+                    {
+                    "name": "DOCUMENT_CORRECTION_REQUIRED",
+                    "description": "Document requires correction"
+                    },
+                    {
+                    "name": "DOCUMENT_NOT_DECISIVE",
+                    "description": "Decision cannot be made based on document. Alternative document required"
+                    }
+                ],
+                "createdOn": "2020-11-24T19:05:02"
+            }]
+        }
 
         self.value = {
             'data': ['{"documents": [{"type": "DRIVERS_LICENSE", "country": "AL", "category": "IDENTIFICATION"}]}']
@@ -2330,6 +2361,30 @@ class ApiTest(unittest.TestCase):
         response = self.api.uploadDocumentsForUser('token', self.value)
 
         self.assertTrue(response.token, self.data.get('token'))
+
+    @mock.patch('hyperwallet.utils.ApiClient._makeRequest')
+    def test_uploadDocumentsForUserAndParse_success(self, mock_put):
+
+        mock_put.return_value = self.uploadSuccessData
+        response = self.api.uploadDocumentsForUser('token', self.value)
+
+        self.assertEqual(response.token, self.uploadSuccessData.get('token'))
+        self.assertEqual(response.documents[0].type, self.uploadSuccessData.get("documents")[0].type)
+
+
+    @mock.patch('hyperwallet.utils.ApiClient._makeRequest')
+    def test_uploadDocumentsForUserAndParseRejection_success(self, mock_put):
+
+        mock_put.return_value = self.uploadRejectionData
+        response = self.api.uploadDocumentsForUser('token', self.value)
+
+        # print(response.documents)
+        # print(response.documents[0].reasons[0].name.name)
+
+        self.assertEqual(response.token, self.uploadRejectionData.get('token'))
+        self.assertEqual(response.documents[0].reasons[0].name.name, self.uploadRejectionData.get("documents")[0].reasons[0].name.name)
+        self.assertEqual(response.documents[0].reasons[1].name.name, self.uploadRejectionData.get("documents")[0].reasons[1].name.name)
+        self.assertEqual(response.documents[0].type, self.uploadRejectionData.get("documents")[0].type)
 
     '''
 
