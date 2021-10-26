@@ -70,7 +70,7 @@ class User(HyperwalletModel):
         A dictionary containing the attributes for the User.
     '''
 
-    filters_array = {'clientUserId', 'email', 'programToken', 'status', 'verificationStatus'}
+    filters_array = {'clientUserId','email','programToken','status','verificationStatus', 'createdBefore', 'createdAfter', 'sortBy', 'offset', 'limit'}
 
     def __init__(self, data):
         '''
@@ -166,6 +166,8 @@ class TransferMethod(HyperwalletModel):
         A dictionary containing the attributes for the Transfer Method.
     '''
 
+    filters_array = {'status', 'type', 'createdBefore', 'createdAfter', 'sortBy', 'offset', 'limit'}
+
     def __init__(self, data):
         '''
         Create a new Transfer Method with the provided attributes.
@@ -201,7 +203,7 @@ class BankAccount(TransferMethod):
         A dictionary containing the attributes for the Bank Account.
     '''
 
-    filters_array = {'type', 'status'}
+    filters_array = {'type','status', 'createdBefore', 'createdAfter', 'sortBy', 'offset', 'limit'}
 
     def __init__(self, data):
         '''
@@ -284,7 +286,7 @@ class BankCard(TransferMethod):
         A dictionary containing the attributes for the Bank Card.
     '''
 
-    filters_array = {'status'}
+    filters_array = {'status', 'type', 'createdOn', 'createdBefore', 'createdAfter', 'sortBy', 'offset', 'limit'}
 
     def __init__(self, data):
         '''
@@ -320,7 +322,7 @@ class PrepaidCard(TransferMethod):
         A dictionary containing the attributes for the Prepaid Card.
     '''
 
-    filters_array = {'status'}
+    filters_array = {'status', 'createdBefore', 'createdAfter', 'sortBy', 'offset', 'limit'}
 
     def __init__(self, data):
         '''
@@ -355,7 +357,7 @@ class PaperCheck(TransferMethod):
         A dictionary containing the attributes for the Paper Check.
     '''
 
-    filters_array = {'status'}
+    filters_array = {'status', 'createdBefore', 'createdAfter', 'sortBy', 'offset', 'limit'}
 
     def __init__(self, data):
         '''
@@ -414,7 +416,7 @@ class Transfer(HyperwalletModel):
         A dictionary containing the attributes for the Transfer.
     '''
 
-    filters_array = {'clientTransferId', 'sourceToken', 'destinationToken'}
+    filters_array = {'clientTransferId','sourceToken','destinationToken', 'createdBefore', 'createdAfter', 'offset', 'limit'}
 
     def __init__(self, data):
         '''
@@ -460,7 +462,7 @@ class PayPalAccount(TransferMethod):
         A dictionary containing the attributes for the PayPal Account.
     '''
 
-    filters_array = {'status'}
+    filters_array = {'status', 'type', 'createdOn' , 'createdBefore', 'createdAfter', 'sortBy', 'offset', 'limit'}
 
     def __init__(self, data):
         '''
@@ -491,6 +493,8 @@ class VenmoAccount(TransferMethod):
         A dictionary containing the attributes for the Venmo Account.
     '''
 
+    filters_array = {'status', 'type', 'createdBefore', 'createdAfter', 'sortBy', 'offset', 'limit'}
+
     def __init__(self, data):
         '''
         Create a new Venmo Account with the provided attributes.
@@ -520,7 +524,7 @@ class Payment(HyperwalletModel):
         A dictionary containing the attributes for the Payment.
     '''
 
-    filters_array = {'clientPaymentId', 'releaseOn'}
+    filters_array = {'clientPaymentId', 'currency', 'memo', 'releaseDate', 'createdBefore', 'createdAfter', 'sortBy', 'offset', 'limit'}
 
     def __init__(self, data):
         '''
@@ -564,7 +568,9 @@ class Balance(HyperwalletModel):
         A dictionary containing the attributes for the Balance.
     '''
 
-    filters_array = {'currency'}
+    filters_array_user = {'currency', 'createdBefore', 'createdAfter', 'sortBy', 'offset', 'limit'}
+    filters_array_account = {'currency', 'createdBefore', 'createdAfter', 'sortBy', 'offset', 'limit'}
+    filters_array_prepaid_card = {'createdBefore', 'createdAfter'}
 
     def __init__(self, data):
         '''
@@ -595,6 +601,10 @@ class Receipt(HyperwalletModel):
     :param data:
         A dictionary containing the attributes for the Receipt.
     '''
+
+    filters_array_user = {'currency', 'createdBefore', 'createdAfter', 'sortBy', 'offset', 'limit'}
+    filters_array_account = {'currency', 'createdBefore', 'createdAfter', 'sortBy', 'offset', 'limit'}
+    filters_array_prepaid_card = {'createdBefore', 'createdAfter'}
 
     def __init__(self, data):
         '''
@@ -700,7 +710,7 @@ class StatusTransition(HyperwalletModel):
         A dictionary containing the attributes for the Status Transition.
     '''
 
-    filters_array = {'transition'}
+    filters_array = {'transition', 'createdBefore', 'createdAfter', 'sortBy', 'offset', 'limit'}
 
     def __init__(self, data):
         '''
@@ -736,6 +746,8 @@ class TransferMethodConfiguration(HyperwalletModel):
     :param data:
         A dictionary containing the attributes for the Transfer Method Configuration.
     '''
+
+    filters_array = {'userToken', 'offset', 'limit'}
 
     def __init__(self, data):
         '''
@@ -778,7 +790,7 @@ class Webhook(HyperwalletModel):
         A dictionary containing the attributes for the Webhook.
     '''
 
-    filters_array = {'programToken'}
+    filters_array = {'programToken', 'type', 'createdBefore', 'createdAfter', 'sortBy', 'offset', 'limit'}
 
     def __init__(self, data):
         '''
