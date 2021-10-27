@@ -23,7 +23,10 @@ from hyperwallet import (
     StatusTransition,
     TransferMethodConfiguration,
     Webhook,
-    TransferRefunds
+    TransferRefunds,
+    HyperwalletVerificationDocument,
+    HyperwalletVerificationDocumentReason,
+    RejectReason
 )
 
 
@@ -2761,6 +2764,38 @@ class Api(object):
     def __buildUrl(self, *paths):
         return '/'.join(s.strip('/') for s in paths)
 
+    def setDocumentAndReasonFromResponseHelper(self,
+                               data=None):
+        '''
+        Helper to modify dictionary with Document and Reason classes
+
+        :param data:
+            A dictionary containing data for either a User
+            sample data:
+            jsonData={'data': ['{"documents": [{"type": "DRIVERS_LICENSE", "country": "US", "category": "IDENTIFICATION", "reasons": {"name": 0, "description": "STRING_VAL"}}]}']};
+        :returns:
+            A Dictionary with documents and reasons information
+        '''
+
+        if "documents" in data.keys():
+            documents = data["documents"]
+            listOfDocs = []
+            for dVal in documents:
+                if "reasons" in dVal.keys():
+                    reasons = dVal["reasons"]
+                    dVal["reasons"] = []
+                    for rVal in reasons:
+                        if type(rVal["name"]) == str:
+                            rVal["name"] = RejectReason[rVal["name"]]
+                        else:
+                            rVal["name"] = RejectReason(rVal["name"])
+                        rVal = HyperwalletVerificationDocumentReason(rVal)
+                        dVal["reasons"].append(rVal)
+                dVal = HyperwalletVerificationDocument(dVal)
+                listOfDocs.append(dVal)
+            data["documents"] = listOfDocs
+        return data
+
     def uploadDocumentsForUser(self,
                                userToken=None,
                                data=None,
@@ -2796,7 +2831,7 @@ class Api(object):
             data,
             files
         )
-
+        response = self.setDocumentAndReasonFromResponseHelper(response)
         return User(response)
 
     '''

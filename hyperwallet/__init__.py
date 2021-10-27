@@ -32,7 +32,10 @@ from .models import (
     StatusTransition,                                                    # noqa
     TransferMethodConfiguration,                                         # noqa
     Webhook,                                                             # noqa
-    TransferRefunds                                                     # naqa
+    TransferRefunds,                                                     # naqa
+    HyperwalletVerificationDocument,
+    HyperwalletVerificationDocumentReason,
+    RejectReason,
 )
 
 from .api import Api                                                     # noqa
