@@ -2765,15 +2765,14 @@ class Api(object):
             for dVal in documents:
                 if "reasons" in dVal.keys():
                     reasons = dVal["reasons"]
-                    listOfReasons = []
+                    dVal["reasons"] = []
                     for rVal in reasons:
                         if type(rVal["name"]) == str:
                             rVal["name"] = RejectReason[rVal["name"]]
                         else:
                             rVal["name"] = RejectReason(rVal["name"])
                         rVal = HyperwalletVerificationDocumentReason(rVal)
-                        listOfReasons.append(rVal)
-                    dVal["reasons"] = listOfReasons
+                        dVal["reasons"].append(rVal)
                 dVal = HyperwalletVerificationDocument(dVal)
                 listOfDocs.append(dVal)
             data["documents"] = listOfDocs
