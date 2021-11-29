@@ -12,7 +12,7 @@ A library to manage users, transfer methods and payments through the Hyperwallet
 Prerequisites
 -------------
 
-Hyperwallet's Python server SDK requires at minimum Python 2.7 and above.
+Hyperwallet's Python server SDK requires at minimum Python 3.5 and above.
 
 Installation
 ------------

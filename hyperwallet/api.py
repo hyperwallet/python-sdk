@@ -2765,7 +2765,7 @@ class Api(object):
         return '/'.join(s.strip('/') for s in paths)
 
     def setDocumentAndReasonFromResponseHelper(self,
-                               data=None):
+                                               data=None):
         '''
         Helper to modify dictionary with Document and Reason classes
 
@@ -3131,7 +3131,7 @@ class Api(object):
 
         if not userToken:
             raise HyperwalletException('userToken is required')
-        
+
         if params and not set(list(params)).issubset(TransferMethod.filters_array):
             raise HyperwalletException('Invalid filter')
 

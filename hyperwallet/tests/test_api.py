@@ -64,7 +64,7 @@ class ApiTest(unittest.TestCase):
             'currencies': ['USD'],
             'type': 'INDIVIDUAL'
         }
-        
+
         self.uploadSuccessData = {
             'token': 'tkn-12345',
             "documents": [{
@@ -84,12 +84,12 @@ class ApiTest(unittest.TestCase):
                 "status": "INVALID",
                 "reasons": [
                     {
-                    "name": "DOCUMENT_CORRECTION_REQUIRED",
-                    "description": "Document requires correction"
+                        "name": "DOCUMENT_CORRECTION_REQUIRED",
+                        "description": "Document requires correction"
                     },
                     {
-                    "name": "DOCUMENT_NOT_DECISIVE",
-                    "description": "Decision cannot be made based on document. Alternative document required"
+                        "name": "DOCUMENT_NOT_DECISIVE",
+                        "description": "Decision cannot be made based on document. Alternative document required"
                     }
                 ],
                 "createdOn": "2020-11-24T19:05:02"
@@ -220,7 +220,7 @@ class ApiTest(unittest.TestCase):
 
     @mock.patch('hyperwallet.utils.ApiClient._makeRequest')
     def test_list_user_status_transitions_params_valid(self, mock_get):
-        
+
         options = {'transition': 'test'}
         mock_get.return_value = {'data': [self.data]}
         response = self.api.listUserStatusTransitions('token', options)
@@ -810,7 +810,7 @@ class ApiTest(unittest.TestCase):
             self.api.listPrepaidCards('token', options)
 
         self.assertEqual(exc.exception.message, 'Invalid filter')
-    
+
     @mock.patch('hyperwallet.utils.ApiClient._makeRequest')
     def test_list_prepaid_cards_params_valid(self, mock_get):
 
@@ -1892,7 +1892,7 @@ class ApiTest(unittest.TestCase):
             self.api.listVenmoAccounts('token', options)
 
         self.assertEqual(exc.exception.message, 'Invalid filter')
-        
+
     @mock.patch('hyperwallet.utils.ApiClient._makeRequest')
     def test_list_venmo_accounts_params_valid(self, mock_get):
 
@@ -2101,7 +2101,7 @@ class ApiTest(unittest.TestCase):
         self.assertTrue(response.token, self.data.get('token'))
 
     def test_list_payments_fail_need_params_invalid(self):
-    
+
         options = {'currency': 'test', 'email': 'test'}
         with self.assertRaises(HyperwalletException) as exc:
             self.api.listPayments(options)
@@ -2585,7 +2585,6 @@ class ApiTest(unittest.TestCase):
 
         self.assertTrue(response[0].type, self.configuration.get('type'))
 
-
     @mock.patch('hyperwallet.utils.ApiClient._makeRequest')
     def test_list_transfer_method_configurations_success(self, mock_get):
 
@@ -2676,7 +2675,6 @@ class ApiTest(unittest.TestCase):
 
         self.assertEqual(response.token, self.uploadSuccessData.get('token'))
         self.assertEqual(response.documents[0].type, self.uploadSuccessData.get("documents")[0].type)
-
 
     @mock.patch('hyperwallet.utils.ApiClient._makeRequest')
     def test_uploadDocumentsForUserAndParseRejection_success(self, mock_put):
@@ -2869,7 +2867,7 @@ class ApiTest(unittest.TestCase):
 
         options = {'transition': 'test', 'token': 'test'}
         with self.assertRaises(HyperwalletException) as exc:
-            self.api.listTransferStatusTransitions('token',options)
+            self.api.listTransferStatusTransitions('token', options)
 
         self.assertEqual(exc.exception.message, 'Invalid filter')
 
@@ -2957,7 +2955,7 @@ class ApiTest(unittest.TestCase):
 
         options = {'type': 'test', 'token': 'test'}
         with self.assertRaises(HyperwalletException) as exc:
-            self.api.listTransferMethods('token',options)
+            self.api.listTransferMethods('token', options)
 
         self.assertEqual(exc.exception.message, 'Invalid filter')
 

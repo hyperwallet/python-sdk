@@ -3,6 +3,7 @@
 import json
 from enum import Enum
 
+
 class HyperwalletModel(object):
     '''
     The base Hyperwallet Model from which all other models will inherit.
@@ -70,7 +71,7 @@ class User(HyperwalletModel):
         A dictionary containing the attributes for the User.
     '''
 
-    filters_array = {'clientUserId','email','programToken','status','verificationStatus', 'taxVerificationStatus', 'createdBefore', 'createdAfter', 'sortBy', 'offset', 'limit'}
+    filters_array = {'clientUserId', 'email', 'programToken', 'status', 'verificationStatus', 'taxVerificationStatus', 'createdBefore', 'createdAfter', 'sortBy', 'offset', 'limit'}
 
     def __init__(self, data):
         '''
@@ -130,6 +131,7 @@ class User(HyperwalletModel):
             token=self.token
         )
 
+
 class HyperwalletVerificationDocument(HyperwalletModel):
     '''
     The HyperwalletVerificationDocument Model.
@@ -163,6 +165,7 @@ class HyperwalletVerificationDocument(HyperwalletModel):
             createdOn=self.createdOn, category=self.category
         )
 
+
 class HyperwalletVerificationDocumentReason(HyperwalletModel):
     '''
     The HyperwalletVerificationDocumentReason Model.
@@ -191,6 +194,7 @@ class HyperwalletVerificationDocumentReason(HyperwalletModel):
             name=self.name, description=self.description
         )
 
+
 class RejectReason(Enum):
     DOCUMENT_EXPIRED = 0
     DOCUMENT_NOT_RELATED_TO_PROFILE = 1
@@ -200,6 +204,7 @@ class RejectReason(Enum):
     DOCUMENT_CORRECTION_REQUIRED = 5
     DOCUMENT_NOT_VALID_WITH_NOTES = 6
     DOCUMENT_TYPE_NOT_VALID = 7
+
 
 class AuthenticationToken(HyperwalletModel):
     '''
@@ -274,7 +279,7 @@ class BankAccount(TransferMethod):
         A dictionary containing the attributes for the Bank Account.
     '''
 
-    filters_array = {'type','status', 'createdBefore', 'createdAfter', 'sortBy', 'offset', 'limit'}
+    filters_array = {'type', 'status', 'createdBefore', 'createdAfter', 'sortBy', 'offset', 'limit'}
 
     def __init__(self, data):
         '''
@@ -487,7 +492,7 @@ class Transfer(HyperwalletModel):
         A dictionary containing the attributes for the Transfer.
     '''
 
-    filters_array = {'clientTransferId','sourceToken','destinationToken', 'createdBefore', 'createdAfter', 'offset', 'limit'}
+    filters_array = {'clientTransferId', 'sourceToken', 'destinationToken', 'createdBefore', 'createdAfter', 'offset', 'limit'}
 
     def __init__(self, data):
         '''
@@ -533,7 +538,7 @@ class PayPalAccount(TransferMethod):
         A dictionary containing the attributes for the PayPal Account.
     '''
 
-    filters_array = {'status', 'type', 'createdOn' , 'createdBefore', 'createdAfter', 'sortBy', 'offset', 'limit'}
+    filters_array = {'status', 'type', 'createdOn', 'createdBefore', 'createdAfter', 'sortBy', 'offset', 'limit'}
 
     def __init__(self, data):
         '''
