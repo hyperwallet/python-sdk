@@ -70,7 +70,7 @@ class User(HyperwalletModel):
         A dictionary containing the attributes for the User.
     '''
 
-    filters_array = {'clientUserId','email','programToken','status','verificationStatus', 'createdBefore', 'createdAfter', 'sortBy', 'offset', 'limit'}
+    filters_array = {'clientUserId','email','programToken','status','verificationStatus', 'taxVerificationStatus', 'createdBefore', 'createdAfter', 'sortBy', 'offset', 'limit'}
 
     def __init__(self, data):
         '''
@@ -116,6 +116,7 @@ class User(HyperwalletModel):
             'status': None,
             'token': None,
             'verificationStatus': None,
+            'taxVerificationStatus': None,
             'timeZone': None,
             'documents': None
         }
