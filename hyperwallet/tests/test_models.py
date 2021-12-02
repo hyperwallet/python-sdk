@@ -504,6 +504,82 @@ class ModelTest(unittest.TestCase):
             )
         )
 
+    def test_webhook_model_good_sub_type_paypal(self):
+
+        webhook_data = {
+            'token': 'wbh-12345',
+            'createdOn': '2017-01-01',
+            'type': 'USER.PAYPAL_ACCOUNTS.CREATED',
+            'object': self.transfer_method_data
+        }
+
+        test_webhook = Webhook(webhook_data)
+
+        self.assertEqual(
+            test_webhook.object.__repr__(),
+            'PayPalAccount({date}, {token})'.format(
+                date=self.transfer_method_data.get('createdOn'),
+                token=self.transfer_method_data.get('token')
+            )
+        )
+
+    def test_webhook_model_good_sub_type_venmo(self):
+
+        webhook_data = {
+            'token': 'wbh-12345',
+            'createdOn': '2017-01-01',
+            'type': 'USER.VENMO_ACCOUNTS.CREATED',
+            'object': self.transfer_method_data
+        }
+
+        test_webhook = Webhook(webhook_data)
+
+        self.assertEqual(
+            test_webhook.object.__repr__(),
+            'VenmoAccount({date}, {token})'.format(
+                date=self.transfer_method_data.get('createdOn'),
+                token=self.transfer_method_data.get('token')
+            )
+        )
+
+    def test_webhook_model_good_sub_type_bankCard(self):
+
+        webhook_data = {
+            'token': 'wbh-12345',
+            'createdOn': '2017-01-01',
+            'type': 'USER.BANK_CARDS.CREATED',
+            'object': self.transfer_method_data
+        }
+
+        test_webhook = Webhook(webhook_data)
+
+        self.assertEqual(
+            test_webhook.object.__repr__(),
+            'BankCard({date}, {token})'.format(
+                date=self.transfer_method_data.get('createdOn'),
+                token=self.transfer_method_data.get('token')
+            )
+        )
+
+    def test_webhook_model_good_sub_type_paperCheck(self):
+
+        webhook_data = {
+            'token': 'wbh-12345',
+            'createdOn': '2017-01-01',
+            'type': 'USER.PAPER_CHECKS.CREATED',
+            'object': self.transfer_method_data
+        }
+
+        test_webhook = Webhook(webhook_data)
+
+        self.assertEqual(
+            test_webhook.object.__repr__(),
+            'PaperCheck({date}, {token})'.format(
+                date=self.transfer_method_data.get('createdOn'),
+                token=self.transfer_method_data.get('token')
+            )
+        )
+
     def test_webhook_model_bad_object(self):
 
         webhook_data = {
