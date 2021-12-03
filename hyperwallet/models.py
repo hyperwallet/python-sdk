@@ -899,7 +899,9 @@ class Webhook(HyperwalletModel):
             "BANK_CARDS": BankCard,
             "PAYPAL_ACCOUNTS": PayPalAccount,
             "PAPER_CHECKS": PaperCheck,
-            "VENMO_ACCOUNTS": VenmoAccount
+            "VENMO_ACCOUNTS": VenmoAccount,
+            "TRANSFERS": Transfer,
+            "REFUND": TransferRefunds
         }
 
         base, sub = self.type.split('.')[:2]

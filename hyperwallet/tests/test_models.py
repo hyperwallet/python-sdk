@@ -580,6 +580,44 @@ class ModelTest(unittest.TestCase):
             )
         )
 
+    def test_webhook_model_good_sub_type_transfer(self):
+
+        webhook_data = {
+            'token': 'wbh-12345',
+            'createdOn': '2017-01-01',
+            'type': 'TRANSFERS.UPDATED.STATUS.SCHEDULED',
+            'object': self.transfer_method_data
+        }
+
+        test_webhook = Webhook(webhook_data)
+
+        self.assertEqual(
+            test_webhook.object.__repr__(),
+            'Transfer({date}, {token})'.format(
+                date=self.transfer_method_data.get('createdOn'),
+                token=self.transfer_method_data.get('token')
+            )
+        )
+
+    def test_webhook_model_good_sub_type_transferRefunds(self):
+
+        webhook_data = {
+            'token': 'wbh-12345',
+            'createdOn': '2017-01-01',
+            'type': 'TRANSFERS.REFUND.CREATED',
+            'object': self.transfer_method_data
+        }
+
+        test_webhook = Webhook(webhook_data)
+
+        self.assertEqual(
+            test_webhook.object.__repr__(),
+            'TransferRefunds({date}, {token})'.format(
+                date=self.transfer_method_data.get('createdOn'),
+                token=self.transfer_method_data.get('token')
+            )
+        )
+
     def test_webhook_model_bad_object(self):
 
         webhook_data = {
