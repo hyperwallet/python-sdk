@@ -1,5 +1,12 @@
 Changelog
 =========
+1.7.0
+-------------------
+- Added missing webhook groups
+- Added webhooks for Transfers
+- Added taxVerificationStatus to User
+- Added Document and RejectReason models
+- Updated filters for list endpoints
 
 1.6.0
 -------------------
