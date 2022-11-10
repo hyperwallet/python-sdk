@@ -51,7 +51,7 @@ jobs:
   test:
     needs: [ build ]
     runs-on: ubuntu-latest
-    name: Test - Python ${{ matrix.java }}
+    name: Test - Python ${{ matrix.python-version }}
 
     strategy:
       fail-fast: false
@@ -90,7 +90,7 @@ jobs:
   code-coverage:
     needs: [ test ]
     runs-on: ubuntu-latest
-    name: Report code coverage - JDK ${{ matrix.java }}
+    name: Report code coverage - Python ${{ matrix.python-version }}
 
     strategy:
       fail-fast: false
