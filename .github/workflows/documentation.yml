@@ -44,12 +44,6 @@ jobs:
         run: |
           echo ${{ github.ref }}
           echo "Commit documentation"
-          # Set identity
-          git config --global user.email "dev-git-action@paypal.com"
-          git config --global user.name "Git Action Doc"
-
-          git init
-          git remote add origin https://${{ secrets.GITHUB_TOKEN }}@github.com/hyperwallet/python-sdk.git > /dev/null
           git checkout -B gh-pages
           git commit -m "Documentation updated" | exit 0
 
