@@ -48,17 +48,18 @@ jobs:
           touch .nojekyll
       - name: Commit documentation changes
         run: |
-          if [[ `git status --porcelain` ]]; then
-            echo "Commit documentation"
-            # Set identity
-            git config --global user.email "dev-git-action@paypal.com"
-            git config --global user.name "Git Action Doc"
+          echo ${{ github.ref }}
+          echo "Commit documentation"
+          # Set identity
+          git config --global user.email "dev-git-action@paypal.com"
+          git config --global user.name "Git Action Doc"
 
-            # Add branch
-            git checkout -B gh-pages
+          git init
+          git remote add origin https://${GH_TOKEN}@github.com/hyperwallet/python-sdk.git > /dev/null
+          git checkout -B gh-pages
+          git commit -m "Documentation updated" | exit 0
 
-            # Push generated files
-            git add .
-            git commit -m "Documentation updated"
-            git push origin gh-pages -fq > /dev/null
-          fi
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
