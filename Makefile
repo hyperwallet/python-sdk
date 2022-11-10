@@ -12,6 +12,7 @@ env:
 	pip install -r requirements.txt
 
 dev: env
+    pip install --upgrade
 	pip install -r requirements.dev.txt
 	pip install -r requirements.docs.txt
 
