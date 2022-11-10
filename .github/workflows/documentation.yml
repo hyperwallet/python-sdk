@@ -37,7 +37,7 @@ jobs:
       - name: Clean
         run: make dev
 
-      - name: Build Documentation
+      - name: Generate Documentation
         run: make docs
 
       - name: Push
