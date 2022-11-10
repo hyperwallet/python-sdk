@@ -38,10 +38,13 @@ jobs:
           cache: 'pip'
 
       - name: Install tools
-        run: make env
+        run: make denv
 
       - name: Clean
         run: make clean
+
+      - name: Lint
+        run: make lint
 
       - name: Build
         run: make build
