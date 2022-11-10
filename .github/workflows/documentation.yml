@@ -40,12 +40,6 @@ jobs:
       - name: Build Documentation
         run: make docs
 
-      - name: Copy to documentation Website Location
-        run: |
-          mkdir ../gh-pages
-          cp -r doc/_build/html/* ../gh-pages/
-          cd ../gh-pages
-          touch .nojekyll
       - name: Commit documentation changes
         run: |
           echo ${{ github.ref }}
