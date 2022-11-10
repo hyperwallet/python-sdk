@@ -38,7 +38,7 @@ jobs:
           cache: 'pip'
 
       - name: Install tools
-        run: make denv
+        run: make dev
 
       - name: Clean
         run: make clean
