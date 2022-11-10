@@ -49,7 +49,7 @@ jobs:
         run: make build
 
   test:
-    needs: [lint]
+    needs: [ build ]
     runs-on: ubuntu-latest
     name: Test - Python ${{ matrix.java }}
 
