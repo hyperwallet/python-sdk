@@ -100,9 +100,6 @@ jobs:
       - name: Install tools
         run: make env
 
-      - name: Clean
-        run: make clean
-
       - name: Coverage
         run: make coverage
 
