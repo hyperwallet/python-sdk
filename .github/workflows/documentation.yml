@@ -51,9 +51,5 @@ jobs:
           
           git checkout -B gh-pages
           git add .
-          git commit -m "Documentation updated" | exit 0
-
-      - name: Push changes
-        uses: ad-m/github-push-action@master
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          git commit -m "Documentation updated"
+          git push origin gh-pages -fq > /dev/null
