@@ -37,7 +37,9 @@ jobs:
           python-version: ${{ matrix.python-version }}
 
       - name: Install tools
-        run: make env
+        run: |
+          pip install .
+          pip install -r requirements.txt
 
       - name: Clean
         run: make clean
@@ -79,7 +81,9 @@ jobs:
           python-version: ${{ matrix.python-version }}
 
       - name: Install tools
-        run: make env
+        run: |
+          pip install .
+          pip install -r requirements.txt
 
       - name: Clean
         run: make clean
@@ -109,7 +113,9 @@ jobs:
           python-version: ${{ matrix.python-version }}
 
       - name: Install tools
-        run: make env
+        run: |
+          pip install .
+          pip install -r requirements.txt
 
       - name: Clean
         run: make clean
