@@ -67,8 +67,9 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
 
-      - name: Install tools
-        run: make env
+      - name: Install tools for python 2.7
+        if: matrix.python-version == '2.7'
+        run: pip install rsa:4.0
 
       - name: Clean
         run: make clean

@@ -22,7 +22,6 @@ def extract_metaitem(meta):
     raise RuntimeError('Unable to find __{meta}__ string.'.format(meta=meta))
 
 requires = [
-    'rsa>=4.0'
     'requests-toolbelt',
     'jwcrypto',
     'python-jose',
