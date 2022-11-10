@@ -78,6 +78,9 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
 
+      - name: Upgrade pip and virtualenv to latest
+        run: pip install --upgrade pip virtualenv
+
       - name: Install tools
         run: make env
 
