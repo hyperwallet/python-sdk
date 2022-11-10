@@ -1,0 +1,106 @@
+name: Python SDK CI
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - master
+      - support/SDK-V3
+      - feature/**
+      - bugfix/**
+  pull_request:
+    branches:
+      - master
+      - support/SDK-V3
+      - feature/**
+      - bugfix/**
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: Build
+
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version:
+          [
+            '3.10'
+          ]
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: 'pip'
+
+      - name: Install tools
+        run: make denv
+
+      - name: Clean
+        run: make clean
+
+      - name: Lint
+        run: make lint
+
+      - name: Build
+        run: make build
+
+  test:
+    needs: [ build ]
+    runs-on: ${{ matrix.os }}
+    name: Test - Python ${{ matrix.python-version }} - ${{ matrix.os }}
+
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: [ "3.7", "3.8", "3.9", "3.10", "3.11-dev" ]
+        os: [ ubuntu-latest, macOS-latest, windows-latest ]
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: 'pip'
+
+      - name: Clean
+        run: make clean
+
+      - name: Test
+        run: make test
+
+  code-coverage:
+    needs: [ test ]
+    runs-on: ubuntu-latest
+    name: Report code coverage - Python ${{ matrix.python-version }}
+
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version:
+          [
+            '3.10'
+          ]
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: 'pip'
+
+      - name: Install tools
+        run: make dev
+
+      - name: Coverage
+        run: make coverage
+
+      - uses: AndreMiras/coveralls-python-action@develop

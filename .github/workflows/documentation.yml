@@ -1,0 +1,63 @@
+name: Update Documentation
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  documentation:
+    runs-on: ubuntu-latest
+    name: Documentation
+
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version:
+          [
+            '3.10'
+          ]
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: 'pip'
+
+      - name: Install tools
+        run: make build
+
+      - name: Clean
+        run: make dev
+
+      - name: Build Documentation
+        run: make docs
+
+      - name: Copy to documentation Website Location
+        run: |
+          mkdir ../gh-pages
+          cp -r docs/* ../gh-pages/
+          cd ../gh-pages
+      - name: Commit documentation changes
+        run: |
+          if [[ `git status --porcelain` ]]; then
+            echo "Commit documentation"
+            # Set identity
+            git config --global user.email "dev-git-action@paypal.com"
+            git config --global user.name "Git Action Doc"
+
+            # Add branch
+            git checkout -B gh-pages
+
+            # Push generated files
+            git add -A
+            git commit -m "Documentation updated"
+            git push origin gh-pages -fq > /dev/null
+          fi

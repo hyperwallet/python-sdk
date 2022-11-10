@@ -36,7 +36,6 @@ setup(
     maintainer_email = extract_metaitem('email'),
     packages = find_packages(exclude = ('tests', 'doc')),
     install_requires = ['requests', 'requests-toolbelt', 'jwcrypto', 'python-jose'],
-    test_suite = 'nose.collector',
     tests_require = [ 'mock', 'nose'],
     keywords='hyperwallet api',
     classifiers=[
@@ -45,8 +44,12 @@ setup(
         'Intended Audience :: Developers',
         'Natural Language :: English',
         'Programming Language :: Python',
-        'Programming Language :: Python :: 2',
-        'Programming Language :: Python :: 2.7',
+        'Programming Language :: Python :: 3',
+        'Programming Language :: Python :: 3.7',
+        'Programming Language :: Python :: 3.8',
+        'Programming Language :: Python :: 3.9',
+        'Programming Language :: Python :: 3.10',
+        'Programming Language :: Python :: 3.11',
         'Topic :: Internet',
         'Topic :: Software Development :: Libraries :: Python Modules'
     ]
