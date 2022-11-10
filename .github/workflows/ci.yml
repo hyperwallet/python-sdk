@@ -98,7 +98,7 @@ jobs:
           python-version: ${{ matrix.python-version }}
 
       - name: Install tools
-        run: make env
+        run: make dev
 
       - name: Coverage
         run: make coverage
