@@ -103,7 +103,7 @@ jobs:
       - name: Clean
         run: make clean
 
-      - name: Test
-        run: make test
+      - name: Coverage
+        run: make coverage
 
       - uses: AndreMiras/coveralls-python-action@develop
