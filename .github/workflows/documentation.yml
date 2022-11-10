@@ -55,7 +55,7 @@ jobs:
           git config --global user.name "Git Action Doc"
 
           git init
-          git remote add origin https://${GH_TOKEN}@github.com/hyperwallet/python-sdk.git > /dev/null
+          git remote add origin https://${{ secrets.GITHUB_TOKEN }}@github.com/hyperwallet/python-sdk.git > /dev/null
           git checkout -B gh-pages
           git commit -m "Documentation updated" | exit 0
 
