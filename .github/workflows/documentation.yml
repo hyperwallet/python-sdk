@@ -45,6 +45,7 @@ jobs:
           echo ${{ github.ref }}
           echo "Commit documentation"
           git checkout -B gh-pages
+          git add .
           git commit -m "Documentation updated" | exit 0
 
       - name: Push changes
