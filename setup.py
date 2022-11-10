@@ -36,7 +36,6 @@ setup(
     maintainer_email = extract_metaitem('email'),
     packages = find_packages(exclude = ('tests', 'doc')),
     install_requires = ['requests', 'requests-toolbelt', 'jwcrypto', 'python-jose'],
-    python_requires=">= 3.7",
     tests_require = [ 'mock', 'nose'],
     keywords='hyperwallet api',
     classifiers=[
