@@ -8,16 +8,6 @@ help:
 	@echo "  build       build the distribution"
 	@echo "  coverage    run tests with code coverage"
 
-venv:
-    venv/bin/activate
-
-venv/bin/activate: setup.py
-	pip install --upgrade pip virtualenv
-	python -m virtualenv --clear venv
-	venv/bin/python -m pip install -U pip tox twine
-	venv/bin/python -m pip install -e .
-	@touch venv/bin/activate
-
 env:
 	pip install -r requirements.txt
 
