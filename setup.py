@@ -21,7 +21,6 @@ def extract_metaitem(meta):
         return meta_match.group(1)
     raise RuntimeError('Unable to find __{meta}__ string.'.format(meta=meta))
 
-
 setup(
     name = 'hyperwallet-sdk',
     url = extract_metaitem('url'),
