@@ -51,7 +51,7 @@ jobs:
   test:
     needs: [ build ]
     runs-on: ${{ matrix.os }}
-    name: Test - Python ${{ matrix.python-version }}
+    name: Test - Python ${{ matrix.python-version }} - ${{ matrix.os }}
 
     strategy:
       fail-fast: false
