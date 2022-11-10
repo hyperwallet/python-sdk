@@ -1,4 +1,4 @@
-name: Java SDK CI
+name: Python SDK CI
 
 on:
   workflow_dispatch:
@@ -55,19 +55,20 @@ jobs:
 
     strategy:
       fail-fast: false
-      python-version:
-        [
-          "2.7",
-          "3.5",
-          "3.6",
-          "3.7",
-          "3.8",
-          "3.9",
-          "3.10",
-          "pypy-2.7",
-          "pypy-3.7",
-          "pypy-3.8",
-        ]
+      matrix:
+        python-version:
+          [
+            "2.7",
+            "3.5",
+            "3.6",
+            "3.7",
+            "3.8",
+            "3.9",
+            "3.10",
+            "pypy-2.7",
+            "pypy-3.7",
+            "pypy-3.8",
+          ]
 
     steps:
       - uses: actions/checkout@v3
