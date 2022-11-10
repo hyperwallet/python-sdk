@@ -56,7 +56,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: [ "2.7", "3.7", "3.8", "3.9", "3.10", "3.11-dev" ]
+        python-version: [ "3.6", "3.7", "3.8", "3.9", "3.10", "3.11-dev" ]
         os: [ ubuntu-latest, macOS-latest, windows-latest ]
 
     steps:
@@ -66,10 +66,6 @@ jobs:
         uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python-version }}
-
-      - name: Install tools for python 2.7
-        if: matrix.python-version == '2.7'
-        run: pip install rsa==4.0
 
       - name: Clean
         run: make clean
