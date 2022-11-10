@@ -69,7 +69,7 @@ jobs:
 
       - name: Install tools for python 2.7
         if: matrix.python-version == '2.7'
-        run: pip install rsa:4.0
+        run: pip install rsa==4.0
 
       - name: Clean
         run: make clean
