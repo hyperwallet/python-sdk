@@ -21,6 +21,13 @@ def extract_metaitem(meta):
         return meta_match.group(1)
     raise RuntimeError('Unable to find __{meta}__ string.'.format(meta=meta))
 
+requires = [
+    'rsa>=4.0'
+    'requests-toolbelt',
+    'jwcrypto',
+    'python-jose',
+]
+
 setup(
     name = 'hyperwallet-sdk',
     url = extract_metaitem('url'),
@@ -35,7 +42,7 @@ setup(
     maintainer = extract_metaitem('author'),
     maintainer_email = extract_metaitem('email'),
     packages = find_packages(exclude = ('tests', 'doc')),
-    install_requires = ['requests', 'requests-toolbelt', 'jwcrypto', 'python-jose'],
+    install_requires = requires,
     python_requires=">= 3.7",
     tests_require = [ 'mock', 'nose'],
     keywords='hyperwallet api',
