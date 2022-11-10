@@ -94,10 +94,11 @@ jobs:
 
     strategy:
       fail-fast: false
-      python-version:
-        [
-          '3.10'
-        ]
+      matrix:
+        python-version:
+          [
+            '3.10'
+          ]
 
     steps:
       - uses: actions/checkout@v3
