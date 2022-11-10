@@ -52,4 +52,6 @@ jobs:
           git checkout -B gh-pages
           git add .
           git commit -m "Documentation updated" 
+          
+          #push 
           git push origin gh-pages -fq > /dev/null | exit 0
