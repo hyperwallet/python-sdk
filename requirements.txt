@@ -1,4 +1,0 @@
-requests
-requests-toolbelt
-jwcrypto
-python-jose

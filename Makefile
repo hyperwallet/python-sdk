@@ -1,42 +1,20 @@
+# Minimal makefile for Sphinx documentation
+#
+
+# You can set these variables from the command line.
+SPHINXOPTS    =
+SPHINXBUILD   = sphinx-build
+SPHINXPROJ    = hyperwallet-sdk
+SOURCEDIR     = .
+BUILDDIR      = _build
+
+# Put it first so that "make" without argument is like "make help".
 help:
-	@echo "  env         install all production dependencies"
-	@echo "  dev         install all production and development dependencies"
-	@echo "  docs        build documentation"
-	@echo "  clean       clean working directory"
-	@echo "  lint        check style with pycodestyle"
-	@echo "  test        run tests"
-	@echo "  build       build the distribution"
-	@echo "  coverage    run tests with code coverage"
+	@$(SPHINXBUILD) -M help "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
 
-env:
-	pip install -r requirements.txt
+.PHONY: help Makefile
 
-dev: env
-	pip install -r requirements.dev.txt
-	pip install -r requirements.docs.txt
-
-docs:
-	$(MAKE) -C doc html
-
-clean:
-	rm -fr htmlcov
-	rm -fr dist
-	rm -fr .eggs
-	rm -fr *.egg-info
-	find . -name '*.pyc' -exec rm -f {} \;
-	find . -name '*.pyo' -exec rm -f {} \;
-
-lint:
-	pycodestyle --config=setup.cfg hyperwallet
-
-test: dev lint
-	python setup.py test
-
-build: clean
-	python setup.py check
-	python setup.py sdist
-
-coverage: clean
-	coverage run setup.py test
-	coverage html
-	coverage report
+# Catch-all target: route all unknown targets to Sphinx using the new
+# "make mode" option.  $(O) is meant as a shortcut for $(SPHINXOPTS).
+%: Makefile
+	@$(SPHINXBUILD) -M $@ "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)

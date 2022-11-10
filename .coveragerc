@@ -1,6 +1,0 @@
-[run]
-relative_files = True
-source = hyperwallet
-omit =
-        venv/*
-        hyperwallet/tests/*

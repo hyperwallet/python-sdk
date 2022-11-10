@@ -1,0 +1,2094 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Welcome to the Hyperwallet Python SDK documentation! &mdash; hyperwallet-sdk 1.4.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="#" class="icon icon-home"> hyperwallet-sdk
+          </a>
+              <div class="version">
+                1.4.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">Welcome to the Hyperwallet Python SDK documentation!</a><ul>
+<li><a class="reference internal" href="#module-hyperwallet.api">API Endpoints</a><ul>
+<li><a class="reference internal" href="#hyperwallet.api.Api"><code class="docutils literal notranslate"><span class="pre">Api</span></code></a><ul>
+<li><a class="reference internal" href="#hyperwallet.api.Api.__buildUrl"><code class="docutils literal notranslate"><span class="pre">Api.__buildUrl()</span></code></a></li>
+<li><a class="reference internal" href="#hyperwallet.api.Api.__updateTransferMethod"><code class="docutils literal notranslate"><span class="pre">Api.__updateTransferMethod()</span></code></a></li>
+<li><a class="reference internal" href="#hyperwallet.api.Api.activateUser"><code class="docutils literal notranslate"><span class="pre">Api.activateUser()</span></code></a></li>
+<li><a class="reference internal" href="#hyperwallet.api.Api.createBankAccount"><code class="docutils literal notranslate"><span class="pre">Api.createBankAccount()</span></code></a></li>
+<li><a class="reference internal" href="#hyperwallet.api.Api.createBankAccountStatusTransition"><code class="docutils literal notranslate"><span class="pre">Api.createBankAccountStatusTransition()</span></code></a></li>
+<li><a class="reference internal" href="#hyperwallet.api.Api.createBankCard"><code class="docutils literal notranslate"><span class="pre">Api.createBankCard()</span></code></a></li>
+<li><a class="reference internal" href="#hyperwallet.api.Api.createBankCardStatusTransition"><code class="docutils literal notranslate"><span class="pre">Api.createBankCardStatusTransition()</span></code></a></li>
+<li><a class="reference internal" href="#hyperwallet.api.Api.createPaperCheck"><code class="docutils literal notranslate"><span class="pre">Api.createPaperCheck()</span></code></a></li>
+<li><a class="reference internal" href="#hyperwallet.api.Api.createPaperCheckStatusTransition"><code class="docutils literal notranslate"><span class="pre">Api.createPaperCheckStatusTransition()</span></code></a></li>
+<li><a class="reference internal" href="#hyperwallet.api.Api.createPayPalAccount"><code class="docutils literal notranslate"><span class="pre">Api.createPayPalAccount()</span></code></a></li>
+<li><a class="reference internal" href="#hyperwallet.api.Api.createPayPalAccountStatusTransition"><code class="docutils literal notranslate"><span class="pre">Api.createPayPalAccountStatusTransition()</span></code></a></li>
+<li><a class="reference internal" href="#hyperwallet.api.Api.createPayment"><code class="docutils literal notranslate"><span class="pre">Api.createPayment()</span></code></a></li>
+<li><a class="reference internal" href="#hyperwallet.api.Api.createPaymentStatusTransition"><code class="docutils literal notranslate"><span class="pre">Api.createPaymentStatusTransition()</span></code></a></li>
+<li><a class="reference internal" href="#hyperwallet.api.Api.createPrepaidCard"><code class="docutils literal notranslate"><span class="pre">Api.createPrepaidCard()</span></code></a></li>
+<li><a class="reference internal" href="#hyperwallet.api.Api.createPrepaidCardStatusTransition"><code class="docutils literal notranslate"><span class="pre">Api.createPrepaidCardStatusTransition()</span></code></a></li>
+<li><a class="reference internal" href="#hyperwallet.api.Api.createTransfer"><code class="docutils literal notranslate"><span class="pre">Api.createTransfer()</span></code></a></li>
+<li><a class="reference internal" href="#hyperwallet.api.Api.createTransferMethod"><code class="docutils literal notranslate"><span class="pre">Api.createTransferMethod()</span></code></a></li>
+<li><a class="reference internal" href="#hyperwallet.api.Api.createTransferRefund"><code class="docutils literal notranslate"><span class="pre">Api.createTransferRefund()</span></code></a></li>
+<li><a class="reference internal" href="#hyperwallet.api.Api.createTransferSpendBackRefund"><code class="docutils literal notranslate"><span class="pre">Api.createTransferSpendBackRefund()</span></code></a></li>
+<li><a class="reference internal" href="#hyperwallet.api.Api.createTransferStatusTransition"><code class="docutils literal notranslate"><span class="pre">Api.createTransferStatusTransition()</span></code></a></li>
+<li><a class="reference internal" href="#hyperwallet.api.Api.createUser"><code class="docutils literal notranslate"><span class="pre">Api.createUser()</span></code></a></li>
+<li><a class="reference internal" href="#hyperwallet.api.Api.createUserStatusTransition"><code class="docutils literal notranslate"><span class="pre">Api.createUserStatusTransition()</span></code></a></li>
+<li><a class="reference internal" href="#hyperwallet.api.Api.createVenmoAccount"><code class="docutils literal notranslate"><span class="pre">Api.createVenmoAccount()</span></code></a></li>
+<li><a class="reference internal" href="#hyperwallet.api.Api.createVenmoAccountStatusTransition"><code class="docutils literal notranslate"><span class="pre">Api.createVenmoAccountStatusTransition()</span></code></a></li>
+<li><a class="reference internal" href="#hyperwallet.api.Api.deactivateBankAccount"><code class="docutils literal notranslate"><span class="pre">Api.deactivateBankAccount()</span></code></a></li>
+<li><a class="reference internal" href="#hyperwallet.api.Api.deactivateBankCard"><code class="docutils literal notranslate"><span class="pre">Api.deactivateBankCard()</span></code></a></li>
+<li><a class="reference internal" href="#hyperwallet.api.Api.deactivatePaperCheck"><code class="docutils literal notranslate"><span class="pre">Api.deactivatePaperCheck()</span></code></a></li>
+<li><a class="reference internal" href="#hyperwallet.api.Api.deactivatePayPalAccount"><code class="docutils literal notranslate"><span class="pre">Api.deactivatePayPalAccount()</span></code></a></li>
+<li><a class="reference internal" href="#hyperwallet.api.Api.deactivatePrepaidCard"><code class="docutils literal notranslate"><span class="pre">Api.deactivatePrepaidCard()</span></code></a></li>
+<li><a class="reference internal" href="#hyperwallet.api.Api.deactivateUser"><code class="docutils literal notranslate"><span class="pre">Api.deactivateUser()</span></code></a></li>
+<li><a class="reference internal" href="#hyperwallet.api.Api.deactivateVenmoAccount"><code class="docutils literal notranslate"><span class="pre">Api.deactivateVenmoAccount()</span></code></a></li>
+<li><a class="reference internal" href="#hyperwallet.api.Api.freezeUser"><code class="docutils literal notranslate"><span class="pre">Api.freezeUser()</span></code></a></li>
+<li><a class="reference internal" href="#hyperwallet.api.Api.getAccount"><code class="docutils literal notranslate"><span class="pre">Api.getAccount()</span></code></a></li>
+<li><a class="reference internal" href="#hyperwallet.api.Api.getAuthenticationToken"><code class="docutils literal notranslate"><span class="pre">Api.getAuthenticationToken()</span></code></a></li>
+<li><a class="reference internal" href="#hyperwallet.api.Api.getBankAccount"><code class="docutils literal notranslate"><span class="pre">Api.getBankAccount()</span></code></a></li>
+<li><a class="reference internal" href="#hyperwallet.api.Api.getBankAccountStatusTransition"><code class="docutils literal notranslate"><span class="pre">Api.getBankAccountStatusTransition()</span></code></a></li>
+<li><a class="reference internal" href="#hyperwallet.api.Api.getBankCard"><code class="docutils literal notranslate"><span class="pre">Api.getBankCard()</span></code></a></li>
+<li><a class="reference internal" href="#hyperwallet.api.Api.getBankCardStatusTransition"><code class="docutils literal notranslate"><span class="pre">Api.getBankCardStatusTransition()</span></code></a></li>
+<li><a class="reference internal" href="#hyperwallet.api.Api.getPaperCheck"><code class="docutils literal notranslate"><span class="pre">Api.getPaperCheck()</span></code></a></li>
+<li><a class="reference internal" href="#hyperwallet.api.Api.getPaperCheckStatusTransition"><code class="docutils literal notranslate"><span class="pre">Api.getPaperCheckStatusTransition()</span></code></a></li>
+<li><a class="reference internal" href="#hyperwallet.api.Api.getPayPalAccount"><code class="docutils literal notranslate"><span class="pre">Api.getPayPalAccount()</span></code></a></li>
+<li><a class="reference internal" href="#hyperwallet.api.Api.getPayPalAccountStatusTransition"><code class="docutils literal notranslate"><span class="pre">Api.getPayPalAccountStatusTransition()</span></code></a></li>
+<li><a class="reference internal" href="#hyperwallet.api.Api.getPayment"><code class="docutils literal notranslate"><span class="pre">Api.getPayment()</span></code></a></li>
+<li><a class="reference internal" href="#hyperwallet.api.Api.getPaymentStatusTransition"><code class="docutils literal notranslate"><span class="pre">Api.getPaymentStatusTransition()</span></code></a></li>
+<li><a class="reference internal" href="#hyperwallet.api.Api.getPrepaidCard"><code class="docutils literal notranslate"><span class="pre">Api.getPrepaidCard()</span></code></a></li>
+<li><a class="reference internal" href="#hyperwallet.api.Api.getPrepaidCardStatusTransition"><code class="docutils literal notranslate"><span class="pre">Api.getPrepaidCardStatusTransition()</span></code></a></li>
+<li><a class="reference internal" href="#hyperwallet.api.Api.getProgram"><code class="docutils literal notranslate"><span class="pre">Api.getProgram()</span></code></a></li>
+<li><a class="reference internal" href="#hyperwallet.api.Api.getTransfer"><code class="docutils literal notranslate"><span class="pre">Api.getTransfer()</span></code></a></li>
+<li><a class="reference internal" href="#hyperwallet.api.Api.getTransferMethodConfiguration"><code class="docutils literal notranslate"><span class="pre">Api.getTransferMethodConfiguration()</span></code></a></li>
+<li><a class="reference internal" href="#hyperwallet.api.Api.getTransferRefund"><code class="docutils literal notranslate"><span class="pre">Api.getTransferRefund()</span></code></a></li>
+<li><a class="reference internal" href="#hyperwallet.api.Api.getTransferStatusTransition"><code class="docutils literal notranslate"><span class="pre">Api.getTransferStatusTransition()</span></code></a></li>
+<li><a class="reference internal" href="#hyperwallet.api.Api.getUser"><code class="docutils literal notranslate"><span class="pre">Api.getUser()</span></code></a></li>
+<li><a class="reference internal" href="#hyperwallet.api.Api.getUserStatusTransition"><code class="docutils literal notranslate"><span class="pre">Api.getUserStatusTransition()</span></code></a></li>
+<li><a class="reference internal" href="#hyperwallet.api.Api.getVenmoAccount"><code class="docutils literal notranslate"><span class="pre">Api.getVenmoAccount()</span></code></a></li>
+<li><a class="reference internal" href="#hyperwallet.api.Api.getVenmoAccountStatusTransition"><code class="docutils literal notranslate"><span class="pre">Api.getVenmoAccountStatusTransition()</span></code></a></li>
+<li><a class="reference internal" href="#hyperwallet.api.Api.getWebhookNotification"><code class="docutils literal notranslate"><span class="pre">Api.getWebhookNotification()</span></code></a></li>
+<li><a class="reference internal" href="#hyperwallet.api.Api.listBalancesForAccount"><code class="docutils literal notranslate"><span class="pre">Api.listBalancesForAccount()</span></code></a></li>
+<li><a class="reference internal" href="#hyperwallet.api.Api.listBalancesForPrepaidCard"><code class="docutils literal notranslate"><span class="pre">Api.listBalancesForPrepaidCard()</span></code></a></li>
+<li><a class="reference internal" href="#hyperwallet.api.Api.listBalancesForUser"><code class="docutils literal notranslate"><span class="pre">Api.listBalancesForUser()</span></code></a></li>
+<li><a class="reference internal" href="#hyperwallet.api.Api.listBankAccountStatusTransitions"><code class="docutils literal notranslate"><span class="pre">Api.listBankAccountStatusTransitions()</span></code></a></li>
+<li><a class="reference internal" href="#hyperwallet.api.Api.listBankAccounts"><code class="docutils literal notranslate"><span class="pre">Api.listBankAccounts()</span></code></a></li>
+<li><a class="reference internal" href="#hyperwallet.api.Api.listBankCardStatusTransitions"><code class="docutils literal notranslate"><span class="pre">Api.listBankCardStatusTransitions()</span></code></a></li>
+<li><a class="reference internal" href="#hyperwallet.api.Api.listBankCards"><code class="docutils literal notranslate"><span class="pre">Api.listBankCards()</span></code></a></li>
+<li><a class="reference internal" href="#hyperwallet.api.Api.listPaperCheckStatusTransitions"><code class="docutils literal notranslate"><span class="pre">Api.listPaperCheckStatusTransitions()</span></code></a></li>
+<li><a class="reference internal" href="#hyperwallet.api.Api.listPaperChecks"><code class="docutils literal notranslate"><span class="pre">Api.listPaperChecks()</span></code></a></li>
+<li><a class="reference internal" href="#hyperwallet.api.Api.listPayPalAccountStatusTransitions"><code class="docutils literal notranslate"><span class="pre">Api.listPayPalAccountStatusTransitions()</span></code></a></li>
+<li><a class="reference internal" href="#hyperwallet.api.Api.listPayPalAccounts"><code class="docutils literal notranslate"><span class="pre">Api.listPayPalAccounts()</span></code></a></li>
+<li><a class="reference internal" href="#hyperwallet.api.Api.listPaymentStatusTransitions"><code class="docutils literal notranslate"><span class="pre">Api.listPaymentStatusTransitions()</span></code></a></li>
+<li><a class="reference internal" href="#hyperwallet.api.Api.listPayments"><code class="docutils literal notranslate"><span class="pre">Api.listPayments()</span></code></a></li>
+<li><a class="reference internal" href="#hyperwallet.api.Api.listPrepaidCardStatusTransitions"><code class="docutils literal notranslate"><span class="pre">Api.listPrepaidCardStatusTransitions()</span></code></a></li>
+<li><a class="reference internal" href="#hyperwallet.api.Api.listPrepaidCards"><code class="docutils literal notranslate"><span class="pre">Api.listPrepaidCards()</span></code></a></li>
+<li><a class="reference internal" href="#hyperwallet.api.Api.listReceiptsForAccount"><code class="docutils literal notranslate"><span class="pre">Api.listReceiptsForAccount()</span></code></a></li>
+<li><a class="reference internal" href="#hyperwallet.api.Api.listReceiptsForPrepaidCard"><code class="docutils literal notranslate"><span class="pre">Api.listReceiptsForPrepaidCard()</span></code></a></li>
+<li><a class="reference internal" href="#hyperwallet.api.Api.listReceiptsForUser"><code class="docutils literal notranslate"><span class="pre">Api.listReceiptsForUser()</span></code></a></li>
+<li><a class="reference internal" href="#hyperwallet.api.Api.listTransferMethodConfigurations"><code class="docutils literal notranslate"><span class="pre">Api.listTransferMethodConfigurations()</span></code></a></li>
+<li><a class="reference internal" href="#hyperwallet.api.Api.listTransferMethods"><code class="docutils literal notranslate"><span class="pre">Api.listTransferMethods()</span></code></a></li>
+<li><a class="reference internal" href="#hyperwallet.api.Api.listTransferRefunds"><code class="docutils literal notranslate"><span class="pre">Api.listTransferRefunds()</span></code></a></li>
+<li><a class="reference internal" href="#hyperwallet.api.Api.listTransferStatusTransitions"><code class="docutils literal notranslate"><span class="pre">Api.listTransferStatusTransitions()</span></code></a></li>
+<li><a class="reference internal" href="#hyperwallet.api.Api.listTransfers"><code class="docutils literal notranslate"><span class="pre">Api.listTransfers()</span></code></a></li>
+<li><a class="reference internal" href="#hyperwallet.api.Api.listUserStatusTransitions"><code class="docutils literal notranslate"><span class="pre">Api.listUserStatusTransitions()</span></code></a></li>
+<li><a class="reference internal" href="#hyperwallet.api.Api.listUsers"><code class="docutils literal notranslate"><span class="pre">Api.listUsers()</span></code></a></li>
+<li><a class="reference internal" href="#hyperwallet.api.Api.listVenmoAccountStatusTransitions"><code class="docutils literal notranslate"><span class="pre">Api.listVenmoAccountStatusTransitions()</span></code></a></li>
+<li><a class="reference internal" href="#hyperwallet.api.Api.listVenmoAccounts"><code class="docutils literal notranslate"><span class="pre">Api.listVenmoAccounts()</span></code></a></li>
+<li><a class="reference internal" href="#hyperwallet.api.Api.listWebhookNotifications"><code class="docutils literal notranslate"><span class="pre">Api.listWebhookNotifications()</span></code></a></li>
+<li><a class="reference internal" href="#hyperwallet.api.Api.lockPrepaidCard"><code class="docutils literal notranslate"><span class="pre">Api.lockPrepaidCard()</span></code></a></li>
+<li><a class="reference internal" href="#hyperwallet.api.Api.lockUser"><code class="docutils literal notranslate"><span class="pre">Api.lockUser()</span></code></a></li>
+<li><a class="reference internal" href="#hyperwallet.api.Api.lostOrStolenPrepaidCard"><code class="docutils literal notranslate"><span class="pre">Api.lostOrStolenPrepaidCard()</span></code></a></li>
+<li><a class="reference internal" href="#hyperwallet.api.Api.preactivateUser"><code class="docutils literal notranslate"><span class="pre">Api.preactivateUser()</span></code></a></li>
+<li><a class="reference internal" href="#hyperwallet.api.Api.setDocumentAndReasonFromResponseHelper"><code class="docutils literal notranslate"><span class="pre">Api.setDocumentAndReasonFromResponseHelper()</span></code></a></li>
+<li><a class="reference internal" href="#hyperwallet.api.Api.suspendPrepaidCard"><code class="docutils literal notranslate"><span class="pre">Api.suspendPrepaidCard()</span></code></a></li>
+<li><a class="reference internal" href="#hyperwallet.api.Api.unlockPrepaidCard"><code class="docutils literal notranslate"><span class="pre">Api.unlockPrepaidCard()</span></code></a></li>
+<li><a class="reference internal" href="#hyperwallet.api.Api.unsuspendPrepaidCard"><code class="docutils literal notranslate"><span class="pre">Api.unsuspendPrepaidCard()</span></code></a></li>
+<li><a class="reference internal" href="#hyperwallet.api.Api.updateBankAccount"><code class="docutils literal notranslate"><span class="pre">Api.updateBankAccount()</span></code></a></li>
+<li><a class="reference internal" href="#hyperwallet.api.Api.updateBankCard"><code class="docutils literal notranslate"><span class="pre">Api.updateBankCard()</span></code></a></li>
+<li><a class="reference internal" href="#hyperwallet.api.Api.updatePaperCheck"><code class="docutils literal notranslate"><span class="pre">Api.updatePaperCheck()</span></code></a></li>
+<li><a class="reference internal" href="#hyperwallet.api.Api.updatePayPalAccount"><code class="docutils literal notranslate"><span class="pre">Api.updatePayPalAccount()</span></code></a></li>
+<li><a class="reference internal" href="#hyperwallet.api.Api.updatePrepaidCard"><code class="docutils literal notranslate"><span class="pre">Api.updatePrepaidCard()</span></code></a></li>
+<li><a class="reference internal" href="#hyperwallet.api.Api.updateUser"><code class="docutils literal notranslate"><span class="pre">Api.updateUser()</span></code></a></li>
+<li><a class="reference internal" href="#hyperwallet.api.Api.updateVenmoAccount"><code class="docutils literal notranslate"><span class="pre">Api.updateVenmoAccount()</span></code></a></li>
+<li><a class="reference internal" href="#hyperwallet.api.Api.uploadDocumentsForUser"><code class="docutils literal notranslate"><span class="pre">Api.uploadDocumentsForUser()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-hyperwallet.utils.apiclient">API Client</a><ul>
+<li><a class="reference internal" href="#hyperwallet.utils.apiclient.ApiClient"><code class="docutils literal notranslate"><span class="pre">ApiClient</span></code></a><ul>
+<li><a class="reference internal" href="#hyperwallet.utils.apiclient.ApiClient.__checkResponseHeaderContentType"><code class="docutils literal notranslate"><span class="pre">ApiClient.__checkResponseHeaderContentType()</span></code></a></li>
+<li><a class="reference internal" href="#hyperwallet.utils.apiclient.ApiClient.__getRequestData"><code class="docutils literal notranslate"><span class="pre">ApiClient.__getRequestData()</span></code></a></li>
+<li><a class="reference internal" href="#hyperwallet.utils.apiclient.ApiClient._makeRequest"><code class="docutils literal notranslate"><span class="pre">ApiClient._makeRequest()</span></code></a></li>
+<li><a class="reference internal" href="#hyperwallet.utils.apiclient.ApiClient.doGet"><code class="docutils literal notranslate"><span class="pre">ApiClient.doGet()</span></code></a></li>
+<li><a class="reference internal" href="#hyperwallet.utils.apiclient.ApiClient.doPost"><code class="docutils literal notranslate"><span class="pre">ApiClient.doPost()</span></code></a></li>
+<li><a class="reference internal" href="#hyperwallet.utils.apiclient.ApiClient.doPut"><code class="docutils literal notranslate"><span class="pre">ApiClient.doPut()</span></code></a></li>
+<li><a class="reference internal" href="#hyperwallet.utils.apiclient.ApiClient.encrypted"><code class="docutils literal notranslate"><span class="pre">ApiClient.encrypted</span></code></a></li>
+<li><a class="reference internal" href="#hyperwallet.utils.apiclient.ApiClient.putDocument"><code class="docutils literal notranslate"><span class="pre">ApiClient.putDocument()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">hyperwallet-sdk</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="#" class="icon icon-home"></a></li>
+      <li class="breadcrumb-item active">Welcome to the Hyperwallet Python SDK documentation!</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="welcome-to-the-hyperwallet-python-sdk-documentation">
+<h1>Welcome to the Hyperwallet Python SDK documentation!<a class="headerlink" href="#welcome-to-the-hyperwallet-python-sdk-documentation" title="Permalink to this heading"></a></h1>
+<section id="module-hyperwallet.api">
+<span id="api-endpoints"></span><h2>API Endpoints<a class="headerlink" href="#module-hyperwallet.api" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="hyperwallet.api.Api">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">hyperwallet.api.</span></span><span class="sig-name descname"><span class="pre">Api</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">username</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">programToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">server</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'https://api.sandbox.hyperwallet.com'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">encryptionData</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hyperwallet.api.Api" title="Permalink to this definition"></a></dt>
+<dd><p>A Python interface for the Hyperwallet API.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>username</strong> – The username of this API user. <strong>REQUIRED</strong></p></li>
+<li><p><strong>password</strong> – The password of this API user. <strong>REQUIRED</strong></p></li>
+<li><p><strong>programToken</strong> – The token for the program this user is accessing. <strong>REQUIRED</strong></p></li>
+<li><p><strong>server</strong> – Your UAT or Production API URL if applicable.</p></li>
+<li><p><strong>encryptionData</strong> – Dictionary with params for encrypted requests (keys: clientPrivateKeySetLocation, hyperwalletKeySetLocation, etc).</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>server</strong> defaults to the Hyperwallet Sandbox URL if not provided.</p>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="hyperwallet.api.Api.__buildUrl">
+<span class="sig-name descname"><span class="pre">__buildUrl</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">paths</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hyperwallet.api.Api.__buildUrl" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hyperwallet.api.Api.__updateTransferMethod">
+<span class="sig-name descname"><span class="pre">__updateTransferMethod</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">userToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transferMethodToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transferMethodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hyperwallet.api.Api.__updateTransferMethod" title="Permalink to this definition"></a></dt>
+<dd><p>Update a Transfer method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>userToken</strong> – A token identifying the User. <strong>REQUIRED</strong></p></li>
+<li><p><strong>transferMethodToken</strong> – A token identifying the Transfer Method. <strong>REQUIRED</strong></p></li>
+<li><p><strong>transferMethodName</strong> – A Transfer Method name used in url. <strong>REQUIRED</strong></p></li>
+<li><p><strong>data</strong> – A dictionary containing Transfer Method information. <strong>REQUIRED</strong></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>An updated Transfer Method object.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hyperwallet.api.Api.activateUser">
+<span class="sig-name descname"><span class="pre">activateUser</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">userToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hyperwallet.api.Api.activateUser" title="Permalink to this definition"></a></dt>
+<dd><p>Create User Activate Status Transition.
+:param userToken:</p>
+<blockquote>
+<div><p>A token identifying the User Create UserToken. <strong>REQUIRED</strong></p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>StatusTransition.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hyperwallet.api.Api.createBankAccount">
+<span class="sig-name descname"><span class="pre">createBankAccount</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">userToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hyperwallet.api.Api.createBankAccount" title="Permalink to this definition"></a></dt>
+<dd><p>Create a Bank Account.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>userToken</strong> – A token identifying the User. <strong>REQUIRED</strong></p></li>
+<li><p><strong>data</strong> – A dictionary containing Bank Account information. <strong>REQUIRED</strong></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A Bank Account.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hyperwallet.api.Api.createBankAccountStatusTransition">
+<span class="sig-name descname"><span class="pre">createBankAccountStatusTransition</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">userToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bankAccountToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hyperwallet.api.Api.createBankAccountStatusTransition" title="Permalink to this definition"></a></dt>
+<dd><p>Create a Bank Account Status Transition.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>userToken</strong> – A token identifying the User. <strong>REQUIRED</strong></p></li>
+<li><p><strong>bankAccountToken</strong> – A token identifying the Bank Account. <strong>REQUIRED</strong></p></li>
+<li><p><strong>data</strong> – A dictionary containing Bank Account Status Transition information. <strong>REQUIRED</strong></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A Bank Account Status Transition.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hyperwallet.api.Api.createBankCard">
+<span class="sig-name descname"><span class="pre">createBankCard</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">userToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hyperwallet.api.Api.createBankCard" title="Permalink to this definition"></a></dt>
+<dd><p>Create a Bank Card.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>userToken</strong> – A token identifying the User. <strong>REQUIRED</strong></p></li>
+<li><p><strong>data</strong> – A dictionary containing Bank Card information. <strong>REQUIRED</strong></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A Bank Card.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hyperwallet.api.Api.createBankCardStatusTransition">
+<span class="sig-name descname"><span class="pre">createBankCardStatusTransition</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">userToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bankCardToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hyperwallet.api.Api.createBankCardStatusTransition" title="Permalink to this definition"></a></dt>
+<dd><p>Create a Bank Card Status Transition.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>userToken</strong> – A token identifying the User. <strong>REQUIRED</strong></p></li>
+<li><p><strong>bankCardToken</strong> – A token identifying the Bank Card. <strong>REQUIRED</strong></p></li>
+<li><p><strong>data</strong> – A dictionary containing Bank Card Status Transition information. <strong>REQUIRED</strong></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A Bank Card Status Transition.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hyperwallet.api.Api.createPaperCheck">
+<span class="sig-name descname"><span class="pre">createPaperCheck</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">userToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hyperwallet.api.Api.createPaperCheck" title="Permalink to this definition"></a></dt>
+<dd><p>Create a Paper Check.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>userToken</strong> – A token identifying the User. <strong>REQUIRED</strong></p></li>
+<li><p><strong>data</strong> – A dictionary containing Paper Check information. <strong>REQUIRED</strong></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A Paper Check.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hyperwallet.api.Api.createPaperCheckStatusTransition">
+<span class="sig-name descname"><span class="pre">createPaperCheckStatusTransition</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">userToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">paperCheckToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hyperwallet.api.Api.createPaperCheckStatusTransition" title="Permalink to this definition"></a></dt>
+<dd><p>Create a Paper Check Status Transition.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>userToken</strong> – A token identifying the User. <strong>REQUIRED</strong></p></li>
+<li><p><strong>paperCheckToken</strong> – A token identifying the Paper Check. <strong>REQUIRED</strong></p></li>
+<li><p><strong>data</strong> – A dictionary containing Paper Check Status Transition information. <strong>REQUIRED</strong></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A Paper Check Status Transition.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hyperwallet.api.Api.createPayPalAccount">
+<span class="sig-name descname"><span class="pre">createPayPalAccount</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">userToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hyperwallet.api.Api.createPayPalAccount" title="Permalink to this definition"></a></dt>
+<dd><p>Create a PayPal Account.
+:param userToken:</p>
+<blockquote>
+<div><p>A token identifying the User. <strong>REQUIRED</strong></p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>data</strong> – A dictionary containing PayPal Account information. <strong>REQUIRED</strong></p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A PayPal Account.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hyperwallet.api.Api.createPayPalAccountStatusTransition">
+<span class="sig-name descname"><span class="pre">createPayPalAccountStatusTransition</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">userToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">payPalAccountToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hyperwallet.api.Api.createPayPalAccountStatusTransition" title="Permalink to this definition"></a></dt>
+<dd><p>Create a PayPal Account Status Transition.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>userToken</strong> – A token identifying the User. <strong>REQUIRED</strong></p></li>
+<li><p><strong>payPalAccountToken</strong> – A token identifying the PayPal Account. <strong>REQUIRED</strong></p></li>
+<li><p><strong>data</strong> – A dictionary containing PayPal Account Status Transition information. <strong>REQUIRED</strong></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A PayPal Account Status Transition.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hyperwallet.api.Api.createPayment">
+<span class="sig-name descname"><span class="pre">createPayment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hyperwallet.api.Api.createPayment" title="Permalink to this definition"></a></dt>
+<dd><p>Create a Payment.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>data</strong> – A dictionary containing Payment information. <strong>REQUIRED</strong></p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A Payment.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hyperwallet.api.Api.createPaymentStatusTransition">
+<span class="sig-name descname"><span class="pre">createPaymentStatusTransition</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">paymentToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hyperwallet.api.Api.createPaymentStatusTransition" title="Permalink to this definition"></a></dt>
+<dd><p>Create Payment Status Transition.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>paymentToken</strong> – A token identifying the Payment. <strong>REQUIRED</strong></p></li>
+<li><p><strong>data</strong> – A dictionary containing User Status Transition information. <strong>REQUIRED</strong></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A Payment Status Transition.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hyperwallet.api.Api.createPrepaidCard">
+<span class="sig-name descname"><span class="pre">createPrepaidCard</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">userToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hyperwallet.api.Api.createPrepaidCard" title="Permalink to this definition"></a></dt>
+<dd><p>Create a Prepaid Card.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>userToken</strong> – A token identifying the User. <strong>REQUIRED</strong></p></li>
+<li><p><strong>data</strong> – A dictionary containing Prepaid Card information. <strong>REQUIRED</strong></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A Prepaid Card.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hyperwallet.api.Api.createPrepaidCardStatusTransition">
+<span class="sig-name descname"><span class="pre">createPrepaidCardStatusTransition</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">userToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prepaidCardToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hyperwallet.api.Api.createPrepaidCardStatusTransition" title="Permalink to this definition"></a></dt>
+<dd><p>Create a Prepaid Card Status Transition.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>userToken</strong> – A token identifying the User. <strong>REQUIRED</strong></p></li>
+<li><p><strong>prepaidCardToken</strong> – A token identifying the Prepaid Card. <strong>REQUIRED</strong></p></li>
+<li><p><strong>data</strong> – A dictionary containing Prepaid Card Status Transition information. <strong>REQUIRED</strong></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A Prepaid Card Status Transition.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hyperwallet.api.Api.createTransfer">
+<span class="sig-name descname"><span class="pre">createTransfer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hyperwallet.api.Api.createTransfer" title="Permalink to this definition"></a></dt>
+<dd><p>Create a Transfer.
+:param data:</p>
+<blockquote>
+<div><p>A dictionary containing Transfer information. <strong>REQUIRED</strong></p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A Transfer.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hyperwallet.api.Api.createTransferMethod">
+<span class="sig-name descname"><span class="pre">createTransferMethod</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">userToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cacheToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hyperwallet.api.Api.createTransferMethod" title="Permalink to this definition"></a></dt>
+<dd><p>Create a Transfer Method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>userToken</strong> – A token identifying the User. <strong>REQUIRED</strong></p></li>
+<li><p><strong>cacheToken</strong> – A cache token identifying the Transfer Method. <strong>REQUIRED</strong></p></li>
+<li><p><strong>data</strong> – A dictionary containing Field Restriction information.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A Transfer Method.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hyperwallet.api.Api.createTransferRefund">
+<span class="sig-name descname"><span class="pre">createTransferRefund</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">transferToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hyperwallet.api.Api.createTransferRefund" title="Permalink to this definition"></a></dt>
+<dd><p>Create a Transfer Refund.
+:param transferToken:</p>
+<blockquote>
+<div><p>A token identifying the Transfer. <strong>REQUIRED</strong></p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>data</strong> – A dictionary containing Transfer Refund information. <strong>REQUIRED</strong></p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A Transfer Refund.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hyperwallet.api.Api.createTransferSpendBackRefund">
+<span class="sig-name descname"><span class="pre">createTransferSpendBackRefund</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">transferToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sourceToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hyperwallet.api.Api.createTransferSpendBackRefund" title="Permalink to this definition"></a></dt>
+<dd><p>Create a Transfer Refund.
+:param transferToken:</p>
+<blockquote>
+<div><p>A token identifying the Transfer. <strong>REQUIRED</strong></p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>data</strong> – A dictionary containing Transfer Refund information. <strong>REQUIRED</strong></p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A Transfer Refund.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hyperwallet.api.Api.createTransferStatusTransition">
+<span class="sig-name descname"><span class="pre">createTransferStatusTransition</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">transferToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hyperwallet.api.Api.createTransferStatusTransition" title="Permalink to this definition"></a></dt>
+<dd><p>Create a Transfer Status Transition.
+:param transferToken:</p>
+<blockquote>
+<div><p>A token identifying the Transfer. <strong>REQUIRED</strong></p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>data</strong> – A dictionary containing Transfer Status Transition information. <strong>REQUIRED</strong></p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A Transfer Status Transition.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hyperwallet.api.Api.createUser">
+<span class="sig-name descname"><span class="pre">createUser</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hyperwallet.api.Api.createUser" title="Permalink to this definition"></a></dt>
+<dd><p>Create a User.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>data</strong> – A dictionary containing User information. <strong>REQUIRED</strong></p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A User.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hyperwallet.api.Api.createUserStatusTransition">
+<span class="sig-name descname"><span class="pre">createUserStatusTransition</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">userToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hyperwallet.api.Api.createUserStatusTransition" title="Permalink to this definition"></a></dt>
+<dd><p>Create User Status Transition.
+:param userToken:</p>
+<blockquote>
+<div><p>A token identifying the User Create UserToken. <strong>REQUIRED</strong></p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>data</strong> – A dictionary containing User Status Create Data information. <strong>REQUIRED</strong></p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>StatusTransition.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hyperwallet.api.Api.createVenmoAccount">
+<span class="sig-name descname"><span class="pre">createVenmoAccount</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">userToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hyperwallet.api.Api.createVenmoAccount" title="Permalink to this definition"></a></dt>
+<dd><p>Create a Venmo Account.
+:param userToken:</p>
+<blockquote>
+<div><p>A token identifying the User. <strong>REQUIRED</strong></p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>data</strong> – A dictionary containing Venmo Account information. <strong>REQUIRED</strong></p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A Venmo Account.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hyperwallet.api.Api.createVenmoAccountStatusTransition">
+<span class="sig-name descname"><span class="pre">createVenmoAccountStatusTransition</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">userToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">venmoAccountToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hyperwallet.api.Api.createVenmoAccountStatusTransition" title="Permalink to this definition"></a></dt>
+<dd><p>Create a Venmo Account Status Transition.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>userToken</strong> – A token identifying the User. <strong>REQUIRED</strong></p></li>
+<li><p><strong>VenmoAccountToken</strong> – A token identifying the Venmo Account. <strong>REQUIRED</strong></p></li>
+<li><p><strong>data</strong> – A dictionary containing Venmo Account Status Transition information. <strong>REQUIRED</strong></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A Venmo Account Status Transition.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hyperwallet.api.Api.deactivateBankAccount">
+<span class="sig-name descname"><span class="pre">deactivateBankAccount</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">userToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bankAccountToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">notes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hyperwallet.api.Api.deactivateBankAccount" title="Permalink to this definition"></a></dt>
+<dd><p>Deactivate a Bank Account.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>userToken</strong> – A token identifying the User. <strong>REQUIRED</strong></p></li>
+<li><p><strong>bankAccountToken</strong> – A token identifying the Bank Account. <strong>REQUIRED</strong></p></li>
+<li><p><strong>notes</strong> – A string describing the deactivation.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A Bank Account Status Transition.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hyperwallet.api.Api.deactivateBankCard">
+<span class="sig-name descname"><span class="pre">deactivateBankCard</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">userToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bankCardToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">notes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hyperwallet.api.Api.deactivateBankCard" title="Permalink to this definition"></a></dt>
+<dd><p>Deactivate a Bank Card.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>userToken</strong> – A token identifying the User. <strong>REQUIRED</strong></p></li>
+<li><p><strong>bankCardToken</strong> – A token identifying the Bank Card. <strong>REQUIRED</strong></p></li>
+<li><p><strong>notes</strong> – A string describing the deactivation.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A Bank Card Status Transition.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hyperwallet.api.Api.deactivatePaperCheck">
+<span class="sig-name descname"><span class="pre">deactivatePaperCheck</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">userToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">paperCheckToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">notes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hyperwallet.api.Api.deactivatePaperCheck" title="Permalink to this definition"></a></dt>
+<dd><p>Deactivate a Paper Check.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>userToken</strong> – A token identifying the User. <strong>REQUIRED</strong></p></li>
+<li><p><strong>paperCheckToken</strong> – A token identifying the Paper Check. <strong>REQUIRED</strong></p></li>
+<li><p><strong>notes</strong> – A string describing the deactivation.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A Paper Check Status Transition.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hyperwallet.api.Api.deactivatePayPalAccount">
+<span class="sig-name descname"><span class="pre">deactivatePayPalAccount</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">userToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">payPalAccountToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">notes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hyperwallet.api.Api.deactivatePayPalAccount" title="Permalink to this definition"></a></dt>
+<dd><p>Deactivate a PayPal Account.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>userToken</strong> – A token identifying the User. <strong>REQUIRED</strong></p></li>
+<li><p><strong>payPalAccountToken</strong> – A token identifying the PayPal Account. <strong>REQUIRED</strong></p></li>
+<li><p><strong>notes</strong> – A string describing the deactivation.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A PayPal Account Status Transition.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hyperwallet.api.Api.deactivatePrepaidCard">
+<span class="sig-name descname"><span class="pre">deactivatePrepaidCard</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">userToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prepaidCardToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">notes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hyperwallet.api.Api.deactivatePrepaidCard" title="Permalink to this definition"></a></dt>
+<dd><p>Deactivate a Prepaid Card.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>userToken</strong> – A token identifying the User. <strong>REQUIRED</strong></p></li>
+<li><p><strong>prepaidCardToken</strong> – A token identifying the Prepaid Card. <strong>REQUIRED</strong></p></li>
+<li><p><strong>notes</strong> – A string describing the deactivation.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A Prepaid Card Status Transition.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hyperwallet.api.Api.deactivateUser">
+<span class="sig-name descname"><span class="pre">deactivateUser</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">userToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hyperwallet.api.Api.deactivateUser" title="Permalink to this definition"></a></dt>
+<dd><p>Create User DeActivate Status Transition.
+:param userToken:</p>
+<blockquote>
+<div><p>A token identifying the User Create UserToken. <strong>REQUIRED</strong></p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>StatusTransition.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hyperwallet.api.Api.deactivateVenmoAccount">
+<span class="sig-name descname"><span class="pre">deactivateVenmoAccount</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">userToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">venmoAccountToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">notes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hyperwallet.api.Api.deactivateVenmoAccount" title="Permalink to this definition"></a></dt>
+<dd><p>Deactivate a Venmo Account.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>userToken</strong> – A token identifying the User. <strong>REQUIRED</strong></p></li>
+<li><p><strong>venmoAccountToken</strong> – A token identifying the Venmo Account. <strong>REQUIRED</strong></p></li>
+<li><p><strong>notes</strong> – A string describing the deactivation.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A Venmo Account Status Transition.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hyperwallet.api.Api.freezeUser">
+<span class="sig-name descname"><span class="pre">freezeUser</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">userToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hyperwallet.api.Api.freezeUser" title="Permalink to this definition"></a></dt>
+<dd><p>Create User Freeze Status Transition.
+:param userToken:</p>
+<blockquote>
+<div><p>A token identifying the User Create UserToken. <strong>REQUIRED</strong></p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>StatusTransition.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hyperwallet.api.Api.getAccount">
+<span class="sig-name descname"><span class="pre">getAccount</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">programToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">accountToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hyperwallet.api.Api.getAccount" title="Permalink to this definition"></a></dt>
+<dd><p>Retrieve an Account.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>programToken</strong> – A token identifying the Program. <strong>REQUIRED</strong></p></li>
+<li><p><strong>accountToken</strong> – A token identifying the Account. <strong>REQUIRED</strong></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>An Account.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hyperwallet.api.Api.getAuthenticationToken">
+<span class="sig-name descname"><span class="pre">getAuthenticationToken</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">userToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hyperwallet.api.Api.getAuthenticationToken" title="Permalink to this definition"></a></dt>
+<dd><p>Get a AuthenticationToken.
+:param userToken:</p>
+<blockquote>
+<div><p>A user token. <strong>REQUIRED</strong></p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>An AuthenticationToken.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hyperwallet.api.Api.getBankAccount">
+<span class="sig-name descname"><span class="pre">getBankAccount</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">userToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bankAccountToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hyperwallet.api.Api.getBankAccount" title="Permalink to this definition"></a></dt>
+<dd><p>Retrieve a Bank Account.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>userToken</strong> – A token identifying the User. <strong>REQUIRED</strong></p></li>
+<li><p><strong>bankAccountToken</strong> – A token identifying the Bank Account. <strong>REQUIRED</strong></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A Bank Account.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hyperwallet.api.Api.getBankAccountStatusTransition">
+<span class="sig-name descname"><span class="pre">getBankAccountStatusTransition</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">userToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bankAccountToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">statusTransitionToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hyperwallet.api.Api.getBankAccountStatusTransition" title="Permalink to this definition"></a></dt>
+<dd><p>Retrieve a Bank Account Status Transition.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>userToken</strong> – A token identifying the User. <strong>REQUIRED</strong></p></li>
+<li><p><strong>bankAccountToken</strong> – A token identifying the Bank Account. <strong>REQUIRED</strong></p></li>
+<li><p><strong>statusTransitionToken</strong> – A token identifying the Bank Account Status Transition. <strong>REQUIRED</strong></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A Bank Account Status Transition.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hyperwallet.api.Api.getBankCard">
+<span class="sig-name descname"><span class="pre">getBankCard</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">userToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bankCardToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hyperwallet.api.Api.getBankCard" title="Permalink to this definition"></a></dt>
+<dd><p>Retrieve a Bank Card.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>userToken</strong> – A token identifying the User. <strong>REQUIRED</strong></p></li>
+<li><p><strong>bankCardToken</strong> – A token identifying the Bank Card. <strong>REQUIRED</strong></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A Bank Card.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hyperwallet.api.Api.getBankCardStatusTransition">
+<span class="sig-name descname"><span class="pre">getBankCardStatusTransition</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">userToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bankCardToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">statusTransitionToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hyperwallet.api.Api.getBankCardStatusTransition" title="Permalink to this definition"></a></dt>
+<dd><p>Retrieve a Bank Card Status Transition.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>userToken</strong> – A token identifying the User. <strong>REQUIRED</strong></p></li>
+<li><p><strong>bankCardToken</strong> – A token identifying the Bank Card. <strong>REQUIRED</strong></p></li>
+<li><p><strong>statusTransitionToken</strong> – A token identifying the Bank Card Status Transition. <strong>REQUIRED</strong></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A Bank Card Status Transition.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hyperwallet.api.Api.getPaperCheck">
+<span class="sig-name descname"><span class="pre">getPaperCheck</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">userToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">paperCheckToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hyperwallet.api.Api.getPaperCheck" title="Permalink to this definition"></a></dt>
+<dd><p>Retrieve a Paper Check.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>userToken</strong> – A token identifying the User. <strong>REQUIRED</strong></p></li>
+<li><p><strong>paperCheckToken</strong> – A token identifying the Paper Check. <strong>REQUIRED</strong></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A Paper Check.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hyperwallet.api.Api.getPaperCheckStatusTransition">
+<span class="sig-name descname"><span class="pre">getPaperCheckStatusTransition</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">userToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">paperCheckToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">statusTransitionToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hyperwallet.api.Api.getPaperCheckStatusTransition" title="Permalink to this definition"></a></dt>
+<dd><p>Retrieve a Paper Check Status Transition.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>userToken</strong> – A token identifying the User. <strong>REQUIRED</strong></p></li>
+<li><p><strong>paperCheckToken</strong> – A token identifying the Paper Check. <strong>REQUIRED</strong></p></li>
+<li><p><strong>statusTransitionToken</strong> – A token identifying the Paper Check Status Transition. <strong>REQUIRED</strong></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A Paper Check Status Transition.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hyperwallet.api.Api.getPayPalAccount">
+<span class="sig-name descname"><span class="pre">getPayPalAccount</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">userToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">payPalAccountToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hyperwallet.api.Api.getPayPalAccount" title="Permalink to this definition"></a></dt>
+<dd><p>Retrieve a PayPal Account.
+:param userToken:</p>
+<blockquote>
+<div><p>A token identifying the User. <strong>REQUIRED</strong></p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>payPalAccountToken</strong> – A token identifying the PayPal Account. <strong>REQUIRED</strong></p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A PayPal Account.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hyperwallet.api.Api.getPayPalAccountStatusTransition">
+<span class="sig-name descname"><span class="pre">getPayPalAccountStatusTransition</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">userToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">payPalAccountToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">statusTransitionToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hyperwallet.api.Api.getPayPalAccountStatusTransition" title="Permalink to this definition"></a></dt>
+<dd><p>Retrieve a PayPal Account Status Transition.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>userToken</strong> – A token identifying the User. <strong>REQUIRED</strong></p></li>
+<li><p><strong>payPalAccountToken</strong> – A token identifying the PayPal Account. <strong>REQUIRED</strong></p></li>
+<li><p><strong>statusTransitionToken</strong> – A token identifying the PayPal Account Status Transition. <strong>REQUIRED</strong></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A PayPal Account Status Transition.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hyperwallet.api.Api.getPayment">
+<span class="sig-name descname"><span class="pre">getPayment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">paymentToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hyperwallet.api.Api.getPayment" title="Permalink to this definition"></a></dt>
+<dd><p>Retrieve a Payment.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>paymentToken</strong> – A token identifying the Payment. <strong>REQUIRED</strong></p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A Payment.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hyperwallet.api.Api.getPaymentStatusTransition">
+<span class="sig-name descname"><span class="pre">getPaymentStatusTransition</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">paymentToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">statusTransitionToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hyperwallet.api.Api.getPaymentStatusTransition" title="Permalink to this definition"></a></dt>
+<dd><p>Retrieve a Payment Status Transition.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>paymentToken</strong> – A token identifying the Payment. <strong>REQUIRED</strong></p></li>
+<li><p><strong>statusTransitionToken</strong> – A token identifying the Payment Status Transition. <strong>REQUIRED</strong></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A Payment Status Transition.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hyperwallet.api.Api.getPrepaidCard">
+<span class="sig-name descname"><span class="pre">getPrepaidCard</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">userToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prepaidCardToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hyperwallet.api.Api.getPrepaidCard" title="Permalink to this definition"></a></dt>
+<dd><p>Retrieve a Prepaid Card.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>userToken</strong> – A token identifying the User. <strong>REQUIRED</strong></p></li>
+<li><p><strong>prepaidCardToken</strong> – A token identifying the Prepaid Card. <strong>REQUIRED</strong></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A Prepaid Card.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hyperwallet.api.Api.getPrepaidCardStatusTransition">
+<span class="sig-name descname"><span class="pre">getPrepaidCardStatusTransition</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">userToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prepaidCardToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">statusTransitionToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hyperwallet.api.Api.getPrepaidCardStatusTransition" title="Permalink to this definition"></a></dt>
+<dd><p>Retrieve a Prepaid Card Status Transition.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>userToken</strong> – A token identifying the User. <strong>REQUIRED</strong></p></li>
+<li><p><strong>prepaidCardToken</strong> – A token identifying the Prepaid Card. <strong>REQUIRED</strong></p></li>
+<li><p><strong>statusTransitionToken</strong> – A token identifying the Prepaid Card Status Transition. <strong>REQUIRED</strong></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A Prepaid Card Status Transition.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hyperwallet.api.Api.getProgram">
+<span class="sig-name descname"><span class="pre">getProgram</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">programToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hyperwallet.api.Api.getProgram" title="Permalink to this definition"></a></dt>
+<dd><p>Retrieve a Program.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>programToken</strong> – A token identifying the Program. <strong>REQUIRED</strong></p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A Program.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hyperwallet.api.Api.getTransfer">
+<span class="sig-name descname"><span class="pre">getTransfer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">transferToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hyperwallet.api.Api.getTransfer" title="Permalink to this definition"></a></dt>
+<dd><p>Retrieve a Transfer.
+:param transferToken:</p>
+<blockquote>
+<div><p>A token identifying the Transfer. <strong>REQUIRED</strong></p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A Transfer.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hyperwallet.api.Api.getTransferMethodConfiguration">
+<span class="sig-name descname"><span class="pre">getTransferMethodConfiguration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">userToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">country</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">currency</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transferMethodType</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">profileType</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hyperwallet.api.Api.getTransferMethodConfiguration" title="Permalink to this definition"></a></dt>
+<dd><p>Retrieve a Transfer Method Configuration.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>userToken</strong> – A token identifying the User. <strong>REQUIRED</strong></p></li>
+<li><p><strong>country</strong> – An ISO 3166-1 code identifying the country. <strong>REQUIRED</strong></p></li>
+<li><p><strong>currency</strong> – An ISO 4217-1 code identifying the currency. <strong>REQUIRED</strong></p></li>
+<li><p><strong>transferMethodType</strong> – A string identifying the type of Transfer Method. <strong>REQUIRED</strong></p></li>
+<li><p><strong>profileType</strong> – A string identifying the type of User. <strong>REQUIRED</strong></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A Transfer Method Configuration.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hyperwallet.api.Api.getTransferRefund">
+<span class="sig-name descname"><span class="pre">getTransferRefund</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">transferToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">refundToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hyperwallet.api.Api.getTransferRefund" title="Permalink to this definition"></a></dt>
+<dd><p>Get a Transfer Refund.
+:param transferToken:</p>
+<blockquote>
+<div><p>A token identifying the Transfer. <strong>REQUIRED</strong></p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>refundToken</strong> – A token identifying Transfer Refund . <strong>REQUIRED</strong></p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Get Transfer Refund.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hyperwallet.api.Api.getTransferStatusTransition">
+<span class="sig-name descname"><span class="pre">getTransferStatusTransition</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">transferToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">statusTransitionToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hyperwallet.api.Api.getTransferStatusTransition" title="Permalink to this definition"></a></dt>
+<dd><p>Retrieve a Transfer Status Transition.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>transferToken</strong> – A token identifying the Transfer. <strong>REQUIRED</strong></p></li>
+<li><p><strong>statusTransitionToken</strong> – A token identifying the Transfer Status Transition. <strong>REQUIRED</strong></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A Transfer Status Transition.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hyperwallet.api.Api.getUser">
+<span class="sig-name descname"><span class="pre">getUser</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">userToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hyperwallet.api.Api.getUser" title="Permalink to this definition"></a></dt>
+<dd><p>Retrieve a User.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>userToken</strong> – A token identifying the User. <strong>REQUIRED</strong></p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A User.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hyperwallet.api.Api.getUserStatusTransition">
+<span class="sig-name descname"><span class="pre">getUserStatusTransition</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">userToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">statusTransitionToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hyperwallet.api.Api.getUserStatusTransition" title="Permalink to this definition"></a></dt>
+<dd><p>Retrieve a User Status Transition.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>userToken</strong> – A token identifying the User. <strong>REQUIRED</strong></p></li>
+<li><p><strong>statusTransitionToken</strong> – A token identifying the User Status Transition. <strong>REQUIRED</strong></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A User Status Transition.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hyperwallet.api.Api.getVenmoAccount">
+<span class="sig-name descname"><span class="pre">getVenmoAccount</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">userToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">venmoAccountToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hyperwallet.api.Api.getVenmoAccount" title="Permalink to this definition"></a></dt>
+<dd><p>Retrieve a Venmo Account.
+:param userToken:</p>
+<blockquote>
+<div><p>A token identifying the User. <strong>REQUIRED</strong></p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>VenmoAccountToken</strong> – A token identifying the Venmo Account. <strong>REQUIRED</strong></p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A Venmo Account.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hyperwallet.api.Api.getVenmoAccountStatusTransition">
+<span class="sig-name descname"><span class="pre">getVenmoAccountStatusTransition</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">userToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">venmoAccountToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">statusTransitionToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hyperwallet.api.Api.getVenmoAccountStatusTransition" title="Permalink to this definition"></a></dt>
+<dd><p>Retrieve a Venmo Account Status Transition.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>userToken</strong> – A token identifying the User. <strong>REQUIRED</strong></p></li>
+<li><p><strong>VenmoAccountToken</strong> – A token identifying the Venmo Account. <strong>REQUIRED</strong></p></li>
+<li><p><strong>statusTransitionToken</strong> – A token identifying the Venmo Account Status Transition. <strong>REQUIRED</strong></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A Venmo Account Status Transition.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hyperwallet.api.Api.getWebhookNotification">
+<span class="sig-name descname"><span class="pre">getWebhookNotification</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">webhookToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hyperwallet.api.Api.getWebhookNotification" title="Permalink to this definition"></a></dt>
+<dd><p>Retrieve a Webhook Notification.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>webhookToken</strong> – A token identifying the Webhook. <strong>REQUIRED</strong></p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A Webhook.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hyperwallet.api.Api.listBalancesForAccount">
+<span class="sig-name descname"><span class="pre">listBalancesForAccount</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">programToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">accountToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hyperwallet.api.Api.listBalancesForAccount" title="Permalink to this definition"></a></dt>
+<dd><p>List Account Balances.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>programToken</strong> – A token identifying the Program. <strong>REQUIRED</strong></p></li>
+<li><p><strong>accountToken</strong> – A token identifying the Account. <strong>REQUIRED</strong></p></li>
+<li><p><strong>params</strong> – A dictionary containing query parameters.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>An array of Balances.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hyperwallet.api.Api.listBalancesForPrepaidCard">
+<span class="sig-name descname"><span class="pre">listBalancesForPrepaidCard</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">userToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prepaidCardToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hyperwallet.api.Api.listBalancesForPrepaidCard" title="Permalink to this definition"></a></dt>
+<dd><p>List Prepaid Card Balances.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>userToken</strong> – A token identifying the User. <strong>REQUIRED</strong></p></li>
+<li><p><strong>prepaidCardToken</strong> – A token identifying the Prepaid Card. <strong>REQUIRED</strong></p></li>
+<li><p><strong>params</strong> – A dictionary containing query parameters.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>An array of Balances.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hyperwallet.api.Api.listBalancesForUser">
+<span class="sig-name descname"><span class="pre">listBalancesForUser</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">userToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hyperwallet.api.Api.listBalancesForUser" title="Permalink to this definition"></a></dt>
+<dd><p>List User Balances.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>userToken</strong> – A token identifying the User. <strong>REQUIRED</strong></p></li>
+<li><p><strong>params</strong> – A dictionary containing query parameters.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>An array of Balances.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hyperwallet.api.Api.listBankAccountStatusTransitions">
+<span class="sig-name descname"><span class="pre">listBankAccountStatusTransitions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">userToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bankAccountToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hyperwallet.api.Api.listBankAccountStatusTransitions" title="Permalink to this definition"></a></dt>
+<dd><p>List Bank Account Status Transitions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>userToken</strong> – A token identifying the User. <strong>REQUIRED</strong></p></li>
+<li><p><strong>bankAccountToken</strong> – A token identifying the Bank Account. <strong>REQUIRED</strong></p></li>
+<li><p><strong>params</strong> – A dictionary containing query parameters.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>An array of Bank Account Status Transitions.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hyperwallet.api.Api.listBankAccounts">
+<span class="sig-name descname"><span class="pre">listBankAccounts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">userToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hyperwallet.api.Api.listBankAccounts" title="Permalink to this definition"></a></dt>
+<dd><p>List Bank Accounts.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>userToken</strong> – A token identifying the User. <strong>REQUIRED</strong></p></li>
+<li><p><strong>params</strong> – A dictionary containing query parameters.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>An array of Bank Accounts.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hyperwallet.api.Api.listBankCardStatusTransitions">
+<span class="sig-name descname"><span class="pre">listBankCardStatusTransitions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">userToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bankCardToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hyperwallet.api.Api.listBankCardStatusTransitions" title="Permalink to this definition"></a></dt>
+<dd><p>List Bank Card Status Transitions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>userToken</strong> – A token identifying the User. <strong>REQUIRED</strong></p></li>
+<li><p><strong>bankCardToken</strong> – A token identifying the Bank Card. <strong>REQUIRED</strong></p></li>
+<li><p><strong>params</strong> – A dictionary containing query parameters.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>An array of Bank Card Status Transitions.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hyperwallet.api.Api.listBankCards">
+<span class="sig-name descname"><span class="pre">listBankCards</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">userToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hyperwallet.api.Api.listBankCards" title="Permalink to this definition"></a></dt>
+<dd><p>List Bank Cards.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>userToken</strong> – A token identifying the User. <strong>REQUIRED</strong></p></li>
+<li><p><strong>params</strong> – A dictionary containing query parameters.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>An array of Bank Cards.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hyperwallet.api.Api.listPaperCheckStatusTransitions">
+<span class="sig-name descname"><span class="pre">listPaperCheckStatusTransitions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">userToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">paperCheckToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hyperwallet.api.Api.listPaperCheckStatusTransitions" title="Permalink to this definition"></a></dt>
+<dd><p>List Paper Check Status Transitions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>userToken</strong> – A token identifying the User. <strong>REQUIRED</strong></p></li>
+<li><p><strong>paperCheckToken</strong> – A token identifying the Paper Check. <strong>REQUIRED</strong></p></li>
+<li><p><strong>params</strong> – A dictionary containing query parameters.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>An array of Paper Check Status Transitions.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hyperwallet.api.Api.listPaperChecks">
+<span class="sig-name descname"><span class="pre">listPaperChecks</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">userToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hyperwallet.api.Api.listPaperChecks" title="Permalink to this definition"></a></dt>
+<dd><p>List Paper Checks.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>userToken</strong> – A token identifying the User. <strong>REQUIRED</strong></p></li>
+<li><p><strong>params</strong> – A dictionary containing query parameters.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>An array of Paper Checks.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hyperwallet.api.Api.listPayPalAccountStatusTransitions">
+<span class="sig-name descname"><span class="pre">listPayPalAccountStatusTransitions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">userToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">payPalAccountToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hyperwallet.api.Api.listPayPalAccountStatusTransitions" title="Permalink to this definition"></a></dt>
+<dd><p>List PayPal Account Status Transitions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>userToken</strong> – A token identifying the User. <strong>REQUIRED</strong></p></li>
+<li><p><strong>payPalAccountToken</strong> – A token identifying the PayPal Account. <strong>REQUIRED</strong></p></li>
+<li><p><strong>params</strong> – A dictionary containing query parameters.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>An array of PayPal Account Status Transitions.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hyperwallet.api.Api.listPayPalAccounts">
+<span class="sig-name descname"><span class="pre">listPayPalAccounts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">userToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hyperwallet.api.Api.listPayPalAccounts" title="Permalink to this definition"></a></dt>
+<dd><p>List PayPal Accounts.
+:param userToken:</p>
+<blockquote>
+<div><p>A token identifying the User. <strong>REQUIRED</strong></p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>params</strong> – A dictionary containing query parameters.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>An array of PayPal Accounts.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hyperwallet.api.Api.listPaymentStatusTransitions">
+<span class="sig-name descname"><span class="pre">listPaymentStatusTransitions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">paymentToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hyperwallet.api.Api.listPaymentStatusTransitions" title="Permalink to this definition"></a></dt>
+<dd><p>List Payment Status Transitions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>paymentToken</strong> – A token identifying the Payment. <strong>REQUIRED</strong></p></li>
+<li><p><strong>params</strong> – A dictionary containing query parameters.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>An array of Payment Status Transitions.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hyperwallet.api.Api.listPayments">
+<span class="sig-name descname"><span class="pre">listPayments</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hyperwallet.api.Api.listPayments" title="Permalink to this definition"></a></dt>
+<dd><p>List Payments.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>params</strong> – A dictionary containing query parameters.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>An array of Payments.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hyperwallet.api.Api.listPrepaidCardStatusTransitions">
+<span class="sig-name descname"><span class="pre">listPrepaidCardStatusTransitions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">userToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prepaidCardToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hyperwallet.api.Api.listPrepaidCardStatusTransitions" title="Permalink to this definition"></a></dt>
+<dd><p>List Prepaid Card Status Transitions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>userToken</strong> – A token identifying the User. <strong>REQUIRED</strong></p></li>
+<li><p><strong>prepaidCardToken</strong> – A token identifying the Prepaid Card. <strong>REQUIRED</strong></p></li>
+<li><p><strong>params</strong> – A dictionary containing query parameters.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>An array of Prepaid Card Status Transitions.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hyperwallet.api.Api.listPrepaidCards">
+<span class="sig-name descname"><span class="pre">listPrepaidCards</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">userToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hyperwallet.api.Api.listPrepaidCards" title="Permalink to this definition"></a></dt>
+<dd><p>List Prepaid Cards.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>userToken</strong> – A token identifying the User. <strong>REQUIRED</strong></p></li>
+<li><p><strong>params</strong> – A dictionary containing query parameters.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>An array of Prepaid Cards.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hyperwallet.api.Api.listReceiptsForAccount">
+<span class="sig-name descname"><span class="pre">listReceiptsForAccount</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">programToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">accountToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hyperwallet.api.Api.listReceiptsForAccount" title="Permalink to this definition"></a></dt>
+<dd><p>List Account Receipts.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>programToken</strong> – A token identifying the Program. <strong>REQUIRED</strong></p></li>
+<li><p><strong>accountToken</strong> – A token identifying the Account. <strong>REQUIRED</strong></p></li>
+<li><p><strong>params</strong> – A dictionary containing query parameters.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>An array of Receipts.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hyperwallet.api.Api.listReceiptsForPrepaidCard">
+<span class="sig-name descname"><span class="pre">listReceiptsForPrepaidCard</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">userToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prepaidCardToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hyperwallet.api.Api.listReceiptsForPrepaidCard" title="Permalink to this definition"></a></dt>
+<dd><p>List Prepaid Card Receipts.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>userToken</strong> – A token identifying the User. <strong>REQUIRED</strong></p></li>
+<li><p><strong>prepaidCardToken</strong> – A token identifying the Prepaid Card. <strong>REQUIRED</strong></p></li>
+<li><p><strong>params</strong> – A dictionary containing query parameters.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>An array of Receipts.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hyperwallet.api.Api.listReceiptsForUser">
+<span class="sig-name descname"><span class="pre">listReceiptsForUser</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">userToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hyperwallet.api.Api.listReceiptsForUser" title="Permalink to this definition"></a></dt>
+<dd><p>List User Receipts.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>userToken</strong> – A token identifying the User. <strong>REQUIRED</strong></p></li>
+<li><p><strong>params</strong> – A dictionary containing query parameters.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>An array of Receipts.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hyperwallet.api.Api.listTransferMethodConfigurations">
+<span class="sig-name descname"><span class="pre">listTransferMethodConfigurations</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">userToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hyperwallet.api.Api.listTransferMethodConfigurations" title="Permalink to this definition"></a></dt>
+<dd><p>List Transfer Method Configurations.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>userToken</strong> – A token identifying the User. <strong>REQUIRED</strong></p></li>
+<li><p><strong>params</strong> – A dictionary containing query parameters.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>An array of Transfer Method Configurations.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hyperwallet.api.Api.listTransferMethods">
+<span class="sig-name descname"><span class="pre">listTransferMethods</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">userToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hyperwallet.api.Api.listTransferMethods" title="Permalink to this definition"></a></dt>
+<dd><p>List a Transfer Methods.
+:param userToken:</p>
+<blockquote>
+<div><p>A token identifying the Transfer. <strong>REQUIRED</strong></p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>List Transfer Methods.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hyperwallet.api.Api.listTransferRefunds">
+<span class="sig-name descname"><span class="pre">listTransferRefunds</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">transferToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hyperwallet.api.Api.listTransferRefunds" title="Permalink to this definition"></a></dt>
+<dd><p>List a Transfer Refund.
+:param transferToken:</p>
+<blockquote>
+<div><p>A token identifying the Transfer. <strong>REQUIRED</strong></p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>List Transfer Refund.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hyperwallet.api.Api.listTransferStatusTransitions">
+<span class="sig-name descname"><span class="pre">listTransferStatusTransitions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">transferToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hyperwallet.api.Api.listTransferStatusTransitions" title="Permalink to this definition"></a></dt>
+<dd><p>Retrieve a Transfer Status Transition.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>transferToken</strong> – A token identifying the Transfer. <strong>REQUIRED</strong></p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A Transfer Status Transition.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hyperwallet.api.Api.listTransfers">
+<span class="sig-name descname"><span class="pre">listTransfers</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hyperwallet.api.Api.listTransfers" title="Permalink to this definition"></a></dt>
+<dd><p>List Transfers.
+:param params:</p>
+<blockquote>
+<div><p>A dictionary containing query parameters.</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>An array of Transfers.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hyperwallet.api.Api.listUserStatusTransitions">
+<span class="sig-name descname"><span class="pre">listUserStatusTransitions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">userToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hyperwallet.api.Api.listUserStatusTransitions" title="Permalink to this definition"></a></dt>
+<dd><p>List User Status Transitions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>userToken</strong> – A token identifying the User. <strong>REQUIRED</strong></p></li>
+<li><p><strong>params</strong> – A dictionary containing query parameters.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>An array of User Status Transitions.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hyperwallet.api.Api.listUsers">
+<span class="sig-name descname"><span class="pre">listUsers</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hyperwallet.api.Api.listUsers" title="Permalink to this definition"></a></dt>
+<dd><p>List Users.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>params</strong> – A dictionary containing query parameters.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>An array of Users.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hyperwallet.api.Api.listVenmoAccountStatusTransitions">
+<span class="sig-name descname"><span class="pre">listVenmoAccountStatusTransitions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">userToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">venmoAccountToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hyperwallet.api.Api.listVenmoAccountStatusTransitions" title="Permalink to this definition"></a></dt>
+<dd><p>List Venmo Account Status Transitions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>userToken</strong> – A token identifying the User. <strong>REQUIRED</strong></p></li>
+<li><p><strong>venmoAccountToken</strong> – A token identifying the Venmo Account. <strong>REQUIRED</strong></p></li>
+<li><p><strong>params</strong> – A dictionary containing query parameters.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>An array of Venmo Account Status Transitions.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hyperwallet.api.Api.listVenmoAccounts">
+<span class="sig-name descname"><span class="pre">listVenmoAccounts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">userToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hyperwallet.api.Api.listVenmoAccounts" title="Permalink to this definition"></a></dt>
+<dd><p>List Venmo Accounts.
+:param userToken:</p>
+<blockquote>
+<div><p>A token identifying the User. <strong>REQUIRED</strong></p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>params</strong> – A dictionary containing query parameters.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>An array of Venmo Accounts.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hyperwallet.api.Api.listWebhookNotifications">
+<span class="sig-name descname"><span class="pre">listWebhookNotifications</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hyperwallet.api.Api.listWebhookNotifications" title="Permalink to this definition"></a></dt>
+<dd><p>List Webhook Notifications.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>params</strong> – A dictionary containing query parameters.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>An array of Webhooks.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hyperwallet.api.Api.lockPrepaidCard">
+<span class="sig-name descname"><span class="pre">lockPrepaidCard</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">userToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prepaidCardToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">notes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hyperwallet.api.Api.lockPrepaidCard" title="Permalink to this definition"></a></dt>
+<dd><p>Lock a Prepaid Card.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>userToken</strong> – A token identifying the User. <strong>REQUIRED</strong></p></li>
+<li><p><strong>prepaidCardToken</strong> – A token identifying the Prepaid Card. <strong>REQUIRED</strong></p></li>
+<li><p><strong>notes</strong> – A string describing the lock.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A Prepaid Card Status Transition.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hyperwallet.api.Api.lockUser">
+<span class="sig-name descname"><span class="pre">lockUser</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">userToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hyperwallet.api.Api.lockUser" title="Permalink to this definition"></a></dt>
+<dd><p>Create User Lock Status Transition.
+:param userToken:</p>
+<blockquote>
+<div><p>A token identifying the User Create UserToken. <strong>REQUIRED</strong></p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>StatusTransition.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hyperwallet.api.Api.lostOrStolenPrepaidCard">
+<span class="sig-name descname"><span class="pre">lostOrStolenPrepaidCard</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">userToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prepaidCardToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">notes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hyperwallet.api.Api.lostOrStolenPrepaidCard" title="Permalink to this definition"></a></dt>
+<dd><p>Report a Prepaid Card lost or stolen.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>userToken</strong> – A token identifying the User. <strong>REQUIRED</strong></p></li>
+<li><p><strong>prepaidCardToken</strong> – A token identifying the Prepaid Card. <strong>REQUIRED</strong></p></li>
+<li><p><strong>notes</strong> – A string describing the lost or stolen report.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A Prepaid Card Status Transition.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hyperwallet.api.Api.preactivateUser">
+<span class="sig-name descname"><span class="pre">preactivateUser</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">userToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hyperwallet.api.Api.preactivateUser" title="Permalink to this definition"></a></dt>
+<dd><p>Create User Pre Activate Status Transition.
+:param userToken:</p>
+<blockquote>
+<div><p>A token identifying the User Create UserToken. <strong>REQUIRED</strong></p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>StatusTransition.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hyperwallet.api.Api.setDocumentAndReasonFromResponseHelper">
+<span class="sig-name descname"><span class="pre">setDocumentAndReasonFromResponseHelper</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hyperwallet.api.Api.setDocumentAndReasonFromResponseHelper" title="Permalink to this definition"></a></dt>
+<dd><p>Helper to modify dictionary with Document and Reason classes</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>data</strong> – A dictionary containing data for either a User
+sample data:
+jsonData={‘data’: [‘{“documents”: [{“type”: “DRIVERS_LICENSE”, “country”: “US”, “category”: “IDENTIFICATION”, “reasons”: {“name”: 0, “description”: “STRING_VAL”}}]}’]};</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A Dictionary with documents and reasons information</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hyperwallet.api.Api.suspendPrepaidCard">
+<span class="sig-name descname"><span class="pre">suspendPrepaidCard</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">userToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prepaidCardToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">notes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hyperwallet.api.Api.suspendPrepaidCard" title="Permalink to this definition"></a></dt>
+<dd><p>Suspend a Prepaid Card.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>userToken</strong> – A token identifying the User. <strong>REQUIRED</strong></p></li>
+<li><p><strong>prepaidCardToken</strong> – A token identifying the Prepaid Card. <strong>REQUIRED</strong></p></li>
+<li><p><strong>notes</strong> – A string describing the suspension.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A Prepaid Card Status Transition.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hyperwallet.api.Api.unlockPrepaidCard">
+<span class="sig-name descname"><span class="pre">unlockPrepaidCard</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">userToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prepaidCardToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">notes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hyperwallet.api.Api.unlockPrepaidCard" title="Permalink to this definition"></a></dt>
+<dd><p>Unlock a Prepaid Card.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>userToken</strong> – A token identifying the User. <strong>REQUIRED</strong></p></li>
+<li><p><strong>prepaidCardToken</strong> – A token identifying the Prepaid Card. <strong>REQUIRED</strong></p></li>
+<li><p><strong>notes</strong> – A string describing the unlock.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A Prepaid Card Status Transition.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hyperwallet.api.Api.unsuspendPrepaidCard">
+<span class="sig-name descname"><span class="pre">unsuspendPrepaidCard</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">userToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prepaidCardToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">notes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hyperwallet.api.Api.unsuspendPrepaidCard" title="Permalink to this definition"></a></dt>
+<dd><p>Unsuspend a Prepaid Card.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>userToken</strong> – A token identifying the User. <strong>REQUIRED</strong></p></li>
+<li><p><strong>prepaidCardToken</strong> – A token identifying the Prepaid Card. <strong>REQUIRED</strong></p></li>
+<li><p><strong>notes</strong> – A string describing the unsuspension.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A Prepaid Card Status Transition.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hyperwallet.api.Api.updateBankAccount">
+<span class="sig-name descname"><span class="pre">updateBankAccount</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">userToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bankAccountToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hyperwallet.api.Api.updateBankAccount" title="Permalink to this definition"></a></dt>
+<dd><p>Update a Bank Account.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>userToken</strong> – A token identifying the User. <strong>REQUIRED</strong></p></li>
+<li><p><strong>bankAccountToken</strong> – A token identifying the Bank Account. <strong>REQUIRED</strong></p></li>
+<li><p><strong>data</strong> – A dictionary containing Bank Account information. <strong>REQUIRED</strong></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A Bank Account.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hyperwallet.api.Api.updateBankCard">
+<span class="sig-name descname"><span class="pre">updateBankCard</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">userToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bankCardToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hyperwallet.api.Api.updateBankCard" title="Permalink to this definition"></a></dt>
+<dd><p>Update a Bank Card.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>userToken</strong> – A token identifying the User. <strong>REQUIRED</strong></p></li>
+<li><p><strong>bankCardToken</strong> – A token identifying the Bank Card. <strong>REQUIRED</strong></p></li>
+<li><p><strong>data</strong> – A dictionary containing Bank Card information. <strong>REQUIRED</strong></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A Bank Card.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hyperwallet.api.Api.updatePaperCheck">
+<span class="sig-name descname"><span class="pre">updatePaperCheck</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">userToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">paperCheckToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hyperwallet.api.Api.updatePaperCheck" title="Permalink to this definition"></a></dt>
+<dd><p>Update a Paper Check.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>userToken</strong> – A token identifying the User. <strong>REQUIRED</strong></p></li>
+<li><p><strong>paperCheckToken</strong> – A token identifying the Paper Check. <strong>REQUIRED</strong></p></li>
+<li><p><strong>data</strong> – A dictionary containing Paper Check information. <strong>REQUIRED</strong></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A Paper Check.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hyperwallet.api.Api.updatePayPalAccount">
+<span class="sig-name descname"><span class="pre">updatePayPalAccount</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">userToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">payPalAccountToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hyperwallet.api.Api.updatePayPalAccount" title="Permalink to this definition"></a></dt>
+<dd><p>Update a PayPal Account.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>userToken</strong> – A token identifying the User. <strong>REQUIRED</strong></p></li>
+<li><p><strong>payPalAccountToken</strong> – A token identifying the PayPal Account. <strong>REQUIRED</strong></p></li>
+<li><p><strong>data</strong> – A dictionary containing PayPal Account information. <strong>REQUIRED</strong></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A PayPal Account.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hyperwallet.api.Api.updatePrepaidCard">
+<span class="sig-name descname"><span class="pre">updatePrepaidCard</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">userToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prepaidCardToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hyperwallet.api.Api.updatePrepaidCard" title="Permalink to this definition"></a></dt>
+<dd><p>Update a Prepaid Card.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>userToken</strong> – A token identifying the User. <strong>REQUIRED</strong></p></li>
+<li><p><strong>prepaidCardToken</strong> – A token identifying the Prepaid Card. <strong>REQUIRED</strong></p></li>
+<li><p><strong>data</strong> – A dictionary containing Prepaid Card information. <strong>REQUIRED</strong></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A Prepaid Card.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hyperwallet.api.Api.updateUser">
+<span class="sig-name descname"><span class="pre">updateUser</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">userToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hyperwallet.api.Api.updateUser" title="Permalink to this definition"></a></dt>
+<dd><p>Update a User.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>userToken</strong> – A token identifying the User. <strong>REQUIRED</strong></p></li>
+<li><p><strong>data</strong> – A dictionary containing User information. <strong>REQUIRED</strong></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A User.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hyperwallet.api.Api.updateVenmoAccount">
+<span class="sig-name descname"><span class="pre">updateVenmoAccount</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">userToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">venmoAccountToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hyperwallet.api.Api.updateVenmoAccount" title="Permalink to this definition"></a></dt>
+<dd><p>Update a Venmo Account.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>userToken</strong> – A token identifying the User. <strong>REQUIRED</strong></p></li>
+<li><p><strong>VenmoAccountToken</strong> – A token identifying the Venmo Account. <strong>REQUIRED</strong></p></li>
+<li><p><strong>data</strong> – A dictionary containing Venmo Account information. <strong>REQUIRED</strong></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A Venmo Account.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hyperwallet.api.Api.uploadDocumentsForUser">
+<span class="sig-name descname"><span class="pre">uploadDocumentsForUser</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">userToken</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">files</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hyperwallet.api.Api.uploadDocumentsForUser" title="Permalink to this definition"></a></dt>
+<dd><p>Upload documents for Users</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>userToken</strong> – A token identifying the User. <strong>REQUIRED</strong></p></li>
+<li><p><strong>data</strong> – A dictionary containing data for the input documents. <strong>REQUIRED</strong>
+sample data:
+jsonData={‘data’: [‘{“documents”: [{“type”: “DRIVERS_LICENSE”, “country”: “US”, “category”: “IDENTIFICATION”}]}’]};</p></li>
+<li><p><strong>files</strong> – Dictionary of <code class="docutils literal notranslate"><span class="pre">'filename':</span> <span class="pre">file-like-objects</span></code>
+for multipart encoding upload. <strong>REQUIRED</strong>
+sample data:
+files = {
+‘drivers_license_front’: open(‘F1.png’, ‘rb’),
+‘drivers_license_back’: open(‘F22.png’, ‘rb’)
+}</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A User with documents information</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-hyperwallet.utils.apiclient">
+<span id="api-client"></span><h2>API Client<a class="headerlink" href="#module-hyperwallet.utils.apiclient" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="hyperwallet.utils.apiclient.ApiClient">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">hyperwallet.utils.apiclient.</span></span><span class="sig-name descname"><span class="pre">ApiClient</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">username</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">server</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">encryptionData</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hyperwallet.utils.apiclient.ApiClient" title="Permalink to this definition"></a></dt>
+<dd><p>The Hyperwallet API Client.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>username</strong> – The username of this API user. <strong>REQUIRED</strong></p></li>
+<li><p><strong>password</strong> – The password of this API user. <strong>REQUIRED</strong></p></li>
+<li><p><strong>server</strong> – The base URL of the API. <strong>REQUIRED</strong></p></li>
+<li><p><strong>encryptionData</strong> – Array with params for encrypted requests(Fields: clientPrivateKeySetLocation, hyperwalletKeySetLocation).</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="hyperwallet.utils.apiclient.ApiClient.__checkResponseHeaderContentType">
+<span class="sig-name descname"><span class="pre">__checkResponseHeaderContentType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">response</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hyperwallet.utils.apiclient.ApiClient.__checkResponseHeaderContentType" title="Permalink to this definition"></a></dt>
+<dd><p>Check response header Content-Type.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>response</strong> – Response to be checked. <strong>REQUIRED</strong></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hyperwallet.utils.apiclient.ApiClient.__getRequestData">
+<span class="sig-name descname"><span class="pre">__getRequestData</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hyperwallet.utils.apiclient.ApiClient.__getRequestData" title="Permalink to this definition"></a></dt>
+<dd><p>If encryption is enabled try to encrypt request data, otherwise no action required.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>data</strong> – Not encrypted request data. <strong>REQUIRED</strong></p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Request data, encrypted if necessary.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hyperwallet.utils.apiclient.ApiClient._makeRequest">
+<span class="sig-name descname"><span class="pre">_makeRequest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">url</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">headers</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">files</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hyperwallet.utils.apiclient.ApiClient._makeRequest" title="Permalink to this definition"></a></dt>
+<dd><p>Process an API response to ensure a JSON object is returned always.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>method</strong> – The HTTP method to use for the request. <strong>REQUIRED</strong></p></li>
+<li><p><strong>url</strong> – A partial URL to specify the API endpoint. <strong>REQUIRED</strong></p></li>
+<li><p><strong>data</strong> – A dictionary containing data for the request body.</p></li>
+<li><p><strong>headers</strong> – A dictionary containing additional request headers.</p></li>
+<li><p><strong>params</strong> – A dictionary containing query parameters.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A JSON object containing the response data or an error object.</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The Hyperwallet API supports <strong>GET</strong>, <strong>POST</strong>, and <strong>PUT</strong>.</p>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hyperwallet.utils.apiclient.ApiClient.doGet">
+<span class="sig-name descname"><span class="pre">doGet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">partialUrl</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hyperwallet.utils.apiclient.ApiClient.doGet" title="Permalink to this definition"></a></dt>
+<dd><p>Submit a GET to the API.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>partialUrl</strong> – A partial URL to specify the API endpoint. <strong>REQUIRED</strong></p></li>
+<li><p><strong>params</strong> – A dictionary containing query parameters.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The API response.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hyperwallet.utils.apiclient.ApiClient.doPost">
+<span class="sig-name descname"><span class="pre">doPost</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">partialUrl</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">headers</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hyperwallet.utils.apiclient.ApiClient.doPost" title="Permalink to this definition"></a></dt>
+<dd><p>Submit a POST to the API.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>partialUrl</strong> – A partial URL to specify the API endpoint. <strong>REQUIRED</strong></p></li>
+<li><p><strong>data</strong> – A dictionary containing data for the request body. <strong>REQUIRED</strong></p></li>
+<li><p><strong>headers</strong> – A dictionary containing additional request headers.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The API response.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hyperwallet.utils.apiclient.ApiClient.doPut">
+<span class="sig-name descname"><span class="pre">doPut</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">partialUrl</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hyperwallet.utils.apiclient.ApiClient.doPut" title="Permalink to this definition"></a></dt>
+<dd><p>Submit a PUT to the API.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>partialUrl</strong> – A partial URL to specify the API endpoint. <strong>REQUIRED</strong></p></li>
+<li><p><strong>data</strong> – A dictionary containing data for the request body. <strong>REQUIRED</strong></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The API response.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="hyperwallet.utils.apiclient.ApiClient.encrypted">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">encrypted</span></span><a class="headerlink" href="#hyperwallet.utils.apiclient.ApiClient.encrypted" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="hyperwallet.utils.apiclient.ApiClient.putDocument">
+<span class="sig-name descname"><span class="pre">putDocument</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">partialUrl</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">files</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hyperwallet.utils.apiclient.ApiClient.putDocument" title="Permalink to this definition"></a></dt>
+<dd><p>Submit a PUT to the API.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>partialUrl</strong> – A partial URL to specify the API endpoint. <strong>REQUIRED</strong></p></li>
+<li><p><strong>data</strong> – A dictionary containing data for the input documents. <strong>REQUIRED</strong></p></li>
+<li><p><strong>files</strong> – Dictionary of <code class="docutils literal notranslate"><span class="pre">'filename':</span> <span class="pre">file-like-objects</span></code>
+for multipart encoding upload. <strong>REQUIRED</strong></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The API response.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2018, Hyperwallet Systems Inc.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
