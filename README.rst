@@ -3,9 +3,9 @@
 .. image:: https://coveralls.io/repos/github/hyperwallet/python-sdk/badge.svg?branch=master
   :target: https://coveralls.io/github/hyperwallet/python-sdk?branch=master
 
-===========================
-Hyperwallet REST SDK (Beta)
-===========================
+====================
+Hyperwallet REST SDK 
+====================
 
 A library to manage users, transfer methods and payments through the Hyperwallet Rest V3 API
 
