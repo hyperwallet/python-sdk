@@ -548,7 +548,8 @@ class PayPalAccount(TransferMethod):
         super(PayPalAccount, self).__init__(data)
 
         self.defaults = {
-            'email': None
+            'email': None,
+            'accountId': None
         }
 
         for (param, default) in self.defaults.items():
