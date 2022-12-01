@@ -1537,7 +1537,7 @@ class Api(object):
         :param userToken:
             A token identifying the User. **REQUIRED**
         :param data:
-            A dictionary containing PayPal Account information. **REQUIRED**
+            A dictionary containing PayPal Account information. Required fields transferMethodCountry, transferMethodCurrency , email or accountId **REQUIRED**
         :returns:
             A PayPal Account.
         '''
