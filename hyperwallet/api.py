@@ -1555,7 +1555,7 @@ class Api(object):
             raise HyperwalletException('transferMethodCurrency is required')
 
         if (not ('email' in data) or not (data['email'])) and (not ('accountId' in data) or not (data['accountId'])):
-            raise HyperwalletException('email/accountId is required')
+            raise HyperwalletException('email or accountId is required')
 
         response = self.apiClient.doPost(
             self.__buildUrl('users', userToken, 'paypal-accounts'),

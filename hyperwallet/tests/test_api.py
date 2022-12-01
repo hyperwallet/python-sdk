@@ -1529,7 +1529,7 @@ class ApiTest(unittest.TestCase):
         with self.assertRaises(HyperwalletException) as exc:
             self.api.createPayPalAccount('token', paypal_account_data)
 
-        self.assertEqual(exc.exception.message, 'email/accountId is required')
+        self.assertEqual(exc.exception.message, 'email or accountId is required')
 
     @mock.patch('hyperwallet.utils.ApiClient._makeRequest')
     def test_create_paypal_account_success(self, mock_post):
