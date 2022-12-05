@@ -1,5 +1,9 @@
 Changelog
 =========
+1.7.1
+-------------------
+- Added attribute 'isDefaultTransferMethod' to identify default accounts.
+
 1.7.0
 -------------------
 - Added missing webhook groups
