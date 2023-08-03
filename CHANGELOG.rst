@@ -1,6 +1,6 @@
 Changelog
 =========
-1.7.1
+1.7.2
 -------------------
 - Added field 'accountId' to PayPal.
 - PayPal account creation allowed using field 'accountId' which accepts Email, Phone Number, PayPal PayerID.
