@@ -1,10 +1,14 @@
 Changelog
 =========
-1.7.1
+1.7.2
 -------------------
 - Added field 'accountId' to PayPal.
 - PayPal account creation allowed using field 'accountId' which accepts Email, Phone Number, PayPal PayerID.
 - Venmo account creation allowed using field 'accountId' which accepts Email, Phone Number, Venmo Handle, Venmo External ID.
+
+1.7.1
+-------------------
+- Added attribute 'isDefaultTransferMethod' to identify default accounts.
 
 1.7.0
 -------------------

@@ -8,12 +8,7 @@ on:
       - support/SDK-V3
       - feature/**
       - bugfix/**
-  pull_request:
-    branches:
-      - master
-      - support/SDK-V3
-      - feature/**
-      - bugfix/**
+      - dependabot/**
 
 jobs:
   build:

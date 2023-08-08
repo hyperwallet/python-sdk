@@ -55,6 +55,11 @@ class ApiTest(unittest.TestCase):
             'type': 'BANK_ACCOUNT'
         }
 
+        self.dataWithIsDefaultTransferAttr = {
+            'token': 'tkn-12345',
+            'isDefaultTransferMethod': True
+        }
+
         self.balance = {
             'currency': 'USD'
         }
@@ -2988,6 +2993,26 @@ class ApiTest(unittest.TestCase):
         response = self.api.listTransferMethods('token')
 
         self.assertTrue(response.token, self.data.get('token'))
+
+    @mock.patch('hyperwallet.utils.ApiClient._makeRequest')
+    def test_getBankAccount_withDefaultTransfer_success(self, mock_get):
+
+        bank_account_data = {
+            'isDefaultTransferMethod': True
+        }
+        mock_get.return_value = bank_account_data
+        response = self.api.getBankAccount('token', 'token')
+
+        self.assertTrue(response.isDefaultTransferMethod, bank_account_data.get('isDefaultTransferMethod'))
+
+    @mock.patch('hyperwallet.utils.ApiClient._makeRequest')
+    def test_list_bank_cards_withDefaultTransfer_success(self, mock_get):
+
+        mock_get.return_value = {'data': [self.dataWithIsDefaultTransferAttr]}
+        response = self.api.listBankCards('token')
+
+        self.assertTrue(response[0].token, self.data.get('token'))
+        self.assertTrue(response[0].isDefaultTransferMethod, self.data.get('isDefaultTransferMethod'))
 
 
 if __name__ == '__main__':

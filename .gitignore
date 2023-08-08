@@ -18,3 +18,4 @@ htmlcov
 .DS_Store
 .coverage
 .idea/
+build/**
