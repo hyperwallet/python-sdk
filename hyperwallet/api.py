@@ -2785,7 +2785,7 @@ class Api(object):
                     reasons = dVal["reasons"]
                     dVal["reasons"] = []
                     for rVal in reasons:
-                        if type(rVal["name"]) == str:
+                        if type(rVal["name"]) is str:
                             rVal["name"] = RejectReason[rVal["name"]]
                         else:
                             rVal["name"] = RejectReason(rVal["name"])
