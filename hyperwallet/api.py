@@ -1537,7 +1537,7 @@ class Api(object):
         :param userToken:
             A token identifying the User. **REQUIRED**
         :param data:
-            A dictionary containing PayPal Account information. **REQUIRED**
+            A dictionary containing PayPal Account information. Required fields transferMethodCountry, transferMethodCurrency , email or accountId **REQUIRED**
         :returns:
             A PayPal Account.
         '''
@@ -1554,8 +1554,8 @@ class Api(object):
         if not ('transferMethodCurrency' in data) or not (data['transferMethodCurrency']):
             raise HyperwalletException('transferMethodCurrency is required')
 
-        if not ('email' in data) or not (data['email']):
-            raise HyperwalletException('email is required')
+        if (not ('email' in data) or not (data['email'])) and (not ('accountId' in data) or not (data['accountId'])):
+            raise HyperwalletException('email or accountId is required')
 
         response = self.apiClient.doPost(
             self.__buildUrl('users', userToken, 'paypal-accounts'),
