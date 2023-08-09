@@ -4,9 +4,9 @@
 
 __author__          = 'The Hyperwallet Developers'
 __email__           = 'devsupport@hyperwallet.com'
-__copyright__       = 'Copyright (c) 2018 Hyperwallet'
+__copyright__       = 'Copyright (c) 2023 Hyperwallet'
 __license__         = 'MIT'
-__version__         = '1.7.1'
+__version__         = '1.7.2'
 __url__             = 'https://github.com/hyperwallet/python-sdk'
 __download_url__    = 'https://pypi.python.org/pypi/hyperwallet-sdk'
 __description__     = 'A Python wrapper around the Hyperwallet API'
