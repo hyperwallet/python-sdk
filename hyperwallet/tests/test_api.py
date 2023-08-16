@@ -2670,6 +2670,7 @@ class ApiTest(unittest.TestCase):
     Upload Documents
 
     '''
+
     def test_uploadDocumentsForUser_fail_need_user_token(self):
 
         with self.assertRaises(HyperwalletException) as exc:
@@ -2981,18 +2982,18 @@ class ApiTest(unittest.TestCase):
     def test_list_transfer_methods_params_valid(self, mock_get):
 
         options = {'type': 'test'}
-        mock_get.return_value = self.data
+        mock_get.return_value = {'data': [self.data]}
         response = self.api.listTransferMethods('token', options)
 
-        self.assertTrue(response.token, self.data.get('token'))
+        self.assertTrue(response[0].token, self.data.get('token'))
 
     @mock.patch('hyperwallet.utils.ApiClient._makeRequest')
     def test_list_transfer_methods_success(self, mock_get):
 
-        mock_get.return_value = self.data
+        mock_get.return_value = {'data': [self.data]}
         response = self.api.listTransferMethods('token')
 
-        self.assertTrue(response.token, self.data.get('token'))
+        self.assertTrue(response[0].token, self.data.get('token'))
 
     @mock.patch('hyperwallet.utils.ApiClient._makeRequest')
     def test_getBankAccount_withDefaultTransfer_success(self, mock_get):
