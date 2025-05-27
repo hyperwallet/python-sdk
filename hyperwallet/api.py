@@ -3144,7 +3144,7 @@ class Api(object):
             params
         )
 
-        return TransferMethod(response)
+        return [TransferMethod(x) for x in response.get('data', [])]
 
     '''
 
