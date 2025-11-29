@@ -118,6 +118,12 @@ class ApiClient(object):
 
         if response.status_code == 204:
             return {}
+        if response.status_code == 429:
+            raise HyperwalletAPIException({
+                'errors': [
+                    {'code': 'TOO_MANY_REQUESTS', 'message': 'Too Many Requests'}
+                ]
+            })
 
         self.__checkResponseHeaderContentType(response)
 

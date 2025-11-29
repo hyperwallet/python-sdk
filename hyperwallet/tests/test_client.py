@@ -369,6 +369,22 @@ class ApiClientTest(unittest.TestCase):
             'Invalid Content-Type specified in Response Header'
         )
 
+    @mock.patch('requests.Session.request')
+    def test_receive_too_many_requests_when_429(self, session_mock):
+
+        session_mock.return_value = mock.MagicMock(status_code=429)
+
+        with self.assertRaises(HyperwalletAPIException) as exc:
+            self.client._makeRequest()
+
+        self.assertEqual(
+            exc.exception.message.get('errors')[0].get('code'), 'TOO_MANY_REQUESTS'
+        )
+
+        self.assertEqual(
+            exc.exception.message.get('errors')[0].get('message'), 'Too Many Requests'
+        )
+
 
 if __name__ == '__main__':
     unittest.main()
