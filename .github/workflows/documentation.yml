@@ -5,7 +5,10 @@ on:
   push:
     branches:
       - master
-
+      - support/SDK-V3
+      - feature/**
+      - bugfix/**
+      - dependabot/**
 permissions:
   contents: read
 
