@@ -98,4 +98,4 @@ jobs:
       - name: Coverage
         run: make coverage
 
-      - uses: AndreMiras/coveralls-python-action@develop
+      - uses: AndreMiras/coveralls-python-action@f5fd5c309b39d01599fb92c72d4f7409ea78aec9 # v20201129
