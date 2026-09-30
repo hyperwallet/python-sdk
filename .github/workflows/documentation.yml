@@ -2,31 +2,32 @@ name: Update Documentation
 
 on:
   workflow_dispatch:
+
   push:
     branches:
       - master
 
-jobs:
-  documentation:
-    runs-on: ubuntu-latest
-    name: Documentation
+permissions:
+  contents: read
 
-    strategy:
-      fail-fast: false
-      matrix:
-        python-version:
-          [
-            '3.10'
-          ]
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Build documentation
+    runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout
+        uses: actions/checkout@v3
 
-      - name: Setup Python ${{ matrix.python-version }}
+      - name: Setup Python
         uses: actions/setup-python@v4
         with:
-          python-version: ${{ matrix.python-version }}
-          cache: 'pip'
+          python-version: "3.10"
+          cache: pip
 
       - name: Install tools
         run: make build
@@ -34,14 +35,29 @@ jobs:
       - name: Clean
         run: make dev
 
-      - name: Generate Documentation
+      - name: Generate documentation
         run: make docs
 
-      - name: Push
-        uses: s0/git-publish-subdir-action@develop
-        env:
-          REPO: self
-          BRANCH: gh-pages
-          FOLDER: doc/_build/html
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          MESSAGE: "Documentation updated"
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v4
+        with:
+          name: github-pages
+          path: doc/_build/html
+
+  deploy:
+    name: Deploy documentation
+    needs: build
+    runs-on: ubuntu-latest
+
+    permissions:
+      pages: write
+      id-token: write
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
