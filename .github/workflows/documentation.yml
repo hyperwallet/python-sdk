@@ -2,6 +2,7 @@ name: Update Documentation
 
 on:
   workflow_dispatch:
+
   push:
     branches:
       - master
@@ -9,15 +10,22 @@ on:
       - feature/**
       - bugfix/**
       - dependabot/**
+
 permissions:
   contents: read
 
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
 jobs:
   build:
+    name: Build documentation
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout
+        uses: actions/checkout@v3
 
       - name: Setup Python
         uses: actions/setup-python@v4
@@ -31,15 +39,17 @@ jobs:
       - name: Clean
         run: make dev
 
-      - name: Generate Documentation
+      - name: Generate documentation
         run: make docs
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v4
         with:
+          name: github-pages
           path: doc/_build/html
 
   deploy:
+    name: Deploy documentation
     needs: build
     runs-on: ubuntu-latest
 
