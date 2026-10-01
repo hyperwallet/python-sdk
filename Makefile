@@ -30,13 +30,13 @@ lint:
 	pycodestyle --config=setup.cfg hyperwallet
 
 test: dev lint
-	python setup.py test
+	nosetests
 
 build: clean
 	python setup.py check
 	python setup.py sdist
 
 coverage: clean
-	coverage run setup.py test
+	coverage run -m nose
 	coverage html
 	coverage report
